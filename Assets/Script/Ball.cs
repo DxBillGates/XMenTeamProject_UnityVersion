@@ -38,12 +38,12 @@ public class Ball : MonoBehaviour
         if (isThrow) Move();
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        Vector3 hitNormal = collision.contacts[0].normal;
+        Vector3 hitNormal = other.gameObject.transform.forward;
         Reflection(hitNormal);
 
-        switch (collision.gameObject.tag)
+        switch (other.gameObject.tag)
         {
             case "Player":
                 state = BallState.THROWED_PLAYER;
@@ -52,6 +52,22 @@ public class Ball : MonoBehaviour
                 state = BallState.THROWED_ENEMY;
                 break;
         }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        //Vector3 hitNormal = collision.contacts[0].normal;
+        //Reflection(hitNormal);
+
+        //switch (collision.gameObject.tag)
+        //{
+        //    case "Player":
+        //        state = BallState.THROWED_PLAYER;
+        //        break;
+        //    case "Enemy":
+        //        state = BallState.THROWED_ENEMY;
+        //        break;
+        //}
     }
 
     // ゲームオブジェクトをその向きに対する速度を与える
