@@ -204,8 +204,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   barrierObject: {fileID: 7257056714171860763, guid: d40b902ef42caa34b8eb02e9be9ebd2e, type: 3}
-  radius: 0
-  openSpan: 0
+  radius: 5
+  openSpan: 60
 --- !u!65 &438633671
 BoxCollider:
   m_ObjectHideFlags: 0
