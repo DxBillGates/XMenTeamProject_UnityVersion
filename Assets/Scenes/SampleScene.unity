@@ -461,7 +461,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   throwPower: 0.5
-  attenuationPower: 0.00001
+  attenuationPower: 0.001
 --- !u!54 &1024034006
 Rigidbody:
   m_ObjectHideFlags: 0
