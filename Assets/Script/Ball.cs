@@ -2,14 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum BallState
+{
+    HOLD_PLAYER,
+    HOLD_ENEMY,
+    THROWED_PLAYER,
+    THROWED_ENEMY,
+}
+
+
+
 public class Ball : MonoBehaviour
 {
     // ボールを投げる際の強さ
     [SerializeField] private float throwPower;
     // 減衰力
     [SerializeField] private float attenuationPower;
-    Vector3 velocity;
-    bool isThrow;
+
+    private Vector3 velocity;
+    private bool isThrow;
+    public BallState state { get; private set; }
 
     // Start is called before the first frame update
     void Start()
@@ -30,6 +42,16 @@ public class Ball : MonoBehaviour
     {
         Vector3 hitNormal = collision.contacts[0].normal;
         Reflection(hitNormal);
+
+        switch (collision.gameObject.tag)
+        {
+            case "Player":
+                state = BallState.THROWED_PLAYER;
+                break;
+            case "Enemy":
+                state = BallState.THROWED_ENEMY;
+                break;
+        }
     }
 
     // ゲームオブジェクトをその向きに対する速度を与える
@@ -48,9 +70,10 @@ public class Ball : MonoBehaviour
         transform.position += velocity;
     }
 
+    // 反射ベクトルを生成
     private void Reflection(Vector3 normal)
     {
-        Vector3 reflectVector = velocity - 2.0f * Vector3.Dot(velocity,normal) * normal;
+        Vector3 reflectVector = velocity - 2.0f * Vector3.Dot(velocity, normal) * normal;
         velocity = reflectVector;
     }
 }
