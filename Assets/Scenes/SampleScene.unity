@@ -383,7 +383,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ece75e4a44ce29340b04d7b4c16f0ee9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movePower: 25
+  movePower: 5
+  velocity: {x: 0, y: 0, z: 0}
+  vector: {x: 0, y: 0, z: 0}
   beforeDirection: {x: 0, y: 0, z: 0}
   currentDirection: {x: 0, y: 0, z: 0}
 --- !u!114 &1959159672
