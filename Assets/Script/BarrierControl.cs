@@ -14,8 +14,6 @@ public class BarrierControl : MonoBehaviour
     [SerializeField] private float radius;
     //展開する長さ(時間)
     [SerializeField] private int openSpan;
-    //
-    [SerializeField] private int angle=0;
     //展開してからの経過時間
     int time;
 
@@ -44,7 +42,7 @@ public class BarrierControl : MonoBehaviour
             }
         }
         //move ベクトルを度数法に変換
-        //float angle = Mathf.Atan2(move.x, move.z);
+        float angle = Mathf.Atan2(move.x, move.z);
         Vector3 barrierPosition = target + new Vector3(Mathf.Sin(angle) * radius, 0.0f, Mathf.Cos(angle) * radius);
 
        //スポーン

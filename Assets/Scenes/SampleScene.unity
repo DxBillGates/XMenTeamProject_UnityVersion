@@ -203,9 +203,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23455dc087655ed4b8c078dc8a663b1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  barrierObject: {fileID: 7257056714171860763, guid: d40b902ef42caa34b8eb02e9be9ebd2e, type: 3}
+  barrierObject: {fileID: 4844139035147976815, guid: 425ed1a5ec33f0441a487e544ce7304f, type: 3}
   radius: 5
-  openSpan: 60
+  openSpan: 500
+  angle: 134
 --- !u!65 &438633671
 BoxCollider:
   m_ObjectHideFlags: 0
