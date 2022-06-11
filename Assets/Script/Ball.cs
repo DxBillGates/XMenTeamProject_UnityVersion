@@ -57,6 +57,9 @@ public class Ball : MonoBehaviour
             case "Wall":
                 Reflection(hitNormal);
                 break;
+            case "Barrier":
+                Reflection(hitNormal);
+                break;
         }
     }
 
