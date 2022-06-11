@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float movePower;
     [SerializeField] private GameObject ballObject;
     [SerializeField] private float throwBallCooldown;
+    [SerializeField] private GameObject lineObjectManager;
 
     private Vector3 velocity;
     private Vector3 currentDirection;
@@ -16,11 +17,22 @@ public class Player : MonoBehaviour
     private bool isThrowBall;
     private float throwBallColldownTime;
 
+    private PredictionalLineDrawer lineDrawer;
+
     // Start is called before the first frame update
     void Start()
     {
-        ballComponent = ballObject.GetComponent<Ball>();
         Application.targetFrameRate = 60;
+
+        velocity = Vector3.zero;
+        currentDirection = transform.forward;
+
+        ballComponent = ballObject.GetComponent<Ball>();
+
+        isThrowBall = false;
+        throwBallColldownTime = 0;
+
+        lineDrawer = lineObjectManager.GetComponent<PredictionalLineDrawer>();
     }
 
     // Update is called once per frame
@@ -35,6 +47,11 @@ public class Player : MonoBehaviour
 
         HoldBallUpdate();
         ThrowingBall(currentDirection);
+
+
+        lineDrawer.isDraw = ballComponent.state == BallState.HOLD_PLAYER;
+        lineDrawer.drawOriginPosition = transform.position;
+        lineDrawer.drawDirection = currentDirection;
     }
 
     private void OnTriggerStay(Collider other)
@@ -97,7 +114,7 @@ public class Player : MonoBehaviour
         if (Input.GetButtonDown("PlayerAbility") == false) return;
         if (ballComponent.state != BallState.HOLD_PLAYER) return;
 
-        ballComponent.Throw(dir,BallState.THROWED_PLAYER);
+        ballComponent.Throw(dir, BallState.THROWED_PLAYER);
 
         isThrowBall = true;
     }
@@ -105,7 +122,7 @@ public class Player : MonoBehaviour
     private void UpdateAbilityCooldown()
     {
         // ボールを投げるクールダウン更新処理
-        if(throwBallColldownTime > throwBallCooldown)
+        if (throwBallColldownTime > throwBallCooldown)
         {
             isThrowBall = false;
             throwBallColldownTime = 0;
