@@ -25,7 +25,6 @@ public class BarrierControl : MonoBehaviour
         target = new Vector3();
         time=0;
     }
-
     // Update is called once per frame
     void Update()
     {
