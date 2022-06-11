@@ -15,17 +15,23 @@ public class Player : MonoBehaviour
 
     private bool isThrowBall;
     private float throwBallColldownTime;
+    //バリアを展開するスクリプト
+    private BarrierControl barrierControl;
 
     // Start is called before the first frame update
     void Start()
     {
         ballComponent = ballObject.GetComponent<Ball>();
         Application.targetFrameRate = 60;
+        barrierControl = GetComponent<BarrierControl>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        //バリアの展開する向き指定
+        barrierControl.direction = gameObject.transform.forward;
+
         velocity = new Vector3();
 
         UpdateAbilityCooldown();
@@ -97,7 +103,7 @@ public class Player : MonoBehaviour
         if (Input.GetButtonDown("PlayerAbility") == false) return;
         if (ballComponent.state != BallState.HOLD_PLAYER) return;
 
-        ballComponent.Throw(dir,BallState.THROWED_PLAYER);
+        ballComponent.Throw(dir, BallState.THROWED_PLAYER);
 
         isThrowBall = true;
     }
@@ -105,7 +111,7 @@ public class Player : MonoBehaviour
     private void UpdateAbilityCooldown()
     {
         // ボールを投げるクールダウン更新処理
-        if(throwBallColldownTime > throwBallCooldown)
+        if (throwBallColldownTime > throwBallCooldown)
         {
             isThrowBall = false;
             throwBallColldownTime = 0;

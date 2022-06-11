@@ -5,7 +5,7 @@ using UnityEngine;
 public class BarrierControl : MonoBehaviour
 {
     //盾を展開する向きのベクトル
-    Vector3 direction { get; set; }
+    public Vector3 direction { get; set; }
 
     bool isOpen { get; set; }
     //盾のモデルをセットするオブジェクト
