@@ -422,6 +422,10 @@ PrefabInstance:
       propertyPath: ballObject
       value: 
       objectReference: {fileID: 1024034000}
+    - target: {fileID: 3891409010159645289, guid: 5014d62a383d180409ab734b145b7cdb, type: 3}
+      propertyPath: throwBallCooldown
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3891409010159645290, guid: 5014d62a383d180409ab734b145b7cdb, type: 3}
       propertyPath: m_RootOrder
       value: 4
