@@ -56,7 +56,7 @@ public class Player : MonoBehaviour
             case "Ball":
                 // ƒ{[ƒ‹‚ª©•ª‚ª“Š‚°‚½ó‘Ô‚È‚ç•Ûó‘Ô‚É•ÏX
                 if (isThrowBall == true) break;
-                if (ballComponent.state == BallState.THROWED_PLAYER)
+                if (ballComponent.state == BallState.THROWED_PLAYER || ballComponent.state == BallState.FREE)
                 {
                     ballComponent.InitializeState(BallState.HOLD_PLAYER);
                 }
@@ -119,6 +119,6 @@ public class Player : MonoBehaviour
         if (isThrowBall == true) return;
         if (ballComponent.state != BallState.HOLD_PLAYER) return;
 
-        ballComponent.transform.position = transform.position + transform.forward + transform.right;
+        ballComponent.transform.position = transform.position + transform.right;
     }
 }

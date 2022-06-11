@@ -19,6 +19,10 @@ public class Ball : MonoBehaviour
     [SerializeField] private float throwPower;
     // 減衰力
     [SerializeField] private float attenuationPower;
+    // 限界速度
+    [SerializeField] private float maxSpeed;
+    // 反射時の加速度
+    [SerializeField] private float accelerateValue;
 
     private Vector3 velocity;
     private bool isThrow;
@@ -40,14 +44,18 @@ public class Ball : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Vector3 hitNormal = other.gameObject.transform.forward;
-        Reflection(hitNormal);
 
         switch (other.gameObject.tag)
         {
             case "Player":
+                // 敵が跳ね返したボールなら加速＆反射
+                if (state == BallState.THROWED_ENEMY) Reflection(hitNormal, true);
                 break;
             case "Enemy":
                 state = BallState.THROWED_ENEMY;
+                break;
+            case "Wall":
+                Reflection(hitNormal);
                 break;
         }
     }
@@ -73,10 +81,12 @@ public class Ball : MonoBehaviour
     }
 
     // 反射ベクトルを生成
-    private void Reflection(Vector3 normal)
+    private void Reflection(Vector3 normal,bool addSpeed = false)
     {
         Vector3 reflectVector = velocity - 2.0f * Vector3.Dot(velocity, normal) * normal;
         velocity = reflectVector;
+
+        velocity = addSpeed ? reflectVector * accelerateValue : reflectVector;
     }
 
     // ボールの状態を初期化
@@ -85,5 +95,10 @@ public class Ball : MonoBehaviour
         velocity = Vector3.zero;
         isThrow = false;
         state = setState;
+    }
+
+    public float GetSpeed()
+    {
+        return velocity.magnitude;
     }
 }
