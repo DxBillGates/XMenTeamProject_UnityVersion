@@ -5,13 +5,21 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [SerializeField] private float movePower;
+    [SerializeField] private GameObject ballObject;
+    [SerializeField] private float throwBallCooldown;
 
     private Vector3 velocity;
     private Vector3 currentDirection;
 
+    private Ball ballComponent;
+
+    private bool isThrowBall;
+    private float throwBallColldownTime;
+
     // Start is called before the first frame update
     void Start()
     {
+        ballComponent = ballObject.GetComponent<Ball>();
         Application.targetFrameRate = 60;
     }
 
@@ -20,8 +28,13 @@ public class Player : MonoBehaviour
     {
         velocity = new Vector3();
 
+        UpdateAbilityCooldown();
+
         Move();
         RotateDirection();
+
+        HoldBallUpdate();
+        ThrowingBall(currentDirection);
     }
 
     private void OnTriggerStay(Collider other)
@@ -41,6 +54,12 @@ public class Player : MonoBehaviour
                 transform.position += moveVector;
                 break;
             case "Ball":
+                // ボールが自分が投げた状態なら保持状態に変更
+                if (isThrowBall == true) break;
+                if (ballComponent.state == BallState.THROWED_PLAYER)
+                {
+                    ballComponent.InitializeState(BallState.HOLD_PLAYER);
+                }
                 break;
             case "Enemy":
                 break;
@@ -69,5 +88,37 @@ public class Player : MonoBehaviour
         if (currentDirection.magnitude == 0) return;
 
         transform.rotation = Quaternion.LookRotation(currentDirection);
+    }
+
+    private void ThrowingBall(Vector3 dir)
+    {
+        // 投げるキーを押していない or ボールを保持していない場合は処理をしない
+        if (isThrowBall == true) return;
+        if (Input.GetButtonDown("PlayerAbility") == false) return;
+        if (ballComponent.state != BallState.HOLD_PLAYER) return;
+
+        ballComponent.Throw(dir,BallState.THROWED_PLAYER);
+
+        isThrowBall = true;
+    }
+
+    private void UpdateAbilityCooldown()
+    {
+        // ボールを投げるクールダウン更新処理
+        if(throwBallColldownTime > throwBallCooldown)
+        {
+            isThrowBall = false;
+            throwBallColldownTime = 0;
+        }
+        if (isThrowBall) throwBallColldownTime += Time.deltaTime;
+    }
+
+    // ボールを保持しているときにボールを自分の右手前に配置
+    private void HoldBallUpdate()
+    {
+        if (isThrowBall == true) return;
+        if (ballComponent.state != BallState.HOLD_PLAYER) return;
+
+        ballComponent.transform.position = transform.position + transform.forward + transform.right;
     }
 }

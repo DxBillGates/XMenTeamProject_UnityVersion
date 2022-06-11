@@ -4,6 +4,7 @@ using UnityEngine;
 
 public enum BallState
 {
+    FREE,
     HOLD_PLAYER,
     HOLD_ENEMY,
     THROWED_PLAYER,
@@ -26,10 +27,8 @@ public class Ball : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        velocity = new Vector3();
-        isThrow = false;
-
-        Throw(new Vector3(0.5f, 0, 1));
+        InitializeState(BallState.THROWED_PLAYER);
+        Throw(new Vector3(0.5f, 0, 1),BallState.THROWED_PLAYER);
     }
 
     // Update is called once per frame
@@ -46,7 +45,6 @@ public class Ball : MonoBehaviour
         switch (other.gameObject.tag)
         {
             case "Player":
-                state = BallState.THROWED_PLAYER;
                 break;
             case "Enemy":
                 state = BallState.THROWED_ENEMY;
@@ -54,34 +52,22 @@ public class Ball : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        //Vector3 hitNormal = collision.contacts[0].normal;
-        //Reflection(hitNormal);
-
-        //switch (collision.gameObject.tag)
-        //{
-        //    case "Player":
-        //        state = BallState.THROWED_PLAYER;
-        //        break;
-        //    case "Enemy":
-        //        state = BallState.THROWED_ENEMY;
-        //        break;
-        //}
-    }
-
     // ゲームオブジェクトをその向きに対する速度を与える
-    public void Throw(Vector3 direction)
+    public void Throw(Vector3 direction,BallState setState)
     {
         velocity = direction * throwPower;
 
         isThrow = true;
+        state = setState;
     }
 
     // ボールの移動処理
     private void Move()
     {
         velocity -= velocity.normalized * attenuationPower;
+
+        const float MIN_VELOCITY = 0.01f;
+        if (velocity.magnitude < MIN_VELOCITY) InitializeState(BallState.FREE);
 
         transform.position += velocity;
     }
@@ -91,5 +77,13 @@ public class Ball : MonoBehaviour
     {
         Vector3 reflectVector = velocity - 2.0f * Vector3.Dot(velocity, normal) * normal;
         velocity = reflectVector;
+    }
+
+    // ボールの状態を初期化
+    public void InitializeState(BallState setState)
+    {
+        velocity = Vector3.zero;
+        isThrow = false;
+        state = setState;
     }
 }
