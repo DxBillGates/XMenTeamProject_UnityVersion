@@ -200,9 +200,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a45524d108f0794a910fed9e3362c21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxLength: 100
-  objectDistance: 4
+  maxLength: 500
+  objectDistance: 10
   lineObjectPrefab: {fileID: 13741350939399065, guid: 3470c9c0d3cc9c94585c5006d86f4866, type: 3}
+  lineObjectCount: 20
+  raycastCount: 2
 --- !u!4 &321424020
 Transform:
   m_ObjectHideFlags: 0
