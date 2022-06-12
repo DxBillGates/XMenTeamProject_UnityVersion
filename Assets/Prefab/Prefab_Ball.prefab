@@ -141,4 +141,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   throwPower: 0.5
-  attenuationPower: 0.0001
+  attenuationPower: 0.001
+  maxSpeed: 1
+  accelerateValue: 1.05
+  stateMaterials:
+  - {fileID: 2100000, guid: 1881196c8550f2b45af99d03c6da1960, type: 2}
+  - {fileID: 2100000, guid: 58b4dbf2dc1cb46408131df6ea47882d, type: 2}
+  - {fileID: 2100000, guid: 22d23ed37c2d4ca4d98f5428c3a5977a, type: 2}
+  - {fileID: 2100000, guid: fc52e54c31dfdb4459e01f0907be1f0c, type: 2}
+  - {fileID: 2100000, guid: 8636c228dfa63414c9f6e81e9742151d, type: 2}

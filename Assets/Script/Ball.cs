@@ -23,6 +23,9 @@ public class Ball : MonoBehaviour
     [SerializeField] private float maxSpeed;
     // 反射時の加速度
     [SerializeField] private float accelerateValue;
+    [SerializeField] private List<Material> stateMaterials;
+
+    private MeshRenderer meshRenderer;
 
     private Vector3 velocity;
     private bool isThrow;
@@ -33,6 +36,14 @@ public class Ball : MonoBehaviour
     {
         InitializeState(BallState.THROWED_PLAYER);
         Throw(new Vector3(0.5f, 0, 1),BallState.THROWED_PLAYER);
+
+        meshRenderer = GetComponent<MeshRenderer>();
+        meshRenderer.material = stateMaterials[(int)state];
+    }
+
+    private void FixedUpdate()
+    {
+        meshRenderer.material = stateMaterials[(int)state];
     }
 
     // Update is called once per frame
@@ -49,13 +60,27 @@ public class Ball : MonoBehaviour
         {
             case "Player":
                 // 敵が跳ね返したボールなら加速＆反射
-                if (state == BallState.THROWED_ENEMY) Reflection(hitNormal, true);
+                if (state == BallState.THROWED_ENEMY)
+                {
+                    hitNormal = (other.gameObject.transform.position - transform.position).normalized;
+                    Reflection(hitNormal, true);
+                }
                 break;
             case "Enemy":
+                // 投げられた状態でそのボールが動いていれば
+                if (isThrow == false && velocity.magnitude <= 0) break;
+
+                hitNormal = (other.gameObject.transform.position - transform.position).normalized;
+                Reflection(hitNormal, true);
+
                 state = BallState.THROWED_ENEMY;
                 break;
             case "Wall":
                 Reflection(hitNormal);
+                break;
+            case "EnemyBarrier":
+                break;
+            case "NormalBarrier":
                 break;
         }
     }
