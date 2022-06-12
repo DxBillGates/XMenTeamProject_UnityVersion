@@ -8,6 +8,9 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject ballObject;
     [SerializeField] private float throwBallCooldown;
     [SerializeField] private GameObject lineObjectManager;
+    [SerializeField] private float maxHp;
+
+    private float hp;
 
     private Vector3 velocity;
     private Vector3 currentDirection;
@@ -19,10 +22,14 @@ public class Player : MonoBehaviour
 
     private PredictionalLineDrawer lineDrawer;
 
+    private Vector3 knockbackVelocity;
+
     // Start is called before the first frame update
     void Start()
     {
         Application.targetFrameRate = 60;
+
+        hp = maxHp;
 
         velocity = Vector3.zero;
         currentDirection = transform.forward;
@@ -41,6 +48,7 @@ public class Player : MonoBehaviour
         velocity = new Vector3();
 
         UpdateAbilityCooldown();
+        UpdateKnockback();
 
         Move();
         RotateDirection();
@@ -72,10 +80,18 @@ public class Player : MonoBehaviour
                 break;
             case "Ball":
                 // ƒ{[ƒ‹‚ªŽ©•ª‚ª“Š‚°‚½ó‘Ô‚È‚ç•ÛŽó‘Ô‚É•ÏX
-                if (isThrowBall == true) break;
+                if (isThrowBall) break;
                 if (ballComponent.state == BallState.THROWED_PLAYER || ballComponent.state == BallState.FREE)
                 {
                     ballComponent.InitializeState(BallState.HOLD_PLAYER);
+                }
+
+                if (ballComponent.state == BallState.THROWED_ENEMY)
+                {
+                    Damage(ballComponent.GetSpeed());
+
+                    Vector3 knockbackVector = (transform.position - other.gameObject.transform.position).normalized;
+                    Knockback(knockbackVector);
                 }
                 break;
             case "Enemy":
@@ -91,7 +107,7 @@ public class Player : MonoBehaviour
         Vector3 inputDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
         bool isInput;
 
-        velocity = movePower * moveVector.normalized;
+        velocity += movePower * moveVector.normalized;
 
         transform.position += velocity;
 
@@ -137,5 +153,31 @@ public class Player : MonoBehaviour
         if (ballComponent.state != BallState.HOLD_PLAYER) return;
 
         ballComponent.transform.position = transform.position + transform.right;
+    }
+
+    private void Knockback(Vector3 vector)
+    {
+        const float POWER = 2;
+        knockbackVelocity = vector * POWER;
+    }
+
+    private void UpdateKnockback()
+    {
+        const float DECAY_VALUE = 2;
+
+        Vector3 backupKnockbackVelocity = knockbackVelocity - knockbackVelocity / DECAY_VALUE;
+        if(backupKnockbackVelocity.magnitude > knockbackVelocity.magnitude)
+        {
+            backupKnockbackVelocity = new Vector3();
+            return;
+        }
+
+        velocity += backupKnockbackVelocity;
+        knockbackVelocity -= backupKnockbackVelocity;
+    }
+
+    void Damage(float value)
+    {
+        hp -= value;
     }
 }
