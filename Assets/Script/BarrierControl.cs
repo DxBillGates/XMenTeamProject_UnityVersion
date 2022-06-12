@@ -11,7 +11,7 @@ public class BarrierControl : MonoBehaviour
     //盾のモデルをセットするオブジェクト
     [SerializeField] private GameObject barrierObject;
     //スポーンさせるクローン的なオブジェクト
-    public GameObject barrieClone;
+    private GameObject barrieClone;
     
     //盾を展開する半径
     [SerializeField] private float radius;
