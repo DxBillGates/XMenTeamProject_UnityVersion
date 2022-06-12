@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float throwBallCooldown;
     [SerializeField] private GameObject lineObjectManager;
     [SerializeField] private float maxHp;
+    [SerializeField] private GameObject hpGaugeUIObject;
 
     private float hp;
 
@@ -23,6 +24,8 @@ public class Player : MonoBehaviour
     private PredictionalLineDrawer lineDrawer;
 
     private Vector3 knockbackVelocity;
+
+    private HPGauge hpGauge;
 
     // Start is called before the first frame update
     void Start()
@@ -40,12 +43,16 @@ public class Player : MonoBehaviour
         throwBallColldownTime = 0;
 
         lineDrawer = lineObjectManager.GetComponent<PredictionalLineDrawer>();
+
+        hpGauge = hpGaugeUIObject.GetComponent<HPGauge>();
     }
 
     // Update is called once per frame
     void Update()
     {
         velocity = new Vector3();
+
+        hpGauge.hp = CalclatePercentHP();
 
         UpdateAbilityCooldown();
         UpdateKnockback();
@@ -176,8 +183,15 @@ public class Player : MonoBehaviour
         knockbackVelocity -= backupKnockbackVelocity;
     }
 
-    void Damage(float value)
+    private void Damage(float value)
     {
         hp -= value;
+
+        if (hp < 0) hp = 0;
+    }
+
+    private float CalclatePercentHP()
+    {
+        return hp / maxHp;
     }
 }
