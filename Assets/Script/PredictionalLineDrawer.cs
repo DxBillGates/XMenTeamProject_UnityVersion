@@ -78,12 +78,12 @@ public class PredictionalLineDrawer : MonoBehaviour
             }
             if (Physics.Raycast(rayOriginPosition, rayDirection, out RaycastHit raycastHit, maxLength - rayDistance))
             {
-                // 壁オブジェクトじゃないならレイキャストの結果は格納しない
-                if (!raycastHit.collider.gameObject.CompareTag("Wall"))
-                {
-                    InitializeRaycastResults(i);
-                    break;
-                }
+                //// 壁オブジェクトじゃないならレイキャストの結果は格納しない
+                //if (!raycastHit.collider.gameObject.CompareTag("Wall"))
+                //{
+                //    InitializeRaycastResults(i);
+                //    break;
+                //}
 
                 // 次のループで使うレイキャストのベクトルを
                 // レイキャストした際のベクトルと壁の法線で反射ベクトルを取得
