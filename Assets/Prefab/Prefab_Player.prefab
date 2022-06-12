@@ -141,5 +141,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movePower: 0.5
-  ballObject: {fileID: 0}
+  ballObject: {fileID: 2683838146694799366, guid: 41336c39d89ec8d4895a261b0d0b0d7c, type: 3}
   throwBallCooldown: 1
+  lineObjectManager: {fileID: 13741350939399065, guid: 3470c9c0d3cc9c94585c5006d86f4866, type: 3}
+  maxHp: 100
