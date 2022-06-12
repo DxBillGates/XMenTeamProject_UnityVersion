@@ -91,7 +91,7 @@ public class Player : MonoBehaviour
                     Damage(ballComponent.GetSpeed());
 
                     Vector3 knockbackVector = (transform.position - other.gameObject.transform.position).normalized;
-                    Knockback(knockbackVector);
+                    Knockback(knockbackVector * ballComponent.GetSpeed());
                 }
                 break;
             case "Enemy":

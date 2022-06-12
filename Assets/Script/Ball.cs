@@ -63,7 +63,7 @@ public class Ball : MonoBehaviour
                 if (state == BallState.THROWED_ENEMY)
                 {
                     hitNormal = (other.gameObject.transform.position - transform.position).normalized;
-                    Reflection(hitNormal, true);
+                    Reflection(hitNormal);
                 }
                 break;
             case "Enemy":
