@@ -1,4 +1,4 @@
-Shader "Unlit/barrierTestShader"
+Shader "Unlit/DomeTestShader"
 {
 	Properties{
 		_Color("Color"     , Color) = (1, 1, 1, 1)

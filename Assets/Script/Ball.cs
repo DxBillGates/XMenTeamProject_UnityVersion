@@ -33,6 +33,8 @@ public class Ball : MonoBehaviour
     {
         InitializeState(BallState.THROWED_PLAYER);
         Throw(new Vector3(0.5f, 0, 1),BallState.THROWED_PLAYER);
+        
+
     }
 
     // Update is called once per frame
@@ -58,7 +60,8 @@ public class Ball : MonoBehaviour
                 Reflection(hitNormal);
                 break;
             case "Barrier":
-                Reflection(hitNormal);
+                Debug.Log(hitNormal);
+                Reflection(hitNormal, true);
                 break;
         }
     }

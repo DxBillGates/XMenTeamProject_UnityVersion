@@ -11,7 +11,7 @@ public class BarrierControl : MonoBehaviour
     //盾のモデルをセットするオブジェクト
     [SerializeField] private GameObject barrierObject;
     //スポーンさせるクローン的なオブジェクト
-    private GameObject barrieClone;
+    public GameObject barrieClone;
     
     //盾を展開する半径
     [SerializeField] private float radius;
@@ -23,6 +23,7 @@ public class BarrierControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        direction = new Vector3();
         time = 0;
     }
 
@@ -60,7 +61,7 @@ public class BarrierControl : MonoBehaviour
         if (isOpen)
         {
             barrieClone.transform.rotation = Quaternion.LookRotation(direction);
-            barrieClone.transform.position = barrierPosition;
+            barrieClone.transform.position = barrierPosition+new Vector3(0,-3,0);
         }
     }
 }
