@@ -9,18 +9,24 @@ public class HPGauge : MonoBehaviour
     int texNumber { get; set; }
     //ŠO•”‚©‚çHP‚ğ•Ï‚¦‚é—p‚Ì•Ï”
     float hp { set; get; }
+
+    Slider hpSlider;
+
     // Start is cSalled before the first frame update
     void Start()
     {
         texNumber = 0;
         hp = 1.0f;
+
+        hpSlider = GetComponent<Slider>();
     }
 
     // Update is called once per frame
     void Update()
     {
         texNumber++;
-        gameObject.GetComponent<Slider>().value = hp;
+        hpSlider.value = hp;
+        //gameObject.GetComponent<Slider>().value = hp;
     }
 
 }
