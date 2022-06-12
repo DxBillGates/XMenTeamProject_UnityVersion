@@ -8,7 +8,7 @@ public class HPGauge : MonoBehaviour
     //テクすやーの番号
     int texNumber { get; set; }
     //外部からHPを変える用の変数
-    float hp { set; get; }
+    public float hp { private get; set; }
 
     Slider hpSlider;
 
