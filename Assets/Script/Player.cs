@@ -69,6 +69,7 @@ public class Player : MonoBehaviour
 
         HoldBallUpdate();
         ThrowingBall(currentDirection);
+        UsingBarrier();
 
 
         lineDrawer.isDraw = ballComponent.state == BallState.HOLD_PLAYER;
@@ -147,6 +148,18 @@ public class Player : MonoBehaviour
         ballComponent.Throw(dir, BallState.THROWED_PLAYER);
 
         isThrowBall = true;
+    }
+
+    private void UsingBarrier()
+    {
+        // ボールを投げたばかりの状態ならリターン
+        if (isThrowBall == true) return;
+        // ボールを保持しているならリターン
+        if (ballComponent.state == BallState.HOLD_PLAYER) return;
+        // アビリティキーを押していないならリターン
+        if (Input.GetButtonDown("PlayerAbility") == false) return;
+
+        barrierControl.Use();
     }
 
     private void UpdateAbilityCooldown()

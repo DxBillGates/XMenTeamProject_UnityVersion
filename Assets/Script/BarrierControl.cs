@@ -46,6 +46,21 @@ public class BarrierControl : MonoBehaviour
 
             }
         }
+
+        //move ベクトルを度数法に変換
+        float angle = Mathf.Atan2(direction.x, direction.z);
+        Vector3 barrierPosition = transform.position + new Vector3(Mathf.Sin(angle) * radius, 0.0f, Mathf.Cos(angle) * radius);
+
+        //展開中なら
+        if (isOpen)
+        {
+            barrieClone.transform.rotation = Quaternion.LookRotation(direction);
+            barrieClone.transform.position = barrierPosition+new Vector3(0,-3,0);
+        }
+    }
+
+    public void Use()
+    {
         //move ベクトルを度数法に変換
         float angle = Mathf.Atan2(direction.x, direction.z);
         Vector3 barrierPosition = transform.position + new Vector3(Mathf.Sin(angle) * radius, 0.0f, Mathf.Cos(angle) * radius);
@@ -58,12 +73,6 @@ public class BarrierControl : MonoBehaviour
                 isOpen = true;
                 barrieClone = Instantiate(barrierObject, barrierPosition, new Quaternion(0, 1, 0, angle));
             }
-        }
-        //展開中なら
-        if (isOpen)
-        {
-            barrieClone.transform.rotation = Quaternion.LookRotation(direction);
-            barrieClone.transform.position = barrierPosition+new Vector3(0,-3,0);
         }
     }
 }
