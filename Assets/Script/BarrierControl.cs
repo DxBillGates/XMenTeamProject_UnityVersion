@@ -12,7 +12,7 @@ public class BarrierControl : MonoBehaviour
     [SerializeField] private GameObject barrierObject;
     //スポーンさせるクローン的なオブジェクト
     private GameObject barrieClone;
-    
+
     //盾を展開する半径
     [SerializeField] private float radius;
     //展開する長さ(時間)
@@ -55,7 +55,7 @@ public class BarrierControl : MonoBehaviour
         if (isOpen)
         {
             barrieClone.transform.rotation = Quaternion.LookRotation(direction);
-            barrieClone.transform.position = barrierPosition+new Vector3(0,-3,0);
+            barrieClone.transform.position = barrierPosition + new Vector3(0, -3, 0);
         }
     }
 
@@ -67,12 +67,8 @@ public class BarrierControl : MonoBehaviour
 
         if (!isOpen)
         {
-            //スポーン
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                isOpen = true;
-                barrieClone = Instantiate(barrierObject, barrierPosition, new Quaternion(0, 1, 0, angle));
-            }
+            isOpen = true;
+            barrieClone = Instantiate(barrierObject, barrierPosition, new Quaternion(0, 1, 0, angle));
         }
     }
 }
