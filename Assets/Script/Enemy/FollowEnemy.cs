@@ -32,7 +32,7 @@ public class FollowEnemy : Enemy
         // ƒ{[ƒ‹‚É“–‚½‚Á‚½‚Æ‚«‚Ìˆ—
         if (collision.gameObject.name == "Ball")
         {
-            KnockBack(collision.gameObject.transform.position);
+            KnockBack(collision.gameObject.transform.position,collision);
         }
     }
 }

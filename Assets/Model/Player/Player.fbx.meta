@@ -1,17 +1,17 @@
 fileFormatVersion: 2
-guid: 74fb551414d5dc54382920c9a3911d59
+guid: 3ef7fff4d38e1a54eb7083c34485aa5b
 ModelImporter:
   serializedVersion: 21202
   internalIDToNameTable:
   - first:
-      74: -960081853429349833
-    second: "\u30A2\u30FC\u30DE\u30C1\u30E5\u30A2|PoseLib"
+      74: -3276019671993404208
+    second: Bone|PoseLib
   - first:
-      74: -2054729920978899392
-    second: "\u30A2\u30FC\u30DE\u30C1\u30E5\u30A2|Walk"
+      74: -1306293826057376171
+    second: Bone|walk
   - first:
-      74: -7873310163155601729
-    second: "\u30A2\u30FC\u30DE\u30C1\u30E5\u30A2|Walk (1)"
+      74: -5103111253210453975
+    second: Bone|walk (1)
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -42,8 +42,8 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: "\u30A2\u30FC\u30DE\u30C1\u30E5\u30A2|Walk (1)"
-      takeName: "\u30A2\u30FC\u30DE\u30C1\u30E5\u30A2|Walk"
+      name: Bone|walk (1)
+      takeName: Bone|walk
       internalID: 0
       firstFrame: 0
       lastFrame: 28
@@ -71,8 +71,8 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: "\u30A2\u30FC\u30DE\u30C1\u30E5\u30A2|Walk"
-      takeName: "\u30A2\u30FC\u30DE\u30C1\u30E5\u30A2|Walk"
+      name: Bone|walk
+      takeName: Bone|walk
       internalID: 0
       firstFrame: 0
       lastFrame: 28
