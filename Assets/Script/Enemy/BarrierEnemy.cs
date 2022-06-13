@@ -97,13 +97,6 @@ public class BarrierEnemy : Enemy
     }
 
 
-    private void OnTriggerStay(Collider collision)
-    {
-        // ƒ{[ƒ‹‚É“–‚½‚Á‚½‚Æ‚«‚Ìˆ—
-        if (collision.gameObject.name == "Ball")
-        {
-            KnockBack(collision.gameObject.transform.position);
-        }
-    }
+   
 
 }

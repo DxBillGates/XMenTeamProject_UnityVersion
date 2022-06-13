@@ -52,18 +52,23 @@ public class Enemy : MonoBehaviour
     /// 何かに当たったときのノックバック処理
     /// </summary>
     /// <param name="">当たった敵の位置</param>
-    protected void KnockBack(Vector3 hitPos)
+    protected void KnockBack(Vector3 hitPos, Collider collision)
     {
         // ノックバックする位置を決める
         Vector3 moveVector = -1 * (hitPos - transform.position);
         // 正規化させる
         moveVector = knock_back_speed * moveVector.normalized;
 
-        transform.position = new Vector3(0, 0, 0);
+        Damage(collision.gameObject.GetComponent<Ball>().GetSpeed());
     }
 
     protected void Damage(float damage)
     {
         hp -= damage;
+
+        if (hp < 0)
+        {
+            Destroy(transform.root.gameObject);
+        }
     }
 }

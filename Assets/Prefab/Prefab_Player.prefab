@@ -15,6 +15,8 @@ GameObject:
   - component: {fileID: 3891409010159645287}
   - component: {fileID: 3891409010159645288}
   - component: {fileID: 3891409010159645289}
+  - component: {fileID: 6271297789954136341}
+  - component: {fileID: 467112380429695262}
   m_Layer: 0
   m_Name: Prefab_Player
   m_TagString: Player
@@ -44,7 +46,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3891409010159645294}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 3252224991405807402, guid: 3ef7fff4d38e1a54eb7083c34485aa5b, type: 3}
 --- !u!23 &3891409010159645292
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -145,3 +147,39 @@ MonoBehaviour:
   throwBallCooldown: 1
   lineObjectManager: {fileID: 13741350939399065, guid: 3470c9c0d3cc9c94585c5006d86f4866, type: 3}
   maxHp: 100
+  hpGaugeUIObject: {fileID: 0}
+--- !u!114 &6271297789954136341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3891409010159645294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dea43bf522a6ddd45a8e4215792655dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  barrierObject: {fileID: 2070665731883021178, guid: f0ff8c9026689df4a9b799fbcabe1d31, type: 3}
+  radius: 5
+  openSpan: 40
+--- !u!95 &467112380429695262
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3891409010159645294}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ed6b23b85939faa4894d1f7beb702837, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
