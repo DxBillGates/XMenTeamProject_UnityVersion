@@ -59,19 +59,11 @@ public class Enemy : MonoBehaviour
         // ê≥ãKâªÇ≥ÇπÇÈ
         moveVector = knock_back_speed * moveVector.normalized;
 
-        transform.position =
-            Vector3.MoveTowards(transform.position, moveVector + transform.position, knock_back_speed);
+        transform.position = new Vector3(0, 0, 0);
     }
 
-    private void OnTriggerStay(Collider collision)
+    protected void Damage(float damage)
     {
-
-        // É{Å[ÉãÇ…ìñÇΩÇ¡ÇΩÇ∆Ç´ÇÃèàóù
-        if (collision.gameObject.name == "Ball")
-        {
-            KnockBack(collision.transform.position);
-        }
-
+        hp -= damage;
     }
-
 }
