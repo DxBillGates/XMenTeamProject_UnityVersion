@@ -31,17 +31,19 @@ public class BarrierControl : MonoBehaviour
     void Update()
     {
         //経過時間が指定した時間を経過していなかったら間
-        if (time < openSpan)
+        if (isOpen)
         {
-            time++;
-        }
-        else
-        {
-            if (isOpen)
+            if (time < openSpan)
             {
+                time++;
+            }
+            else
+            {
+
                 isOpen = false;
                 Destroy(barrieClone);
                 time = 0;
+
             }
         }
         //move ベクトルを度数法に変換
