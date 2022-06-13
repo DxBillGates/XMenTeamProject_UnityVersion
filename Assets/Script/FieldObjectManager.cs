@@ -90,7 +90,11 @@ public class FieldObjectManager : MonoBehaviour
     {
         // 中心へのベクトルを生成
         Vector3 toCenterVector = -argTransform.position.normalized;
-        argTransform.rotation = Quaternion.FromToRotation(argTransform.forward, toCenterVector);
+
+        Vector3 rotateAxis = Vector3.up;
+        float radian = Mathf.Atan2(toCenterVector.x, toCenterVector.z);
+        float degree = radian * 180 / Mathf.PI;
+        argTransform.rotation = Quaternion.AngleAxis(degree, rotateAxis);
     }
 
     // 引数のtransformの座標をクラスに設定されているn角形ごとにあった値分回転させる
