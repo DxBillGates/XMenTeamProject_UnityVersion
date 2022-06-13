@@ -78,9 +78,9 @@ public class Ball : MonoBehaviour
             case "Wall":
                 Reflection(hitNormal);
                 break;
-            case "EnemyBarrier":
-                break;
-            case "NormalBarrier":
+            case "Barrier":
+                Reflection(hitNormal, true);
+                state = BallState.THROWED_PLAYER;
                 break;
         }
     }
@@ -112,6 +112,8 @@ public class Ball : MonoBehaviour
         velocity = reflectVector;
 
         velocity = addSpeed ? reflectVector * accelerateValue : reflectVector;
+
+        if (velocity.magnitude > maxSpeed) velocity = velocity.normalized * maxSpeed;
     }
 
     // ƒ{[ƒ‹‚Ìó‘Ô‚ğ‰Šú‰»

@@ -20,6 +20,9 @@ public class Player : MonoBehaviour
 
     private bool isThrowBall;
     private float throwBallColldownTime;
+    
+    //バリアを展開するスクリプト
+    private BarrierControl barrierControl;
 
     private PredictionalLineDrawer lineDrawer;
 
@@ -38,6 +41,7 @@ public class Player : MonoBehaviour
         currentDirection = transform.forward;
 
         ballComponent = ballObject.GetComponent<Ball>();
+        barrierControl = GetComponent<BarrierControl>();
 
         isThrowBall = false;
         throwBallColldownTime = 0;
@@ -50,6 +54,9 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //バリアの展開する向き指定
+        barrierControl.direction = gameObject.transform.forward;
+
         velocity = new Vector3();
 
         hpGauge.hp = CalclatePercentHP();
