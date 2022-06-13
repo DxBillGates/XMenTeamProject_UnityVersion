@@ -30,6 +30,8 @@ public class Player : MonoBehaviour
 
     private HPGauge hpGauge;
 
+    private UltimateSkill ultimateSkill;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -49,6 +51,8 @@ public class Player : MonoBehaviour
         lineDrawer = lineObjectManager.GetComponent<PredictionalLineDrawer>();
 
         hpGauge = hpGaugeUIObject.GetComponent<HPGauge>();
+
+        ultimateSkill = GetComponent<UltimateSkill>();
     }
 
     // Update is called once per frame
@@ -70,6 +74,7 @@ public class Player : MonoBehaviour
         HoldBallUpdate();
         ThrowingBall(currentDirection);
         UsingBarrier();
+        UseUltimateSkill();
 
 
         lineDrawer.isDraw = ballComponent.state == BallState.HOLD_PLAYER;
@@ -160,6 +165,13 @@ public class Player : MonoBehaviour
         if (Input.GetButtonDown("PlayerAbility") == false) return;
 
         barrierControl.Use();
+    }
+
+    private void UseUltimateSkill()
+    {
+        if (Input.GetButtonDown("UltimateSkill") == false) return;
+
+        ultimateSkill.Use();
     }
 
     private void UpdateAbilityCooldown()

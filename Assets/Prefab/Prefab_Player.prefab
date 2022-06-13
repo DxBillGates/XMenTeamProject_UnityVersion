@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 3891409010159645288}
   - component: {fileID: 3891409010159645289}
   - component: {fileID: 6271297789954136341}
+  - component: {fileID: -6473924605607140458}
   - component: {fileID: 467112380429695262}
   m_Layer: 0
   m_Name: Prefab_Player
@@ -163,6 +164,22 @@ MonoBehaviour:
   barrierObject: {fileID: 2070665731883021178, guid: f0ff8c9026689df4a9b799fbcabe1d31, type: 3}
   radius: 5
   openSpan: 40
+--- !u!114 &-6473924605607140458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3891409010159645294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e65365ea44b8e445a233d44074e231e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxGaugeValue: 100
+  maxLevel: 4
+  initValue: 25
+  levelUpValue: 25
 --- !u!95 &467112380429695262
 Animator:
   serializedVersion: 4

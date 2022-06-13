@@ -24,4 +24,9 @@ public class UltimateGauge : MonoBehaviour
         image.sprite = gaugeSprite[texNumber % gaugeSprite.Count];
         //gameObject.GetComponent<Image>().sprite = gaugeSprite[texNumber % gaugeSprite.Count];
     }
+
+    public void SetLevel(int setLevelValue)
+    {
+        texNumber = setLevelValue;
+    }
 }
