@@ -33,7 +33,7 @@ public class BarrierControl : MonoBehaviour
         //経過時間が指定した時間を経過していなかったら間
         if (time < openSpan)
         {
-            //time++;
+            time++;
         }
         else
         {
