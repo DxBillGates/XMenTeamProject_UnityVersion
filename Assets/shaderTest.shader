@@ -8,7 +8,7 @@ Properties{
 SubShader{
     Pass {
         //Queue‚Ì‡”Ô‚ª³‚µ‚­‚È‚ç‚È‚¢‚Ì‚ÅUnity‘¤‚Åİ’è‚ª•K—v
-        Tags { "Queue" = "Transparent" "RenderType" = "Transparent" }
+        Tags { "Queue" = "Transparent" "RenderType" = "Transparent"}
         Blend One One
         Cull Off
         ZWrite Off
