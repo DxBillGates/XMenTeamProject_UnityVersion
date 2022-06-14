@@ -30,8 +30,23 @@ public class UltimateSkillManager : MonoBehaviour
     }
 
     // “G‚ð“|‚µ‚½‚Æ‚«‚ÉŒÄ‚Ô
-    void AddGaugeValue()
+    public void AddGaugeValue()
     {
         ultimateSkill.AddValue(addValue);
+    }
+
+    public bool IsUse()
+    {
+        return ultimateSkill.isUse;
+    }
+
+    public Vector3 GetUsingPosition()
+    {
+        return ultimateSkill.usingPosition;
+    }
+
+    public float GetSize()
+    {
+        return ultimateSkill.size;
     }
 }

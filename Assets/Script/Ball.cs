@@ -24,12 +24,14 @@ public class Ball : MonoBehaviour
     // ”½ŽËŽž‚Ì‰Á‘¬“x
     [SerializeField] private float accelerateValue;
     [SerializeField] private List<Material> stateMaterials;
+    [SerializeField] private GameObject ultimateSkillManagerObject;
 
     private MeshRenderer meshRenderer;
 
     private Vector3 velocity;
     private bool isThrow;
     public BallState state { get; private set; }
+    private UltimateSkillManager ultimateSkillManager;
 
     // Start is called before the first frame update
     void Start()
@@ -39,6 +41,7 @@ public class Ball : MonoBehaviour
 
         meshRenderer = GetComponent<MeshRenderer>();
         meshRenderer.material = stateMaterials[(int)state];
+        ultimateSkillManager = ultimateSkillManagerObject.GetComponent<UltimateSkillManager>();
     }
 
     private void FixedUpdate()
@@ -50,6 +53,8 @@ public class Ball : MonoBehaviour
     void Update()
     {
         if (isThrow) Move();
+
+        UpdateDomeDetection();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -127,5 +132,23 @@ public class Ball : MonoBehaviour
     public float GetSpeed()
     {
         return velocity.magnitude;
+    }
+
+    // ƒh[ƒ€‚Æ‚Ì“–‚½‚è”»’è
+    private void UpdateDomeDetection()
+    {
+        if (ultimateSkillManager == false) return;
+        if (ultimateSkillManager.IsUse() == false) return;
+
+        Vector3 domePosition = ultimateSkillManager.GetUsingPosition();
+        float domeSize = ultimateSkillManager.GetSize();
+
+        float distance = Vector3.Distance(domePosition, transform.position);
+        if (distance >= domeSize)
+        {
+            Vector3 hitNormal = transform.position - domePosition;
+            hitNormal = hitNormal.normalized;
+            Reflection(hitNormal, true);
+        }
     }
 }

@@ -11,9 +11,10 @@ public class UltimateSkill : MonoBehaviour
 
     // リストにしてレベルの上がりやすさを調整できるようにするかも
     [SerializeField] private float levelUpValue;
+    [SerializeField] GameObject domeGeneratorObject;
 
     // 使用しているか
-    private bool isUse;
+    public bool isUse { get; private set; }
     // ゲージの値
     private float gaugeValue;
     // ゲージのレベル
@@ -22,12 +23,17 @@ public class UltimateSkill : MonoBehaviour
     private float usingTime;
     private float maxUsingTime;
 
+    DomeGenerator domeGenerator;
+    public Vector3 usingPosition { get; private set; }
+    public float size { get; private set; }
+
     // Start is called before the first frame update
     void Start()
     {
         Initialize();
 
         gaugeValue = initValue;
+        domeGenerator = domeGeneratorObject.GetComponent<DomeGenerator>();
     }
 
     // Update is called once per frame
@@ -37,6 +43,7 @@ public class UltimateSkill : MonoBehaviour
         if(usingTime >= maxUsingTime)
         {
             Initialize();
+            domeGenerator.DestroyDome();
         }
 
         usingTime += Time.deltaTime;
@@ -47,6 +54,9 @@ public class UltimateSkill : MonoBehaviour
         isUse = false;
         gaugeValue = 0;
         level = 0;
+        usingTime = 0;
+        usingPosition = Vector3.zero;
+        size = 0;
     }
 
 
@@ -91,6 +101,11 @@ public class UltimateSkill : MonoBehaviour
         // ゲージを初期化してレベルを再計算
         gaugeValue = 0;
         CalcLevel();
+
+        const float SIZE = 20;
+        domeGenerator.CreateDome(transform.position, SIZE);
+        usingPosition = transform.position;
+        size = SIZE;
 
         isUse = true;
     }
