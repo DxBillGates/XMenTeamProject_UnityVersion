@@ -7,7 +7,7 @@ Properties{
 }
 SubShader{
     Pass {
-        //Queueの順番が正しくならないのでUnit側で設定が必要
+        //Queueの順番が正しくならないのでUnity側で設定が必要
         Tags { "Queue" = "Transparent" "RenderType" = "Transparent" }
         Blend One One
         Cull Off
@@ -23,7 +23,7 @@ SubShader{
             float4 pos : SV_POSITION;
             float3 normal : NORMAL;
             float2 uv : TEXCOORD0;
-            float3 viewDir : TEXCOORD1;
+            float3 dir : TEXCOORD1;
         };
 
         sampler2D _MainTex;
@@ -35,8 +35,9 @@ SubShader{
             //ワールド行列に変換
             o.normal = normalize(mul((float3x3)unity_ObjectToWorld, v.normal.xyz));
             //カメラと頂点のディレクション
-            o.viewDir = normalize(_WorldSpaceCameraPos - mul((float3x3)unity_ObjectToWorld, v.vertex));
-            o.uv = TRANSFORM_TEX(v.texcoord.xy, _MainTex);
+            o.dir = normalize(_WorldSpaceCameraPos - mul((float3x3)unity_ObjectToWorld, v.vertex));
+            //タイリングとオフセットの値をテクスチャのUVに適応させる
+            o.uv = TRANSFORM_TEX(v.texcoord, _MainTex);
             return o;
         }
 
@@ -44,8 +45,9 @@ SubShader{
         fixed _Alpha;
 
         fixed4 frag(v2f i) : COLOR {
-            //ディレクションと本線の内積が90度に近いほど光る(等倍)
-            float val = 1 - abs(dot(i.viewDir, i.normal)) * _Alpha;
+            //ディレクションと法線の内積が0に近いほど色がつく
+            float val = 1 - abs(dot(i.dir, i.normal)) * _Alpha;
+            //テクスチャと計算結果と_Colorをかけ合わせる
             return _Color * _Color.a * val * val * tex2D(_MainTex, i.uv);
         }
 
