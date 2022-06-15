@@ -11,10 +11,13 @@ public class TitleScene : MonoBehaviour
     float timer = 0;
     bool isStart = false;
     Vector3 blackSquareScale = new Vector3(1, 1, 1);
+    float maxScaleX = (float)Screen.width / 100 + 1;
+    float maxScaleY = (float)Screen.height / 25;
 
     // Start is called before the first frame update
     void Start()
     {
+        timer = 0;
         blackCircle.transform.position = new Vector3(Screen.width + blackCircle.sizeDelta.x / 2, Screen.height / 2, 0);
         blackSquare.transform.position = new Vector3(Screen.width + blackSquare.sizeDelta.x / 2 + blackCircle.sizeDelta.x / 2, Screen.height / 2, 0);
     }
@@ -49,12 +52,12 @@ public class TitleScene : MonoBehaviour
                 );
 
             //ŽlŠp‚ð‰¡‚ÉŠg‘å
-            blackSquareScale.x = EaseOutExpo(1, 8, timer / 0.5f);
+            blackSquareScale.x = EaseOutExpo(1, maxScaleX, timer / 0.5f);
 
             //ŽlŠp‚ðc‚ÉŠg‘å
             if (timer >= 0.75f)
             {
-                blackSquareScale.y = EaseOutExpo(1, 15, (timer - 0.75f) / 0.5f);
+                blackSquareScale.y = EaseOutExpo(1, maxScaleY, (timer - 0.75f) / 0.5f);
             }
 
             blackSquare.transform.localScale = blackSquareScale;
@@ -68,6 +71,9 @@ public class TitleScene : MonoBehaviour
 
     float EaseOutExpo(float s, float e, float t)
     {
+        if (t < 0) { t = 0; }
+        else if (t > 1) { t = 1; }
+
         float v = t == 1 ? 1 : 1 - Mathf.Pow(2.0f, -10.0f * t);
         float a = e - s;
         v = s + a * v;
