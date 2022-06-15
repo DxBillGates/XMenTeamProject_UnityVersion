@@ -351,7 +351,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 98bd5967a6e3cd846b0dd5710315b765, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 99de9137502e16442896055fde42cc16, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -380,7 +380,7 @@ GameObject:
   - component: {fileID: 1506774427}
   - component: {fileID: 1506774426}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: SceneChangeObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
