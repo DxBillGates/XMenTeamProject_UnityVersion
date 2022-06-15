@@ -53,7 +53,6 @@ Shader "Custom/DepthFade"
                 half screenDepth = depth - i.screenPos.w;
                 float foamLine = 1 - saturate(_DepthFactor * screenDepth);
                 fixed4 col = lerp(_Color, _EdgeColor, foamLine);
-                // fixed4 col = _Color + foamLine * _EdgeColor;   //Edge‚ðEmission‚É‚µ‚½‚¢‚Î‚ ‚¢‚Í‚±‚Á‚¿
                 return col;
             }
             ENDCG
