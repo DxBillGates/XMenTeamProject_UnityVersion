@@ -60,6 +60,7 @@ public class Enemy : MonoBehaviour
             {
                 // 離れるベクトルを計算
                 Vector3 leaveV = transform.position - e.transform.position;
+                leaveV.y = 0;
 
                 moveVector += leaveV.normalized;
             }

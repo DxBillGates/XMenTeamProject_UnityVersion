@@ -47,6 +47,23 @@ public class BarrierEnemy : Enemy
         Vector3 moveVector = targetObject.transform.position - transform.position;
         moveVector.Normalize();
 
+        // 敵の位置に配慮した動き
+        // 敵同士での反発するベクトルを計算
+        GameObject[] enemys = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach (GameObject e in enemys)
+        {
+            float distanceEnemy = Vector3.Distance(transform.position, e.transform.position);
+            // 指定した範囲より敵が近い時に離れる
+            if (distanceEnemy <= dontHitDistance)
+            {
+                // 離れるベクトルを計算 y軸を一度考慮しないでおく
+                Vector3 leaveV = transform.position - e.transform.position;
+                leaveV.y = 0;
+                moveVector += leaveV.normalized;
+            }
+
+        }
+
 
 
         // 設定した距離より遠ければ近づく 近ければ離れる
