@@ -123,6 +123,72 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &117606631
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 117606633}
+  - component: {fileID: 117606632}
+  m_Layer: 0
+  m_Name: CameraMotionManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &117606632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 117606631}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9566e22d24f9874418e7d33831c56288, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  preUtlMotionFlag:
+    maxActiveTime: 3
+    activeTime: 0
+    flag: 0
+    isEnd: 0
+    activeType: 0
+  startMotionInfo:
+    motionTime: 0.5
+    startDegreeAngle: 0
+    endDegreeAngle: 175
+    easingType: 1
+  centerMotionInfo:
+    motionTime: 2
+    startDegreeAngle: 175
+    endDegreeAngle: 190
+    easingType: 0
+  endMotionInfo:
+    motionTime: 0.5
+    startDegreeAngle: 190
+    endDegreeAngle: 360
+    easingType: 1
+  playerTransform: {fileID: 1861758995}
+--- !u!4 &117606633
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 117606631}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &271495746
 GameObject:
   m_ObjectHideFlags: 0
@@ -218,7 +284,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &381592819 stripped
 GameObject:
@@ -332,7 +398,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &645624772
 MonoBehaviour:
@@ -587,7 +653,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &944745964
 GameObject:
@@ -1078,7 +1144,7 @@ RectTransform:
   - {fileID: 1946009452}
   - {fileID: 1237614749}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1155,7 +1221,7 @@ PrefabInstance:
       objectReference: {fileID: 321424018}
     - target: {fileID: 3891409010159645290, guid: 5014d62a383d180409ab734b145b7cdb, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3891409010159645290, guid: 5014d62a383d180409ab734b145b7cdb, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1589,7 +1655,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1921551139525285177, guid: 531dc461ce14a074980fe02f9adaceb7, type: 3}
       propertyPath: ultimateSkill.initValue
-      value: 25
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 1921551139525285177, guid: 531dc461ce14a074980fe02f9adaceb7, type: 3}
       propertyPath: activeFlagController.activeType
@@ -1604,20 +1670,24 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1921551139525285177, guid: 531dc461ce14a074980fe02f9adaceb7, type: 3}
+      propertyPath: preActiveFlagController.maxActiveTime
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1921551139525285177, guid: 531dc461ce14a074980fe02f9adaceb7, type: 3}
       propertyPath: ultimateSkill.levelsScales.Array.data[0]
-      value: 20
+      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 1921551139525285177, guid: 531dc461ce14a074980fe02f9adaceb7, type: 3}
       propertyPath: ultimateSkill.levelsScales.Array.data[1]
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 1921551139525285177, guid: 531dc461ce14a074980fe02f9adaceb7, type: 3}
-      propertyPath: ultimateSkill.levelsScales.Array.data[2]
       value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 1921551139525285177, guid: 531dc461ce14a074980fe02f9adaceb7, type: 3}
+      propertyPath: ultimateSkill.levelsScales.Array.data[2]
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1921551139525285177, guid: 531dc461ce14a074980fe02f9adaceb7, type: 3}
       propertyPath: ultimateSkill.levelsScales.Array.data[3]
-      value: 35
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 2318661832119566641, guid: 531dc461ce14a074980fe02f9adaceb7, type: 3}
       propertyPath: m_Name
@@ -1625,7 +1695,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3670396097468981339, guid: 531dc461ce14a074980fe02f9adaceb7, type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3670396097468981339, guid: 531dc461ce14a074980fe02f9adaceb7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1678,7 +1748,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2683838146694799362, guid: 41336c39d89ec8d4895a261b0d0b0d7c, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 2683838146694799362, guid: 41336c39d89ec8d4895a261b0d0b0d7c, type: 3}
       propertyPath: m_LocalScale.x

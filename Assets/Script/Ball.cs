@@ -11,8 +11,6 @@ public enum BallState
     THROWED_ENEMY,
 }
 
-
-
 public class Ball : MonoBehaviour
 {
     // ボールを投げる際の強さ
@@ -138,7 +136,6 @@ public class Ball : MonoBehaviour
         FlagController flagController = ultimateSkillManager.GetActiveFlagController();
         FlagActiveType flagActiveType = flagController.activeType;
 
-        const float DIVIDE_TIME = 10;
         // 必殺技発動前なら発動地点に持ってくる
         if (flagActiveType == FlagActiveType.PRE)
         {

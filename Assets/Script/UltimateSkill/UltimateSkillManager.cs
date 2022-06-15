@@ -33,10 +33,6 @@ public class UltimateSkillManager : SingletonComponent<UltimateSkillManager>
     // Update is called once per frame
     void Update()
     {
-        //// test
-        //if (isUse == false && Input.GetKeyDown(KeyCode.Space))
-        //{
-        //}
         ultimateSkill.Update();
 
         if (isUse == false) return;
@@ -65,15 +61,20 @@ public class UltimateSkillManager : SingletonComponent<UltimateSkillManager>
     }
 
     // 使用場所を指定してスキルを発動する
-    public void Use(Vector3 position = new Vector3())
+    public void Use(Vector3 position,Vector3 direction,Transform triggerTransform)
     {
         // 必殺技レベルが0以下の場合は発動させない
         if (ultimateSkill.GetCurrentLevel() <= 0) return;
+        if (isUse == true) return;
 
         usedPosition = position;
         usedSize = ultimateSkill.GetCurrentLevelSize();
         isUse = true;
         preActiveFlagController.flag = true;
+        preActiveFlagController.maxActiveTime = CameraMotionManager.GetInstance().GetFlagController().maxActiveTime;
+
+        const float DIRECTION_VALUE = 10;
+        CameraMotionManager.GetInstance().StartPreUltMotion(position + direction * DIRECTION_VALUE, triggerTransform);
     }
 
     private void Initialize()

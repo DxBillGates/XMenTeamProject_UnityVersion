@@ -167,7 +167,9 @@ public class Player : MonoBehaviour
     {
         if (Input.GetButtonDown("UltimateSkill") == false) return;
 
-        UltimateSkillManager.GetInstance().Use(transform.position);
+        const float DIVIDE = 3;
+        Vector3 upVector = new Vector3(0,transform.localScale.y / DIVIDE,0);
+        UltimateSkillManager.GetInstance().Use(transform.position,currentDirection + upVector,transform);
     }
 
     private void UpdateAbilityCooldown()
