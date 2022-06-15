@@ -90,7 +90,7 @@ public class CameraMotionManager : SingletonComponent<CameraMotionManager>
         ultTriggerTransform = ultTrigger;
     }
 
-    public void UpdateSkillCameraMotion()
+    private void UpdateSkillCameraMotion()
     {
         if (preUtlMotionFlag.flag == false) return;
 
@@ -171,6 +171,11 @@ public class CameraMotionManager : SingletonComponent<CameraMotionManager>
     public FlagController GetFlagController()
     {
         return preUtlMotionFlag;
+    }
+
+    public bool IsAnimationTime()
+    {
+        return currentSkillCameraMotionIndex == 1;
     }
 
 }
