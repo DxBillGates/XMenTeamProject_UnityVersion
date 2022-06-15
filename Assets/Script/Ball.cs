@@ -104,7 +104,7 @@ public class Ball : MonoBehaviour
         const float MIN_VELOCITY = 0.01f;
         if (velocity.magnitude < MIN_VELOCITY) InitializeState(BallState.FREE);
 
-        transform.position += velocity;
+        transform.position += velocity * GameTimeManager.GetInstance().GetTime();
     }
 
     // 反射ベクトルを生成
@@ -134,15 +134,17 @@ public class Ball : MonoBehaviour
     // ドームとの当たり判定
     private void UpdateDomeDetection()
     {
-        FlagActiveType flagActiveType = UltimateSkillManager.GetInstance().GetActiveFlagController().activeType;
         UltimateSkillManager ultimateSkillManager = UltimateSkillManager.GetInstance();
+        FlagController flagController = ultimateSkillManager.GetActiveFlagController();
+        FlagActiveType flagActiveType = flagController.activeType;
 
         const float DIVIDE_TIME = 10;
         // 必殺技発動前なら発動地点に持ってくる
-        if (flagActiveType == FlagActiveType.PRE &&
-            ultimateSkillManager.GetActiveFlagController().activeTime < ultimateSkillManager.GetActiveFlagController().maxActiveTime / DIVIDE_TIME)
+        if (flagActiveType == FlagActiveType.PRE)
         {
-            transform.position = ultimateSkillManager.usedPosition;
+            //transform.position = ultimateSkillManager.usedPosition;
+            float perTime = flagController.activeTime / flagController.maxActiveTime;
+            transform.position = Vector3.Lerp(transform.position, ultimateSkillManager.usedPosition, perTime);
         }
         else if (flagActiveType == FlagActiveType.ACTIVE)
         {

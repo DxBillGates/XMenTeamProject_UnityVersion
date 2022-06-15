@@ -20,7 +20,7 @@ public class Player : MonoBehaviour
 
     private bool isThrowBall;
     private float throwBallColldownTime;
-    
+
     //バリアを展開するスクリプト
     private BarrierControl barrierControl;
 
@@ -201,7 +201,7 @@ public class Player : MonoBehaviour
         const float DECAY_VALUE = 2;
 
         Vector3 backupKnockbackVelocity = knockbackVelocity - knockbackVelocity / DECAY_VALUE;
-        if(backupKnockbackVelocity.magnitude > knockbackVelocity.magnitude)
+        if (backupKnockbackVelocity.magnitude > knockbackVelocity.magnitude)
         {
             backupKnockbackVelocity = new Vector3();
             return;

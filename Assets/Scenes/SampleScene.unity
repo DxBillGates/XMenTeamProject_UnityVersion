@@ -1589,7 +1589,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1921551139525285177, guid: 531dc461ce14a074980fe02f9adaceb7, type: 3}
       propertyPath: ultimateSkill.initValue
-      value: 100
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 1921551139525285177, guid: 531dc461ce14a074980fe02f9adaceb7, type: 3}
       propertyPath: activeFlagController.activeType
@@ -1605,15 +1605,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1921551139525285177, guid: 531dc461ce14a074980fe02f9adaceb7, type: 3}
       propertyPath: ultimateSkill.levelsScales.Array.data[0]
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 1921551139525285177, guid: 531dc461ce14a074980fe02f9adaceb7, type: 3}
-      propertyPath: ultimateSkill.levelsScales.Array.data[1]
       value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1921551139525285177, guid: 531dc461ce14a074980fe02f9adaceb7, type: 3}
-      propertyPath: ultimateSkill.levelsScales.Array.data[2]
+      propertyPath: ultimateSkill.levelsScales.Array.data[1]
       value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1921551139525285177, guid: 531dc461ce14a074980fe02f9adaceb7, type: 3}
+      propertyPath: ultimateSkill.levelsScales.Array.data[2]
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 1921551139525285177, guid: 531dc461ce14a074980fe02f9adaceb7, type: 3}
       propertyPath: ultimateSkill.levelsScales.Array.data[3]
