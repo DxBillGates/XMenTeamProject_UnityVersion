@@ -30,6 +30,9 @@ public class Player : MonoBehaviour
 
     private HPGauge hpGauge;
 
+    private Animator animator;
+    private Vector3 triggerSkillPosition;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -49,6 +52,9 @@ public class Player : MonoBehaviour
         lineDrawer = lineObjectManager.GetComponent<PredictionalLineDrawer>();
 
         hpGauge = hpGaugeUIObject.GetComponent<HPGauge>();
+
+        animator = GetComponent<Animator>();
+        triggerSkillPosition = new Vector3();
     }
 
     // Update is called once per frame
@@ -64,7 +70,7 @@ public class Player : MonoBehaviour
         UpdateAbilityCooldown();
         UpdateKnockback();
 
-        Move();
+        bool isMove = Move();
         RotateDirection();
 
         HoldBallUpdate();
@@ -72,6 +78,8 @@ public class Player : MonoBehaviour
         UsingBarrier();
         UseUltimateSkill();
 
+        UpdateAnimator(isMove);
+        UpdateUsingSkillPosition();
 
         lineDrawer.isDraw = ballComponent.state == BallState.HOLD_PLAYER;
         lineDrawer.drawOriginPosition = transform.position;
@@ -80,6 +88,9 @@ public class Player : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
+        // 必殺技使用中なら当たり判定を行わない
+        if (UltimateSkillManager.GetInstance().GetActiveFlagController().flag == true) return;
+
         switch (other.gameObject.tag)
         {
             case "Wall":
@@ -117,7 +128,7 @@ public class Player : MonoBehaviour
     }
 
     // 移動処理
-    private void Move()
+    private bool Move()
     {
         Vector3 moveVector = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
         Vector3 inputDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
@@ -129,6 +140,8 @@ public class Player : MonoBehaviour
 
         isInput = inputDirection.magnitude > 0.5f;
         if (isInput) currentDirection = inputDirection.normalized;
+
+        return isInput;
     }
 
     // プレイヤーを移動ベクトル方向に向かせる
@@ -168,8 +181,8 @@ public class Player : MonoBehaviour
         if (Input.GetButtonDown("UltimateSkill") == false) return;
 
         const float DIVIDE = 3;
-        Vector3 upVector = new Vector3(0,transform.localScale.y / DIVIDE,0);
-        UltimateSkillManager.GetInstance().Use(transform.position,currentDirection + upVector,transform);
+        Vector3 upVector = new Vector3(0, transform.localScale.y / DIVIDE, 0);
+        UltimateSkillManager.GetInstance().Use(transform.position, currentDirection + upVector, transform);
     }
 
     private void UpdateAbilityCooldown()
@@ -223,5 +236,41 @@ public class Player : MonoBehaviour
     private float CalclatePercentHP()
     {
         return hp / maxHp;
+    }
+
+    private void UpdateAnimator(bool isMoveInput)
+    {
+        if (animator == null) return;
+        bool isHoldBall = ballComponent.state == BallState.HOLD_PLAYER ? true : false;
+        bool isHoldBallMove = isHoldBall && isMoveInput;
+        bool isUseSkill = CameraMotionManager.GetInstance().IsAnimationTime();
+
+        animator.SetBool("UltimateSkill", isUseSkill);
+
+        if (isUseSkill == true) return;
+
+        animator.SetBool("BallHaveWalk", isMoveInput & isHoldBall);
+        animator.SetBool("Walk", isMoveInput && isHoldBall == false);
+    }
+
+    private void UpdateUsingSkillPosition()
+    {
+        UltimateSkillManager ultimateSkillManager = UltimateSkillManager.GetInstance();
+
+        if(ultimateSkillManager.GetActiveFlagController().activeType == FlagActiveType.END)
+        {
+            FlagController endSkillFlagController = ultimateSkillManager.GetActiveFlagController();
+            if(endSkillFlagController.IsEndTrigger() == true)
+            {
+                transform.position = triggerSkillPosition;
+            }
+        }
+
+        // スキル使用中じゃない場合は即リターン
+        if (ultimateSkillManager.IsUse() == false) return;
+        if (ultimateSkillManager.GetActiveFlagController().activeType != FlagActiveType.ACTIVE) return;
+
+        UltimateSkillGenerator ultimateSkillGenerator = UltimateSkillGenerator.GetInstance();
+        transform.position = ultimateSkillGenerator.GetCreatedObjectPosition() + Vector3.up * ultimateSkillGenerator.GetCreatedObjectScale();
     }
 }
