@@ -48,7 +48,7 @@ SubShader{
             //ディレクションと法線の内積が0に近いほど色がつく
             float val = 1 - abs(dot(i.dir, i.normal)) * _Alpha;
             //テクスチャと計算結果と_Colorをかけ合わせる
-            return _Color * _Color.a * val * val * tex2D(_MainTex, i.uv);
+            return _Color * _Color.a * val * val* val * tex2D(_MainTex, i.uv);
         }
 
         ENDCG
