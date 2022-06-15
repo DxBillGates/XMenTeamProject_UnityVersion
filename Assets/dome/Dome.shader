@@ -1,4 +1,4 @@
-Shader "Unlit/shaderTest"
+Shader "Unlit/Dome"
 {
 	Properties{
 		_MainTex("Texture", 2D) = "white" {}
