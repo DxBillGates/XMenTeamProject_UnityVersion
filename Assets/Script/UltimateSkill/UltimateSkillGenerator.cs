@@ -24,4 +24,18 @@ public class UltimateSkillGenerator : SingletonComponent<UltimateSkillGenerator>
             Destroy(createdUltimateSkillObject);
         }
     }
+
+    public Vector3 GetCreatedObjectPosition()
+    {
+        if (createdUltimateSkillObject == null) return Vector3.zero;
+
+        return createdUltimateSkillObject.transform.position;
+    }
+
+    public float GetCreatedObjectScale()
+    {
+        if (createdUltimateSkillObject == null) return 0;
+
+        return createdUltimateSkillObject.transform.localScale.y;
+    }
 }
