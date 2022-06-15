@@ -321,7 +321,7 @@ GameObject:
   - component: {fileID: 814415697}
   - component: {fileID: 814415699}
   m_Layer: 5
-  m_Name: BlackCircle
+  m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -360,7 +360,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.94117653, g: 0.5686275, b: 0.1137255, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -411,7 +411,7 @@ GameObject:
   - component: {fileID: 1188072619}
   - component: {fileID: 1188072618}
   m_Layer: 5
-  m_Name: BlackSquare
+  m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -450,14 +450,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.94117653, g: 0.5686275, b: 0.105882354, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 99de9137502e16442896055fde42cc16, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9763f8d955790c045b5a9c07c7b8fd3a, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -590,12 +590,12 @@ GameObject:
   - component: {fileID: 1506774427}
   - component: {fileID: 1506774426}
   m_Layer: 0
-  m_Name: SceneChangeObject
+  m_Name: NextScene
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1506774426
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -608,8 +608,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d47c1df9a81ef524cb0c776b531e1960, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blackCircle: {fileID: 814415696}
-  blackSquare: {fileID: 1188072617}
+  circle: {fileID: 814415696}
+  square: {fileID: 1188072617}
+  nextSceneName: SampleScene
 --- !u!4 &1506774427
 Transform:
   m_ObjectHideFlags: 0
@@ -728,6 +729,7 @@ GameObject:
   - component: {fileID: 1659961327}
   - component: {fileID: 1659961326}
   - component: {fileID: 1659961328}
+  - component: {fileID: 1659961329}
   m_Layer: 5
   m_Name: SonicS
   m_TagString: Untagged
@@ -807,6 +809,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 2
   m_VerticalFit: 2
+--- !u!225 &1659961329
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1659961324}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1776172112
 GameObject:
   m_ObjectHideFlags: 0
@@ -818,7 +832,7 @@ GameObject:
   - component: {fileID: 1776172114}
   - component: {fileID: 1776172113}
   m_Layer: 0
-  m_Name: TitleLogo
+  m_Name: Title
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -842,7 +856,10 @@ MonoBehaviour:
   sonicL: {fileID: 2052350027}
   text: {fileID: 1569822872}
   pressSpaceKey: {fileID: 1236721772}
+  sonicSAlpha: {fileID: 1659961329}
+  sonicLAlpha: {fileID: 2052350031}
   pskAlpha: {fileID: 1236721776}
+  sceneChange: {fileID: 1506774425}
 --- !u!4 &1776172114
 Transform:
   m_ObjectHideFlags: 0
@@ -1235,6 +1252,7 @@ GameObject:
   - component: {fileID: 2052350029}
   - component: {fileID: 2052350028}
   - component: {fileID: 2052350030}
+  - component: {fileID: 2052350031}
   m_Layer: 5
   m_Name: SonicL
   m_TagString: Untagged
@@ -1314,3 +1332,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 2
   m_VerticalFit: 2
+--- !u!225 &2052350031
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2052350026}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0

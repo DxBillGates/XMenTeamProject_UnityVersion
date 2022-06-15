@@ -68,6 +68,7 @@ public class Enemy : MonoBehaviour
 
         if (hp < 0)
         {
+            EnemyManager.DecrementAliveCount();
             Destroy(transform.root.gameObject);
         }
     }

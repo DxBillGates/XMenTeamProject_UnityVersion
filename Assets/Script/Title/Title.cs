@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TitleLogo : MonoBehaviour
+public class Title : MonoBehaviour
 {
     //スプライト
     [SerializeField] RectTransform ball;
@@ -11,7 +11,12 @@ public class TitleLogo : MonoBehaviour
     [SerializeField] RectTransform sonicL;
     [SerializeField] RectTransform text;
     [SerializeField] RectTransform pressSpaceKey;
+    //透明度弄るための
+    [SerializeField] CanvasGroup sonicSAlpha;
+    [SerializeField] CanvasGroup sonicLAlpha;
     [SerializeField] CanvasGroup pskAlpha;
+    //シーンチェンジオブジェクト
+    [SerializeField] GameObject sceneChange;
 
     //定数
     //上に上がらせる値
@@ -31,6 +36,7 @@ public class TitleLogo : MonoBehaviour
 
     //タイマー
     float timer = -0.5f;
+    const float TIME_START_SONIC = 0.5f;
     const float TIME_LIMIT_TO_CENTER = 1.5f;
 
     // Start is called before the first frame update
@@ -58,41 +64,45 @@ public class TitleLogo : MonoBehaviour
         {
             //ボール
             ball.transform.position = new Vector3(
-                EaseInExpo(POS_BALL_MOVE_START.x, POS_BALL_MOVE_END.x, timer / 0.5f),
-                EaseInExpo(POS_BALL_MOVE_START.y, POS_BALL_MOVE_END.y, timer / 0.5f),
-                EaseInExpo(POS_BALL_MOVE_START.z, POS_BALL_MOVE_END.z, timer / 0.5f)
+                EaseOutBack(POS_BALL_MOVE_START.x, POS_BALL_MOVE_END.x, timer / 0.5f),
+                EaseOutBack(POS_BALL_MOVE_START.y, POS_BALL_MOVE_END.y, timer / 0.5f),
+                EaseOutBack(POS_BALL_MOVE_START.z, POS_BALL_MOVE_END.z, timer / 0.5f)
                 );
 
             //線
             line.transform.position = new Vector3(
-                EaseInExpo(POS_LINE_MOVE_START.x, POS_LINE_MOVE_END.x, timer / 0.5f),
-                EaseInExpo(POS_LINE_MOVE_START.y, POS_LINE_MOVE_END.y, timer / 0.5f),
-                EaseInExpo(POS_LINE_MOVE_START.z, POS_LINE_MOVE_END.z, timer / 0.5f)
+                EaseOutBack(POS_LINE_MOVE_START.x, POS_LINE_MOVE_END.x, timer / 0.5f),
+                EaseOutBack(POS_LINE_MOVE_START.y, POS_LINE_MOVE_END.y, timer / 0.5f),
+                EaseOutBack(POS_LINE_MOVE_START.z, POS_LINE_MOVE_END.z, timer / 0.5f)
                 );
 
             //テキスト
             text.transform.position = new Vector3(
-                EaseInQuart(POS_TEXT_MOVE_START.x, POS_TEXT_MOVE_END.x, (timer - 0.1f) / 0.5f),
-                EaseInQuart(POS_TEXT_MOVE_START.y, POS_TEXT_MOVE_END.y, (timer - 0.1f) / 0.5f),
-                EaseInQuart(POS_TEXT_MOVE_START.z, POS_TEXT_MOVE_END.z, (timer - 0.1f) / 0.5f)
+                EaseOutBack(POS_TEXT_MOVE_START.x, POS_TEXT_MOVE_END.x, (timer - 0.1f) / 0.5f),
+                EaseOutBack(POS_TEXT_MOVE_START.y, POS_TEXT_MOVE_END.y, (timer - 0.1f) / 0.5f),
+                EaseOutBack(POS_TEXT_MOVE_START.z, POS_TEXT_MOVE_END.z, (timer - 0.1f) / 0.5f)
                 );
 
 
-            if (timer >= 0.5f)
+            if (timer >= TIME_START_SONIC)
             {
                 //ソニックブームS
                 sonicS.transform.position = new Vector3(
-                    EaseOutExpo(POS_SONIC_S_MOVE_START.x, POS_SONIC_S_MOVE_END.x, (timer - 0.5f) / 0.5f),
-                    EaseOutExpo(POS_SONIC_S_MOVE_START.y, POS_SONIC_S_MOVE_END.y, (timer - 0.5f) / 0.5f),
-                    EaseOutExpo(POS_SONIC_S_MOVE_START.z, POS_SONIC_S_MOVE_END.z, (timer - 0.5f) / 0.5f)
+                    EaseOutExpo(POS_SONIC_S_MOVE_START.x, POS_SONIC_S_MOVE_END.x, (timer - TIME_START_SONIC) / 0.5f),
+                    EaseOutExpo(POS_SONIC_S_MOVE_START.y, POS_SONIC_S_MOVE_END.y, (timer - TIME_START_SONIC) / 0.5f),
+                    EaseOutExpo(POS_SONIC_S_MOVE_START.z, POS_SONIC_S_MOVE_END.z, (timer - TIME_START_SONIC) / 0.5f)
                     );
 
                 //ソニックブームL
                 sonicL.transform.position = new Vector3(
-                    EaseOutExpo(POS_SONIC_L_MOVE_START.x, POS_SONIC_L_MOVE_END.x, (timer - 0.5f) / 0.75f),
-                    EaseOutExpo(POS_SONIC_L_MOVE_START.y, POS_SONIC_L_MOVE_END.y, (timer - 0.5f) / 0.75f),
-                    EaseOutExpo(POS_SONIC_L_MOVE_START.z, POS_SONIC_L_MOVE_END.z, (timer - 0.5f) / 0.75f)
+                    EaseOutExpo(POS_SONIC_L_MOVE_START.x, POS_SONIC_L_MOVE_END.x, (timer - TIME_START_SONIC) / 0.75f),
+                    EaseOutExpo(POS_SONIC_L_MOVE_START.y, POS_SONIC_L_MOVE_END.y, (timer - TIME_START_SONIC) / 0.75f),
+                    EaseOutExpo(POS_SONIC_L_MOVE_START.z, POS_SONIC_L_MOVE_END.z, (timer - TIME_START_SONIC) / 0.75f)
                     );
+
+                //透明度
+                sonicSAlpha.alpha = EaseInOutCubic(0, 1, (timer - TIME_START_SONIC) / 0.5f);
+                sonicLAlpha.alpha = EaseInOutCubic(0, 1, (timer - TIME_START_SONIC) / 0.5f);
             }
         }
         //全て中央から上に
@@ -142,6 +152,12 @@ public class TitleLogo : MonoBehaviour
 
             //透明度
             pskAlpha.alpha = EaseInOutCubic(0, 1, timer - TIME_LIMIT_TO_CENTER);
+        }
+
+        //Spaceキーで開始
+        if (timer >= 2.5f && Input.GetKey(KeyCode.Space))
+        {
+            sceneChange.SetActive(true);
         }
     }
 
@@ -198,6 +214,21 @@ public class TitleLogo : MonoBehaviour
         else if (t > 1) { t = 1; }
 
         float v = t < 0.5 ? 4 * t * t * t : 1 - Mathf.Pow(-2 * t + 2, 3) / 2;
+        float a = e - s;
+        v = s + a * v;
+
+        return v;
+    }
+
+    float EaseOutBack(float s, float e, float t)
+    {
+        if (t < 0) { t = 0; }
+        else if (t > 1) { t = 1; }
+
+        const float c1 = 1.70158f;
+        const float c3 = c1 + 1;
+
+        float v = 1 + c3 * Mathf.Pow(t - 1, 3) + c1 * Mathf.Pow(t - 1, 2);
         float a = e - s;
         v = s + a * v;
 

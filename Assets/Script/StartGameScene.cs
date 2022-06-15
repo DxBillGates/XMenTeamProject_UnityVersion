@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class StartGameScene : MonoBehaviour
 {
-    [SerializeField] RectTransform blackSquare;
+    [SerializeField] RectTransform square;
     float timer = 0;
     Vector3 blackSquareInitScale = new Vector3((float)Screen.width / 100 + 1, (float)Screen.height / 25, 1);
     Vector3 blackSquareScale = new Vector3(1, 1, 1);
@@ -13,8 +13,8 @@ public class StartGameScene : MonoBehaviour
     void Start()
     {
         timer = 0;
-        blackSquare.transform.position = new Vector3(Screen.width / 2,Screen.height / 2,0);
-        blackSquare.transform.localScale = blackSquareInitScale;
+        square.transform.position = new Vector3(Screen.width / 2,Screen.height / 2,0);
+        square.transform.localScale = blackSquareInitScale;
         blackSquareScale = blackSquareInitScale;
     }
 
@@ -31,7 +31,7 @@ public class StartGameScene : MonoBehaviour
             blackSquareInitScale.z
             );
 
-        blackSquare.transform.localScale = blackSquareScale;
+        square.transform.localScale = blackSquareScale;
     }
 
     //ÇŸÇÒÇ∆ÇÕìØÇ∂ä÷êî2Ç¬èëÇ≠ÇÃó«Ç≠Ç»Ç¢ÇØÇ«...
