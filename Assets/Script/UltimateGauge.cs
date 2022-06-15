@@ -21,6 +21,7 @@ public class UltimateGauge : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        SetLevel(UltimateSkillManager.GetInstance().GetCurrentLevel());
         image.sprite = gaugeSprite[texNumber % gaugeSprite.Count];
         //gameObject.GetComponent<Image>().sprite = gaugeSprite[texNumber % gaugeSprite.Count];
     }

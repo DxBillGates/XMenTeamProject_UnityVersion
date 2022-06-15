@@ -24,14 +24,12 @@ public class Ball : MonoBehaviour
     // 反射時の加速度
     [SerializeField] private float accelerateValue;
     [SerializeField] private List<Material> stateMaterials;
-    [SerializeField] private GameObject ultimateSkillManagerObject;
 
     private MeshRenderer meshRenderer;
 
     private Vector3 velocity;
     private bool isThrow;
     public BallState state { get; private set; }
-    private UltimateSkillManager ultimateSkillManager;
 
     // Start is called before the first frame update
     void Start()
@@ -41,7 +39,6 @@ public class Ball : MonoBehaviour
 
         meshRenderer = GetComponent<MeshRenderer>();
         meshRenderer.material = stateMaterials[(int)state];
-        ultimateSkillManager = ultimateSkillManagerObject.GetComponent<UltimateSkillManager>();
     }
 
     private void FixedUpdate()
@@ -137,18 +134,24 @@ public class Ball : MonoBehaviour
     // ドームとの当たり判定
     private void UpdateDomeDetection()
     {
-        if (ultimateSkillManager == false) return;
-        if (ultimateSkillManager.IsUse() == false) return;
+        FlagActiveType flagActiveType = UltimateSkillManager.GetInstance().GetActiveFlagController().activeType;
+        UltimateSkillManager ultimateSkillManager = UltimateSkillManager.GetInstance();
 
-        Vector3 domePosition = ultimateSkillManager.GetUsingPosition();
-        float domeSize = ultimateSkillManager.GetSize();
-
-        float distance = Vector3.Distance(domePosition, transform.position);
-        if (distance >= domeSize)
+        const float DIVIDE_TIME = 10;
+        // 必殺技発動前なら発動地点に持ってくる
+        if (flagActiveType == FlagActiveType.PRE &&
+            ultimateSkillManager.GetActiveFlagController().activeTime < ultimateSkillManager.GetActiveFlagController().maxActiveTime / DIVIDE_TIME)
         {
-            Vector3 hitNormal = transform.position - domePosition;
-            hitNormal = hitNormal.normalized;
-            Reflection(hitNormal, true);
+            transform.position = ultimateSkillManager.usedPosition;
+        }
+        else if (flagActiveType == FlagActiveType.ACTIVE)
+        {
+            Vector3 hitNormal = transform.position - ultimateSkillManager.usedPosition;
+            float distace = hitNormal.magnitude;
+            if(distace > ultimateSkillManager.usedSize)
+            {
+                Reflection(hitNormal.normalized, true);
+            }
         }
     }
 }
