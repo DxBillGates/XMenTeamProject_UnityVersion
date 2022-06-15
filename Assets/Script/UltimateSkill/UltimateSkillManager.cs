@@ -33,6 +33,8 @@ public class UltimateSkillManager : SingletonComponent<UltimateSkillManager>
     // Update is called once per frame
     void Update()
     {
+        if (endActiveFlagController.IsEndTrigger() == true) Initialize();
+
         ultimateSkill.Update();
 
         if (isUse == false) return;
@@ -57,7 +59,6 @@ public class UltimateSkillManager : SingletonComponent<UltimateSkillManager>
 
         // スキル発動後のフラグ発動処理
         endActiveFlagController.Update(Time.deltaTime);
-        if (endActiveFlagController.IsEndTrigger() == true) Initialize();
     }
 
     // 使用場所を指定してスキルを発動する
