@@ -14,6 +14,9 @@ public class Enemy : MonoBehaviour
     // hp
     [SerializeField] protected float hp = 10;
 
+    // “G“¯Žm‚Å‹ß‚Ã‚©‚È‚¢‹——£
+    [SerializeField] protected float dontHitDistance = 3.0f;
+
     //player“ü‚ê‚é
     protected GameObject targetObject;
 
@@ -44,7 +47,27 @@ public class Enemy : MonoBehaviour
 
     protected void PlayerFollow()
     {
-        transform.position = Vector3.MoveTowards(transform.position, targetObject.transform.position, moveSpeed);
+        Vector3 moveVector = targetObject.transform.position - transform.position;
+        moveVector.Normalize();
+
+        // “G“¯Žm‚Å‚Ì”½”­‚·‚éƒxƒNƒgƒ‹‚ðŒvŽZ
+        GameObject[] enemys = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach (GameObject e in enemys )
+        {
+            float distance = Vector3.Distance(transform.position, e.transform.position);
+            // Žw’è‚µ‚½”ÍˆÍ‚æ‚è“G‚ª‹ß‚¢Žž‚É—£‚ê‚é
+            if(distance <= dontHitDistance)
+            {
+                // —£‚ê‚éƒxƒNƒgƒ‹‚ðŒvŽZ
+                Vector3 leaveV = transform.position - e.transform.position;
+
+                moveVector += leaveV.normalized;
+            }
+
+        }
+
+        // ˆÚ“®Œã‚Ìƒ|ƒWƒVƒ‡ƒ“‚ð‘æ“ñˆø”‚É
+        transform.position = Vector3.MoveTowards(transform.position, moveVector + transform.position, moveSpeed);
     }
 
 
@@ -59,7 +82,7 @@ public class Enemy : MonoBehaviour
         // ³‹K‰»‚³‚¹‚é
         moveVector = knock_back_speed * moveVector.normalized;
 
-        Damage(collision.gameObject.GetComponent<Ball>().GetSpeed());
+        //Damage(collision.gameObject.GetComponent<Ball>().GetSpeed());
     }
 
     protected void Damage(float damage)

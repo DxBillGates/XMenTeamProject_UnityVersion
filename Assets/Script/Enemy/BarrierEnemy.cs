@@ -23,10 +23,13 @@ public class BarrierEnemy : Enemy
         targetObject = GameObject.FindGameObjectWithTag("Player");
 
         Array.Resize(ref ballDir, change_pose_frame);
+
+        // ”O‚Ì‚½‚ßƒ^ƒO•t‚¯
+        transform.tag = "Enemy";
     }
 
     // Update is called once per frame
-    void Update()
+    void Update ()
     {
         // ƒ{[ƒ‹‚ÌˆÊ’u‚ðŠi”[
         SetBallDir();
@@ -42,12 +45,15 @@ public class BarrierEnemy : Enemy
         float distance = Vector3.Distance(transform.position, targetObject.transform.position);
 
         Vector3 moveVector = targetObject.transform.position - transform.position;
+        moveVector.Normalize();
+
+
 
         // Ý’è‚µ‚½‹——£‚æ‚è‰“‚¯‚ê‚Î‹ß‚Ã‚­ ‹ß‚¯‚ê‚Î—£‚ê‚é
         if (distance >= playerToDistance)
         {
             transform.position = 
-                Vector3.MoveTowards(transform.position, targetObject.transform.position, moveSpeed);
+                Vector3.MoveTowards(transform.position, moveVector + transform.position, moveSpeed);
 
         }
         else if (distance < playerToDistance - 2)

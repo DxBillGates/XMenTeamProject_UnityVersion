@@ -9,6 +9,9 @@ public class FollowEnemy : Enemy
     void Start()
     {
         targetObject = GameObject.FindGameObjectWithTag("Player");
+
+        // ”O‚Ì‚½‚ßƒ^ƒO•t‚¯
+        transform.tag = "Enemy";
     }
 
     // Update is called once per frame
