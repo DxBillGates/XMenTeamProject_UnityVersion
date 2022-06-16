@@ -27,8 +27,6 @@ public class DomeEffectControl : MonoBehaviour
     }
     private void Update()
     {
-        bloom.intensity.Override(intensity);
-        bloom.threshold.Override(threshold);
         bloom.color.Override(color);
         //　ポストプロセスボリュームに反映
         postProcessVolume = PostProcessManager.instance.QuickVolume(gameObject.layer, 0f, bloom);
