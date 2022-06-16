@@ -602,9 +602,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8abf78f6000a4ff44b62f8828afefdad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  intensity: 1.5
+  intensity: 20
   threshold: 0.25
-  color: {r: 1, g: 1, b: 1, a: 0}
+  color: {r: 0, g: 0.49680614, b: 1, a: 0}
 --- !u!4 &868376163
 Transform:
   m_ObjectHideFlags: 0
@@ -1891,7 +1891,7 @@ PrefabInstance:
     - target: {fileID: 7920553447526652987, guid: 531dc461ce14a074980fe02f9adaceb7, type: 3}
       propertyPath: prefabUltimateSkillObject
       value: 
-      objectReference: {fileID: 3425654652273268205, guid: 5008e8b2c38f71a428bf99408a4879d2, type: 3}
+      objectReference: {fileID: 8557276814243438886, guid: 010d845217a2c1a4dacca0c1f1ce6655, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 531dc461ce14a074980fe02f9adaceb7, type: 3}
 --- !u!1001 &1439989470459578113
