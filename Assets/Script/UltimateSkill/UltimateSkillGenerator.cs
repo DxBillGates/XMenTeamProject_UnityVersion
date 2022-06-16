@@ -11,6 +11,10 @@ public class UltimateSkillGenerator : SingletonComponent<UltimateSkillGenerator>
 
     private GameObject createdUltimateSkillObject;
 
+    //ポストエフェクト制御用
+    [SerializeField] GameObject postEffectManager;
+    DomeEffectControl domeEffectControl;
+
     Vector3 startLerpScale;
     Vector3 endLerpScale;
     bool isAddScale;
@@ -24,6 +28,8 @@ public class UltimateSkillGenerator : SingletonComponent<UltimateSkillGenerator>
         isAddScale = false;
         lerpTime = 0;
         maxLerpTime = 1;
+
+        domeEffectControl = postEffectManager.GetComponent<DomeEffectControl>();
     }
 
     void Update()
@@ -67,6 +73,9 @@ public class UltimateSkillGenerator : SingletonComponent<UltimateSkillGenerator>
     {
         if(createdUltimateSkillObject)
         {
+            //ブルームのIntencityを0にする
+            domeEffectControl.SetBloom(0f);
+
             Destroy(createdUltimateSkillObject);
 
             isAddScale = false;

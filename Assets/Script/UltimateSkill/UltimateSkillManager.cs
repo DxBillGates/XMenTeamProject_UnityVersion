@@ -19,6 +19,8 @@ public class UltimateSkillManager : SingletonComponent<UltimateSkillManager>
     // 使用した際のサイズ
     public float usedSize { get; private set; }
 
+    [SerializeField] GameObject postEffectManager;
+    DomeEffectControl domeEffectControl;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +30,8 @@ public class UltimateSkillManager : SingletonComponent<UltimateSkillManager>
 
         Initialize();
         ultimateSkill.Initialize();
+        domeEffectControl = postEffectManager.GetComponent<DomeEffectControl>();
+
     }
 
     // Update is called once per frame
@@ -63,6 +67,9 @@ public class UltimateSkillManager : SingletonComponent<UltimateSkillManager>
     // 使用場所を指定してスキルを発動する
     public bool Use(Vector3 position,Vector3 direction,Transform triggerTransform)
     {
+        //ブルームのIntencityを20にする
+        domeEffectControl.SetBloom(20f);
+
         // 必殺技レベルが0以下の場合は発動させない
         if (ultimateSkill.GetCurrentLevel() <= 0) return false;
         if (isUse == true) return false;
