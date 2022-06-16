@@ -136,6 +136,9 @@ public class PredictionalLineDrawer : MonoBehaviour
         // ラインオブジェクト分ループして更新
         for (int i = 0; i < lineObjects.Count; ++i)
         {
+            if (isDraw == true) lineObjects[i].SetActive(true);
+            else lineObjects[i].SetActive(false);
+
             // 反射回数が反射の結果を格納している配列の要素数より大きくならないように
             if (reflectCount >= raycastResults.Count)
             {
