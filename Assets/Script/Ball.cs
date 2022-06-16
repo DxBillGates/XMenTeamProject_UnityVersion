@@ -147,7 +147,7 @@ public class Ball : MonoBehaviour
         {
             Vector3 hitNormal = transform.position - ultimateSkillManager.usedPosition;
             float distace = hitNormal.magnitude;
-            if(distace > ultimateSkillManager.usedSize)
+            if(distace > ultimateSkillManager.usedSize - transform.localScale.x)
             {
                 Reflection(hitNormal.normalized, true);
             }
