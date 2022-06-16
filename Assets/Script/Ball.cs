@@ -33,7 +33,7 @@ public class Ball : MonoBehaviour
     void Start()
     {
         InitializeState(BallState.THROWED_PLAYER);
-        Throw(new Vector3(0.5f, 0, 1),BallState.THROWED_PLAYER);
+        Throw(new Vector3(0.5f, 0, 1), BallState.THROWED_PLAYER);
 
         meshRenderer = GetComponent<MeshRenderer>();
         meshRenderer.material = stateMaterials[(int)state];
@@ -86,7 +86,7 @@ public class Ball : MonoBehaviour
     }
 
     // ゲームオブジェクトをその向きに対する速度を与える
-    public void Throw(Vector3 direction,BallState setState)
+    public void Throw(Vector3 direction, BallState setState)
     {
         velocity = direction * throwPower;
 
@@ -106,7 +106,7 @@ public class Ball : MonoBehaviour
     }
 
     // 反射ベクトルを生成
-    private void Reflection(Vector3 normal,bool addSpeed = false)
+    private void Reflection(Vector3 normal, bool addSpeed = false)
     {
         Vector3 reflectVector = velocity - 2.0f * Vector3.Dot(velocity, normal) * normal;
         velocity = reflectVector;
@@ -141,13 +141,20 @@ public class Ball : MonoBehaviour
         {
             //transform.position = ultimateSkillManager.usedPosition;
             float perTime = flagController.activeTime / flagController.maxActiveTime;
-            transform.position = Vector3.Lerp(transform.position, ultimateSkillManager.usedPosition, perTime);
+            Vector3 setPos = Vector3.Lerp(transform.position, ultimateSkillManager.usedPosition, perTime);
+
+            if (Vector3.Distance(setPos, ultimateSkillManager.usedPosition) < ultimateSkillManager.usedSize - transform.localScale.x * 2)
+            {
+                setPos = transform.position;
+            }
+
+            transform.position = setPos;
         }
         else if (flagActiveType == FlagActiveType.ACTIVE)
         {
             Vector3 hitNormal = transform.position - ultimateSkillManager.usedPosition;
             float distace = hitNormal.magnitude;
-            if(distace > ultimateSkillManager.usedSize - transform.localScale.x)
+            if (distace > ultimateSkillManager.usedSize - transform.localScale.x)
             {
                 Reflection(hitNormal.normalized, true);
             }

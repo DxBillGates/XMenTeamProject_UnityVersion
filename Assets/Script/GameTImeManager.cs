@@ -19,7 +19,7 @@ public class GameTimeManager : SingletonComponent<GameTimeManager>
         time = 1;
         if(skillManager.GetActiveFlagController().activeType == FlagActiveType.PRE)
         {
-            time = 0.2f;
+            time = 0.05f;
         }
     }
 
