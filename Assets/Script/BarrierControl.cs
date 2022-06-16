@@ -4,60 +4,71 @@ using UnityEngine;
 
 public class BarrierControl : MonoBehaviour
 {
-    
-    Vector3 target { get; set; }
-    Vector3 move { get; set; }
+    //盾を展開する向きのベクトル
+    public Vector3 direction { get; set; }
+
     bool isOpen { get; set; }
-    //盾のモデルをセット
+    //盾のモデルをセットするオブジェクト
     [SerializeField] private GameObject barrierObject;
     //スポーンさせるクローン的なオブジェクト
     private GameObject barrieClone;
-    //半径
+
+    //盾を展開する半径
     [SerializeField] private float radius;
     //展開する長さ(時間)
     [SerializeField] private int openSpan;
     //展開してからの経過時間
-    int time;
+    private int time;
 
     // Start is called before the first frame update
     void Start()
     {
-        target = new Vector3();
-        time=0;
+        direction = new Vector3();
+        time = 0;
     }
+
     // Update is called once per frame
     void Update()
     {
         //経過時間が指定した時間を経過していなかったら間
-        if (time < openSpan)
+        if (isOpen)
         {
-            time++;
-        }
-        else
-        {
-            if (isOpen)
+            if (time < openSpan)
             {
+                time++;
+            }
+            else
+            {
+
                 isOpen = false;
-               //Destroy(barrieClone);
+                Destroy(barrieClone);
                 time = 0;
+
             }
         }
-        //move ベクトルを度数法に変換
-        //float angle = Mathf.Atan2(move.x, move.z);
-        float angle=(float)time/10.0f;
-        Vector3 barrierPosition = target + new Vector3(Mathf.Sin(angle) * radius, 0.0f, Mathf.Cos(angle) * radius);
 
-       //スポーン
-        if (Input.GetKeyDown(KeyCode.Space))
+        //move ベクトルを度数法に変換
+        float angle = Mathf.Atan2(direction.x, direction.z);
+        Vector3 barrierPosition = transform.position + new Vector3(Mathf.Sin(angle) * radius, 0.0f, Mathf.Cos(angle) * radius);
+
+        //展開中なら
+        if (isOpen)
+        {
+            barrieClone.transform.rotation = Quaternion.LookRotation(direction);
+            barrieClone.transform.position = barrierPosition + new Vector3(0, -3, 0);
+        }
+    }
+
+    public void Use()
+    {
+        //move ベクトルを度数法に変換
+        float angle = Mathf.Atan2(direction.x, direction.z);
+        Vector3 barrierPosition = transform.position + new Vector3(Mathf.Sin(angle) * radius, 0.0f, Mathf.Cos(angle) * radius);
+
+        if (!isOpen)
         {
             isOpen = true;
             barrieClone = Instantiate(barrierObject, barrierPosition, new Quaternion(0, 1, 0, angle));
-        }
-       //展開中なら
-        if (isOpen)
-        {
-            barrieClone.transform.rotation = new Quaternion(0, 1, 0, angle);
-            barrieClone.transform.position = barrierPosition;
         }
     }
 }

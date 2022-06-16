@@ -58,3 +58,11 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+# レイアウトデータは削除
+*.dwlt
+
+*.orig
+*.bak
+*.orig.meta
+*.bak.meta
+
