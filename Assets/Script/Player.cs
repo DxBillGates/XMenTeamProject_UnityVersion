@@ -33,6 +33,8 @@ public class Player : MonoBehaviour
     private Animator animator;
     private Vector3 triggerSkillPosition;
 
+    [SerializeField] private float hitEnemyDamage;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -125,6 +127,26 @@ public class Player : MonoBehaviour
                 break;
         }
 
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        // 必殺技使用中なら当たり判定を行わない
+        if (UltimateSkillManager.GetInstance().GetActiveFlagController().flag == true) return;
+
+        switch (other.gameObject.tag)
+        {
+            case "Wall":
+                break;
+            case "Ball":
+                break;
+            case "Enemy":
+                Damage(hitEnemyDamage);
+
+                Vector3 knockbackVector = (transform.position - other.gameObject.transform.position).normalized;
+                Knockback(knockbackVector * 3);
+                break;
+        }
     }
 
     // 移動処理
@@ -259,10 +281,10 @@ public class Player : MonoBehaviour
     {
         UltimateSkillManager ultimateSkillManager = UltimateSkillManager.GetInstance();
 
-        if(ultimateSkillManager.GetActiveFlagController().activeType == FlagActiveType.END)
+        if (ultimateSkillManager.GetActiveFlagController().activeType == FlagActiveType.END)
         {
             FlagController endSkillFlagController = ultimateSkillManager.GetActiveFlagController();
-            if(endSkillFlagController.IsEndTrigger() == true)
+            if (endSkillFlagController.IsEndTrigger() == true)
             {
                 transform.position = triggerSkillPosition;
             }
