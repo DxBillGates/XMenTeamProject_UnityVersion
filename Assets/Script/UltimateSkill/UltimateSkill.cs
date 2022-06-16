@@ -49,7 +49,7 @@ public class UltimateSkill
     // スキルを使用
     public void Use(Vector3 position)
     {
-        UltimateSkillGenerator.GetInstance().CreateSkillObject(position, levelsScales[level-1]);
+        UltimateSkillGenerator.GetInstance().CreateSkillObject(position, levelsScales[level-1],CameraMotionManager.GetInstance().GetAnimationMaxTime());
     }
 
     // 発動を終了させる

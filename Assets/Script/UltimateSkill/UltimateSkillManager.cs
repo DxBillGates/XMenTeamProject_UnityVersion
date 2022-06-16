@@ -43,7 +43,6 @@ public class UltimateSkillManager : SingletonComponent<UltimateSkillManager>
         preActiveFlagController.Update(Time.deltaTime);
         if (preActiveFlagController.IsEndTrigger() == true)
         {
-            ultimateSkill.Use(usedPosition);
             activeFlagController.maxActiveTime = ultimateSkill.GetCurrentLevelActiveTime();
             activeFlagController.flag = true;
         }
@@ -76,6 +75,8 @@ public class UltimateSkillManager : SingletonComponent<UltimateSkillManager>
 
         const float DIRECTION_VALUE = 10;
         CameraMotionManager.GetInstance().StartPreUltMotion(position + direction * DIRECTION_VALUE, triggerTransform);
+
+        ultimateSkill.Use(usedPosition);
 
         return true;
     }

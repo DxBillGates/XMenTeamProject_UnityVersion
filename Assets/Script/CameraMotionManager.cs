@@ -36,6 +36,7 @@ public class CameraMotionManager : SingletonComponent<CameraMotionManager>
     List<SkillCameraMotionInfo> motionInfos;
     // 現在使用しているカメラモーション配列の要素番号
     int currentSkillCameraMotionIndex;
+    int beforeSkillCameraMotionIndex;
     // 前フレームの回転角度
     float beforeRotateAngle;
 
@@ -63,6 +64,7 @@ public class CameraMotionManager : SingletonComponent<CameraMotionManager>
         motionInfos.Add(centerMotionInfo);
         motionInfos.Add(endMotionInfo);
         currentSkillCameraMotionIndex = 0;
+        beforeSkillCameraMotionIndex = 0;
         motionElapsedTime = 0;
         beforeRotateAngle = 0;
     }
@@ -95,7 +97,10 @@ public class CameraMotionManager : SingletonComponent<CameraMotionManager>
         if (preUtlMotionFlag.flag == false) return;
 
         Transform cameraTransform = Camera.main.transform;
-        int beforeSkillCameraMotionIndex = currentSkillCameraMotionIndex;
+
+        if (IsAnimationStartTrigger() == true) UltimateSkillGenerator.GetInstance().StartAddScale();
+        beforeSkillCameraMotionIndex = currentSkillCameraMotionIndex;
+
         // 現在使用しているモーションデータの最大時間に達しているならモーションデータの要素番号を進める
         if (motionElapsedTime > motionInfos[currentSkillCameraMotionIndex].motionTime)
         {
@@ -176,6 +181,16 @@ public class CameraMotionManager : SingletonComponent<CameraMotionManager>
     public bool IsAnimationTime()
     {
         return currentSkillCameraMotionIndex == 1;
+    }
+
+    public bool IsAnimationStartTrigger()
+    {
+        return beforeSkillCameraMotionIndex == 0 && currentSkillCameraMotionIndex == 1;
+    }
+
+    public float GetAnimationMaxTime()
+    {
+        return motionInfos[1].motionTime;
     }
 
 }
