@@ -62,11 +62,11 @@ public class UltimateSkillManager : SingletonComponent<UltimateSkillManager>
     }
 
     // 使用場所を指定してスキルを発動する
-    public void Use(Vector3 position,Vector3 direction,Transform triggerTransform)
+    public bool Use(Vector3 position,Vector3 direction,Transform triggerTransform)
     {
         // 必殺技レベルが0以下の場合は発動させない
-        if (ultimateSkill.GetCurrentLevel() <= 0) return;
-        if (isUse == true) return;
+        if (ultimateSkill.GetCurrentLevel() <= 0) return false;
+        if (isUse == true) return false;
 
         usedPosition = position;
         usedSize = ultimateSkill.GetCurrentLevelSize();
@@ -76,6 +76,8 @@ public class UltimateSkillManager : SingletonComponent<UltimateSkillManager>
 
         const float DIRECTION_VALUE = 10;
         CameraMotionManager.GetInstance().StartPreUltMotion(position + direction * DIRECTION_VALUE, triggerTransform);
+
+        return true;
     }
 
     private void Initialize()

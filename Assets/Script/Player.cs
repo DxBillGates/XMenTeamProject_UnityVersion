@@ -182,7 +182,9 @@ public class Player : MonoBehaviour
 
         const float DIVIDE = 3;
         Vector3 upVector = new Vector3(0, transform.localScale.y / DIVIDE, 0);
-        UltimateSkillManager.GetInstance().Use(transform.position, currentDirection + upVector, transform);
+        bool isUseSkill = UltimateSkillManager.GetInstance().Use(transform.position, currentDirection + upVector, transform);
+
+        if (isUseSkill) triggerSkillPosition = transform.position;
     }
 
     private void UpdateAbilityCooldown()
