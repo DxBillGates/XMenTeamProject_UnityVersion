@@ -143,12 +143,10 @@ public class Ball : MonoBehaviour
             float perTime = flagController.activeTime / flagController.maxActiveTime;
             Vector3 setPos = Vector3.Lerp(transform.position, ultimateSkillManager.usedPosition, perTime);
 
-            if (Vector3.Distance(setPos, ultimateSkillManager.usedPosition) < ultimateSkillManager.usedSize - transform.localScale.x * 2)
+            if (Vector3.Distance(setPos, ultimateSkillManager.usedPosition) > ultimateSkillManager.usedSize - transform.localScale.x * 2)
             {
-                setPos = transform.position;
+                transform.position = setPos;
             }
-
-            transform.position = setPos;
         }
         else if (flagActiveType == FlagActiveType.ACTIVE)
         {
