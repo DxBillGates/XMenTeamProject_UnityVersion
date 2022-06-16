@@ -20,6 +20,8 @@ public class Enemy : MonoBehaviour
     //player入れる
     protected GameObject targetObject;
 
+    // 現フレームの移動量
+    protected Vector3 movedVector;
 
     // Start is called before the first frame update
     void Start()
@@ -49,26 +51,32 @@ public class Enemy : MonoBehaviour
     {
         Vector3 moveVector = targetObject.transform.position - transform.position;
         moveVector.Normalize();
+        moveVector.y = 0;
+
+        // 離れるベクトルを計算
+        Vector3 leaveV = new Vector3(0, 0, 0);
 
         // 敵同士での反発するベクトルを計算
         GameObject[] enemys = GameObject.FindGameObjectsWithTag("Enemy");
-        foreach (GameObject e in enemys )
+        for(int i = 0;i<enemys.Length;i++)
         {
-            float distance = Vector3.Distance(transform.position, e.transform.position);
+            float distance = Vector3.Distance(transform.position, enemys[i].transform.position);
             // 指定した範囲より敵が近い時に離れる
-            if(distance <= dontHitDistance)
+            if (distance <= dontHitDistance)
             {
-                // 離れるベクトルを計算
-                Vector3 leaveV = transform.position - e.transform.position;
-                leaveV.y = 0;
+                Vector3 calcLeaveV = transform.position - enemys[i].transform.position;
 
-                moveVector += leaveV.normalized;
+                calcLeaveV.y = 0;
+                leaveV += calcLeaveV.normalized;
             }
-
         }
+        leaveV.Normalize();
+
+        // 壁との判定用に値を保存
+        movedVector = (moveVector + leaveV) * moveSpeed;
 
         // 移動後のポジションを第二引数に
-        transform.position = Vector3.MoveTowards(transform.position, moveVector + transform.position, moveSpeed);
+        transform.position += movedVector;
     }
 
 
@@ -78,10 +86,14 @@ public class Enemy : MonoBehaviour
     /// <param name="">当たった敵の位置</param>
     protected void KnockBack(Vector3 hitPos, Collider collision)
     {
-        // ノックバックする位置を決める
-        Vector3 moveVector = -1 * (hitPos - transform.position);
-        // 正規化させる
-        moveVector = knock_back_speed * moveVector.normalized;
+        //// ノックバックする位置を決める
+        //Vector3 moveVector = -1 * (hitPos - transform.position);
+        //// 正規化させる
+        //moveVector = knock_back_speed * moveVector.normalized;
+
+        //transform.position += moveVector;
+
+        //movedVector += moveVector;
 
         //Damage(collision.gameObject.GetComponent<Ball>().GetSpeed());
     }

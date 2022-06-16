@@ -33,9 +33,23 @@ public class FollowEnemy : Enemy
     private void OnTriggerStay(Collider collision)
     {
         // ボールに当たったときの処理
-        if (collision.gameObject.name == "Ball")
+        if (collision.gameObject.tag == "Ball")
         {
             KnockBack(collision.gameObject.transform.position,collision);
         }
+        else if(collision.gameObject.tag == "Wall")
+        {
+            // ヒットした障害物のヒットした法線方向に押し出したいからその法線を取得
+            Vector3 hitNormal = collision.transform.forward;
+
+            // 座標を位置フレーム前に戻す
+            const float PUSH_VALUE = 3.0f;
+            transform.position -= movedVector * PUSH_VALUE;
+
+            // 壁ずりベクトルを計算
+            Vector3 moveVector = movedVector - Vector3.Dot(movedVector, hitNormal) * hitNormal;
+            transform.position += moveVector;
+        }
+
     }
 }
