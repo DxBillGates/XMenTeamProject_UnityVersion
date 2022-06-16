@@ -17,6 +17,7 @@ public class UltimateSkill
     // ƒŒƒxƒ‹•Ê‚Ì‘å‚«‚³
     [SerializeField] private List<float> levelsScales;
 
+
     private float gaugeValue;
     private int level;
 

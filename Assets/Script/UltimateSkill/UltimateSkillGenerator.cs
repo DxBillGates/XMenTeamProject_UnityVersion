@@ -7,6 +7,7 @@ public class UltimateSkillGenerator : SingletonComponent<UltimateSkillGenerator>
 {
     // 必殺技を表現するオブジェクトのプレハブ
     [SerializeField] private GameObject prefabUltimateSkillObject;
+    //[SerializeField]private GameObject
 
     private GameObject createdUltimateSkillObject;
 
