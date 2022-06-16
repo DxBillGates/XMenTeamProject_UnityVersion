@@ -86,16 +86,16 @@ public class Enemy : MonoBehaviour
     /// <param name="">当たった敵の位置</param>
     protected void KnockBack(Vector3 hitPos, Collider collision)
     {
-        //// ノックバックする位置を決める
-        //Vector3 moveVector = -1 * (hitPos - transform.position);
-        //// 正規化させる
-        //moveVector = knock_back_speed * moveVector.normalized;
+        // ノックバックする位置を決める
+        Vector3 moveVector = -1 * (hitPos - transform.position);
+        // 正規化させる
+        moveVector = knock_back_speed * moveVector.normalized;
 
-        //transform.position += moveVector;
+        transform.position += moveVector;
 
-        //movedVector += moveVector;
+        movedVector += moveVector;
 
-        //Damage(collision.gameObject.GetComponent<Ball>().GetSpeed());
+        Damage(collision.gameObject.GetComponent<Ball>().GetSpeed());
     }
 
     protected void Damage(float damage)
