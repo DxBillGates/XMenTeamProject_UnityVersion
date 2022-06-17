@@ -86,18 +86,19 @@ public class BarrierEnemy : Enemy
         }
         leaveV.Normalize();
 
-
+        Vector3 resultMoveVector = (moveVector + leaveV) * moveSpeed;
+        resultMoveVector.y = 0;
 
         // Ý’è‚µ‚½‹——£‚æ‚è‰“‚¯‚ê‚Î‹ß‚Ã‚­ ‹ß‚¯‚ê‚Î—£‚ê‚é
         if (distance > playerToDistance)
         {
-            transform.position += (moveVector + leaveV) * moveSpeed;
+            transform.position += resultMoveVector;
             movedVector = (moveVector + leaveV) * moveSpeed;
 
         }
         else if (distance < playerToDistance - 2)
         {
-            transform.position -= (moveVector + leaveV) * moveSpeed;
+            transform.position -= resultMoveVector;
             movedVector = -((moveVector + leaveV) * moveSpeed);
         }
 

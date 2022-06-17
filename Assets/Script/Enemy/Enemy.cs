@@ -74,6 +74,7 @@ public class Enemy : MonoBehaviour
 
         // 壁との判定用に値を保存
         movedVector = (moveVector + leaveV) * moveSpeed;
+        movedVector.y = 0;
 
         // 移動後のポジションを第二引数に
         transform.position += movedVector;
