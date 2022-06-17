@@ -2,22 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FieldObjectManager : MonoBehaviour
+public class FieldObjectManager : SingletonComponent<FieldObjectManager>
 {
     [SerializeField] private GameObject wallPrefab;
     [SerializeField] private uint wallValue;
     [SerializeField] private bool isRotate;
 
-    // XV’†‚ÉV‚µ‚­•Ç‚ğì‚Á‚Ä‚İ‚½‚¢‚Æ‚«—p
+    // ï¿½Xï¿½Vï¿½ï¿½ï¿½ÉVï¿½ï¿½ï¿½ï¿½ï¿½Ç‚ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚İ‚ï¿½ï¿½ï¿½ï¿½Æ‚ï¿½ï¿½p
     [SerializeField] private bool reCreate;
 
     List<GameObject> wallObjects;
+    private List<ChangeMaterial> changeMaterials{get;set;}
 
     // Start is called before the first frame update
     void Start()
     {
         wallObjects = new List<GameObject>();
-
+        changeMaterials = new List<ChangeMaterial>();
         CreateWall();
     }
 
@@ -31,7 +32,7 @@ public class FieldObjectManager : MonoBehaviour
         }
     }
 
-    // start‚©awake‚ÅŒÄ‚Ño‚µ‚Ä‚­‚¾‚³‚¢
+    // startï¿½ï¿½awakeï¿½ÅŒÄ‚Ñoï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     private void CreateWall()
     {
         foreach (var gameObject in wallObjects)
@@ -55,25 +56,26 @@ public class FieldObjectManager : MonoBehaviour
                                                  , Vector3.Lerp(currntCalcPosition, nextCalcPosition, HALF_LERP_POINT)
                                                  , new Quaternion());
 
-            // ƒ|ƒWƒVƒ‡ƒ“‚ğ’†S“_‚Ìy²‚ÅANGLE“x‰ñ“]
+            // ï¿½|ï¿½Wï¿½Vï¿½ï¿½ï¿½ï¿½ï¿½ğ’†Sï¿½_ï¿½ï¿½yï¿½ï¿½ï¿½ï¿½ANGLEï¿½xï¿½ï¿½]
             if (isRotate)
             {
                 RotatePosition(newWallObject.transform);
             }
 
-            // ‚±‚Ì‚Ü‚Ü‚Å‚ÍRotate‚ª‚¨‚©‚µ‚¢‚Ì‚Å’†S‚ğŒü‚­‚æ‚¤‚ÉC³
+            // ï¿½ï¿½ï¿½Ì‚Ü‚Ü‚Å‚ï¿½Rotateï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì‚Å’ï¿½ï¿½Sï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½æ‚¤ï¿½ÉCï¿½ï¿½
             CalclateRotation(newWallObject.transform);
             ReSize(newWallObject.transform);
             RePosition(newWallObject.transform);
 
             wallObjects.Add(newWallObject);
+            changeMaterials.Add(newWallObject.GetComponent<ChangeMaterial>());
 
-            // e‚Ìİ’è
+            // ï¿½eï¿½Ìİ’ï¿½
             newWallObject.transform.parent = transform;
         }
     }
 
-    // nŠpŒ`‚Ìvalue”Ô–Ú‚Ìƒ|ƒWƒVƒ‡ƒ“‚ğ•Ô‚·
+    // nï¿½pï¿½`ï¿½ï¿½valueï¿½Ô–Ú‚Ìƒ|ï¿½Wï¿½Vï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô‚ï¿½
     private Vector3 CalclatePosition(uint n, uint index)
     {
         const float TWO_PI = 2 * Mathf.PI;
@@ -85,10 +87,10 @@ public class FieldObjectManager : MonoBehaviour
         return returnValue;
     }
 
-    // ’†S‚ğŒü‚­‚æ‚¤‚Ép¨‚ğ§Œä‚·‚é
+    // ï¿½ï¿½ï¿½Sï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½æ‚¤ï¿½Épï¿½ï¿½ï¿½ğ§Œä‚·ï¿½ï¿½
     private void CalclateRotation(Transform argTransform)
     {
-        // ’†S‚Ö‚ÌƒxƒNƒgƒ‹‚ğ¶¬
+        // ï¿½ï¿½ï¿½Sï¿½Ö‚Ìƒxï¿½Nï¿½gï¿½ï¿½ï¿½ğ¶ï¿½
         Vector3 toCenterVector = -argTransform.position.normalized;
 
         Vector3 rotateAxis = Vector3.up;
@@ -97,12 +99,12 @@ public class FieldObjectManager : MonoBehaviour
         argTransform.rotation = Quaternion.AngleAxis(degree, rotateAxis);
     }
 
-    // ˆø”‚Ìtransform‚ÌÀ•W‚ğƒNƒ‰ƒX‚Éİ’è‚³‚ê‚Ä‚¢‚énŠpŒ`‚²‚Æ‚É‚ ‚Á‚½’l•ª‰ñ“]‚³‚¹‚é
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½transformï¿½Ìï¿½ï¿½Wï¿½ï¿½ï¿½Nï¿½ï¿½ï¿½Xï¿½Éİ’è‚³ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½nï¿½pï¿½`ï¿½ï¿½ï¿½Æ‚É‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½lï¿½ï¿½ï¿½ï¿½]ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     private void RotatePosition(Transform argTransform)
     {
         float angle = Mathf.PI / wallValue;
 
-        // ƒ‰ƒWƒAƒ“‚©‚çŠp“x‚ÉC³
+        // ï¿½ï¿½ï¿½Wï¿½Aï¿½ï¿½ï¿½ï¿½ï¿½ï¿½pï¿½xï¿½ÉCï¿½ï¿½
         angle = angle * 180 / Mathf.PI;
 
         Vector3 axis = new Vector3(0, 1, 0);
@@ -112,7 +114,7 @@ public class FieldObjectManager : MonoBehaviour
         argTransform.position = rotateQuaternion * pos;
     }
 
-    // nŠpŒ`‚²‚Æ‚Ì•Ó‚Ì’·‚³‚É‘Î‰‚³‚¹‚é
+    // nï¿½pï¿½`ï¿½ï¿½ï¿½Æ‚Ì•Ó‚Ì’ï¿½ï¿½ï¿½ï¿½É‘Î‰ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     private void ReSize(Transform argTransform)
     {
         float trueWidthSize = 2 * Mathf.Sin(Mathf.PI / wallValue) * wallPrefab.transform.localScale.x;
@@ -120,10 +122,20 @@ public class FieldObjectManager : MonoBehaviour
         argTransform.transform.localScale = new Vector3(trueWidthSize, beforeScale.y, beforeScale.z);
     }
 
-    // •Ç‚Ì’·‚³‚É‚ ‚Á‚½ˆÊ’u‚ÉC³‚·‚é
+    // ï¿½Ç‚Ì’ï¿½ï¿½ï¿½ï¿½É‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê’uï¿½ÉCï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     private void RePosition(Transform argTransform)
     {
         float halfSize = wallPrefab.transform.localScale.x;
         argTransform.position *= halfSize;
+    }
+
+    public int GetFieldObjectsCount()
+    {
+        return wallObjects.Count;
+    }
+
+    public ChangeMaterial GetWallMaterial(int wallIndex)
+    {
+        return changeMaterials[wallIndex];
     }
 }

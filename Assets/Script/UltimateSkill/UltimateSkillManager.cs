@@ -21,9 +21,6 @@ public class UltimateSkillManager : SingletonComponent<UltimateSkillManager>
     //ポストエフェクト調整用
     [SerializeField] GameObject postEffectManager;
     DomeEffectControl domeEffectControl;
-    //壁の色を変える
-    [SerializeField] GameObject fieldObject
-    ChangeMaterial changeMaterial;
     // Start is called before the first frame update
     void Start()
     {
@@ -35,7 +32,6 @@ public class UltimateSkillManager : SingletonComponent<UltimateSkillManager>
         ultimateSkill.Initialize();
         //
         domeEffectControl = postEffectManager.GetComponent<DomeEffectControl>();
-        changeMaterial=fieldObject.GetComponent<changeMaterial>();
 
     }
 
@@ -74,7 +70,13 @@ public class UltimateSkillManager : SingletonComponent<UltimateSkillManager>
     {
         //�u���[����Intencity��20�ɂ���
         domeEffectControl.SetBloom(20f);
-        changeMaterial.SetBlackMaterial();
+
+        int wallCount = FieldObjectManager.GetInstance().GetFieldObjectsCount();
+
+        for(int i = 0;i < wallCount;++i)
+        {
+            FieldObjectManager.GetInstance().GetWallMaterial(i).SetBlackMaterial();
+        }
 
         // �K�E�Z���x����0�ȉ��̏ꍇ�͔��������Ȃ�
         if (ultimateSkill.GetCurrentLevel() <= 0) return false;

@@ -8,13 +8,11 @@ public class ChangeMaterial : MonoBehaviour
     [SerializeField] private Material normalMat;
     //�A���e�B���b�g�X�L���W�J���̃}�e���A��(�����Â�����p)
     [SerializeField] private Material blackMat;
-    private GameObject gameObject;
 
     private MeshRenderer meshRenderer;
     //Start is called before the first frame update
     void Start()
     {
-        gameObject = GetComponent<GameObject>();
         meshRenderer = GetComponent<MeshRenderer>();
 
         meshRenderer.material = normalMat;
@@ -24,11 +22,8 @@ public class ChangeMaterial : MonoBehaviour
     //Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Z))
-        {
-            SetBlackMaterial();
-        }
-    }
+ 
+  }
     public void SetNormalMaterial()
     {
         //���ʂ̃}�e���A�����Z�b�g
