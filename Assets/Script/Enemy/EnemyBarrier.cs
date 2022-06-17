@@ -5,6 +5,8 @@ using UnityEngine;
 public class EnemyBarrier : MonoBehaviour
 {
     [SerializeField] private float Hp = 10.0f;
+
+
     // Start is called before the first frame update
     void Start()
     {
