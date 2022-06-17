@@ -2307,6 +2307,10 @@ PrefabInstance:
       propertyPath: lineObjectManager
       value: 
       objectReference: {fileID: 321424018}
+    - target: {fileID: 1439989470772683766, guid: 90b409cbf370a8641a6aa58ce6fdac3c, type: 3}
+      propertyPath: nextSceneGameOver
+      value: 
+      objectReference: {fileID: 1997161806}
     - target: {fileID: 1473072585009618446, guid: 90b409cbf370a8641a6aa58ce6fdac3c, type: 3}
       propertyPath: m_RootOrder
       value: 6
