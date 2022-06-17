@@ -69,6 +69,8 @@ public class Enemy : MonoBehaviour
         if (hp < 0)
         {
             Destroy(transform.root.gameObject);
+            const float ADD_GAUGE_VALUE = 25;
+            UltimateSkillManager.GetInstance().AddGauge(ADD_GAUGE_VALUE);
         }
     }
 }

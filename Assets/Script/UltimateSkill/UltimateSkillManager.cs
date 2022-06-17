@@ -120,4 +120,9 @@ public class UltimateSkillManager : SingletonComponent<UltimateSkillManager>
     {
         return ultimateSkill.GetCurrentLevel();
     }
+
+    public void AddGauge(float value)
+    {
+        ultimateSkill.AddValue(value);
+    }
 }

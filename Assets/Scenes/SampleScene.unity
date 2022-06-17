@@ -1287,7 +1287,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 525c502e99db8374d8f0b8f732afc3b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  time: 1
+  time: 0
 --- !u!4 &1425900273
 Transform:
   m_ObjectHideFlags: 0
@@ -1810,7 +1810,7 @@ PrefabInstance:
       objectReference: {fileID: 868376160}
     - target: {fileID: 1921551139525285177, guid: 531dc461ce14a074980fe02f9adaceb7, type: 3}
       propertyPath: ultimateSkill.initValue
-      value: 100
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 1921551139525285177, guid: 531dc461ce14a074980fe02f9adaceb7, type: 3}
       propertyPath: activeFlagController.activeType
