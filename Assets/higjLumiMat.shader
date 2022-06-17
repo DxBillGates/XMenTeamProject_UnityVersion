@@ -4,6 +4,7 @@ Shader "Unlit/higjLumiMat"
 	{
 		_MainTex("Texture", 2D) = "white" {}
 		_Color("Color", Color) = (1, 1, 1, 1)
+		_intencity("intencity",float)=1.0
 	}
 		SubShader
 		{
@@ -36,6 +37,7 @@ Shader "Unlit/higjLumiMat"
 				sampler2D _MainTex;
 				float4 _MainTex_ST;
 				fixed4 _Color;
+				float _intencity;
 
 				v2f vert(appdata v)
 				{
@@ -50,7 +52,7 @@ Shader "Unlit/higjLumiMat"
 				{
 					fixed4 col = tex2D(_MainTex,i.uv);
 					fixed grayScale = col.r * 0.299 + col.g * 0.587 + col.b * 0.114;
-					fixed extract = smoothstep(0.6, 0.9, grayScale);
+					fixed extract = smoothstep(0.6, 0.9, grayScale*_intencity);
 					return col * extract * _Color;
 				}
 				ENDCG

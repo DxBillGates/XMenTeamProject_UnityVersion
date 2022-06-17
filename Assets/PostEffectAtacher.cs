@@ -12,6 +12,9 @@ public class PostEffectAtacher : MonoBehaviour
     {
         RenderTexture highLumiTex =RenderTexture.GetTemporary(source.width, source.width, 0, source.format);
         RenderTexture blurTex =RenderTexture.GetTemporary(source.width, source.width, 0, source.format);
+        //縮小バッファ  
+        RenderTexture buffer=RenderTexture.GetTemporary(blurTex.width/2,blurTex.height/2,0,source.format);
+        
 
         Graphics.Blit(source, highLumiTex, highLumiMat);
         Graphics.Blit(highLumiTex, blurTex, blurMat);
