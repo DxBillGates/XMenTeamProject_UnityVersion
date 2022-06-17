@@ -2,16 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// •KE‹ZƒIƒuƒWƒFƒNƒg‚ğì¬
+// ï¿½Kï¿½Eï¿½Zï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½ï¿½ï¿½ì¬
 public class UltimateSkillGenerator : SingletonComponent<UltimateSkillGenerator>
 {
-    // •KE‹Z‚ğ•\Œ»‚·‚éƒIƒuƒWƒFƒNƒg‚ÌƒvƒŒƒnƒu
+    // ï¿½Kï¿½Eï¿½Zï¿½ï¿½\ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½Ìƒvï¿½ï¿½ï¿½nï¿½u
     [SerializeField] private GameObject prefabUltimateSkillObject;
     //[SerializeField]private GameObject
 
     private GameObject createdUltimateSkillObject;
 
-    //ƒ|ƒXƒgƒGƒtƒFƒNƒg§Œä—p
+    //ï¿½|ï¿½Xï¿½gï¿½Gï¿½tï¿½Fï¿½Nï¿½gï¿½ï¿½ï¿½ï¿½p
     [SerializeField] GameObject postEffectManager;
     DomeEffectControl domeEffectControl;
 
@@ -73,8 +73,16 @@ public class UltimateSkillGenerator : SingletonComponent<UltimateSkillGenerator>
     {
         if(createdUltimateSkillObject)
         {
-            //ƒuƒ‹[ƒ€‚ÌIntencity‚ğ0‚É‚·‚é
+            //ï¿½uï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ï¿½Intencityï¿½ï¿½0ï¿½É‚ï¿½ï¿½ï¿½
             domeEffectControl.SetBloom(0f);
+
+             int wallCount = FieldObjectManager.GetInstance().GetFieldObjectsCount();
+
+        for(int i = 0;i < wallCount;++i)
+        {
+            FieldObjectManager.GetInstance().GetWallMaterial(i).SetNormalMaterial();
+        }
+
 
             Destroy(createdUltimateSkillObject);
 

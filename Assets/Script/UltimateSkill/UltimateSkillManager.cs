@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// •KE‹Z‚Ì”­“®‚È‚Ç‚ğŠÇ—‚·‚éƒNƒ‰ƒX
+// ï¿½Kï¿½Eï¿½Zï¿½Ì”ï¿½ï¿½ï¿½ï¿½È‚Ç‚ï¿½ï¿½Ç—ï¿½ï¿½ï¿½ï¿½ï¿½Nï¿½ï¿½ï¿½X
 public class UltimateSkillManager : SingletonComponent<UltimateSkillManager>
 {
     [SerializeField] private FlagController preActiveFlagController;
@@ -10,15 +10,15 @@ public class UltimateSkillManager : SingletonComponent<UltimateSkillManager>
     [SerializeField] private FlagController endActiveFlagController;
     [SerializeField] private UltimateSkill ultimateSkill;
 
-    // g—p’†‚©‚Ç‚¤‚©
+    // ï¿½gï¿½pï¿½ï¿½ï¿½ï¿½ï¿½Ç‚ï¿½ï¿½ï¿½
     private bool isUse;
 
-    // g—p‚µn‚ß‚½êŠ
+    // ï¿½gï¿½pï¿½ï¿½ï¿½nï¿½ß‚ï¿½ï¿½êŠ
     public Vector3 usedPosition { get; private set; }
 
-    // g—p‚µ‚½Û‚ÌƒTƒCƒY
+    // ï¿½gï¿½pï¿½ï¿½ï¿½ï¿½ï¿½Û‚ÌƒTï¿½Cï¿½Y
     public float usedSize { get; private set; }
-
+    //ãƒã‚¹ãƒˆã‚¨ãƒ•ã‚§ã‚¯ãƒˆèª¿æ•´ç”¨
     [SerializeField] GameObject postEffectManager;
     DomeEffectControl domeEffectControl;
     // Start is called before the first frame update
@@ -30,6 +30,7 @@ public class UltimateSkillManager : SingletonComponent<UltimateSkillManager>
 
         Initialize();
         ultimateSkill.Initialize();
+        //
         domeEffectControl = postEffectManager.GetComponent<DomeEffectControl>();
 
     }
@@ -43,7 +44,7 @@ public class UltimateSkillManager : SingletonComponent<UltimateSkillManager>
 
         if (isUse == false) return;
 
-        // ƒXƒLƒ‹”­“®‘O‚Ìƒtƒ‰ƒOXVˆ—
+        // ï¿½Xï¿½Lï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Oï¿½Ìƒtï¿½ï¿½ï¿½Oï¿½Xï¿½Vï¿½ï¿½ï¿½ï¿½
         preActiveFlagController.Update(Time.deltaTime);
         if (preActiveFlagController.IsEndTrigger() == true)
         {
@@ -51,7 +52,7 @@ public class UltimateSkillManager : SingletonComponent<UltimateSkillManager>
             activeFlagController.flag = true;
         }
 
-        // ƒXƒLƒ‹”­“®’†‚Ìƒtƒ‰ƒOXVˆ—
+        // ï¿½Xï¿½Lï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ìƒtï¿½ï¿½ï¿½Oï¿½Xï¿½Vï¿½ï¿½ï¿½ï¿½
         activeFlagController.Update(Time.deltaTime);
         if (activeFlagController.IsEndTrigger() == true)
         {
@@ -60,17 +61,24 @@ public class UltimateSkillManager : SingletonComponent<UltimateSkillManager>
         }
 
 
-        // ƒXƒLƒ‹”­“®Œã‚Ìƒtƒ‰ƒO”­“®ˆ—
+        // ï¿½Xï¿½Lï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ìƒtï¿½ï¿½ï¿½Oï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         endActiveFlagController.Update(Time.deltaTime);
     }
 
-    // g—pêŠ‚ğw’è‚µ‚ÄƒXƒLƒ‹‚ğ”­“®‚·‚é
+    // ï¿½gï¿½pï¿½êŠï¿½ï¿½ï¿½wï¿½è‚µï¿½ÄƒXï¿½Lï¿½ï¿½ï¿½ğ”­“ï¿½ï¿½ï¿½ï¿½ï¿½
     public bool Use(Vector3 position,Vector3 direction,Transform triggerTransform)
     {
-        //ƒuƒ‹[ƒ€‚ÌIntencity‚ğ20‚É‚·‚é
+        //ï¿½uï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ï¿½Intencityï¿½ï¿½20ï¿½É‚ï¿½ï¿½ï¿½
         domeEffectControl.SetBloom(20f);
 
-        // •KE‹ZƒŒƒxƒ‹‚ª0ˆÈ‰º‚Ìê‡‚Í”­“®‚³‚¹‚È‚¢
+        int wallCount = FieldObjectManager.GetInstance().GetFieldObjectsCount();
+
+        for(int i = 0;i < wallCount;++i)
+        {
+            FieldObjectManager.GetInstance().GetWallMaterial(i).SetBlackMaterial();
+        }
+
+        // ï¿½Kï¿½Eï¿½Zï¿½ï¿½ï¿½xï¿½ï¿½ï¿½ï¿½0ï¿½È‰ï¿½ï¿½Ìê‡ï¿½Í”ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È‚ï¿½
         if (ultimateSkill.GetCurrentLevel() <= 0) return false;
         if (isUse == true) return false;
 
@@ -102,15 +110,15 @@ public class UltimateSkillManager : SingletonComponent<UltimateSkillManager>
 
     public FlagController GetActiveFlagController()
     {
-        // pre ‚Æ –{–½‚ğŠm”F‚µ‚Äƒtƒ‰ƒO‚ªƒIƒ“‚È‚ç‚»‚ÌFlagController‚ğ•Ô‚·
+        // pre ï¿½ï¿½ ï¿½{ï¿½ï¿½ï¿½ï¿½ï¿½mï¿½Fï¿½ï¿½ï¿½Äƒtï¿½ï¿½ï¿½Oï¿½ï¿½ï¿½Iï¿½ï¿½ï¿½È‚ç‚»ï¿½ï¿½FlagControllerï¿½ï¿½Ô‚ï¿½
         if (preActiveFlagController.flag == true) return preActiveFlagController;
         if (activeFlagController.flag == true) return activeFlagController;
 
-        // ‚»‚êˆÈŠO‚È‚çI—¹‚ÌflagController‚ğ•Ô‚·
+        // ï¿½ï¿½ï¿½ï¿½ÈŠOï¿½È‚ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½ï¿½flagControllerï¿½ï¿½Ô‚ï¿½
         return endActiveFlagController;
     }
 
-    // ƒAƒNƒeƒBƒu‚Ìƒtƒ‰ƒOƒRƒ“ƒgƒ[ƒ‰[‚ª“®ì’†‚©‚ğ•Ô‚·
+    // ï¿½Aï¿½Nï¿½eï¿½Bï¿½uï¿½Ìƒtï¿½ï¿½ï¿½Oï¿½Rï¿½ï¿½ï¿½gï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½ì’†ï¿½ï¿½ï¿½ï¿½Ô‚ï¿½
     public bool IsUse()
     {
         return activeFlagController.flag;
