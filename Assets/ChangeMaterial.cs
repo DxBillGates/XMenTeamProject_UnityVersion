@@ -4,37 +4,40 @@ using UnityEngine;
 
 public class ChangeMaterial : MonoBehaviour
 {
-    ////’Êí‚Ìƒ}ƒeƒŠƒAƒ‹
-    //[SerializeField] private Material normalMat;
-    ////ƒAƒ‹ƒeƒBƒƒbƒgƒXƒLƒ‹“WŠJ‚Ìƒ}ƒeƒŠƒAƒ‹(‰ñ‚è‚ğˆÃ‚­‚·‚é—p)
-    //[SerializeField] private Material blackMat;
-    //private GameObject gameObject;
+    //ï¿½Êíï¿½Ìƒ}ï¿½eï¿½ï¿½ï¿½Aï¿½ï¿½
+    [SerializeField] private Material normalMat;
+    //ï¿½Aï¿½ï¿½ï¿½eï¿½Bï¿½ï¿½ï¿½bï¿½gï¿½Xï¿½Lï¿½ï¿½ï¿½Wï¿½Jï¿½ï¿½ï¿½Ìƒ}ï¿½eï¿½ï¿½ï¿½Aï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½ï¿½Ã‚ï¿½ï¿½ï¿½ï¿½ï¿½p)
+    [SerializeField] private Material blackMat;
+    private GameObject gameObject;
 
     private MeshRenderer meshRenderer;
-    // Start is called before the first frame update
+    //Start is called before the first frame update
     void Start()
     {
-        //gameObject = GetComponent<GameObject>();
-        //meshRenderer = GetComponent<MeshRenderer>();
+        gameObject = GetComponent<GameObject>();
+        meshRenderer = GetComponent<MeshRenderer>();
 
-        //meshRenderer.material = normalMat;
+        meshRenderer.material = normalMat;
 
     }
 
-    // Update is called once per frame
-    //void Update()
-    //{
-        
-    //}
-    //public void SetNormalMaterial()
-    //{
-    //    //•’Ê‚Ìƒ}ƒeƒŠƒAƒ‹‚ğƒZƒbƒg
-    //    meshRenderer.material = normalMat;
-    //}
-    //public void SetBlackMaterial()
-    //{
-    //    //•‚¢ƒ}ƒeƒŠƒAƒ‹‚ğƒZƒbƒg
-    //    meshRenderer.material = blackMat;
+    //Update is called once per frame
+    void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Z))
+        {
+            SetBlackMaterial();
+        }
+    }
+    public void SetNormalMaterial()
+    {
+        //ï¿½ï¿½ï¿½Ê‚Ìƒ}ï¿½eï¿½ï¿½ï¿½Aï¿½ï¿½ï¿½ï¿½ï¿½Zï¿½bï¿½g
+        meshRenderer.material = normalMat;
+    }
+    public void SetBlackMaterial()
+    {
+        //ï¿½ï¿½ï¿½ï¿½ï¿½}ï¿½eï¿½ï¿½ï¿½Aï¿½ï¿½ï¿½ï¿½ï¿½Zï¿½bï¿½g
+        meshRenderer.material = blackMat;
 
-    //}
+    }
 }
