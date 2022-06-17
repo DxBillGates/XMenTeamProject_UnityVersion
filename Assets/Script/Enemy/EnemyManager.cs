@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyManajer : MonoBehaviour
+public class EnemyManager : MonoBehaviour
 {
     //プレハブ
     [SerializeField] private GameObject BarrierEnemy;
@@ -16,6 +16,11 @@ public class EnemyManajer : MonoBehaviour
     [SerializeField] private float Spawn_Range = 30;
     //　プレイヤーからどれくらいの範囲に敵が出現できないか
     [SerializeField] private float Cant_Spawn_Distance = 10;
+
+    //クリアシーン遷移用
+    [SerializeField] GameObject nextSceneGameClear;
+
+    private static int aliveCount = 0;
 
 
     // Start is called before the first frame update
@@ -46,6 +51,8 @@ public class EnemyManajer : MonoBehaviour
             }
 
             Instantiate(BarrierEnemy, spawnPos, Quaternion.identity);
+            //生成数増やす
+            aliveCount++;
         }
         //追っかけエネミー生成
         for (int i = 0; i < MaxFollowEnemyNum; ++i)
@@ -71,12 +78,23 @@ public class EnemyManajer : MonoBehaviour
 
             //引数の真ん中変更で生成するポジション変更
             Instantiate(FollowEnemy, spawnPos, Quaternion.identity);
+            //生成数増やす
+            aliveCount++;
         }
     }
 
     // Update is called once per frame
     void Update()
     {
+        //敵が全滅したらクリアシーンへ
+        if (aliveCount <= 0)
+        {
+            nextSceneGameClear.SetActive(true);
+        }
+    }
 
+    public static void DecrementAliveCount()
+    {
+        aliveCount--;
     }
 }

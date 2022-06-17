@@ -109,8 +109,11 @@ public class BarrierEnemy : Enemy
     {
         if (firstCountflg)
         {
+            Vector3 lookDirection = ballDir[ballBeforeNum];
+            lookDirection.y = 0;
+
             // 0ƒxƒNƒgƒ‹‚Å‚Í‚È‚¢‚Æ‚«‚É‘ã“ü
-            if(ballDir[ballBeforeNum] != Vector3.zero)transform.rotation = Quaternion.LookRotation(ballDir[ballBeforeNum]);
+            if (lookDirection != Vector3.zero)transform.rotation = Quaternion.LookRotation(lookDirection);
 
             ++ballBeforeNum;
             if(ballBeforeNum >= ballDir.Length)
@@ -120,7 +123,9 @@ public class BarrierEnemy : Enemy
         }
         else
         {
-            if(ballDir[0] != Vector3.zero)transform.rotation = Quaternion.LookRotation(ballDir[0]);
+            Vector3 lookDirection = ballDir[0];
+            lookDirection.y = 0;
+            if (lookDirection != Vector3.zero)transform.rotation = Quaternion.LookRotation(lookDirection);
         }
 
     }

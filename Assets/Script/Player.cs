@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject lineObjectManager;
     [SerializeField] private float maxHp;
     [SerializeField] private GameObject hpGaugeUIObject;
+    [SerializeField] GameObject nextSceneGameOver;
 
     private float hp;
 
@@ -254,7 +255,11 @@ public class Player : MonoBehaviour
     {
         hp -= value;
 
-        if (hp < 0) hp = 0;
+        if (hp < 0) {
+            hp = 0;
+            //ゲームオーバーシーンへ
+            nextSceneGameOver.SetActive(true);
+        }
     }
 
     private float CalclatePercentHP()

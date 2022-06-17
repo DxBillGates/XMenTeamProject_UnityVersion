@@ -283,6 +283,7 @@ MonoBehaviour:
   lineObjectManager: {fileID: 0}
   maxHp: 100
   hpGaugeUIObject: {fileID: 0}
+  nextSceneGameOver: {fileID: 0}
   hitEnemyDamage: 5
 --- !u!114 &1439989470772683769
 MonoBehaviour:
@@ -697,7 +698,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -9130586711530211351, guid: 3ef7fff4d38e1a54eb7083c34485aa5b, type: 3}
+  - {fileID: -9130586711530211351, guid: 76f17b0e6d0cfbc48af8c84b9660bb55, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -722,7 +723,7 @@ SkinnedMeshRenderer:
   m_Quality: 0
   m_UpdateWhenOffscreen: 0
   m_SkinnedMotionVectors: 1
-  m_Mesh: {fileID: 3252224991405807402, guid: 3ef7fff4d38e1a54eb7083c34485aa5b, type: 3}
+  m_Mesh: {fileID: 3252224991405807402, guid: 76f17b0e6d0cfbc48af8c84b9660bb55, type: 3}
   m_Bones:
   - {fileID: 6920658735109183329}
   - {fileID: 1724238971724687717}
