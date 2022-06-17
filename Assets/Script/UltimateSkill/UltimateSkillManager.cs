@@ -38,7 +38,11 @@ public class UltimateSkillManager : SingletonComponent<UltimateSkillManager>
     // Update is called once per frame
     void Update()
     {
-        if (endActiveFlagController.IsEndTrigger() == true) Initialize();
+        if (endActiveFlagController.IsEndTrigger() == true)
+        {
+            Initialize();
+            CameraMotionManager.GetInstance().Initialize();
+        }
 
         ultimateSkill.Update();
 
@@ -68,6 +72,10 @@ public class UltimateSkillManager : SingletonComponent<UltimateSkillManager>
     // �g�p�ꏊ���w�肵�ăX�L���𔭓�����
     public bool Use(Vector3 position,Vector3 direction,Transform triggerTransform)
     {
+        // �K�E�Z���x����0�ȉ��̏ꍇ�͔��������Ȃ�
+        if (ultimateSkill.GetCurrentLevel() <= 0) return false;
+        if (isUse == true) return false;
+
         //�u���[����Intencity��20�ɂ���
         domeEffectControl.SetBloom(20f);
 
@@ -78,10 +86,6 @@ public class UltimateSkillManager : SingletonComponent<UltimateSkillManager>
             FieldObjectManager.GetInstance().GetWallMaterial(i).SetBlackMaterial();
         }
 
-        // �K�E�Z���x����0�ȉ��̏ꍇ�͔��������Ȃ�
-        if (ultimateSkill.GetCurrentLevel() <= 0) return false;
-        if (isUse == true) return false;
-
         usedPosition = position;
         usedSize = ultimateSkill.GetCurrentLevelSize();
         isUse = true;
@@ -89,6 +93,7 @@ public class UltimateSkillManager : SingletonComponent<UltimateSkillManager>
         preActiveFlagController.maxActiveTime = CameraMotionManager.GetInstance().GetFlagController().maxActiveTime;
 
         const float DIRECTION_VALUE = 10;
+
         CameraMotionManager.GetInstance().StartPreUltMotion(position + direction * DIRECTION_VALUE, triggerTransform);
 
         ultimateSkill.Use(usedPosition);

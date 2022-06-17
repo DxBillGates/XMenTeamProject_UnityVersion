@@ -110,12 +110,7 @@ public class CameraMotionManager : SingletonComponent<CameraMotionManager>
             // モーションデータがこれ以降無いならモーションフラグを終了させ初期化を行う
             if(currentSkillCameraMotionIndex > motionInfos.Count - 1)
             {
-                preUtlMotionFlag.Initialize();
-                currentSkillCameraMotionIndex = 0;
-                transform.position = originPosition;
-                transform.rotation = originRotate;
-                cameraTransform.position = originPosition;
-                cameraTransform.rotation = originRotate;
+                Initialize();
                 return;
             }
         }
@@ -193,4 +188,14 @@ public class CameraMotionManager : SingletonComponent<CameraMotionManager>
         return motionInfos[1].motionTime;
     }
 
+    public void Initialize()
+    {
+        Transform cameraTransform = Camera.main.transform;
+        preUtlMotionFlag.Initialize();
+        currentSkillCameraMotionIndex = 0;
+        transform.position = originPosition;
+        transform.rotation = originRotate;
+        cameraTransform.position = originPosition;
+        cameraTransform.rotation = originRotate;
+    }
 }

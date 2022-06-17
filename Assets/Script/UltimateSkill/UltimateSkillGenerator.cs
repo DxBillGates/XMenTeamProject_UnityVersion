@@ -89,6 +89,8 @@ public class UltimateSkillGenerator : SingletonComponent<UltimateSkillGenerator>
             isAddScale = false;
             startLerpScale = new Vector3();
             endLerpScale = new Vector3();
+            lerpTime = 0;
+            maxLerpTime = 1;
         }
     }
 
