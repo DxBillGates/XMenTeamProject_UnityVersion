@@ -162,7 +162,7 @@ MonoBehaviour:
     motionTime: 0.5
     startDegreeAngle: 0
     endDegreeAngle: 175
-    easingType: 1
+    easingType: 0
   centerMotionInfo:
     motionTime: 2
     startDegreeAngle: 175

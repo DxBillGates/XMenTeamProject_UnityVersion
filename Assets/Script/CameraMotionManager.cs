@@ -74,9 +74,7 @@ public class CameraMotionManager : SingletonComponent<CameraMotionManager>
     {
         if(preUtlMotionFlag.flag == false)
         {
-            playerTransform.position += playerTransform.forward + playerTransform.up * 5;
             transform.LookAt(playerTransform);
-            playerTransform.position -= playerTransform.forward + playerTransform.up * 5;
         }
 
         //UpdateUltMotion();
@@ -150,7 +148,6 @@ public class CameraMotionManager : SingletonComponent<CameraMotionManager>
 
         if (currentSkillCameraMotionIndex == 1)
         {
-            Vector3 toTriggerTransform = ultTriggerTransform.position - transform.position;
             cameraTransform.LookAt(playerTransform);
         }
         if(currentSkillCameraMotionIndex == 2)
@@ -197,5 +194,7 @@ public class CameraMotionManager : SingletonComponent<CameraMotionManager>
         transform.rotation = originRotate;
         cameraTransform.position = originPosition;
         cameraTransform.rotation = originRotate;
+        beforeRotateAngle = 0;
+        motionElapsedTime = 0;
     }
 }
