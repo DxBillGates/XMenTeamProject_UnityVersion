@@ -29,6 +29,9 @@ public class Ball : MonoBehaviour
     private bool isThrow;
     public BallState state { get; private set; }
 
+    private bool isHitWall;
+    private bool isInDome;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -37,6 +40,9 @@ public class Ball : MonoBehaviour
 
         meshRenderer = GetComponent<MeshRenderer>();
         meshRenderer.material = stateMaterials[(int)state];
+
+        isHitWall = false;
+        isInDome = false;
     }
 
     private void FixedUpdate()
@@ -76,6 +82,7 @@ public class Ball : MonoBehaviour
                 state = BallState.THROWED_ENEMY;
                 break;
             case "Wall":
+                isHitWall = true;
                 Reflection(hitNormal);
                 break;
             case "Barrier":
@@ -103,6 +110,13 @@ public class Ball : MonoBehaviour
         if (velocity.magnitude < MIN_VELOCITY) InitializeState(BallState.FREE);
 
         transform.position += velocity * GameTimeManager.GetInstance().GetTime();
+
+        // ドーム内に一度でも入っているなら速度ベクトルを足したときに外に出ないように調整
+        if (isInDome == false) return;
+        if(Vector3.Distance(transform.position,UltimateSkillManager.GetInstance().usedPosition) > UltimateSkillManager.GetInstance().usedSize - transform.localScale.x)
+        {
+            transform.position -= velocity * GameTimeManager.GetInstance().GetTime();
+        }
     }
 
     // 反射ベクトルを生成
@@ -136,6 +150,8 @@ public class Ball : MonoBehaviour
         FlagController flagController = ultimateSkillManager.GetActiveFlagController();
         FlagActiveType flagActiveType = flagController.activeType;
 
+        isInDome = flagController.isEnd;
+
         // 必殺技発動前なら発動地点に持ってくる
         if (flagActiveType == FlagActiveType.PRE)
         {
@@ -147,9 +163,18 @@ public class Ball : MonoBehaviour
             {
                 transform.position = setPos;
             }
+            else 
+            {
+                isInDome = true;
+            }
         }
         else if (flagActiveType == FlagActiveType.ACTIVE)
         {
+            if(isHitWall == true)
+            {
+                isHitWall = false;
+                return;
+            }
             Vector3 hitNormal = transform.position - ultimateSkillManager.usedPosition;
             float distace = hitNormal.magnitude;
             if (distace > ultimateSkillManager.usedSize - transform.localScale.x)
