@@ -107,7 +107,12 @@ public class Enemy : MonoBehaviour
         {
             Destroy(transform.root.gameObject);
             const float ADD_GAUGE_VALUE = 25;
-            UltimateSkillManager.GetInstance().AddGauge(ADD_GAUGE_VALUE);
+
+            // スキルを発動していないときに敵を倒したならスキルゲージが増える
+            if (UltimateSkillManager.GetInstance().IsUse() == false)
+            {
+                UltimateSkillManager.GetInstance().AddGauge(ADD_GAUGE_VALUE);
+            }
         }
     }
 }
