@@ -33,10 +33,14 @@ public class BarrierEnemy : Enemy
 
         // 念のためタグ付け
         transform.tag = "Enemy";
+
+        GameObject SEPlayManager = GameObject.FindGameObjectWithTag("SEPlayManager");
+
+        sePlayManagerComponent = SEPlayManager.GetComponent<SEPlayManager>();
     }
 
     // Update is called once per frame
-    void Update ()
+    void Update()
     {
         // ボールの位置を格納
         SetBallDir();
@@ -113,10 +117,10 @@ public class BarrierEnemy : Enemy
             lookDirection.y = 0;
 
             // 0ベクトルではないときに代入
-            if (lookDirection != Vector3.zero)transform.rotation = Quaternion.LookRotation(lookDirection);
+            if (lookDirection != Vector3.zero) transform.rotation = Quaternion.LookRotation(lookDirection);
 
             ++ballBeforeNum;
-            if(ballBeforeNum >= ballDir.Length)
+            if (ballBeforeNum >= ballDir.Length)
             {
                 ballBeforeNum = 0;
             }
@@ -125,7 +129,7 @@ public class BarrierEnemy : Enemy
         {
             Vector3 lookDirection = ballDir[0];
             lookDirection.y = 0;
-            if (lookDirection != Vector3.zero)transform.rotation = Quaternion.LookRotation(lookDirection);
+            if (lookDirection != Vector3.zero) transform.rotation = Quaternion.LookRotation(lookDirection);
         }
 
     }
@@ -141,7 +145,7 @@ public class BarrierEnemy : Enemy
         ballDir[ballCurrentNum] = ballVector.normalized;
         ++ballCurrentNum;
 
-        if(ballCurrentNum >= ballDir.Length)
+        if (ballCurrentNum >= ballDir.Length)
         {
             ballCurrentNum = 0;
             firstCountflg = true;
@@ -151,13 +155,13 @@ public class BarrierEnemy : Enemy
 
     private void CheckBarrierDown()
     {
-        if(barrier == null)
+        if (barrier == null)
         {
             barrierDestroy = true;
         }
     }
 
-   
+
 
     //private void OnTriggerStay(Collider collision)
     //{

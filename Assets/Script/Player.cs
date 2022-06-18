@@ -10,9 +10,9 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject lineObjectManager;
     [SerializeField] private float maxHp;
     [SerializeField] private GameObject hpGaugeUIObject;
-    [SerializeField] GameObject nextSceneGameOver;
-    [SerializeField] GameObject SEPlayManager;
-    [SerializeField] List<AudioClip> SE;
+    [SerializeField] private GameObject nextSceneGameOver;
+    [SerializeField] private GameObject SEPlayManager;
+    [SerializeField] private List<AudioClip> SE;
 
 
     private float hp;

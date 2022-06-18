@@ -17,16 +17,21 @@ public class Enemy : MonoBehaviour
     // “G“¯m‚Å‹ß‚Ã‚©‚È‚¢‹——£
     [SerializeField] protected float dontHitDistance = 3.0f;
 
+    [SerializeField] protected List<AudioClip> SE;
+
     //player“ü‚ê‚é
     protected GameObject targetObject;
 
     // Œ»ƒtƒŒ[ƒ€‚ÌˆÚ“®—Ê
     protected Vector3 movedVector;
 
+    //SE‚ÌGetComponent—p
+    protected SEPlayManager sePlayManagerComponent;
+
     // Start is called before the first frame update
     void Start()
     {
-       
+
     }
 
     // Update is called once per frame
@@ -58,7 +63,7 @@ public class Enemy : MonoBehaviour
 
         // “G“¯m‚Å‚Ì”½”­‚·‚éƒxƒNƒgƒ‹‚ğŒvZ
         GameObject[] enemys = GameObject.FindGameObjectsWithTag("Enemy");
-        for(int i = 0;i<enemys.Length;i++)
+        for (int i = 0; i < enemys.Length; i++)
         {
             float distance = Vector3.Distance(transform.position, enemys[i].transform.position);
             // w’è‚µ‚½”ÍˆÍ‚æ‚è“G‚ª‹ß‚¢‚É—£‚ê‚é
@@ -103,6 +108,8 @@ public class Enemy : MonoBehaviour
     protected void Damage(float damage)
     {
         hp -= damage;
+
+        sePlayManagerComponent.SESeting(SE[0]);
 
         if (hp < 0)
         {

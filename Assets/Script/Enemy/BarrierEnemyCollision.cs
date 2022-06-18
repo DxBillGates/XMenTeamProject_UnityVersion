@@ -23,7 +23,7 @@ public class BarrierEnemyCollision : MonoBehaviour
         BarrierEnemy barrierEnemy = enemyParent.GetComponent<BarrierEnemy>();
 
         // ƒ{[ƒ‹‚É“–‚½‚Á‚½‚Æ‚«‚Ìˆ—
-        if (collision.gameObject.tag == "Ball")
+        if (collision.gameObject.tag == "Ball" && collision.GetComponent<Ball>().state != BallState.HOLD_PLAYER)
         {
             //e‚Å”»’è
             barrierEnemy.KnockBack(collision);

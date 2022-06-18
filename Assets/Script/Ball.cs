@@ -92,9 +92,6 @@ public class Ball : MonoBehaviour
                 hitNormal = (other.gameObject.transform.position - transform.position).normalized;
                 Reflection(hitNormal, true);
                 state = BallState.THROWED_ENEMY;
-
-                sePlayManager.SESeting(SE[0]);
-
                 break;
             case "Wall":
                 isHitWall = true;
@@ -104,6 +101,7 @@ public class Ball : MonoBehaviour
             case "Barrier":
                 Reflection(hitNormal, true);
                 state = BallState.THROWED_PLAYER;
+                sePlayManager.SESeting(SE[0]);
                 break;
             case "EnemyBarrier":
                 Reflection(hitNormal, true);
