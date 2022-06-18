@@ -65,7 +65,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   knock_back_speed: 0.2
   moveSpeed: 0.2
-  hp: 5
+  hp: 10
   dontHitDistance: 20
   SE:
   - {fileID: 8300000, guid: 45bdfac5f1e4ae14fba0862eaea30f42, type: 3}
