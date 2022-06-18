@@ -211,7 +211,7 @@ public class Player : MonoBehaviour
     {
         if (Input.GetButtonDown("UltimateSkill") == false) return;
 
-        
+        sePlayManagerComponent.SESeting(SE[1]);
         const float DIVIDE = 3;
         Vector3 upVector = new Vector3(0, transform.localScale.y / DIVIDE, 0);
         bool isUseSkill = UltimateSkillManager.GetInstance().Use(transform.position, currentDirection + upVector, transform);
@@ -264,7 +264,8 @@ public class Player : MonoBehaviour
     {
         hp -= value;
         sePlayManagerComponent.SESeting(SE[0]);
-        if (hp < 0) {
+        if (hp < 0)
+        {
             hp = 0;
             //ゲームオーバーシーンへ
             nextSceneGameOver.SetActive(true);
