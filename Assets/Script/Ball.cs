@@ -106,6 +106,7 @@ public class Ball : MonoBehaviour
                 sePlayManager.SESeting(SE[0]);
                 break;
             case "EnemyBarrier":
+                if (state == BallState.HOLD_PLAYER) break;
                 Reflection(hitNormal, true);
                 state = BallState.THROWED_ENEMY;
                 sePlayManager.SESeting(SE[0]);
