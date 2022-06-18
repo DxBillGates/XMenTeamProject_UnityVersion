@@ -140,6 +140,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f7b30dd3b8bf344586e702d07dfa9bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SEPlayManager: {fileID: 5001082493362104408, guid: 7587479cdba26374c8d3aa484afe3cd0, type: 3}
+  SE:
+  - {fileID: 8300000, guid: 45bdfac5f1e4ae14fba0862eaea30f42, type: 3}
   throwPower: 0.5
   attenuationPower: 0.001
   maxSpeed: 1

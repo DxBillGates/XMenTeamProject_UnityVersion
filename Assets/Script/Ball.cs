@@ -13,6 +13,12 @@ public enum BallState
 
 public class Ball : MonoBehaviour
 {
+    //SE鳴らすマネージャーオブジェクト
+    [SerializeField] private GameObject SEPlayManager;
+
+    //SEリソース達
+    [SerializeField] private List<AudioClip> SE;
+
     // ボールを投げる際の強さ
     [SerializeField] private float throwPower;
     // 減衰力
@@ -24,6 +30,9 @@ public class Ball : MonoBehaviour
     [SerializeField] private List<Material> stateMaterials;
 
     private MeshRenderer meshRenderer;
+
+    //GetConponent用
+    private SEPlayManager sePlayManager;
 
     private Vector3 velocity;
     private bool isThrow;
@@ -43,6 +52,8 @@ public class Ball : MonoBehaviour
 
         isHitWall = false;
         isInDome = false;
+
+        sePlayManager = SEPlayManager.GetComponent<SEPlayManager>();
     }
 
     private void FixedUpdate()
@@ -62,6 +73,8 @@ public class Ball : MonoBehaviour
     {
         Vector3 hitNormal = other.gameObject.transform.forward;
 
+
+
         switch (other.gameObject.tag)
         {
             case "Player":
@@ -78,12 +91,15 @@ public class Ball : MonoBehaviour
 
                 hitNormal = (other.gameObject.transform.position - transform.position).normalized;
                 Reflection(hitNormal, true);
-
                 state = BallState.THROWED_ENEMY;
+
+                sePlayManager.SESeting(SE[0]);
+
                 break;
             case "Wall":
                 isHitWall = true;
                 Reflection(hitNormal);
+                sePlayManager.SESeting(SE[0]);
                 break;
             case "Barrier":
                 Reflection(hitNormal, true);
@@ -113,7 +129,7 @@ public class Ball : MonoBehaviour
 
         // ドーム内に一度でも入っているなら速度ベクトルを足したときに外に出ないように調整
         if (isInDome == false) return;
-        if(Vector3.Distance(transform.position,UltimateSkillManager.GetInstance().usedPosition) > UltimateSkillManager.GetInstance().usedSize - transform.localScale.x)
+        if (Vector3.Distance(transform.position, UltimateSkillManager.GetInstance().usedPosition) > UltimateSkillManager.GetInstance().usedSize - transform.localScale.x)
         {
             transform.position -= velocity * GameTimeManager.GetInstance().GetTime();
         }
@@ -163,14 +179,14 @@ public class Ball : MonoBehaviour
             {
                 transform.position = setPos;
             }
-            else 
+            else
             {
                 isInDome = true;
             }
         }
         else if (flagActiveType == FlagActiveType.ACTIVE)
         {
-            if(isHitWall == true)
+            if (isHitWall == true)
             {
                 isHitWall = false;
                 return;
