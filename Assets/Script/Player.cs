@@ -11,6 +11,9 @@ public class Player : MonoBehaviour
     [SerializeField] private float maxHp;
     [SerializeField] private GameObject hpGaugeUIObject;
     [SerializeField] GameObject nextSceneGameOver;
+    [SerializeField] GameObject SEPlayManager;
+    [SerializeField] List<AudioClip> SE;
+
 
     private float hp;
 
@@ -36,6 +39,9 @@ public class Player : MonoBehaviour
 
     [SerializeField] private float hitEnemyDamage;
 
+    //SEのGetComponent用
+    private SEPlayManager sePlayManagerComponent;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -58,6 +64,8 @@ public class Player : MonoBehaviour
 
         animator = GetComponent<Animator>();
         triggerSkillPosition = new Vector3();
+
+        sePlayManagerComponent = SEPlayManager.GetComponent<SEPlayManager>();
     }
 
     // Update is called once per frame
@@ -254,7 +262,7 @@ public class Player : MonoBehaviour
     private void Damage(float value)
     {
         hp -= value;
-
+        sePlayManagerComponent.SESeting(SE[0]);
         if (hp < 0) {
             hp = 0;
             //ゲームオーバーシーンへ

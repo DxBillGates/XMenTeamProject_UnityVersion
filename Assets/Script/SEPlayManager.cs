@@ -16,12 +16,12 @@ public class SEPlayManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
+
     }
 
-    public void SESeting(AudioClip SE)
+    public void SESeting(AudioClip SE, float volume = 1)
     {
         GameObject sePlayer = Instantiate(SEPlayer);
-        sePlayer.GetComponent<SEPlayer>().PlaySE(SE);
+        sePlayer.GetComponent<SEPlayer>().PlaySE(SE, volume);
     }
 }
