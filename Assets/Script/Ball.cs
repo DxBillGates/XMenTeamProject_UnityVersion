@@ -75,7 +75,7 @@ public class Ball : MonoBehaviour
     {
         Vector3 hitNormal = other.gameObject.transform.forward;
 
-        const float audioVolume=0.5f;
+        const float audioVolume = 0.5f;
 
         switch (other.gameObject.tag)
         {
@@ -126,6 +126,7 @@ public class Ball : MonoBehaviour
     // ボールの移動処理
     private void Move()
     {
+
         velocity -= velocity.normalized * attenuationPower;
 
         const float MIN_VELOCITY = 0.01f;
@@ -142,6 +143,10 @@ public class Ball : MonoBehaviour
         {
             transform.position -= resultVelocity * GameTimeManager.GetInstance().GetTime();
         }
+
+        Vector3 pos = transform.position;
+        pos.y = 0;
+        transform.position = pos;
     }
 
     // 反射ベクトルを生成
