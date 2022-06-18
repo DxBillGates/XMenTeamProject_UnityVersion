@@ -10,10 +10,6 @@ public class FollowEnemy : Enemy
     {
         targetObject = GameObject.FindGameObjectWithTag("Player");
 
-        // ”O‚Ì‚½‚ßƒ^ƒO•t‚¯
-        transform.tag = "Enemy";
-
-
         GameObject SEPlayManager = GameObject.FindGameObjectWithTag("SEPlayManager");
         sePlayManagerComponent = SEPlayManager.GetComponent<SEPlayManager>();
     }

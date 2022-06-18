@@ -10,10 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 2121104212441638061}
   - component: {fileID: 7087433514508457317}
+  - component: {fileID: 3570265353194182555}
   - component: {fileID: 7610633346716219750}
   m_Layer: 0
   m_Name: FollowEnemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -50,6 +51,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &3570265353194182555
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1571662748511080394}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1.5, z: 0.85}
+  m_Center: {x: 0, y: 0.8, z: -0.06}
 --- !u!114 &7610633346716219750
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -125,7 +139,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 74fb551414d5dc54382920c9a3911d59, type: 3}
       propertyPath: m_TagString
-      value: Enemy
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 74fb551414d5dc54382920c9a3911d59, type: 3}
@@ -134,19 +148,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 74fb551414d5dc54382920c9a3911d59, type: 3}
   m_PrefabInstance: {fileID: 6377750239660038466}
   m_PrefabAsset: {fileID: 0}
---- !u!65 &315193984362787857
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6071762541809525779}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 2, z: 0.85}
-  m_Center: {x: 0, y: 1, z: -0.06}
 --- !u!95 &6255901693628692275
 Animator:
   serializedVersion: 4

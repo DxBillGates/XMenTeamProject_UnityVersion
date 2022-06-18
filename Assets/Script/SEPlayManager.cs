@@ -19,7 +19,7 @@ public class SEPlayManager : MonoBehaviour
 
     }
 
-    public void SESeting(AudioClip SE, float volume = 1)
+    public void SESeting(AudioClip SE, float volume = 1.0f)
     {
         GameObject sePlayer = Instantiate(SEPlayer);
         sePlayer.GetComponent<SEPlayer>().PlaySE(SE, volume);

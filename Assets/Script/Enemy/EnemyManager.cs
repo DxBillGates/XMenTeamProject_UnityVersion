@@ -22,6 +22,7 @@ public class EnemyManager : MonoBehaviour
 
     private static int aliveCount = 0;
 
+    private GameObject[] Enemys;
 
     // Start is called before the first frame update
     void Start()
@@ -42,12 +43,12 @@ public class EnemyManager : MonoBehaviour
                 // 出現禁止範囲内なら位置を変更
                 if (Vector3.Distance(player.transform.position, spawnPos) <= Cant_Spawn_Distance)
                 {
-                    spawnPos = 
+                    spawnPos =
                         new Vector3(Random.Range(-1 * Spawn_Range, Spawn_Range), 0, Random.Range(-1 * Spawn_Range, Spawn_Range));
 
                 }
                 else break;
-                
+
             }
 
             Instantiate(BarrierEnemy, spawnPos, Quaternion.identity);
@@ -57,8 +58,8 @@ public class EnemyManager : MonoBehaviour
         //追っかけエネミー生成
         for (int i = 0; i < MaxFollowEnemyNum; ++i)
         {
-            Vector3 spawnPos = 
-                new Vector3(Random.Range(-1 * Spawn_Range, Spawn_Range),0, Random.Range(-1 * Spawn_Range, Spawn_Range));
+            Vector3 spawnPos =
+                new Vector3(Random.Range(-1 * Spawn_Range, Spawn_Range), 0, Random.Range(-1 * Spawn_Range, Spawn_Range));
 
             while (true)
             {
@@ -86,8 +87,9 @@ public class EnemyManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Enemys = GameObject.FindGameObjectsWithTag("Enemy");
         //敵が全滅したらクリアシーンへ
-        if (aliveCount <= 0)
+        if (Enemys.Length <= 0)
         {
             nextSceneGameClear.SetActive(true);
         }

@@ -94,13 +94,13 @@ public class Player : MonoBehaviour
 
 
         var ultManager = UltimateSkillManager.GetInstance();
-        if(ultManager.IsUse() && ballComponent.state == BallState.HOLD_PLAYER)
+        if (ultManager.IsUse() && ballComponent.state == BallState.HOLD_PLAYER)
         {
             Vector2 randomVector = new Vector3();
 
             const int MAX_INDEX = 60;
             int index = 0;
-            while(true)
+            while (true)
             {
                 if (randomVector.magnitude != 0) break;
                 if (index >= MAX_INDEX) break;
@@ -233,12 +233,15 @@ public class Player : MonoBehaviour
     {
         if (Input.GetButtonDown("UltimateSkill") == false) return;
 
-        sePlayManagerComponent.SESeting(SE[1]);
         const float DIVIDE = 3;
         Vector3 upVector = new Vector3(0, transform.localScale.y / DIVIDE, 0);
         bool isUseSkill = UltimateSkillManager.GetInstance().Use(transform.position, currentDirection + upVector, transform);
 
-        if (isUseSkill) triggerSkillPosition = transform.position;
+        if (isUseSkill)
+        {
+            triggerSkillPosition = transform.position;
+            sePlayManagerComponent.SESeting(SE[1]);
+        }
     }
 
     private void UpdateAbilityCooldown()
@@ -285,7 +288,7 @@ public class Player : MonoBehaviour
     private void Damage(float value)
     {
         hp -= value;
-        sePlayManagerComponent.SESeting(SE[0]);
+        sePlayManagerComponent.SESeting(SE[0], 0.5f);
         if (hp < 0)
         {
             hp = 0;

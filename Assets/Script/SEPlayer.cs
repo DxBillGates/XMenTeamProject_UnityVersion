@@ -20,7 +20,7 @@ public class SEPlayer : MonoBehaviour
         }
     }
 
-    public void PlaySE(AudioClip SE, float volume = 1)
+    public void PlaySE(AudioClip SE, float volume)
     {
         audioSource = GetComponent<AudioSource>();
         audioSource.volume = volume;

@@ -31,9 +31,6 @@ public class BarrierEnemy : Enemy
 
         Array.Resize(ref ballDir, change_pose_frame);
 
-        // ”O‚Ì‚½‚ßƒ^ƒO•t‚¯
-        transform.tag = "Enemy";
-
         GameObject SEPlayManager = GameObject.FindGameObjectWithTag("SEPlayManager");
 
         sePlayManagerComponent = SEPlayManager.GetComponent<SEPlayManager>();

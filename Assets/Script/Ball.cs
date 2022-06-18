@@ -75,7 +75,7 @@ public class Ball : MonoBehaviour
     {
         Vector3 hitNormal = other.gameObject.transform.forward;
 
-
+        const float audioVolume=0.5f;
 
         switch (other.gameObject.tag)
         {
@@ -98,18 +98,18 @@ public class Ball : MonoBehaviour
             case "Wall":
                 isHitWall = true;
                 Reflection(hitNormal);
-                sePlayManager.SESeting(SE[0]);
+                sePlayManager.SESeting(SE[0], audioVolume);
                 break;
             case "Barrier":
                 Reflection(hitNormal, true);
                 state = BallState.THROWED_PLAYER;
-                sePlayManager.SESeting(SE[0]);
+                sePlayManager.SESeting(SE[0], audioVolume);
                 break;
             case "EnemyBarrier":
                 if (state == BallState.HOLD_PLAYER) break;
                 Reflection(hitNormal, true);
                 state = BallState.THROWED_ENEMY;
-                sePlayManager.SESeting(SE[0]);
+                sePlayManager.SESeting(SE[0], audioVolume);
                 break;
         }
     }
