@@ -85,8 +85,9 @@ public class Enemy : MonoBehaviour
     /// 何かに当たったときのノックバック処理
     /// </summary>
     /// <param name="">当たった敵の位置</param>
-    protected void KnockBack(Vector3 hitPos, Collider collision)
+    public void KnockBack(Collider collision)
     {
+        Vector3 hitPos = collision.gameObject.transform.position;
         // ノックバックする位置を決める
         Vector3 moveVector = -1 * (hitPos - transform.position);
         // 正規化させる
@@ -115,5 +116,19 @@ public class Enemy : MonoBehaviour
                 UltimateSkillManager.GetInstance().AddGauge(ADD_GAUGE_VALUE);
             }
         }
+    }
+
+    public void WallCollsion(Transform wallTransform)
+    {
+        // ヒットした障害物のヒットした法線方向に押し出したいからその法線を取得
+        Vector3 hitNormal = wallTransform.forward;
+
+        // 座標を位置フレーム前に戻す
+        const float PUSH_VALUE = 3.0f;
+        transform.position -= movedVector * PUSH_VALUE;
+
+        // 壁ずりベクトルを計算
+        Vector3 moveVector = movedVector - Vector3.Dot(movedVector, hitNormal) * hitNormal;
+        transform.position += moveVector;
     }
 }

@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 1452703305129656441}
   - component: {fileID: 1452703305129656440}
   - component: {fileID: 1452703305129656447}
-  - component: {fileID: 2765988157295787945}
   m_Layer: 0
   m_Name: BarrierEnemy
   m_TagString: Untagged
@@ -71,22 +70,6 @@ MonoBehaviour:
   playerToDistance: 20
   change_pose_frame: 120
   barrier: {fileID: 3447620141785347147}
---- !u!114 &2765988157295787945
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1452703305129656446}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9797505d4319752468d177da7e76401d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  knock_back_speed: 0.5
-  moveSpeed: 2
-  hp: 10
-  dontHitDistance: 3
 --- !u!1001 &1452703305243780230
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -203,10 +186,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9797505d4319752468d177da7e76401d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  knock_back_speed: 0.5
-  moveSpeed: 2
-  hp: 10
-  dontHitDistance: 3
 --- !u!1001 &2529054389295237402
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -280,7 +259,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: a853a2b11a1bed74aa6b4979b397bd74, type: 3}
       propertyPath: m_TagString
-      value: Barrier
+      value: EnemyBarrier
       objectReference: {fileID: 0}
     - target: {fileID: 1905440346368130327, guid: a853a2b11a1bed74aa6b4979b397bd74, type: 3}
       propertyPath: m_Materials.Array.data[0]

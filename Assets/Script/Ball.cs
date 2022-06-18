@@ -105,6 +105,11 @@ public class Ball : MonoBehaviour
                 Reflection(hitNormal, true);
                 state = BallState.THROWED_PLAYER;
                 break;
+            case "EnemyBarrier":
+                Reflection(hitNormal, true);
+                state = BallState.THROWED_ENEMY;
+                sePlayManager.SESeting(SE[0]);
+                break;
         }
     }
 

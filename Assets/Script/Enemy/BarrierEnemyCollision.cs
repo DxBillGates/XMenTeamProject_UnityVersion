@@ -2,40 +2,37 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BarrierEnemyCollision : Enemy
+public class BarrierEnemyCollision : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     private void OnTriggerStay(Collider collision)
     {
+        //親オブジェクト取得
+        GameObject enemyParent = transform.root.gameObject;
+        BarrierEnemy barrierEnemy = enemyParent.GetComponent<BarrierEnemy>();
+
         // ボールに当たったときの処理
         if (collision.gameObject.tag == "Ball")
         {
-            KnockBack(collision.gameObject.transform.position, collision);
+            //親で判定
+            barrierEnemy.KnockBack(collision);
         }
 
-        if(collision.gameObject.tag == "Wall")
+        if (collision.gameObject.tag == "Wall")
         {
-            // ヒットした障害物のヒットした法線方向に押し出したいからその法線を取得
-            Vector3 hitNormal = collision.transform.forward;
-
-            // 座標を位置フレーム前に戻す
-            const float PUSH_VALUE = 3.0f;
-            transform.position -= movedVector * PUSH_VALUE;
-
-            // 壁ずりベクトルを計算
-            Vector3 moveVector = movedVector - Vector3.Dot(movedVector, hitNormal) * hitNormal;
-            transform.position += moveVector;
+            //親で親のトランスフォーム修正
+            barrierEnemy.WallCollsion(collision.transform);
         }
     }
 }

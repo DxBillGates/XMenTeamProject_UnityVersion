@@ -36,7 +36,7 @@ public class FollowEnemy : Enemy
         // ƒ{[ƒ‹‚É“–‚½‚Á‚½‚Æ‚«‚Ìˆ—
         if (collision.gameObject.tag == "Ball")
         {
-            KnockBack(collision.gameObject.transform.position,collision);
+            KnockBack(collision);
         }
         else if(collision.gameObject.tag == "Wall")
         {
