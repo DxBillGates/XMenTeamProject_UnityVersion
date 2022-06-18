@@ -20,6 +20,17 @@ public class UltimateSkillManager : SingletonComponent<UltimateSkillManager>
     public float usedSize { get; private set; }
     //ポストエフェクト調整用
     [SerializeField] GameObject postEffectManager;
+
+
+    //SE鳴らすマネージャーオブジェクト
+    [SerializeField] private GameObject SEPlayManager;
+
+    //SEリソース達
+    [SerializeField] private List<AudioClip> SE;
+
+    //SEGetConponent用
+    private SEPlayManager sePlayManager;
+
     DomeEffectControl domeEffectControl;
     // Start is called before the first frame update
     void Start()
@@ -33,6 +44,7 @@ public class UltimateSkillManager : SingletonComponent<UltimateSkillManager>
         //
         domeEffectControl = postEffectManager.GetComponent<DomeEffectControl>();
 
+        sePlayManager = SEPlayManager.GetComponent<SEPlayManager>();
     }
 
     // Update is called once per frame
@@ -75,6 +87,9 @@ public class UltimateSkillManager : SingletonComponent<UltimateSkillManager>
         // �K�E�Z���x����0�ȉ��̏ꍇ�͔��������Ȃ�
         if (ultimateSkill.GetCurrentLevel() <= 0) return false;
         if (isUse == true) return false;
+
+        //最初のSE鳴らす
+        sePlayManager.SESeting(SE[0]);
 
         //�u���[����Intencity��20�ɂ���
         domeEffectControl.SetBloom(20f);
