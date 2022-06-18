@@ -155,7 +155,7 @@ public class Title : MonoBehaviour
         }
 
         //Spaceキーで開始
-        if (timer >= 2.5f && Input.GetKey(KeyCode.Space))
+        if (timer >= 2.5f && Input.GetButtonDown("PlayerAbility"))
         {
             sceneChange.SetActive(true);
         }
