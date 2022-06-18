@@ -92,6 +92,7 @@ public class BarrierEnemy : Enemy
 
         Vector3 resultMoveVector = (moveVector + leaveV) * moveSpeed;
         resultMoveVector.y = 0;
+        resultMoveVector *= GameTimeManager.GetInstance().GetTime();
 
         // Ý’è‚µ‚½‹——£‚æ‚è‰“‚¯‚ê‚Î‹ß‚Ã‚­ ‹ß‚¯‚ê‚Î—£‚ê‚é
         if (distance > playerToDistance)

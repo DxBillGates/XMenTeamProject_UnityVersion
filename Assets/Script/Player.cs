@@ -92,6 +92,28 @@ public class Player : MonoBehaviour
         UpdateAnimator(isMove);
         UpdateUsingSkillPosition();
 
+
+        var ultManager = UltimateSkillManager.GetInstance();
+        if(ultManager.IsUse() && ballComponent.state == BallState.HOLD_PLAYER)
+        {
+            Vector2 randomVector = new Vector3();
+
+            const int MAX_INDEX = 60;
+            int index = 0;
+            while(true)
+            {
+                if (randomVector.magnitude != 0) break;
+                if (index >= MAX_INDEX) break;
+
+                randomVector.x = Random.Range(-1, 1);
+                randomVector.y = Random.Range(-1, 1);
+                randomVector = randomVector.normalized;
+
+                ++index;
+            }
+            ballComponent.Throw(new Vector3(randomVector.x, 0, randomVector.y), BallState.THROWED_PLAYER);
+        }
+
         lineDrawer.isDraw = ballComponent.state == BallState.HOLD_PLAYER;
         lineDrawer.drawOriginPosition = transform.position;
         lineDrawer.drawDirection = currentDirection;
