@@ -27,6 +27,8 @@ public class Ball : MonoBehaviour
     [SerializeField] private float maxSpeed;
     // 反射時の加速度
     [SerializeField] private float accelerateValue;
+    // ドームにあたった際の加速度
+    [SerializeField] private float domeHitAccelerateValue;
     [SerializeField] private List<Material> stateMaterials;
 
     private MeshRenderer meshRenderer;
@@ -128,13 +130,16 @@ public class Ball : MonoBehaviour
         const float MIN_VELOCITY = 0.01f;
         if (velocity.magnitude < MIN_VELOCITY) InitializeState(BallState.FREE);
 
-        transform.position += velocity * GameTimeManager.GetInstance().GetTime();
+        Vector3 resultVelocity = velocity * GameTimeManager.GetInstance().GetTime();
+        resultVelocity.y = 0;
+
+        transform.position += resultVelocity * GameTimeManager.GetInstance().GetTime();
 
         // ドーム内に一度でも入っているなら速度ベクトルを足したときに外に出ないように調整
         if (isInDome == false) return;
         if (Vector3.Distance(transform.position, UltimateSkillManager.GetInstance().usedPosition) > UltimateSkillManager.GetInstance().usedSize - transform.localScale.x)
         {
-            transform.position -= velocity * GameTimeManager.GetInstance().GetTime();
+            transform.position -= resultVelocity * GameTimeManager.GetInstance().GetTime();
         }
     }
 
@@ -144,7 +149,8 @@ public class Ball : MonoBehaviour
         Vector3 reflectVector = velocity - 2.0f * Vector3.Dot(velocity, normal) * normal;
         velocity = reflectVector;
 
-        velocity = addSpeed ? reflectVector * accelerateValue : reflectVector;
+        float acc = UltimateSkillManager.GetInstance().IsUse() ? domeHitAccelerateValue : accelerateValue;
+        velocity = addSpeed ? reflectVector * acc : reflectVector;
 
         if (velocity.magnitude > maxSpeed) velocity = velocity.normalized * maxSpeed;
     }
@@ -189,6 +195,7 @@ public class Ball : MonoBehaviour
         }
         else if (flagActiveType == FlagActiveType.ACTIVE)
         {
+
             if (isHitWall == true)
             {
                 isHitWall = false;

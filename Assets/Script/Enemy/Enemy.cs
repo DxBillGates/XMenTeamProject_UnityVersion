@@ -82,7 +82,7 @@ public class Enemy : MonoBehaviour
         movedVector.y = 0;
 
         // ˆÚ“®Œã‚Ìƒ|ƒWƒVƒ‡ƒ“‚ğ‘æ“ñˆø”‚É
-        transform.position += movedVector;
+        transform.position += movedVector * GameTimeManager.GetInstance().GetTime();
     }
 
 
