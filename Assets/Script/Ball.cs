@@ -27,6 +27,8 @@ public class Ball : MonoBehaviour
     [SerializeField] private float maxSpeed;
     // 反射時の加速度
     [SerializeField] private float accelerateValue;
+    // ドームにあたった際の加速度
+    [SerializeField] private float domeHitAccelerateValue;
     [SerializeField] private List<Material> stateMaterials;
 
     private MeshRenderer meshRenderer;
@@ -144,7 +146,8 @@ public class Ball : MonoBehaviour
         Vector3 reflectVector = velocity - 2.0f * Vector3.Dot(velocity, normal) * normal;
         velocity = reflectVector;
 
-        velocity = addSpeed ? reflectVector * accelerateValue : reflectVector;
+        float acc = UltimateSkillManager.GetInstance().IsUse() ? domeHitAccelerateValue : accelerateValue;
+        velocity = addSpeed ? reflectVector * acc : reflectVector;
 
         if (velocity.magnitude > maxSpeed) velocity = velocity.normalized * maxSpeed;
     }
