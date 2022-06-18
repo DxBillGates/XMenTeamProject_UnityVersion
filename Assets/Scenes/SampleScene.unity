@@ -2751,9 +2751,9 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 0}
-    m_HighlightedColor: {r: 0.9622642, g: 0.32226774, b: 0.32226774, a: 1}
-    m_PressedColor: {r: 0.6981132, g: 0, b: 0, a: 1}
-    m_SelectedColor: {r: 0.8867924, g: 0.3973834, b: 0.3973834, a: 1}
+    m_HighlightedColor: {r: 0.9622642, g: 0.32226774, b: 0.32226774, a: 0}
+    m_PressedColor: {r: 0.6981132, g: 0, b: 0, a: 0}
+    m_SelectedColor: {r: 0.8867924, g: 0.3973834, b: 0.3973834, a: 0}
     m_DisabledColor: {r: 0.8490566, g: 0.4285333, b: 0.4285333, a: 0}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -3047,7 +3047,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1439989470772683766, guid: 90b409cbf370a8641a6aa58ce6fdac3c, type: 3}
       propertyPath: maxHp
-      value: 50
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 1439989470772683766, guid: 90b409cbf370a8641a6aa58ce6fdac3c, type: 3}
       propertyPath: movePower
