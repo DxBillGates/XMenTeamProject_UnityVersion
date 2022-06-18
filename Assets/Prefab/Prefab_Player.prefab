@@ -193,8 +193,8 @@ Transform:
   m_GameObject: {fileID: 2250312288394085556}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -10}
-  m_LocalScale: {x: 3, y: 3, z: 3}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 4, y: 4, z: 4}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4584989933033223973}
   - {fileID: 2479507580897882035}
@@ -284,6 +284,8 @@ MonoBehaviour:
   maxHp: 100
   hpGaugeUIObject: {fileID: 0}
   nextSceneGameOver: {fileID: 0}
+  SEPlayManager: {fileID: 0}
+  SE: []
   hitEnemyDamage: 5
 --- !u!114 &1439989470772683769
 MonoBehaviour:

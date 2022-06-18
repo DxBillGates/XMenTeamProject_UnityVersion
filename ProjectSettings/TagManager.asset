@@ -9,6 +9,7 @@ TagManager:
   - Wall
   - Barrier
   - EnemyBarrier
+  - SEPlayManager
   layers:
   - Default
   - TransparentFX
