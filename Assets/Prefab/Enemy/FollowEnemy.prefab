@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 1571662748511080394}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 10, y: 10, z: 10}
+  m_LocalScale: {x: 5.5, y: 5.5, z: 5.5}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 6847982100283670185}
@@ -63,7 +63,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   knock_back_speed: 0.2
-  moveSpeed: 0.1
+  moveSpeed: 0.2
   hp: 10
   dontHitDistance: 10
 --- !u!1001 &6377750239660038466
