@@ -83,6 +83,13 @@ public class Enemy : MonoBehaviour
 
         // 移動後のポジションを第二引数に
         transform.position += movedVector * GameTimeManager.GetInstance().GetTime();
+
+        // 移動時 向き変更
+        // プレイヤーの方向ベクトルを取得し、それを使い回転させる
+        Vector3 playerV = targetObject.transform.position - transform.position;
+        playerV.y = 0;
+
+        if (playerV != Vector3.zero) transform.rotation = Quaternion.LookRotation(playerV);
     }
 
 

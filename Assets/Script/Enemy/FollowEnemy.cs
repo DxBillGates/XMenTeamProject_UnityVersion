@@ -19,7 +19,7 @@ public class FollowEnemy : Enemy
     {
         PlayerFollow();
 
-        ChangePose();
+        //ChangePose();
     }
 
     private void ChangePose()

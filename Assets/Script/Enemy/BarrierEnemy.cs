@@ -44,7 +44,6 @@ public class BarrierEnemy : Enemy
         // バリアが死んでいるのか確認
         if (!barrierDestroy) CheckBarrierDown();
 
-        ChangePose();
 
         if (!barrierDestroy)
         {
@@ -104,7 +103,7 @@ public class BarrierEnemy : Enemy
             movedVector = -((moveVector + leaveV) * moveSpeed);
         }
 
-
+        ChangePose();
     }
 
     private void ChangePose()
