@@ -12,18 +12,20 @@ public class FlashingMaterial
 
     // 点滅間隔フラグ
     [SerializeField] private FlagController flashingSpanFlagController;
-    // 点滅時間フラグ
-    [SerializeField] private FlagController flashingFlagController;
+    //// 点滅時間フラグ
+    //[SerializeField] private FlagController flashingFlagController;
+    private FlagController externalFlagController;
 
     // 参照するマテリアル
     private Material refMaterial;
     private List<Color> setColors;
     private bool changeFlag;
+    private bool isInitialized;
 
     public void Initialize()
     {
         flashingSpanFlagController.Initialize();
-        flashingFlagController.Initialize();
+        //flashingFlagController.Initialize();
 
         if (setColors == null)
         {
@@ -33,20 +35,33 @@ public class FlashingMaterial
         }
 
         changeFlag = false;
+        isInitialized = true;
     }
 
     public void Update(float deltaTime)
     {
         if (refMaterial == null) return;
+        if (externalFlagController == null) return;
 
-        if (flashingFlagController.IsEndTrigger() == true)
+        //if (flashingFlagController.IsEndTrigger() == true)
+        //{
+        //    RestoreMaterialColor();
+        //    Initialize();
+        //    return;
+        //}
+
+        //if (flashingFlagController.flag == false) return;
+
+        if (externalFlagController.IsEndTrigger() == true)
         {
             RestoreMaterialColor();
             Initialize();
+            externalFlagController.Initialize();
             return;
         }
 
-        if (flashingFlagController.flag == false) return;
+        if (externalFlagController.flag == false) return;
+
 
         // 点滅のフラグを管理しているフラグコントローラーが
         if (flashingSpanFlagController.flag == false) flashingSpanFlagController.flag = true;
@@ -65,12 +80,15 @@ public class FlashingMaterial
 
         // 点滅フラグ管理の更新
         flashingSpanFlagController.Update(deltaTime);
-        // フラグ全体管理の更新
-        flashingFlagController.Update(deltaTime);
+
+        //// フラグ全体管理の更新
+        //flashingFlagController.Update(deltaTime);
     }
 
     public void SetMaterial(Material material)
     {
+        if (isInitialized == false) Debug.LogError("初期化処理が行われていません");
+
         refMaterial = material;
         originalColor = material.color;
 
@@ -78,17 +96,20 @@ public class FlashingMaterial
     }
 
     // 点滅管理フラグをオンにする
-    public void Flash()
+    public void Flash(FlagController flagController)
     {
-        flashingFlagController.Initialize();
         flashingSpanFlagController.Initialize();
-
-        flashingFlagController.flag = true;
     }
 
-    public void RestoreMaterialColor()
+    // マテリアルの色を戻す
+    private void RestoreMaterialColor()
     {
         if (refMaterial == null) return;
         refMaterial.color = originalColor;
+    }
+
+    public void SetExternalFlagController(FlagController flagController)
+    {
+        externalFlagController = flagController;
     }
 }
