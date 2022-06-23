@@ -46,6 +46,11 @@ public class UltimateSkillManager : SingletonComponent<UltimateSkillManager>
 
         ultimateSkill.Update();
 
+        if (GetActiveFlagController().activeType == FlagActiveType.PRE)
+        {
+            GameTimeManager.GetInstance().SetTime(0.05f);
+        }
+
         if (isUse == false) return;
 
         // �X�L�������O�̃t���O�X�V����

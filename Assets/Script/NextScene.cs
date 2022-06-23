@@ -62,6 +62,11 @@ public class NextScene : MonoBehaviour
         {
             SceneManager.LoadScene(nextSceneName);
         }
+        else
+        {
+            //ƒQ[ƒ€“àŠÔ‚ğ~‚ß‚é
+            GameTimeManager.GetInstance().SetTime(0);
+        }
     }
 
     float EaseOutExpo(float s, float e, float t)
