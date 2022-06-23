@@ -33,6 +33,7 @@ public class Title : MonoBehaviour
     Vector3 POS_TEXT_MOVE_END { get { return new Vector3(302 + text.sizeDelta.x / 2, Screen.height - 279 - text.sizeDelta.y / 2, 0); } }
     Vector3 POS_PSK_MOVE_START { get { return new Vector3(Screen.width / 2, Screen.height / 2, 0); } }
     Vector3 POS_PSK_MOVE_END { get { return new Vector3(Screen.width / 2, Screen.height / 2 - ADD_Y, 0); } }
+    Vector3 POS_OUT_CANVAS { get { return new Vector3(Screen.width * 2, Screen.height * 2, 0); } }
 
     //タイマー
     float timer = -0.5f;
@@ -57,6 +58,17 @@ public class Title : MonoBehaviour
     {
         //タイマー更新
         timer += Time.deltaTime;
+
+        //タイマーが負の数の時には描画しない
+        if (timer < 0) {
+            ball.transform.position = POS_OUT_CANVAS;
+            line.transform.position = POS_OUT_CANVAS;
+            sonicS.transform.position = POS_OUT_CANVAS;
+            sonicL.transform.position = POS_OUT_CANVAS;
+            text.transform.position = POS_OUT_CANVAS;
+            pressSpaceKey.transform.position = POS_OUT_CANVAS;
+            return; 
+        }
 
         //各種スプライト移動
         //中央へ
