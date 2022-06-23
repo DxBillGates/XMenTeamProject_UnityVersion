@@ -28,6 +28,9 @@ public class Enemy : MonoBehaviour
     //SEのGetComponent用
     protected SEPlayManager sePlayManagerComponent;
 
+    // アニメーションの速度変更用
+    protected Animator animator;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -123,6 +126,9 @@ public class Enemy : MonoBehaviour
             EnemyManager.DecrementAliveCount();
             Destroy(transform.root.gameObject);
             const float ADD_GAUGE_VALUE = 25;
+
+            // 倒したときにヒットストップ
+            GameTimeManager.GetInstance().SetTime(0);
 
             // スキルを発動していないときに敵を倒したならスキルゲージが増える
             if (UltimateSkillManager.GetInstance().IsUse() == false)

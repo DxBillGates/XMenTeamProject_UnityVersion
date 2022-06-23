@@ -34,6 +34,10 @@ public class BarrierEnemy : Enemy
         GameObject SEPlayManager = GameObject.FindGameObjectWithTag("SEPlayManager");
 
         sePlayManagerComponent = SEPlayManager.GetComponent<SEPlayManager>();
+
+        // animetor
+        GameObject temp = transform.root.Find("EnemyModel").gameObject;
+        animator = temp.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -54,6 +58,10 @@ public class BarrierEnemy : Enemy
             PlayerFollow();
 
         }
+
+        // ヒットストップ時にモデルのアニメーションもストップさせる
+        animator.SetFloat("Speed", GameTimeManager.GetInstance().GetTime());
+
     }
 
     //　基本的な行動
