@@ -100,7 +100,7 @@ public class Ball : MonoBehaviour
                 state = BallState.THROWED_ENEMY;
                 break;
             case "Wall":
-                if(isHitDome == true)
+                if (isHitDome == true)
                 {
                     isHitDome = false;
                     break;
@@ -222,7 +222,7 @@ public class Ball : MonoBehaviour
                 isHitWall = false;
                 return;
             }
-            Vector3 hitNormal = transform.position - ultimateSkillManager.usedPosition;
+            Vector3 hitNormal = -(transform.position - ultimateSkillManager.usedPosition);
             float distace = hitNormal.magnitude;
             if (distace > ultimateSkillManager.usedSize - transform.localScale.x)
             {

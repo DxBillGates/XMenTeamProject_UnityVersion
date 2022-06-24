@@ -58,8 +58,8 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
-# レイアウトデータは削除
-*.dwlt
+# delete user setting
+/[Uu]serSettings/
 
 *.orig
 *.bak
