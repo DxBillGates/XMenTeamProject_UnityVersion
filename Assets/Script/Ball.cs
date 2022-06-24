@@ -72,6 +72,8 @@ public class Ball : MonoBehaviour
 
         if (isThrow) Move();
 
+
+        Debug.DrawRay(transform.position, velocity.normalized, Color.yellow,2);
         UpdateDomeDetection();
     }
 
@@ -95,7 +97,7 @@ public class Ball : MonoBehaviour
                 // 投げられた状態でそのボールが動いていれば
                 if (isThrow == false && velocity.magnitude <= 0) break;
 
-                hitNormal = (other.gameObject.transform.position - transform.position).normalized;
+                hitNormal = -(other.gameObject.transform.position - transform.position).normalized;
                 Reflection(hitNormal, true);
                 state = BallState.THROWED_ENEMY;
                 break;
@@ -174,6 +176,9 @@ public class Ball : MonoBehaviour
         velocity = addSpeed ? reflectVector * acc : reflectVector;
 
         if (velocity.magnitude > maxSpeed) velocity = velocity.normalized * maxSpeed;
+
+        Debug.DrawRay(transform.position, normal * 2, Color.red, 10);
+        Debug.DrawRay(transform.position + normal * 2, normal, Color.green, 10); ;
     }
 
     // ボールの状態を初期化
