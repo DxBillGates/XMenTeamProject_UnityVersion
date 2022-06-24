@@ -41,6 +41,7 @@ public class Ball : MonoBehaviour
     public BallState state { get; private set; }
 
     private bool isHitWall;
+    private bool isHitDome;
     private bool isInDome;
 
     // Start is called before the first frame update
@@ -53,6 +54,7 @@ public class Ball : MonoBehaviour
         meshRenderer.material = stateMaterials[(int)state];
 
         isHitWall = false;
+        isHitDome = false;
         isInDome = false;
 
         sePlayManager = SEPlayManager.GetComponent<SEPlayManager>();
@@ -66,6 +68,8 @@ public class Ball : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        isHitDome = false;
+
         if (isThrow) Move();
 
         UpdateDomeDetection();
@@ -96,6 +100,11 @@ public class Ball : MonoBehaviour
                 state = BallState.THROWED_ENEMY;
                 break;
             case "Wall":
+                if(isHitDome == true)
+                {
+                    isHitDome = false;
+                    break;
+                }
                 isHitWall = true;
                 Reflection(hitNormal);
                 sePlayManager.SESeting(SE[0], audioVolume);
@@ -153,6 +162,12 @@ public class Ball : MonoBehaviour
     private void Reflection(Vector3 normal, bool addSpeed = false)
     {
         Vector3 reflectVector = velocity - 2.0f * Vector3.Dot(velocity, normal) * normal;
+
+        // 法線ベクトルとの内積を計算して鈍角なら反射をせずに終了させる
+        float dotReflectAndNormal = Vector3.Dot(reflectVector, normal);
+        float dotReflectAndNormalAngle = 180.0f * dotReflectAndNormal / Mathf.PI;
+        if (Mathf.Abs(dotReflectAndNormalAngle) > 180) return;
+
         velocity = reflectVector;
 
         float acc = UltimateSkillManager.GetInstance().IsUse() ? domeHitAccelerateValue : accelerateValue;
@@ -212,6 +227,7 @@ public class Ball : MonoBehaviour
             if (distace > ultimateSkillManager.usedSize - transform.localScale.x)
             {
                 Reflection(hitNormal.normalized, true);
+                isHitDome = true;
             }
         }
     }
