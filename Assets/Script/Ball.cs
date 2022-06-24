@@ -72,8 +72,6 @@ public class Ball : MonoBehaviour
 
         if (isThrow) Move();
 
-
-        Debug.DrawRay(transform.position, velocity.normalized, Color.yellow,2);
         UpdateDomeDetection();
     }
 
@@ -163,6 +161,7 @@ public class Ball : MonoBehaviour
     // 反射ベクトルを生成
     private void Reflection(Vector3 normal, bool addSpeed = false)
     {
+        Vector3 backupVelocity = velocity;
         Vector3 reflectVector = velocity - 2.0f * Vector3.Dot(velocity, normal) * normal;
 
         // 法線ベクトルとの内積を計算して鈍角なら反射をせずに終了させる
@@ -177,8 +176,15 @@ public class Ball : MonoBehaviour
 
         if (velocity.magnitude > maxSpeed) velocity = velocity.normalized * maxSpeed;
 
+        // 法線を表示
         Debug.DrawRay(transform.position, normal * 2, Color.red, 10);
-        Debug.DrawRay(transform.position + normal * 2, normal, Color.green, 10); ;
+        Debug.DrawRay(transform.position + normal * 2, normal, Color.green, 10);
+
+        // 反射ベクトルを表示
+        Debug.DrawRay(transform.position, velocity.normalized, Color.yellow,10);
+
+        // 反射前ベクトルを表示
+        Debug.DrawRay(transform.position, backupVelocity.normalized, Color.white,10);
     }
 
     // ボールの状態を初期化
@@ -229,8 +235,11 @@ public class Ball : MonoBehaviour
             }
             Vector3 hitNormal = -(transform.position - ultimateSkillManager.usedPosition);
             float distace = hitNormal.magnitude;
+            float distanceSubject = distace - ultimateSkillManager.usedSize - transform.localScale.x;
+
             if (distace > ultimateSkillManager.usedSize - transform.localScale.x)
             {
+                transform.position -= velocity.normalized * Mathf.Abs(distanceSubject);
                 Reflection(hitNormal.normalized, true);
                 isHitDome = true;
             }
