@@ -59,7 +59,7 @@ sysinfo.txt
 crashlytics-build.properties
 
 # delete user setting
-/[Uu]serSettings/
+/[Uu]serSetting/
 
 *.orig
 *.bak
