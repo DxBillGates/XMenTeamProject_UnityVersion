@@ -43,6 +43,11 @@ public class Ball : MonoBehaviour
     private bool isHitWall;
     private bool isInDome;
 
+    //軌跡
+    private GameObject trail;
+    private TrailRenderer trailRenderer;
+    private bool trailFlg;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -56,6 +61,11 @@ public class Ball : MonoBehaviour
         isInDome = false;
 
         sePlayManager = SEPlayManager.GetComponent<SEPlayManager>();
+
+        trail = transform.GetChild(0).gameObject;
+        trailRenderer = trail.GetComponent<TrailRenderer>();
+        trailFlg = false;
+        trail.SetActive(trailFlg);
     }
 
     private void FixedUpdate()
@@ -67,7 +77,7 @@ public class Ball : MonoBehaviour
     void Update()
     {
         if (isThrow) Move();
-
+        TrailController();
         UpdateDomeDetection();
     }
 
@@ -113,6 +123,7 @@ public class Ball : MonoBehaviour
                 break;
         }
     }
+
 
     // ゲームオブジェクトをその向きに対する速度を与える
     public void Throw(Vector3 direction, BallState setState)
@@ -172,6 +183,36 @@ public class Ball : MonoBehaviour
     public float GetSpeed()
     {
         return velocity.magnitude;
+    }
+
+    private void TrailController()
+    {
+        switch (state)
+        {
+            case BallState.FREE:
+            case BallState.HOLD_ENEMY:
+            case BallState.HOLD_PLAYER:
+                if (trailFlg)
+                {
+                    trailFlg = false;
+                    trail.SetActive(trailFlg);
+                }
+                break;
+            case BallState.THROWED_ENEMY:
+            case BallState.THROWED_PLAYER:
+                if (!trailFlg)
+                {
+                    trailFlg = true;
+                    trail.SetActive(trailFlg);
+                }
+                trailRenderer.startColor = stateMaterials[(int)state].color;
+                Color color = stateMaterials[(int)state].color;
+                color.a = 0.01f;
+                trailRenderer.endColor = color;
+                
+                break;
+
+        }
     }
 
     // ドームとの当たり判定
