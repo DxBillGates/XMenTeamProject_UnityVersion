@@ -3346,7 +3346,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1439989470772683766, guid: 90b409cbf370a8641a6aa58ce6fdac3c, type: 3}
       propertyPath: movePower
-      value: 0.7
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 1439989470772683766, guid: 90b409cbf370a8641a6aa58ce6fdac3c, type: 3}
       propertyPath: ballObject
@@ -3557,7 +3557,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2683838146694799363, guid: 41336c39d89ec8d4895a261b0d0b0d7c, type: 3}
       propertyPath: attenuationPower
-      value: 0.0016
+      value: 0.0032
       objectReference: {fileID: 0}
     - target: {fileID: 2683838146694799363, guid: 41336c39d89ec8d4895a261b0d0b0d7c, type: 3}
       propertyPath: enemyAccelerateValue
