@@ -34,9 +34,9 @@ public class StageSelectBarrier : MonoBehaviour
             Vector3 after = GetPosFromStageNum(stageNum);
 
             transform.position = new Vector3(
-                Lerp(before.x, after.x, timer / 0.5f),
-                Lerp(before.y, after.y, timer / 0.5f),
-                Lerp(before.z, after.z, timer / 0.5f)
+                EaseOutExpo(before.x, after.x, timer / 0.5f),
+                EaseOutExpo(before.y, after.y, timer / 0.5f),
+                EaseOutExpo(before.z, after.z, timer / 0.5f)
                 );
         }
         //ê√é~éû
@@ -62,12 +62,12 @@ public class StageSelectBarrier : MonoBehaviour
         return result;
     }
 
-    float Lerp(float s, float e, float t)
+    float EaseOutExpo(float s, float e, float t)
     {
         if (t < 0) { t = 0; }
         else if (t > 1) { t = 1; }
 
-        float v = t;
+        float v = t == 1 ? 1 : 1 - Mathf.Pow(2.0f, -10.0f * t);
         float a = e - s;
         v = s + a * v;
 
