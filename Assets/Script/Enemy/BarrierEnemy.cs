@@ -27,12 +27,14 @@ public class BarrierEnemy : Enemy
     // Start is called before the first frame update
     void Start()
     {
+        // プレイヤーの情報を格納
         targetObject = GameObject.FindGameObjectWithTag("Player");
 
+        // ボールの配列用
         Array.Resize(ref ballDir, change_pose_frame);
 
+        // SE用
         GameObject SEPlayManager = GameObject.FindGameObjectWithTag("SEPlayManager");
-
         sePlayManagerComponent = SEPlayManager.GetComponent<SEPlayManager>();
 
         // animetor
@@ -98,17 +100,18 @@ public class BarrierEnemy : Enemy
         resultMoveVector.y = 0;
         resultMoveVector *= GameTimeManager.GetInstance().GetTime();
 
+
         // 設定した距離より遠ければ近づく 近ければ離れる
         if (distance > playerToDistance)
         {
             transform.position += resultMoveVector;
-            movedVector = (moveVector + leaveV) * moveSpeed;
+            movedVector = resultMoveVector;
 
         }
         else if (distance < playerToDistance - 2)
         {
             transform.position -= resultMoveVector;
-            movedVector = -((moveVector + leaveV) * moveSpeed);
+            movedVector = -resultMoveVector;
         }
 
         ChangePose();
