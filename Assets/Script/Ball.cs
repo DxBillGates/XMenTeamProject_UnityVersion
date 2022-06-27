@@ -291,7 +291,7 @@ public class Ball : MonoBehaviour
             if (distace > ultimateSkillManager.usedSize - transform.localScale.x)
             {
                 transform.position -= velocity.normalized * Mathf.Abs(distanceSubject);
-                Reflection(hitNormal.normalized, true);
+                Reflection(hitNormal.normalized,false,true);
                 isHitDome = true;
             }
         }

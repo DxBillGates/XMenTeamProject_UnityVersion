@@ -5,8 +5,8 @@ using UnityEngine;
 // �K�E�Z�̔����Ȃǂ��Ǘ�����N���X
 public class UltimateSkillManager : SingletonComponent<UltimateSkillManager>
 {
-    [SerializeField] private FlagController preActiveFlagController;
-    [SerializeField] private FlagController activeFlagController;
+    private FlagController preActiveFlagController;
+    private FlagController activeFlagController;
     [SerializeField] private FlagController endActiveFlagController;
     [SerializeField] private UltimateSkill ultimateSkill;
 
@@ -25,6 +25,9 @@ public class UltimateSkillManager : SingletonComponent<UltimateSkillManager>
     // Start is called before the first frame update
     void Start()
     {
+        preActiveFlagController = new FlagController();
+        activeFlagController = new FlagController();
+
         preActiveFlagController.activeType = FlagActiveType.PRE;
         activeFlagController.activeType = FlagActiveType.ACTIVE;
         endActiveFlagController.activeType = FlagActiveType.END;
@@ -144,8 +147,8 @@ public class UltimateSkillManager : SingletonComponent<UltimateSkillManager>
         return ultimateSkill.GetCurrentLevel();
     }
 
-    public void AddGauge(float value)
+    public void AddGauge()
     {
-        ultimateSkill.AddValue(value);
+        ultimateSkill.AddValue();
     }
 }
