@@ -47,7 +47,7 @@ SubShader{
         fixed4 frag(v2f i) : COLOR {
             //ディレクションと法線の内積が0に近いほど色がつく
             float val = 1 - abs(dot(i.dir, i.normal)) * _Alpha;
-            //テクスチャと計算結果と_Colorをかけ合わせる
+            //テクスチャと計算結果と_Colorをかける
             return _Color * _Color.a * val * val * tex2D(_MainTex, i.uv);
         }
 
