@@ -124,11 +124,16 @@ public class Ball : MonoBehaviour
                 sePlayManager.SESeting(SE[0], audioVolume);
                 break;
             case "Barrier":
+                // 投げられた状態でそのボールが動いていれば
+                if (isThrow == false && velocity.magnitude <= 0) break;
+
                 Reflection(hitNormal, true);
                 state = BallState.THROWED_PLAYER;
                 sePlayManager.SESeting(SE[0], audioVolume);
                 break;
             case "EnemyBarrier":
+                // 投げられた状態でそのボールが動いていれば
+                if (isThrow == false && velocity.magnitude <= 0) break;
                 if (state == BallState.HOLD_PLAYER) break;
                 Reflection(hitNormal, true);
                 state = BallState.THROWED_ENEMY;
