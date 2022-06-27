@@ -41,6 +41,7 @@ public class Ball : MonoBehaviour
     public BallState state { get; private set; }
 
     private bool isHitWall;
+    private bool isHitDome;
     private bool isInDome;
 
     //軌跡
@@ -58,6 +59,7 @@ public class Ball : MonoBehaviour
         meshRenderer.material = stateMaterials[(int)state];
 
         isHitWall = false;
+        isHitDome = false;
         isInDome = false;
 
         sePlayManager = SEPlayManager.GetComponent<SEPlayManager>();
@@ -76,6 +78,8 @@ public class Ball : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        isHitDome = false;
+
         if (isThrow) Move();
         TrailController();
         UpdateDomeDetection();
@@ -101,11 +105,16 @@ public class Ball : MonoBehaviour
                 // 投げられた状態でそのボールが動いていれば
                 if (isThrow == false && velocity.magnitude <= 0) break;
 
-                hitNormal = (other.gameObject.transform.position - transform.position).normalized;
+                hitNormal = -(other.gameObject.transform.position - transform.position).normalized;
                 Reflection(hitNormal, true);
                 state = BallState.THROWED_ENEMY;
                 break;
             case "Wall":
+                if (isHitDome == true)
+                {
+                    isHitDome = false;
+                    break;
+                }
                 isHitWall = true;
                 Reflection(hitNormal);
                 sePlayManager.SESeting(SE[0], audioVolume);
@@ -163,13 +172,30 @@ public class Ball : MonoBehaviour
     // 反射ベクトルを生成
     private void Reflection(Vector3 normal, bool addSpeed = false)
     {
+        Vector3 backupVelocity = velocity;
         Vector3 reflectVector = velocity - 2.0f * Vector3.Dot(velocity, normal) * normal;
+
+        // 法線ベクトルとの内積を計算して鈍角なら反射をせずに終了させる
+        float dotReflectAndNormal = Vector3.Dot(reflectVector, normal);
+        float dotReflectAndNormalAngle = 180.0f * dotReflectAndNormal / Mathf.PI;
+        if (Mathf.Abs(dotReflectAndNormalAngle) > 180) return;
+
         velocity = reflectVector;
 
         float acc = UltimateSkillManager.GetInstance().IsUse() ? domeHitAccelerateValue : accelerateValue;
         velocity = addSpeed ? reflectVector * acc : reflectVector;
 
         if (velocity.magnitude > maxSpeed) velocity = velocity.normalized * maxSpeed;
+
+        // 法線を表示
+        Debug.DrawRay(transform.position, normal * 2, Color.red, 10);
+        Debug.DrawRay(transform.position + normal * 2, normal, Color.green, 10);
+
+        // 反射ベクトルを表示
+        Debug.DrawRay(transform.position, velocity.normalized, Color.yellow,10);
+
+        // 反射前ベクトルを表示
+        Debug.DrawRay(transform.position, backupVelocity.normalized, Color.white,10);
     }
 
     // ボールの状態を初期化
@@ -248,11 +274,15 @@ public class Ball : MonoBehaviour
                 isHitWall = false;
                 return;
             }
-            Vector3 hitNormal = transform.position - ultimateSkillManager.usedPosition;
+            Vector3 hitNormal = -(transform.position - ultimateSkillManager.usedPosition);
             float distace = hitNormal.magnitude;
+            float distanceSubject = distace - ultimateSkillManager.usedSize - transform.localScale.x;
+
             if (distace > ultimateSkillManager.usedSize - transform.localScale.x)
             {
+                transform.position -= velocity.normalized * Mathf.Abs(distanceSubject);
                 Reflection(hitNormal.normalized, true);
+                isHitDome = true;
             }
         }
     }
