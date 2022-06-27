@@ -489,6 +489,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 663297945}
   m_CullTransparentMesh: 1
+--- !u!1 &676976071 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2250312288394085556, guid: 90b409cbf370a8641a6aa58ce6fdac3c, type: 3}
+  m_PrefabInstance: {fileID: 1439989470459578113}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -3089,6 +3094,14 @@ PrefabInstance:
       propertyPath: throwBallCooldown
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 1439989470772683766, guid: 90b409cbf370a8641a6aa58ce6fdac3c, type: 3}
+      propertyPath: testFlashingMaterial.flashingFlagController.maxActiveTime
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1439989470772683766, guid: 90b409cbf370a8641a6aa58ce6fdac3c, type: 3}
+      propertyPath: testFlashingMaterial.flashingSpanFlagController.maxActiveTime
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 1473072585009618446, guid: 90b409cbf370a8641a6aa58ce6fdac3c, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -3161,6 +3174,32 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6920658735109183329, guid: 90b409cbf370a8641a6aa58ce6fdac3c, type: 3}
   m_PrefabInstance: {fileID: 1439989470459578113}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1439989470459578116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 676976071}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54bdfaf25b9fa524caa90ca1ebfd289f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flagController:
+    maxActiveTime: 1
+    activeTime: 0
+    flag: 0
+    isEnd: 0
+    activeType: 0
+  flashingMaterial:
+    color: {r: 0, g: 0, b: 0, a: 0}
+    flashingSpanFlagController:
+      maxActiveTime: 0.1
+      activeTime: 0
+      flag: 0
+      isEnd: 0
+      activeType: 0
 --- !u!1001 &2683838146376590550
 PrefabInstance:
   m_ObjectHideFlags: 0

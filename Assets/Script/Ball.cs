@@ -94,7 +94,7 @@ public class Ball : MonoBehaviour
         switch (other.gameObject.tag)
         {
             case "Player":
-                // 敵が跳ね返したボールなら加速＆反射
+                // 敵が跳ね返したボールなら反射
                 if (state == BallState.THROWED_ENEMY)
                 {
                     hitNormal = (other.gameObject.transform.position - transform.position).normalized;

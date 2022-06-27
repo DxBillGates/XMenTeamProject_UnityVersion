@@ -42,6 +42,8 @@ public class Player : MonoBehaviour
     //SE‚ÌGetComponent—p
     private SEPlayManager sePlayManagerComponent;
 
+    InvincibleFlag invincibleFlag;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -66,6 +68,8 @@ public class Player : MonoBehaviour
         triggerSkillPosition = new Vector3();
 
         sePlayManagerComponent = SEPlayManager.GetComponent<SEPlayManager>();
+
+        invincibleFlag = GetComponent<InvincibleFlag>();
     }
 
     // Update is called once per frame
@@ -287,8 +291,13 @@ public class Player : MonoBehaviour
 
     private void Damage(float value)
     {
+        if (invincibleFlag.IsInvincible() == true) return;
+
+        invincibleFlag.Invincible();
+
         hp -= value;
         sePlayManagerComponent.SESeting(SE[0], 0.5f);
+
         if (hp < 0)
         {
             hp = 0;
