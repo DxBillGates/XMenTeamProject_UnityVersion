@@ -91,7 +91,7 @@ public class StageSelectManager : SingletonComponent<StageSelectManager>
                 result += staticStageCount;
             }
 
-            return result % staticStageCount;
+            return staticStageCount != 0 ? result % staticStageCount : 0;
         }
         else
         {
