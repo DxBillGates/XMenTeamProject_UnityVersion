@@ -128,7 +128,7 @@ public class Enemy : MonoBehaviour
             const float ADD_GAUGE_VALUE = 25;
 
             // 倒したときにヒットストップ
-            GameTimeManager.GetInstance().SetTime(0);
+            HitStopManager.GetInstance().HitStop();
 
             // スキルを発動していないときに敵を倒したならスキルゲージが増える
             if (UltimateSkillManager.GetInstance().IsUse() == false)
