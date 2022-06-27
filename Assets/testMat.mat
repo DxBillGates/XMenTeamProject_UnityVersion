@@ -71,12 +71,12 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.589
     - _GlossyReflections: 1
-    - _GlowCutoff: 0.262
+    - _GlowCutoff: 0.056
     - _Metallic: 0.631
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _PixelLevel: 82
+    - _PixelLevel: 91
     - _RimEffect: 1
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
