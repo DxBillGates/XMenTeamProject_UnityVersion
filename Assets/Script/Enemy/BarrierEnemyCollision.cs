@@ -23,10 +23,15 @@ public class BarrierEnemyCollision : MonoBehaviour
         BarrierEnemy barrierEnemy = enemyParent.GetComponent<BarrierEnemy>();
 
         // ボールに当たったときの処理
-        if (collision.gameObject.tag == "Ball" && collision.GetComponent<Ball>().state != BallState.HOLD_PLAYER)
+        Ball ballComponent;
+        if (collision.gameObject.CompareTag("Ball"))
         {
-            //親で判定
-            barrierEnemy.KnockBack(collision);
+            ballComponent = collision.gameObject.GetComponent<Ball>();
+            if (ballComponent.GetSpeed() > 0)
+            {
+                //親で判定
+                barrierEnemy.KnockBack(collision);
+            }
         }
 
         if (collision.gameObject.tag == "Wall")

@@ -39,10 +39,15 @@ public class FollowEnemy : Enemy
 
     private void OnTriggerStay(Collider collision)
     {
-        // ボールに当たったときの処理
-        if (collision.gameObject.tag == "Ball" && collision.GetComponent<Ball>().state != BallState.HOLD_PLAYER)
+        Ball ballComponent;
+        if (collision.gameObject.CompareTag("Ball"))
         {
-            KnockBack(collision);
+            ballComponent = collision.gameObject.GetComponent<Ball>();
+            // ボールに当たったときの処理
+            if (ballComponent.GetSpeed() > 0)
+            {
+                KnockBack(collision);
+            }
         }
         else if (collision.gameObject.tag == "Wall")
         {

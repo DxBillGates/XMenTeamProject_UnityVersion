@@ -92,19 +92,24 @@ public class RollEnemy : Enemy
     private void OnTriggerStay(Collider collision)
     {
         // ボールに当たったときの処理
-        if (collision.gameObject.tag == "Ball" && collision.GetComponent<Ball>().state != BallState.HOLD_PLAYER)
+        Ball ballComponent;
+        if (collision.gameObject.CompareTag("Ball"))
         {
-            // ボールを投げ返す方向を指定
-            Vector3 throwVector = targetObject.transform.position - transform.position;
-            throwVector.Normalize();
-            throwVector.y = 0;
+            ballComponent = collision.gameObject.GetComponent<Ball>();
+            // ボールに当たったときの処理
+            if (ballComponent.GetSpeed() > 0)
+            {
+                // ボールを投げ返す方向を指定
+                Vector3 throwVector = targetObject.transform.position - transform.position;
+                throwVector.Normalize();
+                throwVector.y = 0;
 
-            float ballSpeed = collision.GetComponent<Ball>().GetSpeed();
+                float ballSpeed = collision.GetComponent<Ball>().GetSpeed();
 
-            collision.GetComponent<Ball>().Throw(throwVector * ballSpeed , BallState.THROWED_ENEMY);
+                collision.GetComponent<Ball>().Throw(throwVector * ballSpeed, BallState.THROWED_ENEMY);
 
-            KnockBack(collision);
-
+                KnockBack(collision);
+            }
         }
         else if (collision.gameObject.tag == "Wall")
         {

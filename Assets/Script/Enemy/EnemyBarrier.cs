@@ -10,24 +10,29 @@ public class EnemyBarrier : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     private void OnTriggerStay(Collider collision)
     {
         // É{Å[ÉãÇ…ìñÇΩÇ¡ÇΩÇ∆Ç´ÇÃèàóù
-        if (collision.gameObject.name == "Ball")
+        Ball ballComponent;
+        if (collision.gameObject.CompareTag("Ball"))
         {
-            Hp -= collision.gameObject.GetComponent<Ball>().GetSpeed();
-            if (Hp <= 0)
+            ballComponent = collision.gameObject.GetComponent<Ball>();
+            if (ballComponent.GetSpeed() > 0)
             {
-                Destroy(gameObject);
+                Hp -= collision.gameObject.GetComponent<Ball>().GetSpeed();
+                if (Hp <= 0)
+                {
+                    Destroy(gameObject);
+                }
             }
         }
     }
