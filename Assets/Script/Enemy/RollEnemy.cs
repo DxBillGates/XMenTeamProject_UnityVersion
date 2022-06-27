@@ -15,10 +15,6 @@ public class RollEnemy : Enemy
         // プレイヤーの情報を格納
         targetObject = GameObject.FindGameObjectWithTag("Player");
 
-        // SE用
-        GameObject SEPlayManager = GameObject.FindGameObjectWithTag("SEPlayManager");
-        sePlayManagerComponent = SEPlayManager.GetComponent<SEPlayManager>();
-
         // animetor
         GameObject temp = transform.root.Find("EnemyModel").gameObject;
         animator = temp.GetComponent<Animator>();

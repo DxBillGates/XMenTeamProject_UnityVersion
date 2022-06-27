@@ -25,9 +25,6 @@ public class Enemy : MonoBehaviour
     // 現フレームの移動量
     protected Vector3 movedVector;
 
-    //SEのGetComponent用
-    protected SEPlayManager sePlayManagerComponent;
-
     // アニメーションの速度変更用
     protected Animator animator;
 
@@ -119,7 +116,7 @@ public class Enemy : MonoBehaviour
     {
         hp -= damage;
 
-        sePlayManagerComponent.SESeting(SE[0]);
+        AudioManager.GetInstance().PlayAudio(SE[0], MyAudioType.SE, 1, false);
 
         if (hp < 0)
         {

@@ -39,9 +39,6 @@ public class Player : MonoBehaviour
 
     [SerializeField] private float hitEnemyDamage;
 
-    //SE‚ÌGetComponent—p
-    private SEPlayManager sePlayManagerComponent;
-
     InvincibleFlag invincibleFlag;
 
     // Start is called before the first frame update
@@ -66,8 +63,6 @@ public class Player : MonoBehaviour
 
         animator = GetComponent<Animator>();
         triggerSkillPosition = new Vector3();
-
-        sePlayManagerComponent = SEPlayManager.GetComponent<SEPlayManager>();
 
         invincibleFlag = GetComponent<InvincibleFlag>();
     }
@@ -245,7 +240,7 @@ public class Player : MonoBehaviour
         if (isUseSkill)
         {
             triggerSkillPosition = transform.position;
-            sePlayManagerComponent.SESeting(SE[1]);
+            AudioManager.GetInstance().PlayAudio(SE[1], MyAudioType.SE, 1, false);
         }
     }
 
@@ -297,7 +292,7 @@ public class Player : MonoBehaviour
         invincibleFlag.Invincible();
 
         hp -= value;
-        sePlayManagerComponent.SESeting(SE[0], 0.5f);
+        AudioManager.GetInstance().PlayAudio(SE[0], MyAudioType.SE, 0.5f, false);
 
         if (hp < 0)
         {

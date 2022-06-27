@@ -5,6 +5,8 @@ using UnityEngine;
 public enum PauseButtonType
 {
     NONE,
+    BGM_VOLUME,
+    SE_VOLUME,
     TITLE,
     RESTART,
     STAGE_SELECT,
@@ -17,14 +19,18 @@ public class PauseManager : MonoBehaviour
     private bool isPause;
 
     [SerializeField] private List<PauseButtonType> buttonInfos;
-    private int currentButtonIndex;
+    [SerializeField] private int currentButtonIndex;
     private bool isInputVerticalButton;
+    private bool isInputHorizontalButton;
+
+    [SerializeField] private UnityEngine.UI.Text testTextUI;
+    [SerializeField] private List<UnityEngine.UI.Text> texts;
 
     // Start is called before the first frame update
     void Start()
     {
         isPause = false;
-        isInputVerticalButton = false;
+        isInputVerticalButton = isInputHorizontalButton = false;
         currentButtonIndex = 0;
     }
 
@@ -32,10 +38,13 @@ public class PauseManager : MonoBehaviour
     void Update()
     {
         CheckPauseButton();
+        testTextUI.gameObject.SetActive(isPause);
 
         if (isPause == false) return;
 
         UpdateCurrentButtonIndex();
+        UpdateUIColor();
+        UpdateAudioVolumeUI();
 
         switch (CheckUIButtons())
         {
@@ -56,10 +65,12 @@ public class PauseManager : MonoBehaviour
 
     private void CheckPauseButton()
     {
-        if(Input.GetButtonDown("Pause"))
+        if (Input.GetButtonDown("Pause"))
         {
             isPause = !isPause;
-            //GameTimeManager.GetInstance().SetTime(System.Convert.ToInt32(isPause));
+
+            // trueだと1になるから!をつける
+            GameTimeManager.GetInstance().SetTime(System.Convert.ToInt32(!isPause));
         }
     }
 
@@ -68,7 +79,7 @@ public class PauseManager : MonoBehaviour
     {
         if (isPause == false) return PauseButtonType.NONE;
 
-        if(Input.GetButtonDown("PlayerAbility"))
+        if (Input.GetButtonDown("PlayerAbility"))
         {
             return buttonInfos[currentButtonIndex];
         }
@@ -85,9 +96,11 @@ public class PauseManager : MonoBehaviour
     private void UpdateCurrentButtonIndex()
     {
         float inputVertical = Input.GetAxisRaw("Vertical");
+        if (Input.GetAxisRaw("VerticalButton") != 0) inputVertical = Input.GetAxisRaw("VerticalButton");
+
         if (inputVertical != 0 && isInputVerticalButton == false)
         {
-            currentButtonIndex += inputVertical > 0 ? 1 : -1;
+            currentButtonIndex += inputVertical > 0 ? -1 : 1;
 
             if (currentButtonIndex < 0) currentButtonIndex = 0;
             if (currentButtonIndex > buttonInfos.Count - 1) currentButtonIndex = buttonInfos.Count - 1;
@@ -96,6 +109,48 @@ public class PauseManager : MonoBehaviour
         }
 
         if (inputVertical == 0) isInputVerticalButton = false;
+    }
+
+    private void UpdateUIColor()
+    {
+        for (int i = 0; i < texts.Count; ++i)
+        {
+            if (i == currentButtonIndex)
+            {
+                texts[i].color = Color.red;
+            }
+            else
+            {
+                texts[i].color = Color.gray;
+            }
+        }
+    }
+
+    private void UpdateAudioVolumeUI()
+    {
+        if (isPause == false) return;
+        float inputHorizontal = Input.GetAxisRaw("Horizontal");
+        if (Input.GetAxisRaw("HorizontalButton") != 0) inputHorizontal = Input.GetAxisRaw("HorizontalButton");
+
+        if(inputHorizontal != 0 && isInputHorizontalButton == false)
+        {
+            int increaseValue = inputHorizontal > 0 ? 1 : -1;
+            if(currentButtonIndex == (int)PauseButtonType.BGM_VOLUME - 1)
+            {
+                AudioManager.GetInstance().IncreaseBGMMasterVolumeLevel(increaseValue);
+            }
+            if(currentButtonIndex == (int)PauseButtonType.SE_VOLUME - 1)
+            {
+                AudioManager.GetInstance().IncreaseSEMasterVolumeLevel(increaseValue);
+            }
+
+            isInputHorizontalButton = true;
+        }
+
+        if (inputHorizontal == 0) isInputHorizontalButton = false;
+
+        texts[(int)PauseButtonType.BGM_VOLUME - 1].text = "BGMVolume" + " < " + AudioManager.GetInstance().GetBGMMasterVolumeLevel() + " > ";
+        texts[(int)PauseButtonType.SE_VOLUME - 1].text = "SEVolume" + " < " + AudioManager.GetInstance().GetSEMasterVolumeLevel() + " > ";
     }
 
     // タイトルへのUIを押した際に実行する内容
@@ -120,5 +175,7 @@ public class PauseManager : MonoBehaviour
     private void OnClickBack()
     {
         isPause = !isPause;
+        // trueだと1になるから!をつける
+        GameTimeManager.GetInstance().SetTime(System.Convert.ToInt32(!isPause));
     }
 }

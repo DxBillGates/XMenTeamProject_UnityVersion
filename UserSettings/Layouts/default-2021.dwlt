@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 997
   m_ShowMode: 4
-  m_Title: Game
+  m_Title: Inspector
   m_RootView: {fileID: 8}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -74,7 +74,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 229
+  controlID: 76
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -154,7 +154,7 @@ MonoBehaviour:
   m_MinSize: {x: 400, y: 200}
   m_MaxSize: {x: 32384, y: 16192}
   vertical: 0
-  controlID: 238
+  controlID: 64
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -230,7 +230,7 @@ MonoBehaviour:
     height: 30
   m_MinSize: {x: 0, y: 0}
   m_MaxSize: {x: 0, y: 0}
-  m_LastLoadedLayoutName: MyEditorLayout
+  m_LastLoadedLayoutName: 
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -310,11 +310,30 @@ MonoBehaviour:
     m_LastAppliedPresetName: Default
     m_SaveData: []
   m_ViewTransforms:
-    m_KeySerializationHelper: []
-    m_ValueSerializationHelper: []
+    m_KeySerializationHelper:
+    - {fileID: 7135181965165058916, guid: 889823cdd17709f4bba31f4b6e8a0b70, type: 2}
+    m_ValueSerializationHelper:
+    - e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
   m_PreviewAnimator: {fileID: 0}
-  m_AnimatorController: {fileID: 0}
-  m_BreadCrumbs: []
+  m_AnimatorController: {fileID: 9100000, guid: 889823cdd17709f4bba31f4b6e8a0b70, type: 2}
+  m_BreadCrumbs:
+  - m_Target: {fileID: 7135181965165058916, guid: 889823cdd17709f4bba31f4b6e8a0b70, type: 2}
+    m_ScrollPosition: {x: 0, y: 0}
   stateMachineGraph: {fileID: 0}
   stateMachineGraphGUI: {fileID: 0}
   blendTreeGraph: {fileID: 0}
@@ -1282,22 +1301,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scenes
+    - Assets
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scenes
+  - Assets
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\suzut\Desktop\XMenTeamProjectUnityVersion\XMenTeamProject_UnityVer
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 90760000
-    m_LastClickedID: 30352
-    m_ExpandedIDs: 000000007a76000092760000
+    m_SelectedIDs: c8620000
+    m_LastClickedID: 25288
+    m_ExpandedIDs: 00000000c8620000966a0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1325,7 +1344,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000007a760000
+    m_ExpandedIDs: 00000000c8620000ca620000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1350,8 +1369,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 
-    m_LastClickedInstanceID: 0
+    m_SelectedInstanceIDs: e484feff
+    m_LastClickedInstanceID: -97052
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c6230000
     m_RenameOverlay:
@@ -1453,9 +1472,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
-      m_LastClickedID: 0
-      m_ExpandedIDs: d0c0fcffcafbfcff2006fdffc41bfdff944ffdff3c53fdff7e6afdffb078fdff72fafdff8213feffda14feffe020feff2431feff8433feffa613ffff4a15ffff0a17ffff3671ffff4471ffff2874ffffa275ffff4ca5ffff92a5ffffd0a6ffff16a7ffff5ca7ffff98a8ffffccaaffff0cacffff32e7ffff
+      m_SelectedIDs: 7a810000
+      m_LastClickedID: 33146
+      m_ExpandedIDs: 3c59fcff9880fcff1ea5feff7aa8feffa8a9fefffeaafeff26adfeff44aefefff4affeff7e41ffffdc94ffff0896ffffc297ffff5a99ffffc099ffffb0f8ffffeafaffff1a6300001c810000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1578,7 +1597,7 @@ MonoBehaviour:
       floating: 0
       collapsed: 0
       displayed: 1
-      snapOffset: {x: 0, y: 0}
+      snapOffset: {x: 0, y: 25}
       snapOffsetDelta: {x: 0, y: 0}
       snapCorner: 0
       id: unity-transform-toolbar
@@ -1726,9 +1745,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -58.811855, y: -1811.8235, z: 3170.436}
+    m_Target: {x: 635.9716, y: 315.32886, z: -462.8657}
     speed: 2
-    m_Value: {x: -58.811855, y: -1811.8235, z: 3170.436}
+    m_Value: {x: 635.9716, y: 315.32886, z: -462.8657}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1775,13 +1794,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: -0.25652695, y: 0.009225486, z: -0.0040658684, w: -0.9663033}
+    m_Target: {x: 0.049475893, y: 0.0055308677, z: -0.0012556843, w: -0.9985845}
     speed: 2
-    m_Value: {x: -0.2565719, y: 0.009227102, z: -0.0040665804, w: -0.9664725}
+    m_Value: {x: 0.049484525, y: 0.005531833, z: -0.0012559034, w: -0.99875873}
   m_Size:
-    m_Target: 1880.7773
+    m_Target: 57.739105
     speed: 2
-    m_Value: 1880.7773
+    m_Value: 57.739105
   m_Ortho:
     m_Target: 0
     speed: 2
