@@ -50,6 +50,10 @@ public class UltimateSkillManager : SingletonComponent<UltimateSkillManager>
         {
             GameTimeManager.GetInstance().SetTime(0.05f);
         }
+        else if(GetActiveFlagController().activeType == FlagActiveType.ACTIVE)
+        {
+            GameTimeManager.GetInstance().SetTime(1);
+        }
 
         if (isUse == false) return;
 
