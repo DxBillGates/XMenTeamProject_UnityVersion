@@ -332,7 +332,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BarrierEnemy: {fileID: 1452703305129656446, guid: 079ff1ae46b11004ca559a0d0d7832e4, type: 3}
   FollowEnemy: {fileID: 1571662748511080394, guid: 2b0bb61fcae0cd64bb6709891593668f, type: 3}
-  MaxBarrierEnemyNum: 2
+  MaxBarrierEnemyNum: 4
   MaxFollowEnemyNum: 1
   Spawn_Range: 35
   Cant_Spawn_Distance: 10
@@ -3266,7 +3266,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2683838146694799363, guid: 41336c39d89ec8d4895a261b0d0b0d7c, type: 3}
       propertyPath: attenuationPower
-      value: 0.0032
+      value: 0.007
       objectReference: {fileID: 0}
     - target: {fileID: 2683838146694799363, guid: 41336c39d89ec8d4895a261b0d0b0d7c, type: 3}
       propertyPath: enemyAccelerateValue
