@@ -5,22 +5,15 @@ using UnityEngine;
 public class GameTimeManager : SingletonComponent<GameTimeManager>
 {
     // ÉQÅ[ÉÄì‡éûä‘ 0 ~ 1
-    [SerializeField, Range(0, 1)] private float time;
+    [SerializeField, Range(0, 1)] private float time = 1;
 
     // Start is called before the first frame update
     void Start()
     {
-        time = 1;
     }
 
     void Update()
     {
-        UltimateSkillManager skillManager = UltimateSkillManager.GetInstance();
-        time = 1;
-        if (skillManager.GetActiveFlagController().activeType == FlagActiveType.PRE)
-        {
-            time = 0.05f;
-        }
     }
 
     public float GetTime()

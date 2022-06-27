@@ -5,9 +5,11 @@ using UnityEngine;
 public class StartGameScene : MonoBehaviour
 {
     [SerializeField] RectTransform square;
+    [SerializeField] float StartUpdateTime = 2.0f;
     float timer = 0;
     Vector3 blackSquareInitScale = new Vector3((float)Screen.width / 100 + 1, (float)Screen.height / 25, 1);
     Vector3 blackSquareScale = new Vector3(1, 1, 1);
+    bool isEnd = false;//演出終わったか
 
     // Start is called before the first frame update
     void Start()
@@ -16,6 +18,9 @@ public class StartGameScene : MonoBehaviour
         square.transform.position = new Vector3(Screen.width / 2,Screen.height / 2,0);
         square.transform.localScale = blackSquareInitScale;
         blackSquareScale = blackSquareInitScale;
+        isEnd = false;
+        //ゲーム時間戻す
+        GameTimeManager.GetInstance().SetTime(0);
     }
 
     // Update is called once per frame
@@ -23,7 +28,13 @@ public class StartGameScene : MonoBehaviour
     {
         //タイマー更新
         timer += Time.deltaTime;
-        if (timer >= 0.5f) { timer = 0.5f; }
+
+        if (timer >= StartUpdateTime && isEnd == false) {
+            timer = StartUpdateTime;
+            //ゲーム時間戻す
+            GameTimeManager.GetInstance().SetTime(1);
+            isEnd = true;
+        }
 
         blackSquareScale = new Vector3(
             blackSquareInitScale.x,
