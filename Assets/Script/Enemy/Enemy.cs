@@ -28,6 +28,9 @@ public class Enemy : MonoBehaviour
     //SEのGetComponent用
     protected SEPlayManager sePlayManagerComponent;
 
+    // アニメーションの速度変更用
+    protected Animator animator;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -83,6 +86,13 @@ public class Enemy : MonoBehaviour
 
         // 移動後のポジションを第二引数に
         transform.position += movedVector * GameTimeManager.GetInstance().GetTime();
+
+        // 移動時 向き変更
+        // プレイヤーの方向ベクトルを取得し、それを使い回転させる
+        Vector3 playerV = targetObject.transform.position - transform.position;
+        playerV.y = 0;
+
+        if (playerV != Vector3.zero) transform.rotation = Quaternion.LookRotation(playerV);
     }
 
 
@@ -116,6 +126,9 @@ public class Enemy : MonoBehaviour
             EnemyManager.DecrementAliveCount();
             Destroy(transform.root.gameObject);
             const float ADD_GAUGE_VALUE = 25;
+
+            // 倒したときにヒットストップ
+            GameTimeManager.GetInstance().SetTime(0);
 
             // スキルを発動していないときに敵を倒したならスキルゲージが増える
             if (UltimateSkillManager.GetInstance().IsUse() == false)

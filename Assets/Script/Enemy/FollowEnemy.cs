@@ -12,6 +12,10 @@ public class FollowEnemy : Enemy
 
         GameObject SEPlayManager = GameObject.FindGameObjectWithTag("SEPlayManager");
         sePlayManagerComponent = SEPlayManager.GetComponent<SEPlayManager>();
+
+        // animetor
+        GameObject temp = transform.root.Find("EnemyModel").gameObject;
+        animator = temp.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -19,7 +23,9 @@ public class FollowEnemy : Enemy
     {
         PlayerFollow();
 
-        ChangePose();
+        // ヒットストップ時にモデルのアニメーションもストップさせる
+        animator.SetFloat("Speed",GameTimeManager.GetInstance().GetTime());
+        //ChangePose();
     }
 
     private void ChangePose()
@@ -40,16 +46,7 @@ public class FollowEnemy : Enemy
         }
         else if (collision.gameObject.tag == "Wall")
         {
-            // ヒットした障害物のヒットした法線方向に押し出したいからその法線を取得
-            Vector3 hitNormal = collision.transform.forward;
-
-            // 座標を位置フレーム前に戻す
-            const float PUSH_VALUE = 3.0f;
-            transform.position -= movedVector * PUSH_VALUE;
-
-            // 壁ずりベクトルを計算
-            Vector3 moveVector = movedVector - Vector3.Dot(movedVector, hitNormal) * hitNormal;
-            transform.position += moveVector;
+            WallCollsion(collision.transform);
         }
 
     }

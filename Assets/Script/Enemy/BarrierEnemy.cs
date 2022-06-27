@@ -27,13 +27,19 @@ public class BarrierEnemy : Enemy
     // Start is called before the first frame update
     void Start()
     {
+        // プレイヤーの情報を格納
         targetObject = GameObject.FindGameObjectWithTag("Player");
 
+        // ボールの配列用
         Array.Resize(ref ballDir, change_pose_frame);
 
+        // SE用
         GameObject SEPlayManager = GameObject.FindGameObjectWithTag("SEPlayManager");
-
         sePlayManagerComponent = SEPlayManager.GetComponent<SEPlayManager>();
+
+        // animetor
+        GameObject temp = transform.root.Find("EnemyModel").gameObject;
+        animator = temp.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -44,7 +50,6 @@ public class BarrierEnemy : Enemy
         // バリアが死んでいるのか確認
         if (!barrierDestroy) CheckBarrierDown();
 
-        ChangePose();
 
         if (!barrierDestroy)
         {
@@ -55,6 +60,10 @@ public class BarrierEnemy : Enemy
             PlayerFollow();
 
         }
+
+        // ヒットストップ時にモデルのアニメーションもストップさせる
+        animator.SetFloat("Speed", GameTimeManager.GetInstance().GetTime());
+
     }
 
     //　基本的な行動
@@ -91,20 +100,21 @@ public class BarrierEnemy : Enemy
         resultMoveVector.y = 0;
         resultMoveVector *= GameTimeManager.GetInstance().GetTime();
 
+
         // 設定した距離より遠ければ近づく 近ければ離れる
         if (distance > playerToDistance)
         {
             transform.position += resultMoveVector;
-            movedVector = (moveVector + leaveV) * moveSpeed;
+            movedVector = resultMoveVector;
 
         }
         else if (distance < playerToDistance - 2)
         {
             transform.position -= resultMoveVector;
-            movedVector = -((moveVector + leaveV) * moveSpeed);
+            movedVector = -resultMoveVector;
         }
 
-
+        ChangePose();
     }
 
     private void ChangePose()
