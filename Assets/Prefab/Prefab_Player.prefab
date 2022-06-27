@@ -177,6 +177,7 @@ GameObject:
   - component: {fileID: 1439989470772683767}
   - component: {fileID: 1439989470772683766}
   - component: {fileID: 1439989470772683769}
+  - component: {fileID: 9018895301937466266}
   m_Layer: 0
   m_Name: Prefab_Player
   m_TagString: Player
@@ -299,6 +300,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8283c776f8464d947bd5ef1bf4c4a165, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &9018895301937466266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2250312288394085556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54bdfaf25b9fa524caa90ca1ebfd289f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flagController:
+    maxActiveTime: 1
+    activeTime: 0
+    flag: 0
+    isEnd: 0
+    activeType: 0
+  flashingMaterial:
+    color: {r: 0, g: 0, b: 0, a: 0}
+    flashingSpanFlagController:
+      maxActiveTime: 0.2
+      activeTime: 0
+      flag: 0
+      isEnd: 0
+      activeType: 0
 --- !u!1 &3280216555872638687
 GameObject:
   m_ObjectHideFlags: 0

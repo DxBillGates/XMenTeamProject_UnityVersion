@@ -823,7 +823,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   circle: {fileID: 153075578}
   square: {fileID: 1059918354}
-  nextSceneName: SampleScene
+  nextSceneName: Stage2
 --- !u!4 &1459785082
 Transform:
   m_ObjectHideFlags: 0
