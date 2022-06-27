@@ -63,7 +63,8 @@ MonoBehaviour:
   moveSpeed: 0.2
   hp: 10
   dontHitDistance: 20
-  SE: []
+  SE:
+  - {fileID: 8300000, guid: 75fa6fbf1ac3a104a8ea6eae7f3bf4a0, type: 3}
   playerToDistance: 20
   rollingSpeed: 3
 --- !u!1001 &5448679520157567283
