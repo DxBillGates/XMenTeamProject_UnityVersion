@@ -11,7 +11,7 @@ public class UltimateSkill
     [SerializeField] private float initValue;
 
     // リストにしてレベルの上がりやすさを調整できるようにするかも
-    [SerializeField] private float levelUpValue;
+    [SerializeField] private List<float> levelUpValues;
     // レベル別の発動時間
     [SerializeField] private List<float> levelsActiveTimes;
     // レベル別の大きさ
@@ -36,12 +36,12 @@ public class UltimateSkill
     {
         // 現在のゲージ量をレベルアップに必要な既定値で割った値
         // 例）74(現ゲージ量) / 25(既定値) = 2level
-        level = (int)(gaugeValue / levelUpValue);
+        level = (int)(gaugeValue / (maxGaugeValue / maxLevel));
     }
 
-    public void AddValue(float addValue)
+    public void AddValue()
     {
-        gaugeValue += addValue;
+        gaugeValue += levelUpValues[GetCurrentLevel()];
 
         // ゲージ値の制限
         if (gaugeValue >= maxGaugeValue) gaugeValue = maxGaugeValue;
