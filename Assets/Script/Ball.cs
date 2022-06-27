@@ -25,8 +25,12 @@ public class Ball : MonoBehaviour
     [SerializeField] private float attenuationPower;
     // 限界速度
     [SerializeField] private float maxSpeed;
-    // 反射時の加速度
+    // プレイヤーバリア反射時の加速度
     [SerializeField] private float accelerateValue;
+
+    // Enemy反射時の加速度
+    [SerializeField] private float enemyAccelerateValue;
+
     // ドームにあたった際の加速度
     [SerializeField] private float domeHitAccelerateValue;
     [SerializeField] private List<Material> stateMaterials;
@@ -106,7 +110,7 @@ public class Ball : MonoBehaviour
                 if (isThrow == false && velocity.magnitude <= 0) break;
 
                 hitNormal = -(other.gameObject.transform.position - transform.position).normalized;
-                Reflection(hitNormal, true);
+                Reflection(hitNormal,true, true);
                 state = BallState.THROWED_ENEMY;
                 break;
             case "Wall":
@@ -170,7 +174,7 @@ public class Ball : MonoBehaviour
     }
 
     // 反射ベクトルを生成
-    private void Reflection(Vector3 normal, bool addSpeed = false)
+    private void Reflection(Vector3 normal, bool enemy = false, bool addSpeed = false)
     {
         Vector3 backupVelocity = velocity;
         Vector3 reflectVector = velocity - 2.0f * Vector3.Dot(velocity, normal) * normal;
@@ -182,20 +186,26 @@ public class Ball : MonoBehaviour
 
         velocity = reflectVector;
 
-        float acc = UltimateSkillManager.GetInstance().IsUse() ? domeHitAccelerateValue : accelerateValue;
+        float acc = 0.0f;
+
+        if (UltimateSkillManager.GetInstance().IsUse())
+        {
+            acc = domeHitAccelerateValue;
+        }
+        else if (enemy)
+        {
+            acc = enemyAccelerateValue;
+        }
+        else
+        {
+            acc = accelerateValue;
+        }
+		
+		// 引数のaddSpeedFlagの内容で反射ベクトルに加速度をかけるか
         velocity = addSpeed ? reflectVector * acc : reflectVector;
 
+		// 加速後の速度が上限を超え内容制限
         if (velocity.magnitude > maxSpeed) velocity = velocity.normalized * maxSpeed;
-
-        // 法線を表示
-        Debug.DrawRay(transform.position, normal * 2, Color.red, 10);
-        Debug.DrawRay(transform.position + normal * 2, normal, Color.green, 10);
-
-        // 反射ベクトルを表示
-        Debug.DrawRay(transform.position, velocity.normalized, Color.yellow,10);
-
-        // 反射前ベクトルを表示
-        Debug.DrawRay(transform.position, backupVelocity.normalized, Color.white,10);
     }
 
     // ボールの状態を初期化

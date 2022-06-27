@@ -65,7 +65,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   knock_back_speed: 0.2
   moveSpeed: 0.2
-  hp: 10
+  hp: 15
   dontHitDistance: 20
   SE:
   - {fileID: 8300000, guid: 45bdfac5f1e4ae14fba0862eaea30f42, type: 3}
@@ -201,15 +201,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a853a2b11a1bed74aa6b4979b397bd74, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.5
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a853a2b11a1bed74aa6b4979b397bd74, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.5
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a853a2b11a1bed74aa6b4979b397bd74, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.5
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a853a2b11a1bed74aa6b4979b397bd74, type: 3}
       propertyPath: m_LocalPosition.x
@@ -304,4 +304,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cd4bbd48e69961428d97af523e90f83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Hp: 10
+  Hp: 20
