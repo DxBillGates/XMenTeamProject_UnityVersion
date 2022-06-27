@@ -29,89 +29,16 @@ public class EnemyManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+
         //バリアエネミー生成
-        for (int i = 0; i < MaxBarrierEnemyNum; ++i)
-        {
-            //引数の真ん中変更で生成するポジション変更
+        CreateEnemies(BarrierEnemy, player, MaxBarrierEnemyNum);
 
-            // ランダムなポジションの設定
-            Vector3 spawnPos =
-                new Vector3(Random.Range(-1 * Spawn_Range, Spawn_Range), 0, Random.Range(-1 * Spawn_Range, Spawn_Range));
-
-            while (true)
-            {
-                GameObject player = GameObject.FindGameObjectWithTag("Player");
-
-                // 出現禁止範囲内なら位置を変更
-                if (Vector3.Distance(player.transform.position, spawnPos) <= Cant_Spawn_Distance)
-                {
-                    spawnPos =
-                        new Vector3(Random.Range(-1 * Spawn_Range, Spawn_Range), 0, Random.Range(-1 * Spawn_Range, Spawn_Range));
-
-                }
-                else break;
-
-            }
-
-            Instantiate(BarrierEnemy, spawnPos, Quaternion.identity);
-            //生成数増やす
-            aliveCount++;
-        }
         //追っかけエネミー生成
-        for (int i = 0; i < MaxFollowEnemyNum; ++i)
-        {
-            Vector3 spawnPos =
-                new Vector3(Random.Range(-1 * Spawn_Range, Spawn_Range), 0, Random.Range(-1 * Spawn_Range, Spawn_Range));
-
-            while (true)
-            {
-                GameObject player = GameObject.FindGameObjectWithTag("Player");
-
-                // 出現禁止範囲内なら位置を変更
-                if (Vector3.Distance(player.transform.position, spawnPos) <= Cant_Spawn_Distance)
-                {
-                    spawnPos =
-                        new Vector3(Random.Range(-1 * Spawn_Range, Spawn_Range), 0, Random.Range(-1 * Spawn_Range, Spawn_Range));
-
-
-                }
-                else break;
-
-            }
-
-            //引数の真ん中変更で生成するポジション変更
-            Instantiate(FollowEnemy, spawnPos, Quaternion.identity);
-            //生成数増やす
-            aliveCount++;
-        }
+        CreateEnemies(FollowEnemy, player, MaxFollowEnemyNum);
 
         //回転エネミー生成
-        for (int i = 0; i < MaxRollEnemyNum; ++i)
-        {
-            Vector3 spawnPos =
-                new Vector3(Random.Range(-1 * Spawn_Range, Spawn_Range), 0, Random.Range(-1 * Spawn_Range, Spawn_Range));
-
-            while (true)
-            {
-                GameObject player = GameObject.FindGameObjectWithTag("Player");
-
-                // 出現禁止範囲内なら位置を変更
-                if (Vector3.Distance(player.transform.position, spawnPos) <= Cant_Spawn_Distance)
-                {
-                    spawnPos =
-                        new Vector3(Random.Range(-1 * Spawn_Range, Spawn_Range), 0, Random.Range(-1 * Spawn_Range, Spawn_Range));
-
-
-                }
-                else break;
-
-            }
-
-            //引数の真ん中変更で生成するポジション変更
-            Instantiate(RollEnemy, spawnPos, Quaternion.identity);
-            //生成数増やす
-            aliveCount++;
-        }
+        CreateEnemies(RollEnemy, player, MaxRollEnemyNum);
     }
 
     // Update is called once per frame
@@ -128,5 +55,35 @@ public class EnemyManager : MonoBehaviour
     public static void DecrementAliveCount()
     {
         aliveCount--;
+    }
+
+    // 指定したプレハブの敵を指定数生成する
+    public void CreateEnemies(GameObject prefab,GameObject player,int enemyAmount)
+    {
+        //回転エネミー生成
+        for (int i = 0; i < enemyAmount; ++i)
+        {
+            Vector3 spawnPos =
+                new Vector3(Random.Range(-1 * Spawn_Range, Spawn_Range), 0, Random.Range(-1 * Spawn_Range, Spawn_Range));
+
+            while (true)
+            {
+                // 出現禁止範囲内なら位置を変更
+                if (Vector3.Distance(player.transform.position, spawnPos) <= Cant_Spawn_Distance)
+                {
+                    spawnPos =
+                        new Vector3(Random.Range(-1 * Spawn_Range, Spawn_Range), 0, Random.Range(-1 * Spawn_Range, Spawn_Range));
+
+
+                }
+                else break;
+
+            }
+
+            //引数の真ん中変更で生成するポジション変更
+            Instantiate(prefab, spawnPos, Quaternion.identity);
+            //生成数増やす
+            aliveCount++;
+        }
     }
 }
