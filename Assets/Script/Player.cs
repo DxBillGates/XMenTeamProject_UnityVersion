@@ -106,12 +106,13 @@ public class Player : MonoBehaviour
             int index = 0;
             while (true)
             {
-                if (randomVector.magnitude != 0) break;
                 if (index >= MAX_INDEX) break;
 
                 randomVector.x = Random.Range(-1, 1);
                 randomVector.y = Random.Range(-1, 1);
                 randomVector = randomVector.normalized;
+
+                if (randomVector.magnitude != 0) break;
 
                 ++index;
             }
@@ -193,7 +194,7 @@ public class Player : MonoBehaviour
 
         velocity += movePower * moveVector.normalized;
 
-        transform.position += velocity;
+        transform.position += velocity * GameTimeManager.GetInstance().GetTime();
 
         isInput = inputDirection.magnitude > 0.5f;
         if (isInput) currentDirection = inputDirection.normalized;
