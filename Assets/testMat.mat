@@ -71,7 +71,7 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.589
     - _GlossyReflections: 1
-    - _GlowCutoff: 0.056
+    - _GlowCutoff: 0.18
     - _Metallic: 0.631
     - _Mode: 0
     - _OcclusionStrength: 1
@@ -84,7 +84,7 @@ Material:
     - _SrcBlend: 1
     - _Start: 0.999
     - _TexCutoff: 0.334
-    - _Threshold: 0.69
+    - _Threshold: 0.67
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
