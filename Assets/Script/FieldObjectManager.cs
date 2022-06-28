@@ -19,7 +19,6 @@ public class FieldObjectManager : SingletonComponent<FieldObjectManager>
     {
         wallObjects = new List<GameObject>();
         changeMaterials = new List<ChangeMaterial>();
-        wallValue = (uint)StageSelectManager.GetNowSelectStageNum(true) + 4;
         CreateWall();
     }
 
