@@ -3,7 +3,7 @@ Shader "Unlit/Blur"
 	Properties
 	{
 		_MainTex("Texture", 2D) = "white" {}
-		_StepWidth("StepWidth",Range(0.001,1.0)) = 0.01
+		_Threshold("Threshold",Range(0.001,0.03)) = 0.01
 
 	}
 		SubShader
@@ -36,7 +36,7 @@ Shader "Unlit/Blur"
 
 				sampler2D _MainTex;
 				float4 _MainTex_ST;
-				float _StepWidth;
+				float _Threshold;
 
 				v2f vert(appdata v)
 				{
@@ -54,7 +54,7 @@ Shader "Unlit/Blur"
 				}
 				fixed4 frag(v2f i) : SV_Target
 				{
-				   float totalWeight = 0,_Sigma = 0.01;
+				   float totalWeight = 0,_Sigma = _Threshold, _StepWidth= 0.001;
 				float4 col = fixed4(0, 0, 0, 0);
 				for (float py = -_Sigma * 2; py <= _Sigma * 2; py += _StepWidth)
 				{

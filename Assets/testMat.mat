@@ -84,7 +84,7 @@ Material:
     - _SrcBlend: 1
     - _Start: 0.999
     - _TexCutoff: 0.334
-    - _Threshold: 0
+    - _Threshold: 0.69
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:

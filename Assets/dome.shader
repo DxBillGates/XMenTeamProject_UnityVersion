@@ -1,4 +1,4 @@
-Shader "Custom/test"
+Shader "Custom/dome"
 {
 	Properties
 	{
