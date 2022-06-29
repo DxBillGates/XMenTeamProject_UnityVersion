@@ -11,13 +11,15 @@ public class StageSelectManager : SingletonComponent<StageSelectManager>
     [SerializeField] GameObject barrierPrefab;                  //バリアプレハブ
     [SerializeField] List<Image> UIStageNums;                   //選択中のステージナンバーUI
     [SerializeField] List<Sprite> sprNums;                      //0～9の数字
-    [SerializeField] GameObject sceneChange;                    //シーンチェンジオブジェクト
+    [SerializeField] NextScene sceneChange;                     //シーンチェンジオブジェクト
 
-    static int staticStageCount;                        //ステージ数　いずれ自動カウントできるようにしたい
-    static int nowSelectStageNum = 0;                                  //現在選択中のステージインデックス
-    [SerializeField] float timer = 0.5f;                        //演出タイマー
-    bool isStartTimer = false;                                  //タイマーが開始しているか
+    static int staticStageCount;                                //ステージ数　いずれ自動カウントできるようにしたい
+    static int nowSelectStageNum = 0;                           //現在選択中のステージインデックス
     bool isMoveLeft = false;                                    //バリアが左に動いているか
+    float moveTimer = 0.75f;                                     //移動タイマー
+    bool isStartMoveTimer = false;                              //移動タイマーが開始しているか
+    float decideTimer = 0;                                     //移動タイマー
+    bool isStartDecideTimer = false;                              //移動タイマーが開始しているか
 
 
     protected override void Awake()
@@ -32,47 +34,73 @@ public class StageSelectManager : SingletonComponent<StageSelectManager>
         {
             Instantiate(barrierPrefab);
         }
+        moveTimer = 0.5f;
+        decideTimer = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
+        //タイマー更新
+        UpdateTimer();
+
         //左右キーが押されたとき、回転させる
-        if (isStartTimer)
+        if (isStartMoveTimer == false)
         {
-            timer += Time.deltaTime;
-        }
-        else
-        {
-            if (Input.GetAxis("Horizontal") < 0)
-            {
-                nowSelectStageNum--;
-                timer = 0;
-                isStartTimer = true;
-                isMoveLeft = false;
-            }
             if (Input.GetAxis("Horizontal") > 0)
             {
                 nowSelectStageNum++;
-                timer = 0;
-                isStartTimer = true;
+                moveTimer = 0;
+                isStartMoveTimer = true;
+                isMoveLeft = false;
+            }
+            if (Input.GetAxis("Horizontal") < 0)
+            {
+                nowSelectStageNum--;
+                moveTimer = 0;
+                isStartMoveTimer = true;
                 isMoveLeft = true;
-
             }
         }
-        if (timer > 0.5f)
-        {
-            timer = 0.5f;
-            isStartTimer = false;
-        }
 
+        //Stagennのスプライトセット
         SetSpriteNum(GetNowSelectStageNum(true) + 1);
 
         //決定
         if (Input.GetButtonDown("PlayerAbility"))
         {
-            //壁の数を指定して作り直し
-            sceneChange.SetActive(true);
+            isStartDecideTimer = true;
+        }
+        //演出途中で次のシーンへ
+        if (decideTimer >= 1.0f && sceneChange.gameObject.activeSelf == false)
+        {
+            //選ばれたステージシーンに遷移
+            sceneChange.nextSceneName = "Stage" + (GetNowSelectStageNum(true) + 1).ToString();
+            sceneChange.gameObject.SetActive(true);
+        }
+
+        Debug.Log(sceneChange.gameObject.activeSelf);
+    }
+
+    void UpdateTimer()
+    {
+        if (isStartMoveTimer)
+        {
+            moveTimer += Time.deltaTime;
+            if (moveTimer > 0.75f)
+            {
+                moveTimer = 0.75f;
+                isStartMoveTimer = false;
+            }
+        }
+        if (isStartDecideTimer)
+        {
+            decideTimer += Time.deltaTime;
+            if (decideTimer > 2.5f)
+            {
+                decideTimer = 2.5f;
+                isStartDecideTimer = false;
+            }
         }
     }
 
@@ -110,16 +138,24 @@ public class StageSelectManager : SingletonComponent<StageSelectManager>
         return center;
     }
 
-    public float GetTimer()
+    public float GetMoveTimer()
     {
-        return timer;
+        return moveTimer;
     }
 
-    public bool IsStartTimer()
+    public bool IsStartMoveTimer()
     {
-        return isStartTimer;
+        return isStartMoveTimer;
     }
 
+    public float GetDecideTimer()
+    {
+        return decideTimer;
+    }
+    public bool IsStartDecideTimer()
+    {
+        return isStartDecideTimer;
+    }
     public bool IsMoveLeft()
     {
         return isMoveLeft;

@@ -823,7 +823,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   circle: {fileID: 153075578}
   square: {fileID: 1059918354}
-  nextSceneName: Stage2
 --- !u!4 &1459785082
 Transform:
   m_ObjectHideFlags: 0
@@ -1050,7 +1049,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 480549e6e85b99249be092c06353240f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stageCount: 4
+  stageCount: 6
   center: {x: 0, y: 0, z: 20}
   radius: 20
   barrierPrefab: {fileID: 6302714476797584802, guid: 6b011e121fc032a49916722abc12f4d7, type: 3}
@@ -1068,7 +1067,7 @@ MonoBehaviour:
   - {fileID: -769171240, guid: 6be1482a20690834e91960cb6153b73f, type: 3}
   - {fileID: -281063952, guid: 6be1482a20690834e91960cb6153b73f, type: 3}
   - {fileID: 1475135371, guid: 6be1482a20690834e91960cb6153b73f, type: 3}
-  sceneChange: {fileID: 1459785080}
+  sceneChange: {fileID: 1459785081}
   timer: 0.5
 --- !u!4 &1970035457
 Transform:

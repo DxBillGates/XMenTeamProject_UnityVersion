@@ -219,7 +219,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wallPrefab: {fileID: 3279621897873870784, guid: 39980861749c57645be43d9ce2fc0a9e, type: 3}
-  wallValue: 4
+  wallValue: 6
   isRotate: 1
   reCreate: 0
 --- !u!4 &271495748
@@ -1439,7 +1439,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   circle: {fileID: 1843805694}
   square: {fileID: 663297946}
-  nextSceneName: GameClearScene
 --- !u!4 &1181262426
 Transform:
   m_ObjectHideFlags: 0
@@ -2732,7 +2731,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   circle: {fileID: 1843805694}
   square: {fileID: 663297946}
-  nextSceneName: GameOverScene
 --- !u!4 &1997161808
 Transform:
   m_ObjectHideFlags: 0
