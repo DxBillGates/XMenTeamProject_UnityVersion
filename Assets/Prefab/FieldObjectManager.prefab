@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &8663123735917539578
+--- !u!1 &1444413757296346224
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,22 +8,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5761831557744962751}
-  - component: {fileID: -709054189343020559}
+  - component: {fileID: 1444413757296346230}
+  - component: {fileID: 1444413757296346225}
   m_Layer: 0
-  m_Name: AudioManager
+  m_Name: FieldObjectManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5761831557744962751
+--- !u!4 &1444413757296346230
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8663123735917539578}
+  m_GameObject: {fileID: 1444413757296346224}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -32,21 +32,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-709054189343020559
+--- !u!114 &1444413757296346225
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8663123735917539578}
+  m_GameObject: {fileID: 1444413757296346224}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf659e78f77fca94e9dd168e5b672da2, type: 3}
+  m_Script: {fileID: 11500000, guid: babcad2f8a2cafd4eb981ec93583abab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultVolume: 0.1
-  bgmMasterVolumeLevel: 5
-  seMasterVolumeLevel: 5
-  prefabAudioPlayer: {fileID: 1492218712085223176, guid: a2df02e37af598a4e941b43c241427a8, type: 3}
-  bgmPlayer: {fileID: 0}
-  testSE: {fileID: 8300000, guid: 75fa6fbf1ac3a104a8ea6eae7f3bf4a0, type: 3}
+  wallPrefab: {fileID: 3279621897873870784, guid: 39980861749c57645be43d9ce2fc0a9e, type: 3}
+  wallValue: 4
+  isRotate: 1
+  reCreate: 0

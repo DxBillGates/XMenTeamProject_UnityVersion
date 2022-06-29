@@ -156,19 +156,20 @@ public class PauseManager : MonoBehaviour
     // タイトルへのUIを押した際に実行する内容
     private void OnClickTitle()
     {
-
+        UnityEngine.SceneManagement.SceneManager.LoadScene("TitleScene");
     }
 
     // リスタートのUIを押した際に実行する内容
     private void OnClickRestart()
     {
-
+        UnityEngine.SceneManagement.Scene currentScene = UnityEngine.SceneManagement.SceneManager.GetActiveScene();
+        UnityEngine.SceneManagement.SceneManager.LoadScene(currentScene.name);
     }
 
     // ステージセレクトのUIを押した際に実行する内容
     private void OnClickStageSelect()
     {
-
+        UnityEngine.SceneManagement.SceneManager.LoadScene("StageSelectScene");
     }
 
     // 戻るのUIを押した際に実行する内容
