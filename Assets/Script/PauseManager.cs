@@ -19,19 +19,23 @@ public class PauseManager : MonoBehaviour
     private bool isPause;
 
     [SerializeField] private List<PauseButtonType> buttonInfos;
-    [SerializeField] private int currentButtonIndex;
+    private int currentButtonIndex;
     private bool isInputVerticalButton;
     private bool isInputHorizontalButton;
 
     [SerializeField] private UnityEngine.UI.Text testTextUI;
     [SerializeField] private List<UnityEngine.UI.Text> texts;
 
+    // ポーズ中の操作が何秒後から可能か
+    [SerializeField] private float enabledTime;
+
+    // ポーズ中の経過時間
+    private float pauseTime;
+
     // Start is called before the first frame update
     void Start()
     {
-        isPause = false;
-        isInputVerticalButton = isInputHorizontalButton = false;
-        currentButtonIndex = 0;
+        Initialize();
     }
 
     // Update is called once per frame
@@ -42,9 +46,15 @@ public class PauseManager : MonoBehaviour
 
         if (isPause == false) return;
 
-        UpdateCurrentButtonIndex();
-        UpdateUIColor();
         UpdateAudioVolumeUI();
+        UpdateUIColor();
+
+        pauseTime += Time.deltaTime;
+
+        // ポーズ中の経過時間が操作可能時間に満たしていないなら操作はできないようにする
+        if (pauseTime < enabledTime) return;
+
+        UpdateCurrentButtonIndex();
 
         switch (CheckUIButtons())
         {
@@ -63,14 +73,25 @@ public class PauseManager : MonoBehaviour
         }
     }
 
+    private void Initialize()
+    {
+        isPause = false;
+        isInputVerticalButton = isInputHorizontalButton = false;
+        currentButtonIndex = 0;
+        pauseTime = 0;
+    }
+
     private void CheckPauseButton()
     {
         if (Input.GetButtonDown("Pause"))
         {
-            isPause = !isPause;
+            bool backupIsPause = isPause = !isPause;
 
             // trueだと1になるから!をつける
             GameTimeManager.GetInstance().SetTime(System.Convert.ToInt32(!isPause));
+
+            Initialize();
+            isPause = backupIsPause;
         }
     }
 
@@ -111,6 +132,7 @@ public class PauseManager : MonoBehaviour
         if (inputVertical == 0) isInputVerticalButton = false;
     }
 
+    // 選択されているUIの色を変更する
     private void UpdateUIColor()
     {
         for (int i = 0; i < texts.Count; ++i)

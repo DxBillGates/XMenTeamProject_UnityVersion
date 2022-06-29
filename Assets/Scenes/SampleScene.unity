@@ -3156,7 +3156,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonInfos: 010000000200000003000000040000000500000006000000
-  currentButtonIndex: 0
   testTextUI: {fileID: 358959302}
   texts:
   - {fileID: 287693531}
@@ -3165,6 +3164,7 @@ MonoBehaviour:
   - {fileID: 2088338698}
   - {fileID: 1077738223}
   - {fileID: 1918322261}
+  enabledTime: 0.25
 --- !u!4 &2041991848
 Transform:
   m_ObjectHideFlags: 0
