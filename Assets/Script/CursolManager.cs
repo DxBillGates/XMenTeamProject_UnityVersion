@@ -37,7 +37,7 @@ public class CursolManager : MonoBehaviour
             }
             else
             {
-                sceneChange.nextSceneName = "";
+                sceneChange.nextSceneName = "Stage" + (StageSelectManager.GetNowSelectStageNum(true) + 1);
             }
             sceneChange.gameObject.SetActive(true);
         }

@@ -1439,6 +1439,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   circle: {fileID: 1843805694}
   square: {fileID: 663297946}
+  nextSceneName: GameClearScene
 --- !u!4 &1181262426
 Transform:
   m_ObjectHideFlags: 0
@@ -2731,6 +2732,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   circle: {fileID: 1843805694}
   square: {fileID: 663297946}
+  nextSceneName: GameOverScene
 --- !u!4 &1997161808
 Transform:
   m_ObjectHideFlags: 0
