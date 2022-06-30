@@ -35,6 +35,9 @@ public class Ball : MonoBehaviour
     [SerializeField] private float domeHitAccelerateValue;
     [SerializeField] private List<Material> stateMaterials;
 
+    // バリアと反射する際の反射率0 ~ 1で0に近いと法線をつかった反射ベクトルの計算に近づく
+    [SerializeField, Range(0, 1)] private float barrierReflectance;
+
     private MeshRenderer meshRenderer;
 
     //GetConponent用
@@ -128,6 +131,12 @@ public class Ball : MonoBehaviour
                 if (isThrow == false && velocity.magnitude <= 0) break;
 
                 Reflection(hitNormal, true);
+                // 速度ベクトルの大きさを取得
+                float speed = velocity.magnitude;
+
+                Vector3 newVelocity = Vector3.Lerp(velocity, other.gameObject.transform.forward * speed,barrierReflectance);
+                velocity = newVelocity;
+
                 state = BallState.THROWED_PLAYER;
                 sePlayManager.SESeting(SE[0], audioVolume);
                 break;
