@@ -32,6 +32,8 @@ public class CameraMotionManager : SingletonComponent<CameraMotionManager>
     // カメラが元夫位置に行くまでの時間(s)
     [SerializeField] private SkillCameraMotionInfo endMotionInfo;
 
+    [SerializeField] private float playerDistance;
+
     // カメラモーションに使用するデータ配列
     List<SkillCameraMotionInfo> motionInfos;
     // 現在使用しているカメラモーション配列の要素番号
@@ -47,8 +49,16 @@ public class CameraMotionManager : SingletonComponent<CameraMotionManager>
     Quaternion originRotate;
 
     Vector3 ultTriggerPosition;
-    Transform ultTriggerTransform;
-    [SerializeField] Transform playerTransform;
+
+    [SerializeField] private Transform playerTransform;
+    // カメラがもとの位置に戻る時間
+    [SerializeField] private float backOriginPositionSetTime;
+
+    // カメラがもとの位置に戻る経過時間
+    private float backOriginPositionTime;
+    private bool isBackOriginPosition;
+    // スキル発動時のカメラの座標を保持する用
+    private Vector3 skillCameraPosition;
 
     // Start is called before the first frame update
     void Start()
@@ -67,6 +77,9 @@ public class CameraMotionManager : SingletonComponent<CameraMotionManager>
         beforeSkillCameraMotionIndex = 0;
         motionElapsedTime = 0;
         beforeRotateAngle = 0;
+
+        backOriginPositionTime = 0;
+        isBackOriginPosition = false;
     }
 
     // Update is called once per frame
@@ -80,6 +93,19 @@ public class CameraMotionManager : SingletonComponent<CameraMotionManager>
         //UpdateUltMotion();
         UpdateSkillCameraMotion();
         preUtlMotionFlag.Update(Time.deltaTime);
+
+        if (isBackOriginPosition == false) return;
+        if(backOriginPositionTime >= backOriginPositionSetTime)
+        {
+            isBackOriginPosition = false;
+            backOriginPositionTime = 0;
+            Camera.main.transform.position = originPosition;
+            return;
+        }
+
+        Camera.main.transform.position = Vector3.Lerp(skillCameraPosition, originPosition, EaseOutExpo(backOriginPositionTime));
+
+        backOriginPositionTime += Time.deltaTime;
     }
 
     public void StartPreUltMotion(Vector3 triggerPosition,Transform ultTrigger)
@@ -87,7 +113,6 @@ public class CameraMotionManager : SingletonComponent<CameraMotionManager>
         preUtlMotionFlag.flag = true;
         preUtlMotionFlag.maxActiveTime = UltimateSkillManager.GetInstance().GetActiveFlagController().maxActiveTime;
         ultTriggerPosition = triggerPosition;
-        ultTriggerTransform = ultTrigger;
     }
 
     private void UpdateSkillCameraMotion()
@@ -108,7 +133,13 @@ public class CameraMotionManager : SingletonComponent<CameraMotionManager>
             // モーションデータがこれ以降無いならモーションフラグを終了させ初期化を行う
             if(currentSkillCameraMotionIndex > motionInfos.Count - 1)
             {
-                Initialize();
+                preUtlMotionFlag.Initialize();
+                currentSkillCameraMotionIndex = 0;
+                transform.position = originPosition;
+                transform.rotation = originRotate;
+                cameraTransform.rotation = originRotate;
+                beforeRotateAngle = 0;
+                motionElapsedTime = 0;
                 return;
             }
         }
@@ -152,6 +183,12 @@ public class CameraMotionManager : SingletonComponent<CameraMotionManager>
         }
         if(currentSkillCameraMotionIndex == 2)
         {
+            Vector3 playerPos = playerTransform.position + Vector3.up * UltimateSkillGenerator.GetInstance().GetCreatedObjectScale();
+            playerPos -= Vector3.forward * playerDistance;
+            playerPos.y = originPosition.y;
+
+            cameraTransform.position = playerPos;
+            skillCameraPosition = playerPos;
             cameraTransform.rotation = originRotate;
         }
 
@@ -196,5 +233,10 @@ public class CameraMotionManager : SingletonComponent<CameraMotionManager>
         cameraTransform.rotation = originRotate;
         beforeRotateAngle = 0;
         motionElapsedTime = 0;
+    }
+
+    public void BackOriginPosition()
+    {
+        isBackOriginPosition = true;
     }
 }

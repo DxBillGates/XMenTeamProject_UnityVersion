@@ -45,6 +45,7 @@ public class UltimateSkillManager : SingletonComponent<UltimateSkillManager>
         {
             Initialize();
             CameraMotionManager.GetInstance().Initialize();
+            CameraMotionManager.GetInstance().BackOriginPosition();
         }
 
         ultimateSkill.Update();

@@ -173,7 +173,9 @@ MonoBehaviour:
     startDegreeAngle: 190
     endDegreeAngle: 360
     easingType: 1
+  playerDistance: 50
   playerTransform: {fileID: 1439989470459578114}
+  backOriginPositionSetTime: 1
 --- !u!4 &117606633
 Transform:
   m_ObjectHideFlags: 0
