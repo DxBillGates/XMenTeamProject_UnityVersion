@@ -3347,6 +3347,10 @@ PrefabInstance:
       propertyPath: ultimateSkillManagerObject
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 2683838146694799363, guid: 41336c39d89ec8d4895a261b0d0b0d7c, type: 3}
+      propertyPath: domeTriggerAccelerationValue
+      value: 1.25
+      objectReference: {fileID: 0}
     - target: {fileID: 2683838146694799366, guid: 41336c39d89ec8d4895a261b0d0b0d7c, type: 3}
       propertyPath: m_Name
       value: Ball

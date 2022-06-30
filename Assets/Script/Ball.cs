@@ -33,6 +33,8 @@ public class Ball : MonoBehaviour
 
     // ドームにあたった際の加速度
     [SerializeField] private float domeHitAccelerateValue;
+
+    [SerializeField] private float domeTriggerAccelerationValue;
     [SerializeField] private List<Material> stateMaterials;
 
     // バリアと反射する際の反射率0 ~ 1で0に近いと法線をつかった反射ベクトルの計算に近づく
@@ -318,5 +320,11 @@ public class Ball : MonoBehaviour
                 isHitDome = true;
             }
         }
+    }
+
+    // ドーム発動時に加速させるための関数
+    public void AddTriggerSkillAcc()
+    {
+        velocity *= domeTriggerAccelerationValue;
     }
 }
