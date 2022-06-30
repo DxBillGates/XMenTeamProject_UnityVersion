@@ -123,9 +123,12 @@ public class Ball : MonoBehaviour
                 Reflection(hitNormal);
                 sePlayManager.SESeting(SE[0], audioVolume);
                 break;
+
+            // プレイヤーのバリアにあたったときの処理
             case "Barrier":
                 // 投げられた状態でそのボールが動いていれば
                 if (isThrow == false && velocity.magnitude <= 0) break;
+                HitStopManager.GetInstance().HitStop();
 
                 Reflection(hitNormal, true);
                 state = BallState.THROWED_PLAYER;
