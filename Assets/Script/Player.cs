@@ -36,6 +36,7 @@ public class Player : MonoBehaviour
 
     private Animator animator;
     private Vector3 triggerSkillPosition;
+    private float triggerSkillSize;
 
     [SerializeField] private float hitEnemyDamage;
 
@@ -66,6 +67,7 @@ public class Player : MonoBehaviour
 
         animator = GetComponent<Animator>();
         triggerSkillPosition = new Vector3();
+        triggerSkillSize = 0;
 
         sePlayManagerComponent = SEPlayManager.GetComponent<SEPlayManager>();
 
@@ -330,10 +332,20 @@ public class Player : MonoBehaviour
     private void UpdateUsingSkillPosition()
     {
         UltimateSkillManager ultimateSkillManager = UltimateSkillManager.GetInstance();
+        UltimateSkillGenerator ultimateSkillGenerator = UltimateSkillGenerator.GetInstance();
 
+        // ドーム終了時にもとの位置にイージングで戻る
         if (ultimateSkillManager.GetActiveFlagController().activeType == FlagActiveType.END)
         {
             FlagController endSkillFlagController = ultimateSkillManager.GetActiveFlagController();
+
+            if (endSkillFlagController.flag)
+            {
+                float lerpTime = endSkillFlagController.activeTime / endSkillFlagController.maxActiveTime;
+                Vector3 beforePosition = triggerSkillPosition + Vector3.up * triggerSkillSize;
+                transform.position = Vector3.Lerp(beforePosition, triggerSkillPosition, Easing.EaseOutExpo(lerpTime));
+            }
+
             if (endSkillFlagController.IsEndTrigger() == true)
             {
                 transform.position = triggerSkillPosition;
@@ -344,7 +356,7 @@ public class Player : MonoBehaviour
         if (ultimateSkillManager.IsUse() == false) return;
         if (ultimateSkillManager.GetActiveFlagController().activeType != FlagActiveType.ACTIVE) return;
 
-        UltimateSkillGenerator ultimateSkillGenerator = UltimateSkillGenerator.GetInstance();
+        triggerSkillSize = ultimateSkillGenerator.GetCreatedObjectScale();
         transform.position = ultimateSkillGenerator.GetCreatedObjectPosition() + Vector3.up * ultimateSkillGenerator.GetCreatedObjectScale();
     }
 }
