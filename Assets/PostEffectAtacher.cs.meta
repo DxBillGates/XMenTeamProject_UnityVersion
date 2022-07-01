@@ -3,7 +3,10 @@ guid: 4344b21e06e9a9b4490d303b7cabe6fe
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - highLumiMat: {fileID: 2100000, guid: 66d85d07ecc1b8545976b50f4ea39e6e, type: 2}
+  - blurMat: {fileID: 2100000, guid: 76f992856837b074c8fe48aacff707e0, type: 2}
+  - compoMat: {fileID: 2100000, guid: 3a2a67f2adcea20419afce44b0011db6, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
