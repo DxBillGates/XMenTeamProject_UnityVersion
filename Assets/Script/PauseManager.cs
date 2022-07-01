@@ -5,6 +5,8 @@ using UnityEngine;
 public enum PauseButtonType
 {
     NONE,
+    BGM_VOLUME,
+    SE_VOLUME,
     TITLE,
     RESTART,
     STAGE_SELECT,
@@ -19,21 +21,38 @@ public class PauseManager : MonoBehaviour
     [SerializeField] private List<PauseButtonType> buttonInfos;
     private int currentButtonIndex;
     private bool isInputVerticalButton;
+    private bool isInputHorizontalButton;
+
+    [SerializeField] private UnityEngine.UI.Text testTextUI;
+    [SerializeField] private List<UnityEngine.UI.Text> texts;
+
+    // ポーズ中の操作が何秒後から可能か
+    [SerializeField] private float enabledTime;
+
+    // ポーズ中の経過時間
+    private float pauseTime;
 
     // Start is called before the first frame update
     void Start()
     {
-        isPause = false;
-        isInputVerticalButton = false;
-        currentButtonIndex = 0;
+        Initialize();
     }
 
     // Update is called once per frame
     void Update()
     {
         CheckPauseButton();
+        testTextUI.gameObject.SetActive(isPause);
 
         if (isPause == false) return;
+
+        UpdateAudioVolumeUI();
+        UpdateUIColor();
+
+        pauseTime += Time.deltaTime;
+
+        // ポーズ中の経過時間が操作可能時間に満たしていないなら操作はできないようにする
+        if (pauseTime < enabledTime) return;
 
         UpdateCurrentButtonIndex();
 
@@ -54,12 +73,25 @@ public class PauseManager : MonoBehaviour
         }
     }
 
+    private void Initialize()
+    {
+        isPause = false;
+        isInputVerticalButton = isInputHorizontalButton = false;
+        currentButtonIndex = 0;
+        pauseTime = 0;
+    }
+
     private void CheckPauseButton()
     {
-        if(Input.GetButtonDown("Pause"))
+        if (Input.GetButtonDown("Pause"))
         {
-            isPause = !isPause;
-            //GameTimeManager.GetInstance().SetTime(System.Convert.ToInt32(isPause));
+            bool backupIsPause = isPause = !isPause;
+
+            // trueだと1になるから!をつける
+            GameTimeManager.GetInstance().SetTime(System.Convert.ToInt32(!isPause));
+
+            Initialize();
+            isPause = backupIsPause;
         }
     }
 
@@ -68,7 +100,7 @@ public class PauseManager : MonoBehaviour
     {
         if (isPause == false) return PauseButtonType.NONE;
 
-        if(Input.GetButtonDown("PlayerAbility"))
+        if (Input.GetButtonDown("PlayerAbility"))
         {
             return buttonInfos[currentButtonIndex];
         }
@@ -85,9 +117,11 @@ public class PauseManager : MonoBehaviour
     private void UpdateCurrentButtonIndex()
     {
         float inputVertical = Input.GetAxisRaw("Vertical");
+        if (Input.GetAxisRaw("VerticalButton") != 0) inputVertical = Input.GetAxisRaw("VerticalButton");
+
         if (inputVertical != 0 && isInputVerticalButton == false)
         {
-            currentButtonIndex += inputVertical > 0 ? 1 : -1;
+            currentButtonIndex += inputVertical > 0 ? -1 : 1;
 
             if (currentButtonIndex < 0) currentButtonIndex = 0;
             if (currentButtonIndex > buttonInfos.Count - 1) currentButtonIndex = buttonInfos.Count - 1;
@@ -98,27 +132,73 @@ public class PauseManager : MonoBehaviour
         if (inputVertical == 0) isInputVerticalButton = false;
     }
 
+    // 選択されているUIの色を変更する
+    private void UpdateUIColor()
+    {
+        for (int i = 0; i < texts.Count; ++i)
+        {
+            if (i == currentButtonIndex)
+            {
+                texts[i].color = Color.red;
+            }
+            else
+            {
+                texts[i].color = Color.gray;
+            }
+        }
+    }
+
+    private void UpdateAudioVolumeUI()
+    {
+        if (isPause == false) return;
+        float inputHorizontal = Input.GetAxisRaw("Horizontal");
+        if (Input.GetAxisRaw("HorizontalButton") != 0) inputHorizontal = Input.GetAxisRaw("HorizontalButton");
+
+        if(inputHorizontal != 0 && isInputHorizontalButton == false)
+        {
+            int increaseValue = inputHorizontal > 0 ? 1 : -1;
+            if(currentButtonIndex == (int)PauseButtonType.BGM_VOLUME - 1)
+            {
+                AudioManager.GetInstance().IncreaseBGMMasterVolumeLevel(increaseValue);
+            }
+            if(currentButtonIndex == (int)PauseButtonType.SE_VOLUME - 1)
+            {
+                AudioManager.GetInstance().IncreaseSEMasterVolumeLevel(increaseValue);
+            }
+
+            isInputHorizontalButton = true;
+        }
+
+        if (inputHorizontal == 0) isInputHorizontalButton = false;
+
+        texts[(int)PauseButtonType.BGM_VOLUME - 1].text = "BGMVolume" + " < " + AudioManager.GetInstance().GetBGMMasterVolumeLevel() + " > ";
+        texts[(int)PauseButtonType.SE_VOLUME - 1].text = "SEVolume" + " < " + AudioManager.GetInstance().GetSEMasterVolumeLevel() + " > ";
+    }
+
     // タイトルへのUIを押した際に実行する内容
     private void OnClickTitle()
     {
-
+        UnityEngine.SceneManagement.SceneManager.LoadScene("TitleScene");
     }
 
     // リスタートのUIを押した際に実行する内容
     private void OnClickRestart()
     {
-
+        UnityEngine.SceneManagement.Scene currentScene = UnityEngine.SceneManagement.SceneManager.GetActiveScene();
+        UnityEngine.SceneManagement.SceneManager.LoadScene(currentScene.name);
     }
 
     // ステージセレクトのUIを押した際に実行する内容
     private void OnClickStageSelect()
     {
-
+        UnityEngine.SceneManagement.SceneManager.LoadScene("StageSelectScene");
     }
 
     // 戻るのUIを押した際に実行する内容
     private void OnClickBack()
     {
         isPause = !isPause;
+        // trueだと1になるから!をつける
+        GameTimeManager.GetInstance().SetTime(System.Convert.ToInt32(!isPause));
     }
 }

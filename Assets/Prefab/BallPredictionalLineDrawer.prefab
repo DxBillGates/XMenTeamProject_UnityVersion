@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5001082493362104408
+--- !u!1 &5945315821136443496
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,40 +8,44 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3225347536771315694}
-  - component: {fileID: 8319087964817104874}
+  - component: {fileID: 5945315821136443502}
+  - component: {fileID: 5945315821136443497}
   m_Layer: 0
-  m_Name: Prefab_SEPlayManager
-  m_TagString: SEPlayManager
+  m_Name: BallPredictionalLineDrawer
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3225347536771315694
+--- !u!4 &5945315821136443502
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5001082493362104408}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 25.76039, y: -2778.3706, z: 3405.2856}
+  m_GameObject: {fileID: 5945315821136443496}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8319087964817104874
+--- !u!114 &5945315821136443497
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5001082493362104408}
+  m_GameObject: {fileID: 5945315821136443496}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5654161c5d2e9a4780dba54f79d3885, type: 3}
+  m_Script: {fileID: 11500000, guid: 7a45524d108f0794a910fed9e3362c21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SEPlayer: {fileID: 1912455632646025281, guid: ba7697a46ed1e8f4b9ed974c618c8e25, type: 3}
+  maxLength: 500
+  objectDistance: 10
+  lineObjectPrefab: {fileID: 13741350939399065, guid: 3470c9c0d3cc9c94585c5006d86f4866, type: 3}
+  lineObjectCount: 20
+  raycastCount: 2

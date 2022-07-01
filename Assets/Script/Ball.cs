@@ -42,9 +42,6 @@ public class Ball : MonoBehaviour
 
     private MeshRenderer meshRenderer;
 
-    //GetConponent用
-    private SEPlayManager sePlayManager;
-
     private Vector3 velocity;
     private bool isThrow;
     public BallState state { get; private set; }
@@ -70,8 +67,6 @@ public class Ball : MonoBehaviour
         isHitWall = false;
         isHitDome = false;
         isInDome = false;
-
-        sePlayManager = SEPlayManager.GetComponent<SEPlayManager>();
 
         trail = transform.GetChild(0).gameObject;
         trailRenderer = trail.GetComponent<TrailRenderer>();
@@ -126,7 +121,7 @@ public class Ball : MonoBehaviour
                 }
                 isHitWall = true;
                 Reflection(hitNormal);
-                sePlayManager.SESeting(SE[0], audioVolume);
+                AudioManager.GetInstance().PlayAudio(SE[0], MyAudioType.SE, audioVolume, false);
                 break;
 
             // プレイヤーのバリアにあたったときの処理
@@ -143,7 +138,7 @@ public class Ball : MonoBehaviour
                 velocity = newVelocity;
 
                 state = BallState.THROWED_PLAYER;
-                sePlayManager.SESeting(SE[0], audioVolume);
+                AudioManager.GetInstance().PlayAudio(SE[0], MyAudioType.SE, audioVolume, false);
                 break;
             case "EnemyBarrier":
                 // 投げられた状態でそのボールが動いていれば
@@ -151,7 +146,7 @@ public class Ball : MonoBehaviour
                 if (state == BallState.HOLD_PLAYER) break;
                 Reflection(hitNormal, true);
                 state = BallState.THROWED_ENEMY;
-                sePlayManager.SESeting(SE[0], audioVolume);
+                AudioManager.GetInstance().PlayAudio(SE[0], MyAudioType.SE, audioVolume, false);
                 break;
         }
     }

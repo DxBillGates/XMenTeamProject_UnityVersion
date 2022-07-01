@@ -10,9 +10,6 @@ public class FollowEnemy : Enemy
     {
         targetObject = GameObject.FindGameObjectWithTag("Player");
 
-        GameObject SEPlayManager = GameObject.FindGameObjectWithTag("SEPlayManager");
-        sePlayManagerComponent = SEPlayManager.GetComponent<SEPlayManager>();
-
         // animetor
         GameObject temp = transform.root.Find("EnemyModel").gameObject;
         animator = temp.GetComponent<Animator>();

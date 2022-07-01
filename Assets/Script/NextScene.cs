@@ -9,7 +9,7 @@ public class NextScene : MonoBehaviour
     [SerializeField] RectTransform circle;
     [SerializeField] RectTransform square;
     //遷移先のシーン名
-    [SerializeField] string nextSceneName;
+    [SerializeField] public string nextSceneName;
 
     //演出タイマー
     float timer = 0;

@@ -33,10 +33,6 @@ public class BarrierEnemy : Enemy
         // ボールの配列用
         Array.Resize(ref ballDir, change_pose_frame);
 
-        // SE用
-        GameObject SEPlayManager = GameObject.FindGameObjectWithTag("SEPlayManager");
-        sePlayManagerComponent = SEPlayManager.GetComponent<SEPlayManager>();
-
         // animetor
         GameObject temp = transform.root.Find("EnemyModel").gameObject;
         animator = temp.GetComponent<Animator>();
