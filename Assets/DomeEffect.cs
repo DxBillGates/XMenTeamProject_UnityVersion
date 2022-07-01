@@ -7,9 +7,9 @@ public class DomeEffect : MonoBehaviour
 
     [SerializeField] Material material;
 
-    [Range(0,0.999f)] float threshold{ get; set; }
+    float threshold;
 
-     [Range(0.001f,1)]float glowIntencity { get; set; }
+    float glowIntencity;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,4 +23,14 @@ public class DomeEffect : MonoBehaviour
         material.SetFloat("_Threshold", threshold);
         material.SetFloat("_GlowCutoff", glowIntencity);
     }
+
+    public void SetThreshold(float t)
+    {
+        threshold=t<0?0:t>0.999f?0.999f:t;
+    }
+    public void SetGlowIntencity(float i)
+    {
+        glowIntencity=i<0?0:i>1?1:i;
+    }
+
 }
