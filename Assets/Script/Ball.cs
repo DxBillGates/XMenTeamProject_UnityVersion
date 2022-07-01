@@ -162,7 +162,6 @@ public class Ball : MonoBehaviour
 
         if(Physics.Raycast(transform.position,direction,out RaycastHit raycastHit))
         {
-            Debug.Log(raycastHit.collider.tag + " : " + raycastHit.distance);
             if (raycastHit.collider.CompareTag("Wall") && raycastHit.distance < transform.localScale.x)
             {
                 Reflection(raycastHit.normal, false, false);
