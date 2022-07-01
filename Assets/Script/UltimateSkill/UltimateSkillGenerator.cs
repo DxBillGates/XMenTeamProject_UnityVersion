@@ -39,7 +39,7 @@ public class UltimateSkillGenerator : SingletonComponent<UltimateSkillGenerator>
 
         bool isReturn = false;
         Vector3 setScale = Vector3.Lerp(startLerpScale, endLerpScale, lerpTime);
-        if(lerpTime > 1)
+        if (lerpTime > 1)
         {
             isReturn = true;
             setScale = endLerpScale;
@@ -57,31 +57,31 @@ public class UltimateSkillGenerator : SingletonComponent<UltimateSkillGenerator>
         isAddScale = true;
     }
 
-    public void CreateSkillObject(Vector3 position,float scale,float setMaxLerpTime)
+    public void CreateSkillObject(Vector3 position, float scale, float setMaxLerpTime)
     {
         createdUltimateSkillObject = Instantiate(prefabUltimateSkillObject);
         createdUltimateSkillObject.transform.position = position;
         createdUltimateSkillObject.transform.localScale = new Vector3();
 
         startLerpScale = new Vector3();
-        endLerpScale = new Vector3(scale, scale,scale);
+        endLerpScale = new Vector3(scale, scale, scale);
         lerpTime = 0;
         maxLerpTime = setMaxLerpTime;
     }
 
     public void DestroySkillObject()
     {
-        if(createdUltimateSkillObject)
+        if (createdUltimateSkillObject)
         {
             //�u���[����Intencity��0�ɂ���
             domeEffectControl.SetBloom(0f);
 
-             int wallCount = FieldObjectManager.GetInstance().GetFieldObjectsCount();
+            int wallCount = FieldObjectManager.GetInstance().GetFieldObjectsCount();
 
-        for(int i = 0;i < wallCount;++i)
-        {
-            FieldObjectManager.GetInstance().GetWallMaterial(i).SetNormalMaterial();
-        }
+            for (int i = 0; i < wallCount; ++i)
+            {
+                FieldObjectManager.GetInstance().GetWallMaterial(i).SetNormalMaterial();
+            }
 
 
             Destroy(createdUltimateSkillObject);

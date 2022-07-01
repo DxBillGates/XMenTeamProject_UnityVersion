@@ -46,6 +46,7 @@ public class UltimateSkillManager : SingletonComponent<UltimateSkillManager>
             Initialize();
             CameraMotionManager.GetInstance().Initialize();
             CameraMotionManager.GetInstance().BackOriginPosition();
+            ultimateSkill.End();
         }
 
         ultimateSkill.Update();
@@ -73,7 +74,6 @@ public class UltimateSkillManager : SingletonComponent<UltimateSkillManager>
         activeFlagController.Update(Time.deltaTime);
         if (activeFlagController.IsEndTrigger() == true)
         {
-            ultimateSkill.End();
             endActiveFlagController.flag = true;
         }
 
