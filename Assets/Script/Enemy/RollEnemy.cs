@@ -31,6 +31,7 @@ public class RollEnemy : Enemy
     // 回転の挙動
     protected void Rolling()
     {
+        rollingSpeed *= GameTimeManager.GetInstance().GetTime();
         // オブジェクトを回転させる
         transform.Rotate(0, rollingSpeed, 0);
     }
