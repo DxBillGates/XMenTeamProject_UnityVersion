@@ -219,7 +219,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wallPrefab: {fileID: 3279621897873870784, guid: 39980861749c57645be43d9ce2fc0a9e, type: 3}
-  wallValue: 4
+  wallValue: 6
   isRotate: 1
   reCreate: 0
 --- !u!4 &271495748
