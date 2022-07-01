@@ -33,7 +33,12 @@ public class Ball : MonoBehaviour
 
     // ドームにあたった際の加速度
     [SerializeField] private float domeHitAccelerateValue;
+
+    [SerializeField] private float domeTriggerAccelerationValue;
     [SerializeField] private List<Material> stateMaterials;
+
+    // バリアと反射する際の反射率0 ~ 1で0に近いと法線をつかった反射ベクトルの計算に近づく
+    [SerializeField, Range(0, 1)] private float barrierReflectance;
 
     private MeshRenderer meshRenderer;
 
@@ -131,6 +136,12 @@ public class Ball : MonoBehaviour
                 HitStopManager.GetInstance().HitStop();
 
                 Reflection(hitNormal, true);
+                // 速度ベクトルの大きさを取得
+                float speed = velocity.magnitude;
+
+                Vector3 newVelocity = Vector3.Lerp(velocity, other.gameObject.transform.forward * speed,barrierReflectance);
+                velocity = newVelocity;
+
                 state = BallState.THROWED_PLAYER;
                 sePlayManager.SESeting(SE[0], audioVolume);
                 break;
@@ -153,6 +164,15 @@ public class Ball : MonoBehaviour
 
         isThrow = true;
         state = setState;
+
+        if(Physics.Raycast(transform.position,direction,out RaycastHit raycastHit))
+        {
+            Debug.Log(raycastHit.collider.tag + " : " + raycastHit.distance);
+            if (raycastHit.collider.CompareTag("Wall") && raycastHit.distance < transform.localScale.x)
+            {
+                Reflection(raycastHit.normal, false, false);
+            }
+        }
     }
 
     // ボールの移動処理
@@ -303,5 +323,11 @@ public class Ball : MonoBehaviour
                 isHitDome = true;
             }
         }
+    }
+
+    // ドーム発動時に加速させるための関数
+    public void AddTriggerSkillAcc()
+    {
+        velocity *= domeTriggerAccelerationValue;
     }
 }

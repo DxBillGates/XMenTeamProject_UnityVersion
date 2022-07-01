@@ -246,6 +246,7 @@ public class Player : MonoBehaviour
 
         if (isUseSkill)
         {
+            ballComponent.AddTriggerSkillAcc();
             triggerSkillPosition = transform.position;
             sePlayManagerComponent.SESeting(SE[1]);
         }
