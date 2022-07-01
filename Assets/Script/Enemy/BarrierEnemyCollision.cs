@@ -29,6 +29,8 @@ public class BarrierEnemyCollision : MonoBehaviour
             ballComponent = collision.gameObject.GetComponent<Ball>();
             if (ballComponent.GetSpeed() > 0)
             {
+                barrierEnemy.HitBall = ballComponent;
+
                 //êeÇ≈îªíË
                 barrierEnemy.KnockBack(collision);
             }

@@ -19,6 +19,12 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] protected List<AudioClip> SE;
 
+    // 敵のダメージ時のパーティクル
+    [SerializeField] protected ParticleSystem damageParticle;
+    // 敵の撃破時のパーティクル
+    [SerializeField] protected ParticleSystem deadParticle;
+
+
     //player入れる
     protected GameObject targetObject;
 
@@ -27,6 +33,9 @@ public class Enemy : MonoBehaviour
 
     // アニメーションの速度変更用
     protected Animator animator;
+
+    // 当たったボールを変数に格納
+    protected Ball hitBall;
 
     // Start is called before the first frame update
     void Start()
@@ -118,8 +127,11 @@ public class Enemy : MonoBehaviour
 
         AudioManager.GetInstance().PlayAudio(SE[0], MyAudioType.SE, 1, false);
 
-        if (hp < 0)
+        if (hp <= 0)
         {
+            // 撃破時のパーティクル再生
+            Instantiate(deadParticle, transform.position, transform.rotation);
+
             EnemyManager.DecrementAliveCount();
             Destroy(transform.root.gameObject);
 
@@ -131,6 +143,14 @@ public class Enemy : MonoBehaviour
             {
                 UltimateSkillManager.GetInstance().AddGauge();
             }
+        }
+        else
+        { 
+            // 当たったボールからのベクトルを計算
+            Vector3 atBallVector = hitBall.transform.position - transform.position;
+
+            // ダメージ時のパーティクル再生
+            Instantiate(damageParticle, transform.position, Quaternion.Inverse(Quaternion.LookRotation(atBallVector)));
         }
     }
 
@@ -146,5 +166,15 @@ public class Enemy : MonoBehaviour
         // 壁ずりベクトルを計算
         Vector3 moveVector = movedVector - Vector3.Dot(movedVector, hitNormal) * hitNormal;
         transform.position += moveVector;
+    }
+
+    public ParticleSystem GetDamageParticle
+    {
+        get { return damageParticle; }
+    }
+
+    public Ball HitBall
+    {
+        set { hitBall = value; }
     }
 }

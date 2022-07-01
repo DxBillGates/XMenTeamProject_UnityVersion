@@ -96,6 +96,9 @@ public class RollEnemy : Enemy
             // ボールに当たったときの処理
             if (ballComponent.GetSpeed() > 0)
             {
+                // 親クラスでの処理用に変数に格納
+                hitBall = ballComponent;
+
                 // ボールを投げ返す方向を指定
                 Vector3 throwVector = targetObject.transform.position - transform.position;
                 throwVector.Normalize();

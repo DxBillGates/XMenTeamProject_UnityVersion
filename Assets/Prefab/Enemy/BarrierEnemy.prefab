@@ -69,6 +69,8 @@ MonoBehaviour:
   dontHitDistance: 20
   SE:
   - {fileID: 8300000, guid: 45bdfac5f1e4ae14fba0862eaea30f42, type: 3}
+  damageParticle: {fileID: -6852552541218724442, guid: 253e467a5fde65b4499e365c3a706507, type: 3}
+  deadParticle: {fileID: -6852552541218724442, guid: 253e467a5fde65b4499e365c3a706507, type: 3}
   playerToDistance: 20
   change_pose_frame: 120
   barrier: {fileID: 3447620141785347147}

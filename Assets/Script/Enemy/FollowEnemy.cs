@@ -43,6 +43,9 @@ public class FollowEnemy : Enemy
             // ボールに当たったときの処理
             if (ballComponent.GetSpeed() > 0)
             {
+                // 親クラスでの処理用に変数に格納
+                hitBall = ballComponent;
+
                 KnockBack(collision);
             }
         }

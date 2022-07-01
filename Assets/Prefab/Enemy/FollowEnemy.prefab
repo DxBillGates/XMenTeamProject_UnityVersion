@@ -82,6 +82,8 @@ MonoBehaviour:
   dontHitDistance: 10
   SE:
   - {fileID: 8300000, guid: 45bdfac5f1e4ae14fba0862eaea30f42, type: 3}
+  damageParticle: {fileID: -6852552541218724442, guid: 3eefe83feb5262242a5a5856b45f7f2c, type: 3}
+  deadParticle: {fileID: -6852552541218724442, guid: 253e467a5fde65b4499e365c3a706507, type: 3}
 --- !u!1001 &6377750239660038466
 PrefabInstance:
   m_ObjectHideFlags: 0
