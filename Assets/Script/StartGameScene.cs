@@ -5,16 +5,16 @@ using UnityEngine;
 public class StartGameScene : MonoBehaviour
 {
     [SerializeField] RectTransform square;
-    [SerializeField] RectTransform cd3; //ƒJƒEƒ“ƒgƒ_ƒEƒ“3
-    [SerializeField] RectTransform cd2; //ƒJƒEƒ“ƒgƒ_ƒEƒ“2
-    [SerializeField] RectTransform cd1; //ƒJƒEƒ“ƒgƒ_ƒEƒ“1
-    [SerializeField] RectTransform cdGO; //ƒJƒEƒ“ƒgƒ_ƒEƒ“GO
+    [SerializeField] RectTransform cd3; //ã‚«ã‚¦ãƒ³ãƒˆãƒ€ã‚¦ãƒ³3
+    [SerializeField] RectTransform cd2; //ã‚«ã‚¦ãƒ³ãƒˆãƒ€ã‚¦ãƒ³2
+    [SerializeField] RectTransform cd1; //ã‚«ã‚¦ãƒ³ãƒˆãƒ€ã‚¦ãƒ³1
+    [SerializeField] RectTransform cdGO; //ã‚«ã‚¦ãƒ³ãƒˆãƒ€ã‚¦ãƒ³GO
 
     float timer = 0;
     float StartUpdateTime = 4.0f;
     Vector3 blackSquareInitScale = new Vector3((float)Screen.width / 100 + 1, (float)Screen.height / 25, 1);
     Vector3 blackSquareScale = new Vector3(1, 1, 1);
-    bool isEnd = false;//‰‰oI‚í‚Á‚½‚©
+    bool isEnd = false;//æ¼”å‡ºçµ‚ã‚ã£ãŸã‹
 
     // Start is called before the first frame update
     void Start()
@@ -24,18 +24,18 @@ public class StartGameScene : MonoBehaviour
         square.transform.localScale = blackSquareInitScale;
         blackSquareScale = blackSquareInitScale;
         isEnd = false;
-        //ƒQ[ƒ€ŠÔ–ß‚·
+        //ã‚²ãƒ¼ãƒ æ™‚é–“æˆ»ã™
         GameTimeManager.GetInstance().SetTime(0);
     }
 
     // Update is called once per frame
     void Update()
     {
-        //ƒ^ƒCƒ}[XV
+        //ã‚¿ã‚¤ãƒãƒ¼æ›´æ–°
         timer += Time.deltaTime;
 
         if (timer >= StartUpdateTime && isEnd == false) {
-            //ƒQ[ƒ€ŠÔ–ß‚·
+            //ã‚²ãƒ¼ãƒ æ™‚é–“æˆ»ã™
             GameTimeManager.GetInstance().SetTime(1);
             isEnd = true;
         }
@@ -48,7 +48,7 @@ public class StartGameScene : MonoBehaviour
 
         square.transform.localScale = blackSquareScale;
 
-        //ƒJƒEƒ“ƒgƒ_ƒEƒ“ƒXƒvƒ‰ƒCƒg‘S•”ƒAƒTƒCƒ“‚³‚ê‚Ä‚¢‚½‚çƒJƒEƒ“ƒgƒ_ƒEƒ“•\¦
+        //ã‚«ã‚¦ãƒ³ãƒˆãƒ€ã‚¦ãƒ³ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆå…¨éƒ¨ã‚¢ã‚µã‚¤ãƒ³ã•ã‚Œã¦ã„ãŸã‚‰ã‚«ã‚¦ãƒ³ãƒˆãƒ€ã‚¦ãƒ³è¡¨ç¤º
         if (cd3 != null && cd2 != null && cd1 != null && cdGO != null)
         {
             UpdateCountDown();
@@ -57,7 +57,7 @@ public class StartGameScene : MonoBehaviour
 
     void UpdateCountDown()
     {
-        //ƒJƒEƒ“ƒgƒ_ƒEƒ“‘O
+        //ã‚«ã‚¦ãƒ³ãƒˆãƒ€ã‚¦ãƒ³å‰
         if (timer < 1)
         {
             cd3.transform.position = new Vector3(Screen.width + cd3.sizeDelta.x * 2, Screen.height / 2);
@@ -135,7 +135,7 @@ public class StartGameScene : MonoBehaviour
         }
     }
 
-    //‚Ù‚ñ‚Æ‚Í“¯‚¶ŠÖ”2‚Â‘‚­‚Ì—Ç‚­‚È‚¢‚¯‚Ç...
+    //ã»ã‚“ã¨ã¯åŒã˜é–¢æ•°2ã¤æ›¸ãã®è‰¯ããªã„ã‘ã©...
     float EaseOutExpo(float s, float e, float t)
     {
         if (t < 0) { t = 0; }
