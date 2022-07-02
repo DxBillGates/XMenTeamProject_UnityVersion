@@ -10,12 +10,16 @@ public class BarrierHitEffect : MonoBehaviour
     [SerializeField] GameObject gameObject;
     float distance;
     float count;
+    [SerializeField] float AddSpeed; 
+    [SerializeField] float maxSize; 
     bool isEffect;
     // Start is called before the first frame update
     void Start()
     {
         distance = 27.0f;
         count = 0.0f;
+        AddSpeed = 20.0f;
+        maxSize = 100.0f;
         gameObject.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
 
         isEffect = false;
@@ -29,11 +33,11 @@ public class BarrierHitEffect : MonoBehaviour
         {
             isEffect = true;
         }
+        #endregion
         if(isEffect)
         {
-            HitEffect(10.0f,100.0f,Vector3.zero);
+            HitEffect(AddSpeed, maxSize, Vector3.zero);
         }
-        #endregion
 
         material.SetFloat("_Distance", distance);
     }
