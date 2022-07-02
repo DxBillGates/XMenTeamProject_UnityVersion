@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class EnemyParticleDestroy : MonoBehaviour
@@ -16,6 +17,17 @@ public class EnemyParticleDestroy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        var particleArray = gameObject.GetComponentsInChildren<ParticleSystem>().ToList();
+
+        foreach(var par in particleArray)
+        {
+            // パーティクルの実行速度にヒットストップ適用
+            var parMain = par.main;
+            parMain.simulationSpeed = GameTimeManager.GetInstance().GetTime();
+
+
+        }
         // パーティクルが終わった時に消す
         if(particle.isStopped)
         {
