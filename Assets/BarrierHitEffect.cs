@@ -65,4 +65,9 @@ public class BarrierHitEffect : MonoBehaviour
             gameObject.transform.localScale = Vector3.zero;
         }
     }
+
+    public void IsOpen()
+    {
+        isEffect = true;
+    }
 }
