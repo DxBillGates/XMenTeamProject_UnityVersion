@@ -8,35 +8,66 @@ public class BarrierHitEffect : MonoBehaviour
     [SerializeField] Material material;
     //マテリアルを保持しているオブジェクト
     [SerializeField] GameObject gameObject;
+    struct HitEffect
+    {
+        public GameObject cloneObject;
+        public float count;
+        public bool isEffect;
+
+    }
+    int num = 3;
+    HitEffect[] hitEffect;
+
     float distance;
-    float count;
-    [SerializeField] float AddSpeed; 
-    [SerializeField] float maxSize; 
-    bool isEffect;
+    //拡大する速さ
+    [SerializeField] float AddSpeed;
+    //エフェクトの拡大する大きさ
+    [SerializeField] float MaxScale;
+
     // Start is called before the first frame update
     void Start()
     {
-        distance = 27.0f;
-        count = 0.0f;
-        AddSpeed = 20.0f;
-        maxSize = 100.0f;
-        gameObject.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+        hitEffect = new HitEffect[5];
+        for (int i = 0; i < num; i++)
+        {
+            hitEffect[i].count = 0.0f;
+            hitEffect[i].isEffect = false;
 
-        isEffect = false;
+        }
+        distance = 27.0f;
+        AddSpeed = 10.0f;
+        MaxScale = 100.0f;
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        #region テスト
+        for (int i = 0; i < num; i++)
+        {
+
+            if (hitEffect[i].isEffect)
+            {
+                if (hitEffect[i].count < AddSpeed)
+                {
+                    hitEffect[i].count++;
+                    //値の制御
+                    float result = Mathf.Lerp(0.0f, MaxScale, hitEffect[i].count / AddSpeed);
+                    //拡大
+                    hitEffect[i].cloneObject.transform.localScale = new Vector3(result, result, result);
+                }
+                else
+                {
+                    hitEffect[i].isEffect = false;
+                    Destroy(hitEffect[i].cloneObject);
+                    hitEffect[i].count = 0.0f;
+                }
+            }
+        }
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            isEffect = true;
-        }
-        #endregion
-        if(isEffect)
-        {
-            HitEffect(AddSpeed, maxSize, Vector3.zero);
+            Use(Vector3.zero);
         }
 
         material.SetFloat("_Distance", distance);
@@ -46,28 +77,17 @@ public class BarrierHitEffect : MonoBehaviour
     {
         distance = f < 0 ? 0 : f > 100.0f ? 100.0f : f;
     }
-
-    public void HitEffect(float speed, float MaxScale,Vector3 position)
+    public void Use(Vector3 position)
     {
-        //カウントの値がspeedを超えないよう制御
-        count++;
-        //値の制御
-        float result = Mathf.Lerp(0.0f, MaxScale, count / speed);
-        //座標指定
-        gameObject.transform.position = position;
-        //拡大
-        gameObject.transform.localScale = new Vector3(result, result, result);
-        //終了
-        if(count>speed)
+        for (int i = 0; i < num; i++)
         {
-            isEffect = false;
-            count = 0.0f;
-            gameObject.transform.localScale = Vector3.zero;
-        }
-    }
 
-    public void IsOpen()
-    {
-        isEffect = true;
+            if (!hitEffect[i].isEffect)
+            {
+                hitEffect[i].isEffect = true;
+                hitEffect[i].cloneObject = Instantiate(gameObject, position, new Quaternion(0, 1, 0, 0));
+                break;
+            }
+        }
     }
 }
