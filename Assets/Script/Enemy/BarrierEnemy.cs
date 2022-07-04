@@ -123,7 +123,7 @@ public class BarrierEnemy : Enemy
             // 0ƒxƒNƒgƒ‹‚Å‚Í‚È‚¢‚Æ‚«‚É‘ã“ü
             if (lookDirection != Vector3.zero) transform.rotation = Quaternion.LookRotation(lookDirection);
 
-            ++ballBeforeNum;
+            ballBeforeNum += (int)GameTimeManager.GetInstance().GetTime();
             if (ballBeforeNum >= ballDir.Length)
             {
                 ballBeforeNum = 0;
