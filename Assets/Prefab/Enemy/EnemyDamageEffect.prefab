@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 311882450604037216}
   - component: {fileID: -6852552541218724442}
   - component: {fileID: -2569646420681565170}
-  - component: {fileID: 7689593084340766144}
+  - component: {fileID: 200896210628271211}
   m_Layer: 0
   m_Name: EnemyDamageEffect
   m_TagString: Untagged
@@ -4813,7 +4813,7 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!114 &7689593084340766144
+--- !u!114 &200896210628271211
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
