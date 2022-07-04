@@ -41,6 +41,8 @@ public class UltimateSkillManager : SingletonComponent<UltimateSkillManager>
     // Update is called once per frame
     void Update()
     {
+        if (PauseManager.GetInstance().IsPause() == true) return;
+
         if (endActiveFlagController.IsEndTrigger() == true)
         {
             Initialize();
@@ -63,7 +65,9 @@ public class UltimateSkillManager : SingletonComponent<UltimateSkillManager>
         if (isUse == false) return;
 
         // �X�L�������O�̃t���O�X�V����
-        preActiveFlagController.Update(Time.deltaTime);
+        float deltaTime = Time.deltaTime;
+
+        preActiveFlagController.Update(deltaTime);
         if (preActiveFlagController.IsEndTrigger() == true)
         {
             activeFlagController.maxActiveTime = ultimateSkill.GetCurrentLevelActiveTime();
@@ -71,7 +75,7 @@ public class UltimateSkillManager : SingletonComponent<UltimateSkillManager>
         }
 
         // �X�L���������̃t���O�X�V����
-        activeFlagController.Update(Time.deltaTime);
+        activeFlagController.Update(deltaTime);
         if (activeFlagController.IsEndTrigger() == true)
         {
             endActiveFlagController.flag = true;
@@ -79,7 +83,7 @@ public class UltimateSkillManager : SingletonComponent<UltimateSkillManager>
 
 
         // �X�L��������̃t���O��������
-        endActiveFlagController.Update(Time.deltaTime);
+        endActiveFlagController.Update(deltaTime);
     }
 
     // �g�p�ꏊ���w�肵�ăX�L���𔭓�����

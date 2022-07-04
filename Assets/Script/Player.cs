@@ -14,7 +14,6 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject SEPlayManager;
     [SerializeField] private List<AudioClip> SE;
 
-
     private float hp;
 
     private Vector3 velocity;
@@ -185,6 +184,9 @@ public class Player : MonoBehaviour
     // ˆÚ“®ˆ—
     private bool Move()
     {
+        if (PauseManager.GetInstance().IsPause() == true) return false;
+        if (UltimateSkillManager.GetInstance().IsUse() == true) return false;
+
         Vector3 moveVector = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
         Vector3 inputDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
         bool isInput;

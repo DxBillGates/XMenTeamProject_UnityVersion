@@ -14,7 +14,7 @@ public enum PauseButtonType
 }
 
 
-public class PauseManager : MonoBehaviour
+public class PauseManager : SingletonComponent<PauseManager>
 {
     private bool isPause;
 
@@ -247,5 +247,10 @@ public class PauseManager : MonoBehaviour
         v = s + a * v;
 
         return v;
+    }
+
+    public bool IsPause()
+    {
+        return isPause;
     }
 }
