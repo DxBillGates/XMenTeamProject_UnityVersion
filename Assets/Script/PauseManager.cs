@@ -25,12 +25,18 @@ public class PauseManager : MonoBehaviour
 
     [SerializeField] private UnityEngine.UI.Text testTextUI;
     [SerializeField] private List<UnityEngine.UI.Text> texts;
+    [SerializeField] private CanvasGroup BGAlpha;
+    [SerializeField] private RectTransform circle;
+    [SerializeField] private RectTransform underLine;
 
     // ポーズ中の操作が何秒後から可能か
     [SerializeField] private float enabledTime;
 
     // ポーズ中の経過時間
     private float pauseTime;
+
+    // 球と下線の演出用タイマー
+    private float timerEffect = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -43,11 +49,12 @@ public class PauseManager : MonoBehaviour
     {
         CheckPauseButton();
         testTextUI.gameObject.SetActive(isPause);
+        UpdateUIColor();
 
         if (isPause == false) return;
 
         UpdateAudioVolumeUI();
-        UpdateUIColor();
+        UpdateEffect();
 
         pauseTime += Time.deltaTime;
 
@@ -79,6 +86,7 @@ public class PauseManager : MonoBehaviour
         isInputVerticalButton = isInputHorizontalButton = false;
         currentButtonIndex = 0;
         pauseTime = 0;
+        timerEffect = 0;
     }
 
     private void CheckPauseButton()
@@ -127,6 +135,7 @@ public class PauseManager : MonoBehaviour
             if (currentButtonIndex > buttonInfos.Count - 1) currentButtonIndex = buttonInfos.Count - 1;
 
             isInputVerticalButton = true;
+            timerEffect = 0;
         }
 
         if (inputVertical == 0) isInputVerticalButton = false;
@@ -139,12 +148,21 @@ public class PauseManager : MonoBehaviour
         {
             if (i == currentButtonIndex)
             {
-                texts[i].color = Color.red;
+                texts[i].color = new Color32(242, 145, 25, 255);
             }
             else
             {
-                texts[i].color = Color.gray;
+                texts[i].color = new Color32(32, 174, 227, 255);
             }
+        }
+        //BGの色
+        if (isPause == false)
+        {
+            BGAlpha.alpha = 0;
+        }
+        else
+        {
+            BGAlpha.alpha = 0.75f;
         }
     }
 
@@ -174,6 +192,19 @@ public class PauseManager : MonoBehaviour
         texts[(int)PauseButtonType.BGM_VOLUME - 1].text = "BGMVolume" + " < " + AudioManager.GetInstance().GetBGMMasterVolumeLevel() + " > ";
         texts[(int)PauseButtonType.SE_VOLUME - 1].text = "SEVolume" + " < " + AudioManager.GetInstance().GetSEMasterVolumeLevel() + " > ";
     }
+    private void UpdateEffect()
+    {
+        timerEffect += Time.deltaTime;
+        if (timerEffect >= 0.5f)
+        {
+            timerEffect = 0.5f;
+        }
+
+        //-80,-15
+        circle.localPosition = new Vector3(23 - 80, -8 - 15 + currentButtonIndex * -14.75f);
+        underLine.localPosition = new Vector3(EaseOutExpo(82 - 80 - 100 / 2, 82 - 80, timerEffect / 0.5f), -15 - 15 + currentButtonIndex * -14.75f);
+        underLine.localScale = new Vector3(EaseOutExpo(0, 0.75f, timerEffect / 0.5f), 0.25f);
+    }
 
     // タイトルへのUIを押した際に実行する内容
     private void OnClickTitle()
@@ -200,5 +231,17 @@ public class PauseManager : MonoBehaviour
         isPause = !isPause;
         // trueだと1になるから!をつける
         GameTimeManager.GetInstance().SetTime(System.Convert.ToInt32(!isPause));
+    }
+
+    float EaseOutExpo(float s, float e, float t)
+    {
+        if (t < 0) { t = 0; }
+        else if (t > 1) { t = 1; }
+
+        float v = t == 1 ? 1 : 1 - Mathf.Pow(2.0f, -10.0f * t);
+        float a = e - s;
+        v = s + a * v;
+
+        return v;
     }
 }
