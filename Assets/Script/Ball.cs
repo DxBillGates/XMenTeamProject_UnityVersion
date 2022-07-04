@@ -172,7 +172,6 @@ public class Ball : MonoBehaviour
     // ƒ{[ƒ‹‚ÌˆÚ“®ˆ—
     private void Move()
     {
-
         velocity -= velocity.normalized * attenuationPower;
 
         const float MIN_VELOCITY = 0.01f;

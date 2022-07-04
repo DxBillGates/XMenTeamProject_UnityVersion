@@ -83,7 +83,7 @@ public class PauseManager : MonoBehaviour
     private void Initialize()
     {
         isPause = false;
-        isInputVerticalButton = isInputHorizontalButton = false;
+        isInputVerticalButton = isInputHorizontalButton = true;
         currentButtonIndex = 0;
         pauseTime = 0;
         timerEffect = 0;
@@ -172,14 +172,14 @@ public class PauseManager : MonoBehaviour
         float inputHorizontal = Input.GetAxisRaw("Horizontal");
         if (Input.GetAxisRaw("HorizontalButton") != 0) inputHorizontal = Input.GetAxisRaw("HorizontalButton");
 
-        if(inputHorizontal != 0 && isInputHorizontalButton == false)
+        if (inputHorizontal != 0 && isInputHorizontalButton == false)
         {
             int increaseValue = inputHorizontal > 0 ? 1 : -1;
-            if(currentButtonIndex == (int)PauseButtonType.BGM_VOLUME - 1)
+            if (currentButtonIndex == (int)PauseButtonType.BGM_VOLUME - 1)
             {
                 AudioManager.GetInstance().IncreaseBGMMasterVolumeLevel(increaseValue);
             }
-            if(currentButtonIndex == (int)PauseButtonType.SE_VOLUME - 1)
+            if (currentButtonIndex == (int)PauseButtonType.SE_VOLUME - 1)
             {
                 AudioManager.GetInstance().IncreaseSEMasterVolumeLevel(increaseValue);
             }
@@ -190,7 +190,7 @@ public class PauseManager : MonoBehaviour
         if (inputHorizontal == 0) isInputHorizontalButton = false;
 
         texts[(int)PauseButtonType.BGM_VOLUME - 1].text = "BGMVolume" + " < " + AudioManager.GetInstance().GetBGMMasterVolumeLevel() + " > ";
-        texts[(int)PauseButtonType.SE_VOLUME - 1].text = "SEVolume" + " < " + AudioManager.GetInstance().GetSEMasterVolumeLevel() + " > ";
+        texts[(int)PauseButtonType.SE_VOLUME - 1].text = "SEVolume" + "      < " + AudioManager.GetInstance().GetSEMasterVolumeLevel() + " > ";
     }
     private void UpdateEffect()
     {
@@ -201,8 +201,12 @@ public class PauseManager : MonoBehaviour
         }
 
         //-80,-15
-        circle.localPosition = new Vector3(23 - 80, -8 - 15 + currentButtonIndex * -14.75f);
-        underLine.localPosition = new Vector3(EaseOutExpo(82 - 80 - 100 / 2, 82 - 80, timerEffect / 0.5f), -15 - 15 + currentButtonIndex * -14.75f);
+        //float circlePositionX = -texts[currentButtonIndex].text.Length / 2 * texts[currentButtonIndex].fontSize / 2 * texts[currentButtonIndex].gameObject.transform.localScale.x;
+        float circlePositionY = texts[currentButtonIndex].transform.localPosition.y;
+        float underlinePositionY = texts[currentButtonIndex].gameObject.transform.localPosition.y - texts[currentButtonIndex].fontSize / 2 * texts[currentButtonIndex].gameObject.transform.localScale.y;
+
+        circle.localPosition = new Vector3(circle.localPosition.x, circlePositionY);
+        underLine.localPosition = new Vector3(EaseOutExpo(82 - 80 - 100 / 2, 82 - 80, timerEffect / 0.5f), underlinePositionY);
         underLine.localScale = new Vector3(EaseOutExpo(0, 0.75f, timerEffect / 0.5f), 0.25f);
     }
 
