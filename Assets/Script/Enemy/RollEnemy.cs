@@ -9,7 +9,6 @@ public class RollEnemy : Enemy
     // ‰ñ“]‘¬“x
     [SerializeField] private float rollingSpeed = 3.0f;
 
-    private float initRollingSpeed;
 
     // Start is called before the first frame update
     void Start()
@@ -20,8 +19,6 @@ public class RollEnemy : Enemy
         // animetor
         GameObject temp = transform.root.Find("EnemyModel").gameObject;
         animator = temp.GetComponent<Animator>();
-
-        initRollingSpeed = rollingSpeed;
     }
 
     // Update is called once per frame
@@ -35,12 +32,10 @@ public class RollEnemy : Enemy
     // ‰ñ“]‚Ì‹““®
     protected void Rolling()
     {
-        rollingSpeed *= GameTimeManager.GetInstance().GetTime();
+       var rollY = rollingSpeed * GameTimeManager.GetInstance().GetTime();
         // ƒIƒuƒWƒFƒNƒg‚ð‰ñ“]‚³‚¹‚é
-        transform.Rotate(0, rollingSpeed, 0);
+        transform.Rotate(0, rollY, 0);
 
-        // gameTime‚Å‰ñ“]‚ªŽ~‚Ü‚ç‚È‚¢‚æ‚¤‚É
-        if (rollingSpeed <= 0) rollingSpeed = initRollingSpeed;
     }
 
     protected override void Move()
