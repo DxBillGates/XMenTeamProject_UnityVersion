@@ -172,7 +172,6 @@ public class Ball : MonoBehaviour
     // ボールの移動処理
     private void Move()
     {
-
         velocity -= velocity.normalized * attenuationPower;
 
         const float MIN_VELOCITY = 0.01f;
@@ -196,7 +195,7 @@ public class Ball : MonoBehaviour
     }
 
     // 反射ベクトルを生成
-    private void Reflection(Vector3 normal, bool enemy = false, bool addSpeed = false)
+    public void Reflection(Vector3 normal, bool enemy = false, bool addSpeed = false)
     {
         Vector3 backupVelocity = velocity;
         Vector3 reflectVector = velocity - 2.0f * Vector3.Dot(velocity, normal) * normal;

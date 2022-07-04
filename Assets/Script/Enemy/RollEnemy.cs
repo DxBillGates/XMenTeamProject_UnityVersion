@@ -86,7 +86,7 @@ public class RollEnemy : Enemy
 
     }
 
-    private void OnTriggerStay(Collider collision)
+    private void OnTriggerEnter(Collider collision)
     {
         // É{Å[ÉãÇ…ìñÇΩÇ¡ÇΩÇ∆Ç´ÇÃèàóù
         Ball ballComponent;
@@ -101,11 +101,23 @@ public class RollEnemy : Enemy
                 throwVector.Normalize();
                 throwVector.y = 0;
 
+
                 float ballSpeed = collision.GetComponent<Ball>().GetSpeed();
 
-                collision.GetComponent<Ball>().Throw(throwVector * ballSpeed, BallState.THROWED_ENEMY);
-
+                var ultManager = UltimateSkillManager.GetInstance();
+                if (ultManager.GetActiveFlagController().activeType == FlagActiveType.ACTIVE)
+                {
+                    if (ultManager.GetActiveFlagController().flag == true)
+                    {
+                        ballComponent.Reflection(transform.forward,true,true);
+                    }
+                }
+                else
+                {
+                    ballComponent.Throw(throwVector * ballSpeed, BallState.THROWED_ENEMY);
+                }
                 KnockBack(collision);
+
             }
         }
         else if (collision.gameObject.tag == "Wall")
