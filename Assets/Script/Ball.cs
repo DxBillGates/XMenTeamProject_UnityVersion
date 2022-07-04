@@ -15,7 +15,9 @@ public class Ball : MonoBehaviour
 {
     //SE鳴らすマネージャーオブジェクト
     [SerializeField] private GameObject SEPlayManager;
-
+    //BarrierHitEffect.csをもつオブジェクト
+    [SerializeField] private GameObject BarrierHitEffectManager;
+    BarrierHitEffect barrierHitEffect;
     //SEリソース達
     [SerializeField] private List<AudioClip> SE;
 
@@ -72,8 +74,10 @@ public class Ball : MonoBehaviour
         trailRenderer = trail.GetComponent<TrailRenderer>();
         trailFlg = false;
         trail.SetActive(trailFlg);
-    }
 
+        barrierHitEffect = BarrierHitEffectManager.GetComponent<BarrierHitEffect>();
+    }
+    
     private void FixedUpdate()
     {
         meshRenderer.material = stateMaterials[(int)state];
@@ -139,6 +143,10 @@ public class Ball : MonoBehaviour
 
                 state = BallState.THROWED_PLAYER;
                 AudioManager.GetInstance().PlayAudio(SE[0], MyAudioType.SE, audioVolume, false);
+
+                //ヒット時エフェクト
+                barrierHitEffect.Use(gameObject.transform.position);
+
                 break;
             case "EnemyBarrier":
                 // 投げられた状態でそのボールが動いていれば
