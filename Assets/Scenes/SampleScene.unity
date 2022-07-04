@@ -524,6 +524,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: e9c435e43785abd418624360a491ba89, type: 2}
-  gameObject: {fileID: 3242729995810890828, guid: 438f7c5a82646c949bbba88210d8f10e, type: 3}
-  AddSpeed: 0
-  MaxScale: 0
+  hitObj: {fileID: 3242729995810890828, guid: 438f7c5a82646c949bbba88210d8f10e, type: 3}
+  AddSpeed: 44.17
+  MaxScale: 100.87

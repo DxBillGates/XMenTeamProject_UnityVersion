@@ -7,7 +7,7 @@ public class BarrierHitEffect : MonoBehaviour
     //エフェクト用マテリアル
     [SerializeField] Material material;
     //マテリアルを保持しているオブジェクト
-    [SerializeField] GameObject gameObject;
+    [SerializeField] GameObject hitObj;
     struct HitEffect
     {
         public GameObject cloneObject;
@@ -28,6 +28,8 @@ public class BarrierHitEffect : MonoBehaviour
     void Start()
     {
         hitEffect = new HitEffect[5];
+
+
         for (int i = 0; i < num; i++)
         {
             hitEffect[i].count = 0.0f;
@@ -35,8 +37,6 @@ public class BarrierHitEffect : MonoBehaviour
 
         }
         distance = 27.0f;
-        AddSpeed = 10.0f;
-        MaxScale = 100.0f;
 
     }
 
@@ -85,7 +85,7 @@ public class BarrierHitEffect : MonoBehaviour
             if (!hitEffect[i].isEffect)
             {
                 hitEffect[i].isEffect = true;
-                hitEffect[i].cloneObject = Instantiate(gameObject, position, new Quaternion(0, 1, 0, 0));
+                hitEffect[i].cloneObject = Instantiate(hitObj, position, new Quaternion(0, 1, 0, 0));
                 break;
             }
         }
