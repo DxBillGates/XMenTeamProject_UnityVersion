@@ -100,11 +100,23 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: numOrange_0
+      name: num_0
       rect:
         serializedVersion: 2
         x: 0
@@ -118,14 +130,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 05db5d2696ee6544ab14e82279aa92ec
-      internalID: 1934689668
+      spriteID: 6d55492d2d37f734481540171ec3eda1
+      internalID: -1146157607
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: numOrange_1
+      name: num_1
       rect:
         serializedVersion: 2
         x: 150
@@ -139,14 +151,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d7ffd4f31351d5b469cbdf8ea79f9c41
-      internalID: 365060284
+      spriteID: 081034b33e5533b4fb6f2556b1130659
+      internalID: -1037073725
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: numOrange_2
+      name: num_2
       rect:
         serializedVersion: 2
         x: 300
@@ -160,14 +172,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ee913c3e6568216469dffc951283e644
-      internalID: 310254079
+      spriteID: da310cfac4a6a1147969a7f61f3dc92b
+      internalID: 472388783
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: numOrange_3
+      name: num_3
       rect:
         serializedVersion: 2
         x: 450
@@ -181,14 +193,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 12ab96c2cc942dd48b79babdfee50bb6
-      internalID: -641804226
+      spriteID: ebb666423a3e1aa48850ab18a48c92b8
+      internalID: 2068593023
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: numOrange_4
+      name: num_4
       rect:
         serializedVersion: 2
         x: 600
@@ -202,14 +214,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 365f0782d6da4564c89aa2c1c515f645
-      internalID: -536422454
+      spriteID: 7d87256b25dbc6441bb95f42e75d0df3
+      internalID: -1393966406
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: numOrange_5
+      name: num_5
       rect:
         serializedVersion: 2
         x: 750
@@ -223,14 +235,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ca41db8cfe42e0a40b8edcde6084d805
-      internalID: 1320322269
+      spriteID: ea738c83b1c1a694c9d8a5bdfdfe9a0d
+      internalID: -290967890
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: numOrange_6
+      name: num_6
       rect:
         serializedVersion: 2
         x: 900
@@ -244,14 +256,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cf59962c2a480c644b63419526fbd07f
-      internalID: -769171240
+      spriteID: 64a53c8bfea592247a2db16befcc2fc2
+      internalID: -1697325636
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: numOrange_7
+      name: num_7
       rect:
         serializedVersion: 2
         x: 1050
@@ -265,14 +277,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9c4b89046c35c024180c846be201fa60
-      internalID: -281063952
+      spriteID: 8cd8ebf3eef049e44a6f8ba7c0d69275
+      internalID: 770069934
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: numOrange_8
+      name: num_8
       rect:
         serializedVersion: 2
         x: 1200
@@ -286,14 +298,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7929de40dd691d940ad91bcedcd54523
-      internalID: 1475135371
+      spriteID: e63f83101209d474c86ac0aaf8ecdc54
+      internalID: -1641383276
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: numOrange_9
+      name: num_9
       rect:
         serializedVersion: 2
         x: 1350
@@ -307,8 +319,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 120fece98779b4148a0d1afde36d9187
-      internalID: -1120022373
+      spriteID: 4c8505486e2c93043b106940d31c168a
+      internalID: 1445356088
       vertices: []
       indices: 
       edges: []
@@ -316,7 +328,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: e406e0dd1381e6f4d96782426bf3cea5
     internalID: 0
     vertices: []
     indices: 
@@ -324,16 +336,16 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      numOrange_8: 1475135371
-      numOrange_4: -536422454
-      numOrange_5: 1320322269
-      numOrange_9: -1120022373
-      numOrange_2: 310254079
-      numOrange_0: 1934689668
-      numOrange_1: 365060284
-      numOrange_6: -769171240
-      numOrange_7: -281063952
-      numOrange_3: -641804226
+      num_2: 472388783
+      num_3: 2068593023
+      num_1: -1037073725
+      num_0: -1146157607
+      num_9: 1445356088
+      num_5: -290967890
+      num_8: -1641383276
+      num_6: -1697325636
+      num_7: 770069934
+      num_4: -1393966406
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
