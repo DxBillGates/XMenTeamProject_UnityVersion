@@ -180,8 +180,8 @@ public class Ball : MonoBehaviour
 
         Vector3 resultVelocity = velocity * GameTimeManager.GetInstance().GetTime();
         resultVelocity.y = 0;
-
-        transform.position += resultVelocity * GameTimeManager.GetInstance().GetTime();
+        resultVelocity = DontPenetrater.CalcVelocity(transform.position, resultVelocity);
+        transform.position += resultVelocity;
 
         // ドーム内に一度でも入っているなら速度ベクトルを足したときに外に出ないように調整
         if (isInDome == false) return;

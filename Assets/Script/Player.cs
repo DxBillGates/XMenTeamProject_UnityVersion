@@ -190,8 +190,9 @@ public class Player : MonoBehaviour
         bool isInput;
 
         velocity += movePower * moveVector.normalized;
-
-        transform.position += velocity * GameTimeManager.GetInstance().GetTime();
+        Vector3 addVelocity = velocity * GameTimeManager.GetInstance().GetTime();
+        addVelocity = DontPenetrater.CalcVelocity(transform.position, addVelocity);
+        transform.position += addVelocity;
 
         isInput = inputDirection.magnitude > 0.5f;
         if (isInput) currentDirection = inputDirection.normalized;

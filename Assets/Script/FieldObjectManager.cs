@@ -138,4 +138,9 @@ public class FieldObjectManager : SingletonComponent<FieldObjectManager>
     {
         return changeMaterials[wallIndex];
     }
+
+    public float GetWallSize()
+    {
+        return wallPrefab.transform.localScale.z;
+    }
 }
