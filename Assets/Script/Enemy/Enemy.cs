@@ -127,7 +127,7 @@ public class Enemy : MonoBehaviour
             HitStopManager.GetInstance().HitStop();
 
             // スキルを発動していないときに敵を倒したならスキルゲージが増える
-            if (UltimateSkillManager.GetInstance().IsUse() == false)
+            if (UltimateSkillManager.GetInstance().IsActiveFlagControllerFlag() == false)
             {
                 UltimateSkillManager.GetInstance().AddGauge();
             }

@@ -138,9 +138,14 @@ public class UltimateSkillManager : SingletonComponent<UltimateSkillManager>
     }
 
     // �A�N�e�B�u�̃t���O�R���g���[���[�����쒆����Ԃ�
-    public bool IsUse()
+    public bool IsActiveFlagControllerFlag()
     {
         return activeFlagController.flag;
+    }
+
+    public bool IsUse()
+    {
+        return isUse;
     }
 
     public int GetCurrentLevel()
