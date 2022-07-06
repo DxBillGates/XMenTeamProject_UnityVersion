@@ -31,6 +31,11 @@ public class StartGameScene : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (PauseManager.GetInstance().IsPause() == true) return;
+        if (isEnd == true) return;
+
+        GameTimeManager.GetInstance().SetTime(0);
+
         //タイマー更新
         timer += Time.deltaTime;
 
