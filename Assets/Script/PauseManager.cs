@@ -259,12 +259,13 @@ public class PauseManager : MonoBehaviour
 
         //-80,-15
         //float circlePositionX = -texts[currentButtonIndex].text.Length / 2 * texts[currentButtonIndex].fontSize / 2 * texts[currentButtonIndex].gameObject.transform.localScale.x;
-        float circlePositionY = texts[currentButtonIndex].transform.localPosition.y;
-        float underlinePositionY = texts[currentButtonIndex].gameObject.transform.localPosition.y - texts[currentButtonIndex].fontSize / 2 * texts[currentButtonIndex].gameObject.transform.localScale.y;
+        float circlePositionY = texts[currentButtonIndex].transform.position.y;
+        float underlinePositionY = texts[currentButtonIndex].gameObject.transform.position.y - texts[currentButtonIndex].fontSize / 2 * texts[currentButtonIndex].gameObject.transform.localScale.y;
+        float adjustY = -20;
 
-        circle.localPosition = new Vector3(circle.localPosition.x, circlePositionY);
-        underLine.localPosition = new Vector3(EaseOutExpo(82 - 80 - 100 / 2, 82 - 80, timerEffect / 0.5f), underlinePositionY);
-        underLine.localScale = new Vector3(EaseOutExpo(0, 0.75f, timerEffect / 0.5f), 0.25f);
+        circle.position = new Vector3(circle.position.x, circlePositionY);
+        underLine.position = new Vector3(EaseOutExpo(405, 405 + 132 * 1.4f * 2.7f / 2, timerEffect / 0.5f), underlinePositionY + adjustY);
+        underLine.localScale = new Vector3(EaseOutExpo(0, 1.4f, timerEffect / 0.5f), 0.35f);
     }
 
     // タイトルへのUIを押した際に実行する内容
