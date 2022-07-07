@@ -8,7 +8,7 @@ public class CursolManager : MonoBehaviour
 
     //シーンチェンジオブジェクト
     [SerializeField] NextScene sceneChange;
-    [SerializeField] Image title;
+    [SerializeField] Image stageSelect;
     [SerializeField] Image restart;
     [SerializeField] Image circle;
     [SerializeField] Image underLine;
@@ -33,7 +33,7 @@ public class CursolManager : MonoBehaviour
         {
             if (cursolPos == 0)
             {
-                sceneChange.nextSceneName = "TitleScene";
+                sceneChange.nextSceneName = "StageSelectScene";
             }
             else
             {
@@ -63,43 +63,43 @@ public class CursolManager : MonoBehaviour
         if (cursolPos == 0)
         {
             //Circle位置
-            circle.transform.position = new Vector3(210, 200);
+            circle.transform.position = new Vector3(184, 202);
 
             //UnderLine位置・スケール
             underLine.transform.position = new Vector3(
-                EaseOutExpo(283, 283 + 132 * 1.85f / 2, timer / 0.5f),
-                135
+                EaseOutExpo(238, 238 + 132 * 3.3f / 2, timer / 0.5f),
+                148
                 );
             underLine.transform.localScale = new Vector3(
-                EaseOutExpo(0, 1.85f, timer / 0.5f),
+                EaseOutExpo(0, 3.3f, timer / 0.5f),
                 2
                 );
 
             //色変更
             //オレンジ
-            title.color = new Color32(242, 145, 25, 255);
+            stageSelect.color = new Color32(242, 145, 25, 255);
             //青
             restart.color = new Color32(32, 174, 227, 255);
         }
         else
         {
             //Circle位置
-            circle.transform.position = new Vector3(700, 200);
+            circle.transform.position = new Vector3(822, 202);
 
             //UnderLine位置・スケール
             underLine.transform.position = new Vector3(
-                EaseOutExpo(775, 775 + 132 * 2.8f / 2, timer / 0.5f),
-                135
+                EaseOutExpo(874, 874 + 132 * 2.2f / 2, timer / 0.5f),
+                148
                 );
             underLine.transform.localScale = new Vector3(
-                EaseOutExpo(0, 2.8f, timer / 0.5f),
+                EaseOutExpo(0, 2.2f, timer / 0.5f),
                 2
                 );
 
 
             //色変更
             //青
-            title.color = new Color32(32, 174, 227, 255);
+            stageSelect.color = new Color32(32, 174, 227, 255);
             //オレンジ
             restart.color = new Color32(242, 145, 25, 255);
         }

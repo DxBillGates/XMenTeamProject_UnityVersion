@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class AudioManager : SingletonComponent<AudioManager>
 {
-    private const int MAX_VOLEME_LEVEL = 10;
+    private const int MAX_VOLUME_LEVEL = 9;
 
     [SerializeField,Range(0,1)] private float defaultVolume; 
 
-    [SerializeField,Range(0,MAX_VOLEME_LEVEL)] private int bgmMasterVolumeLevel;
+    [SerializeField,Range(0,MAX_VOLUME_LEVEL)] private int bgmMasterVolumeLevel;
     private int beforeBGMMasterVolumeLevel;
 
-    [SerializeField,Range(0,MAX_VOLEME_LEVEL)] private int seMasterVolumeLevel;
+    [SerializeField,Range(0,MAX_VOLUME_LEVEL)] private int seMasterVolumeLevel;
     private int beforeSEMasterVolumeLevel;
 
     [SerializeField] private GameObject prefabAudioPlayer;
@@ -53,7 +53,7 @@ public class AudioManager : SingletonComponent<AudioManager>
     // bgmのマスター音量を0 ~ 1で返す
     public float GetBGMMasterVolume()
     {
-        return defaultVolume * ((float)bgmMasterVolumeLevel / MAX_VOLEME_LEVEL);
+        return defaultVolume * ((float)bgmMasterVolumeLevel / MAX_VOLUME_LEVEL);
     }
 
     // bgmのマスター音量レベルを返す
@@ -65,7 +65,7 @@ public class AudioManager : SingletonComponent<AudioManager>
     // seのマスター音量を0 ~ 1で返す
     public float GetSEMasterVolume()
     {
-        return defaultVolume * ((float)seMasterVolumeLevel / MAX_VOLEME_LEVEL);
+        return defaultVolume * ((float)seMasterVolumeLevel / MAX_VOLUME_LEVEL);
     }
 
     // seのマスター音量レベルを返す
@@ -76,7 +76,7 @@ public class AudioManager : SingletonComponent<AudioManager>
 
     public int GetMaxMasterVolume()
     {
-        return MAX_VOLEME_LEVEL;
+        return MAX_VOLUME_LEVEL;
     }
 
     public float GetDefaultVolume()
@@ -88,7 +88,7 @@ public class AudioManager : SingletonComponent<AudioManager>
     {
         bgmMasterVolumeLevel += value;
         if (bgmMasterVolumeLevel <= 0) bgmMasterVolumeLevel = 0;
-        if (bgmMasterVolumeLevel >= MAX_VOLEME_LEVEL) bgmMasterVolumeLevel = MAX_VOLEME_LEVEL;
+        if (bgmMasterVolumeLevel >= MAX_VOLUME_LEVEL) bgmMasterVolumeLevel = MAX_VOLUME_LEVEL;
     }
 
     public void IncreaseSEMasterVolumeLevel(int value)
@@ -96,7 +96,7 @@ public class AudioManager : SingletonComponent<AudioManager>
         seMasterVolumeLevel += value;
 
         if (seMasterVolumeLevel <= 0) seMasterVolumeLevel = 0;
-        if (seMasterVolumeLevel >= MAX_VOLEME_LEVEL) seMasterVolumeLevel = MAX_VOLEME_LEVEL;
+        if (seMasterVolumeLevel >= MAX_VOLUME_LEVEL) seMasterVolumeLevel = MAX_VOLUME_LEVEL;
     }
 
     public void PlayAudio(AudioClip audio, MyAudioType audioType, float volume, bool isLoop = false)
