@@ -50,9 +50,7 @@ public class GameTimeManager : SingletonComponent<GameTimeManager>
 
     private void CheckPauseManager()
     {
-        PauseManager pauseManager = PauseManager.GetInstance();
-
-        if (pauseManager.IsPause() == false) return;
+        if (PauseManager.IsPause() == false) return;
 
         SetTime(0);
     }

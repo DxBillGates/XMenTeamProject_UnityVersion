@@ -36,7 +36,7 @@ public class UltimateSkillGenerator : SingletonComponent<UltimateSkillGenerator>
     {
         if (isAddScale == false) return;
         if (createdUltimateSkillObject == null) return;
-        if (PauseManager.GetInstance().IsPause() == true) return;
+        if (PauseManager.IsPause() == true) return;
 
         bool isReturn = false;
         Vector3 setScale = Vector3.Lerp(startLerpScale, endLerpScale, lerpTime);

@@ -314,9 +314,4 @@ public class PauseManager : SingletonComponent<PauseManager>
 
         return v;
     }
-
-    public bool IsPause()
-    {
-        return isPause;
-    }
 }

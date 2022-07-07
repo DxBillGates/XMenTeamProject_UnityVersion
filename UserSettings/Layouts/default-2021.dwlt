@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 997
   m_ShowMode: 4
-  m_Title: Game
+  m_Title: Hierarchy
   m_RootView: {fileID: 8}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -74,7 +74,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 96
+  controlID: 134
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -154,7 +154,7 @@ MonoBehaviour:
   m_MinSize: {x: 400, y: 200}
   m_MaxSize: {x: 32384, y: 16192}
   vertical: 0
-  controlID: 91
+  controlID: 24
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -1301,22 +1301,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Prefab/Enemy
+    - Assets/Scenes
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Prefab/Enemy
+  - Assets/Scenes
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\suzut\Desktop\XMenTeamProjectUnityVersion\XMenTeamProject_UnityVer
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: dc680000
-    m_LastClickedID: 26844
-    m_ExpandedIDs: 0000000076630000a2630000
+    m_SelectedIDs: fe660000
+    m_LastClickedID: 26366
+    m_ExpandedIDs: 00000000e8660000fa660000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1344,7 +1344,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 0000000076630000
+    m_ExpandedIDs: 00000000e8660000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1474,7 +1474,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 7cf9ffffd6faffff
+      m_ExpandedIDs: 7a2efdffda31fdff5632fdff2e34fdffa264fdffaa64fdff38cffdff44d4fdff40e0fdff28e3fdff80e3fdffd8e3fdff70e5fdffdae7fdff0227ffff00fbffff7663000090710000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1745,9 +1745,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 23.865902, y: 52.05856, z: -62.092403}
+    m_Target: {x: 324.22568, y: -518.18726, z: 890.41675}
     speed: 2
-    m_Value: {x: 23.865902, y: 52.05856, z: -62.092403}
+    m_Value: {x: 324.2256, y: -518.18726, z: 890.4168}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1794,13 +1794,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: -0.22575279, y: 0.111290276, z: -0.027722452, w: -0.9671806}
+    m_Target: {x: -0.24034515, y: -0.16016988, z: 0.038923543, w: -0.9563514}
     speed: 2
-    m_Value: {x: -0.22580284, y: 0.11131495, z: -0.027728599, w: -0.96739507}
+    m_Value: {x: -0.23896489, y: -0.16026464, z: 0.038692296, w: -0.9569294}
   m_Size:
-    m_Target: 10
+    m_Target: 574.58386
     speed: 2
-    m_Value: 10
+    m_Value: 574.58386
   m_Ortho:
     m_Target: 0
     speed: 2

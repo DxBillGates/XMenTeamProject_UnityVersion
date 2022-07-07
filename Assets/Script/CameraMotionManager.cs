@@ -85,7 +85,7 @@ public class CameraMotionManager : SingletonComponent<CameraMotionManager>
     // Update is called once per frame
     void Update()
     {
-        if (PauseManager.GetInstance().IsPause() == true) return;
+        if (PauseManager.IsPause() == true) return;
 
         if(preUtlMotionFlag.flag == false)
         {
