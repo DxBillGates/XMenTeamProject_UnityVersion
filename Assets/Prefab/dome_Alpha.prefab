@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3391555894847657951}
   - component: {fileID: 974740116381150287}
   - component: {fileID: 9048329974845740095}
+  - component: {fileID: 469323702138751424}
   m_Layer: 0
   m_Name: dome:pSphere1
   m_TagString: Untagged
@@ -83,6 +84,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &469323702138751424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 706235940433184449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a2d26ac4de16f34d8adfd934824ccf3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  material: {fileID: 2100000, guid: 0b493b42eb2717146980333ae9ea7839, type: 2}
 --- !u!1 &2193223138559680327
 GameObject:
   m_ObjectHideFlags: 0
