@@ -1053,7 +1053,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 480549e6e85b99249be092c06353240f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stageCount: 6
+  stageCount: 3
   center: {x: 0, y: 0, z: 20}
   radius: 20
   barrierPrefab: {fileID: 6302714476797584802, guid: 6b011e121fc032a49916722abc12f4d7, type: 3}
