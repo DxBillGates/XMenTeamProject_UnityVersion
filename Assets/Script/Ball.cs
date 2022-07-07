@@ -84,9 +84,9 @@ public class Ball : MonoBehaviour
     {
         isHitDome = false;
 
+        UpdateDomeDetection();
         if (isThrow) Move();
         TrailController();
-        UpdateDomeDetection();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -179,8 +179,8 @@ public class Ball : MonoBehaviour
 
         Vector3 resultVelocity = velocity * GameTimeManager.GetInstance().GetTime();
         resultVelocity.y = 0;
-
-        transform.position += resultVelocity * GameTimeManager.GetInstance().GetTime();
+        resultVelocity = DontPenetrater.CalcVelocity(transform.position, resultVelocity);
+        transform.position += resultVelocity;
 
         // ドーム内に一度でも入っているなら速度ベクトルを足したときに外に出ないように調整
         if (isInDome == false) return;
@@ -209,7 +209,7 @@ public class Ball : MonoBehaviour
 
         float acc = 0.0f;
 
-        if (UltimateSkillManager.GetInstance().IsUse())
+        if (UltimateSkillManager.GetInstance().IsActiveFlagControllerFlag())
         {
             acc = domeHitAccelerateValue;
         }
@@ -279,7 +279,9 @@ public class Ball : MonoBehaviour
         FlagController flagController = ultimateSkillManager.GetActiveFlagController();
         FlagActiveType flagActiveType = flagController.activeType;
 
+
         isInDome = flagController.isEnd;
+        if (ultimateSkillManager.IsUse() == false) return;
 
         // 必殺技発動前なら発動地点に持ってくる
         if (flagActiveType == FlagActiveType.PRE)
@@ -297,7 +299,7 @@ public class Ball : MonoBehaviour
                 isInDome = true;
             }
         }
-        else if (flagActiveType == FlagActiveType.ACTIVE)
+        else if (flagActiveType == FlagActiveType.ACTIVE || flagActiveType == FlagActiveType.END)
         {
 
             if (isHitWall == true)

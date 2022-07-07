@@ -94,7 +94,7 @@ public class Player : MonoBehaviour
 
 
         var ultManager = UltimateSkillManager.GetInstance();
-        if (ultManager.IsUse() && ballComponent.state == BallState.HOLD_PLAYER)
+        if (ultManager.IsActiveFlagControllerFlag() && ballComponent.state == BallState.HOLD_PLAYER)
         {
             Vector2 randomVector = new Vector3();
 
@@ -192,8 +192,9 @@ public class Player : MonoBehaviour
         bool isInput;
 
         velocity += movePower * moveVector.normalized;
-
-        transform.position += velocity * GameTimeManager.GetInstance().GetTime();
+        Vector3 addVelocity = velocity * GameTimeManager.GetInstance().GetTime();
+        addVelocity = DontPenetrater.CalcVelocity(transform.position, addVelocity);
+        transform.position += addVelocity;
 
         isInput = inputDirection.magnitude > 0.5f;
         if (isInput) currentDirection = inputDirection.normalized;
@@ -351,7 +352,7 @@ public class Player : MonoBehaviour
         }
 
         // スキル使用中じゃない場合は即リターン
-        if (ultimateSkillManager.IsUse() == false) return;
+        if (ultimateSkillManager.IsActiveFlagControllerFlag() == false) return;
         if (ultimateSkillManager.GetActiveFlagController().activeType != FlagActiveType.ACTIVE) return;
 
         triggerSkillSize = ultimateSkillGenerator.GetCreatedObjectScale();
