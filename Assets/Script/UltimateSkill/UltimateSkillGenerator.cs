@@ -13,7 +13,6 @@ public class UltimateSkillGenerator : SingletonComponent<UltimateSkillGenerator>
 
     //�|�X�g�G�t�F�N�g����p
     [SerializeField] GameObject postEffectManager;
-    DomeEffectControl domeEffectControl;
 
     Vector3 startLerpScale;
     Vector3 endLerpScale;
@@ -28,8 +27,6 @@ public class UltimateSkillGenerator : SingletonComponent<UltimateSkillGenerator>
         isAddScale = false;
         lerpTime = 0;
         maxLerpTime = 1;
-
-        domeEffectControl = postEffectManager.GetComponent<DomeEffectControl>();
     }
 
     void Update()
@@ -48,6 +45,8 @@ public class UltimateSkillGenerator : SingletonComponent<UltimateSkillGenerator>
 
         createdUltimateSkillObject.transform.localScale = setScale;
 
+        var shape=createdUltimateSkillObject.GetComponentInChildren<ParticleSystem>().shape;
+        shape.radius = setScale.x;
         if (isReturn == true) return;
 
         lerpTime += Time.deltaTime / maxLerpTime;
@@ -75,7 +74,7 @@ public class UltimateSkillGenerator : SingletonComponent<UltimateSkillGenerator>
         if (createdUltimateSkillObject)
         {
             //�u���[����Intencity��0�ɂ���
-            domeEffectControl.SetBloom(0f);
+            postEffectManager.GetComponent<DomeEffectControl>().SetBloom(0f);
 
             int wallCount = FieldObjectManager.GetInstance().GetFieldObjectsCount();
 
