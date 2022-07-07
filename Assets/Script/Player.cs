@@ -81,7 +81,7 @@ public class Player : MonoBehaviour
         UpdateAbilityCooldown();
         UpdateKnockback();
 
-        bool isMove = Move();
+        bool isMove = PauseManager.IsPause() == false ? Move() : false; //ポーズ状態確認
         RotateDirection();
 
         HoldBallUpdate();

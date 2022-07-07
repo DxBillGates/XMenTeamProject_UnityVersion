@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum PauseButtonType
 {
-    NONE,
+    NONE = -1,
     BGM_VOLUME,
     SE_VOLUME,
     TITLE,
@@ -16,7 +17,7 @@ public enum PauseButtonType
 
 public class PauseManager : SingletonComponent<PauseManager>
 {
-    private bool isPause;
+    static bool isPause;
 
     [SerializeField] private List<PauseButtonType> buttonInfos;
     private int currentButtonIndex;
@@ -28,6 +29,13 @@ public class PauseManager : SingletonComponent<PauseManager>
     [SerializeField] private CanvasGroup BGAlpha;
     [SerializeField] private RectTransform circle;
     [SerializeField] private RectTransform underLine;
+    [SerializeField] private Image bgmVolume;
+    [SerializeField] private Image seVolume;
+    [SerializeField] private Image bgmArrowLeft;
+    [SerializeField] private Image bgmArrowRight;
+    [SerializeField] private Image seArrowLeft;
+    [SerializeField] private Image seArrowRight;
+    [SerializeField] private List<Sprite> sprNum;
 
     // ポーズ中の操作が何秒後から可能か
     [SerializeField] private float enabledTime;
@@ -96,7 +104,10 @@ public class PauseManager : SingletonComponent<PauseManager>
             bool backupIsPause = isPause = !isPause;
 
             // trueだと1になるから!をつける
-            GameTimeManager.GetInstance().SetTime(System.Convert.ToInt32(!isPause));
+            if (StartGameScene.IsGameStart())
+            {
+                GameTimeManager.GetInstance().SetTime(System.Convert.ToInt32(!isPause));
+            }
 
             Initialize();
             isPause = backupIsPause;
@@ -155,6 +166,24 @@ public class PauseManager : SingletonComponent<PauseManager>
                 texts[i].color = new Color32(32, 174, 227, 255);
             }
         }
+        //BGM数字
+        if (currentButtonIndex == (int)PauseButtonType.BGM_VOLUME)
+        {
+            bgmVolume.color = new Color32(242, 145, 25, 255);
+        }
+        else
+        {
+            bgmVolume.color = new Color32(30, 173, 226, 255);
+        }
+        //SE数字
+        if (currentButtonIndex == (int)PauseButtonType.SE_VOLUME)
+        {
+            seVolume.color = new Color32(242, 145, 25, 255);
+        }
+        else
+        {
+            seVolume.color = new Color32(30, 173, 226, 255);
+        }
         //BGの色
         if (isPause == false)
         {
@@ -175,11 +204,11 @@ public class PauseManager : SingletonComponent<PauseManager>
         if (inputHorizontal != 0 && isInputHorizontalButton == false)
         {
             int increaseValue = inputHorizontal > 0 ? 1 : -1;
-            if (currentButtonIndex == (int)PauseButtonType.BGM_VOLUME - 1)
+            if (currentButtonIndex == (int)PauseButtonType.BGM_VOLUME)
             {
                 AudioManager.GetInstance().IncreaseBGMMasterVolumeLevel(increaseValue);
             }
-            if (currentButtonIndex == (int)PauseButtonType.SE_VOLUME - 1)
+            if (currentButtonIndex == (int)PauseButtonType.SE_VOLUME)
             {
                 AudioManager.GetInstance().IncreaseSEMasterVolumeLevel(increaseValue);
             }
@@ -187,10 +216,38 @@ public class PauseManager : SingletonComponent<PauseManager>
             isInputHorizontalButton = true;
         }
 
+        //スプライト更新
+        //数字
+        bgmVolume.sprite = sprNum[AudioManager.GetInstance().GetBGMMasterVolumeLevel()];
+        seVolume.sprite = sprNum[AudioManager.GetInstance().GetSEMasterVolumeLevel()];
+        //矢印
+        //BGM
+        if (currentButtonIndex == (int)PauseButtonType.BGM_VOLUME)
+        {
+            bgmArrowLeft.color = new Color(bgmArrowLeft.color.r, bgmArrowLeft.color.g, bgmArrowLeft.color.b, 1);
+            bgmArrowRight.color = new Color(bgmArrowRight.color.r, bgmArrowRight.color.g, bgmArrowRight.color.b, 1);
+        }
+        else
+        {
+            bgmArrowLeft.color = new Color(bgmArrowLeft.color.r, bgmArrowLeft.color.g, bgmArrowLeft.color.b, 0);
+            bgmArrowRight.color = new Color(bgmArrowRight.color.r, bgmArrowRight.color.g, bgmArrowRight.color.b, 0);
+        }
+        //SE
+        if (currentButtonIndex == (int)PauseButtonType.SE_VOLUME)
+        {
+            seArrowLeft.color = new Color(seArrowLeft.color.r, seArrowLeft.color.g, seArrowLeft.color.b, 1);
+            seArrowRight.color = new Color(seArrowRight.color.r, seArrowRight.color.g, seArrowRight.color.b, 1);
+        }
+        else
+        {
+            seArrowLeft.color = new Color(seArrowLeft.color.r, seArrowLeft.color.g, seArrowLeft.color.b, 0);
+            seArrowRight.color = new Color(seArrowRight.color.r, seArrowRight.color.g, seArrowRight.color.b, 0);
+        }
+
         if (inputHorizontal == 0) isInputHorizontalButton = false;
 
-        texts[(int)PauseButtonType.BGM_VOLUME - 1].text = "BGMVolume" + " < " + AudioManager.GetInstance().GetBGMMasterVolumeLevel() + " > ";
-        texts[(int)PauseButtonType.SE_VOLUME - 1].text = "SEVolume" + "      < " + AudioManager.GetInstance().GetSEMasterVolumeLevel() + " > ";
+        //texts[(int)PauseButtonType.BGM_VOLUME - 1].text = "BGMVolume" + " < " + AudioManager.GetInstance().GetBGMMasterVolumeLevel() + " > ";
+        //texts[(int)PauseButtonType.SE_VOLUME - 1].text = "SEVolume" + "      < " + AudioManager.GetInstance().GetSEMasterVolumeLevel() + " > ";
     }
     private void UpdateEffect()
     {
@@ -202,12 +259,13 @@ public class PauseManager : SingletonComponent<PauseManager>
 
         //-80,-15
         //float circlePositionX = -texts[currentButtonIndex].text.Length / 2 * texts[currentButtonIndex].fontSize / 2 * texts[currentButtonIndex].gameObject.transform.localScale.x;
-        float circlePositionY = texts[currentButtonIndex].transform.localPosition.y;
-        float underlinePositionY = texts[currentButtonIndex].gameObject.transform.localPosition.y - texts[currentButtonIndex].fontSize / 2 * texts[currentButtonIndex].gameObject.transform.localScale.y;
+        float circlePositionY = texts[currentButtonIndex].transform.position.y;
+        float underlinePositionY = texts[currentButtonIndex].gameObject.transform.position.y - texts[currentButtonIndex].fontSize / 2 * texts[currentButtonIndex].gameObject.transform.localScale.y;
+        float adjustY = -20;
 
-        circle.localPosition = new Vector3(circle.localPosition.x, circlePositionY);
-        underLine.localPosition = new Vector3(EaseOutExpo(82 - 80 - 100 / 2, 82 - 80, timerEffect / 0.5f), underlinePositionY);
-        underLine.localScale = new Vector3(EaseOutExpo(0, 0.75f, timerEffect / 0.5f), 0.25f);
+        circle.position = new Vector3(circle.position.x, circlePositionY);
+        underLine.position = new Vector3(EaseOutExpo(405, 405 + 132 * 1.4f * 2.7f / 2, timerEffect / 0.5f), underlinePositionY + adjustY);
+        underLine.localScale = new Vector3(EaseOutExpo(0, 1.4f, timerEffect / 0.5f), 0.35f);
     }
 
     // タイトルへのUIを押した際に実行する内容
@@ -234,7 +292,15 @@ public class PauseManager : SingletonComponent<PauseManager>
     {
         isPause = !isPause;
         // trueだと1になるから!をつける
-        GameTimeManager.GetInstance().SetTime(System.Convert.ToInt32(!isPause));
+        if (StartGameScene.IsGameStart())
+        {
+            GameTimeManager.GetInstance().SetTime(System.Convert.ToInt32(!isPause));
+        }
+    }
+
+    public static bool IsPause()
+    {
+        return isPause;
     }
 
     float EaseOutExpo(float s, float e, float t)

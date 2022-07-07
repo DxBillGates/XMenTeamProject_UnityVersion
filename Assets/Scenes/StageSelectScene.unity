@@ -426,14 +426,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.9490196, g: 0.5686275, b: 0.09803922, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1120022373, guid: 6be1482a20690834e91960cb6153b73f, type: 3}
+  m_Sprite: {fileID: -1037073725, guid: 6be1482a20690834e91960cb6153b73f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -691,14 +691,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.9490196, g: 0.5686275, b: 0.09803922, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1120022373, guid: 6be1482a20690834e91960cb6153b73f, type: 3}
+  m_Sprite: {fileID: -1146157607, guid: 6be1482a20690834e91960cb6153b73f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -823,6 +823,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   circle: {fileID: 153075578}
   square: {fileID: 1059918354}
+  nextSceneName: 
 --- !u!4 &1459785082
 Transform:
   m_ObjectHideFlags: 0
@@ -1004,7 +1005,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   square: {fileID: 1059918354}
-  StartUpdateTime: 2
+  cd3: {fileID: 0}
+  cd2: {fileID: 0}
+  cd1: {fileID: 0}
+  cdGO: {fileID: 0}
 --- !u!4 &1723417463
 Transform:
   m_ObjectHideFlags: 0
@@ -1057,18 +1061,17 @@ MonoBehaviour:
   - {fileID: 176072781}
   - {fileID: 995376159}
   sprNums:
-  - {fileID: -1120022373, guid: 6be1482a20690834e91960cb6153b73f, type: 3}
-  - {fileID: 1934689668, guid: 6be1482a20690834e91960cb6153b73f, type: 3}
-  - {fileID: 365060284, guid: 6be1482a20690834e91960cb6153b73f, type: 3}
-  - {fileID: 310254079, guid: 6be1482a20690834e91960cb6153b73f, type: 3}
-  - {fileID: -641804226, guid: 6be1482a20690834e91960cb6153b73f, type: 3}
-  - {fileID: -536422454, guid: 6be1482a20690834e91960cb6153b73f, type: 3}
-  - {fileID: 1320322269, guid: 6be1482a20690834e91960cb6153b73f, type: 3}
-  - {fileID: -769171240, guid: 6be1482a20690834e91960cb6153b73f, type: 3}
-  - {fileID: -281063952, guid: 6be1482a20690834e91960cb6153b73f, type: 3}
-  - {fileID: 1475135371, guid: 6be1482a20690834e91960cb6153b73f, type: 3}
+  - {fileID: -1146157607, guid: 6be1482a20690834e91960cb6153b73f, type: 3}
+  - {fileID: -1037073725, guid: 6be1482a20690834e91960cb6153b73f, type: 3}
+  - {fileID: 472388783, guid: 6be1482a20690834e91960cb6153b73f, type: 3}
+  - {fileID: 2068593023, guid: 6be1482a20690834e91960cb6153b73f, type: 3}
+  - {fileID: -1393966406, guid: 6be1482a20690834e91960cb6153b73f, type: 3}
+  - {fileID: -290967890, guid: 6be1482a20690834e91960cb6153b73f, type: 3}
+  - {fileID: -1697325636, guid: 6be1482a20690834e91960cb6153b73f, type: 3}
+  - {fileID: 770069934, guid: 6be1482a20690834e91960cb6153b73f, type: 3}
+  - {fileID: -1641383276, guid: 6be1482a20690834e91960cb6153b73f, type: 3}
+  - {fileID: 1445356088, guid: 6be1482a20690834e91960cb6153b73f, type: 3}
   sceneChange: {fileID: 1459785081}
-  timer: 0.5
 --- !u!4 &1970035457
 Transform:
   m_ObjectHideFlags: 0
