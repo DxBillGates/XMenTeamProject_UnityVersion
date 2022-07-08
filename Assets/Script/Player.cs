@@ -41,6 +41,10 @@ public class Player : MonoBehaviour
 
     InvincibleFlag invincibleFlag;
 
+    Collider collider;
+    bool isHitWall;
+    Vector3 backupPushVector;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -66,6 +70,10 @@ public class Player : MonoBehaviour
         triggerSkillSize = 0;
 
         invincibleFlag = GetComponent<InvincibleFlag>();
+
+        collider = GetComponent<Collider>();
+        isHitWall = false;
+        backupPushVector = Vector3.zero;
     }
 
     // Update is called once per frame
@@ -118,6 +126,9 @@ public class Player : MonoBehaviour
         lineDrawer.isDraw = ballComponent.state == BallState.HOLD_PLAYER;
         lineDrawer.drawOriginPosition = transform.position;
         lineDrawer.drawDirection = currentDirection;
+
+        isHitWall = false;
+        backupPushVector = Vector3.zero;
     }
 
     private void OnTriggerStay(Collider other)
@@ -131,13 +142,25 @@ public class Player : MonoBehaviour
                 // ヒットした障害物のヒットした法線方向に押し出したいからその法線を取得
                 Vector3 hitNormal = other.transform.forward;
 
-                // 座標を位置フレーム前に戻す
-                const float PUSH_VALUE = 1.5f;
-                transform.position -= velocity * PUSH_VALUE;
+                //// 座標を位置フレーム前に戻す
+                //const float PUSH_VALUE = 1.5f;
+                //transform.position -= velocity * PUSH_VALUE;
+
+                // 押し出し
+                float pushValue = CollisionManager.CollisionBoxAndPlane(transform, collider.bounds, other.transform, hitNormal);
+                float dotNormalAndVelocity = Vector3.Dot(velocity, hitNormal);
+                Debug.Log(dotNormalAndVelocity);
+
+                //if (dotNormalAndVelocity < 0)
+                transform.position += pushValue * dotNormalAndVelocity * velocity.normalized;
 
                 // 壁ずりベクトルを計算
                 Vector3 moveVector = velocity - Vector3.Dot(velocity, hitNormal) * hitNormal;
-                transform.position += moveVector;
+                //transform.position += moveVector;
+
+                isHitWall = true;
+                backupPushVector += moveVector;
+
                 break;
             case "Ball":
                 // ボールが自分が投げた状態なら保持状態に変更
@@ -194,7 +217,17 @@ public class Player : MonoBehaviour
         velocity += movePower * moveVector.normalized;
         Vector3 addVelocity = velocity * GameTimeManager.GetInstance().GetTime();
         addVelocity = DontPenetrater.CalcVelocity(transform.position, addVelocity);
-        transform.position += addVelocity;
+
+        if (isHitWall == true)
+        {
+            if (backupPushVector.magnitude > movePower) backupPushVector = backupPushVector.normalized * movePower;
+
+            transform.position += backupPushVector;
+        }
+        else
+        {
+            transform.position += addVelocity;
+        }
 
         isInput = inputDirection.magnitude > 0.5f;
         if (isInput) currentDirection = inputDirection.normalized;
