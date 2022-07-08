@@ -89,6 +89,8 @@ public class Player : MonoBehaviour
         UsingBarrier();
         UseUltimateSkill();
 
+        if (PauseManager.IsPause() == true) animator.speed = 0;
+        else animator.speed = 1;
         UpdateAnimator(isMove);
         UpdateUsingSkillPosition();
 
