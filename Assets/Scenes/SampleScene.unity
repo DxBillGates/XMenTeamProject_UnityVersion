@@ -3402,9 +3402,9 @@ MonoBehaviour:
   BarrierEnemy: {fileID: 1452703305129656446, guid: 079ff1ae46b11004ca559a0d0d7832e4, type: 3}
   FollowEnemy: {fileID: 1571662748511080394, guid: 2b0bb61fcae0cd64bb6709891593668f, type: 3}
   RollEnemy: {fileID: 7502561408969008520, guid: 8d306a475e3091c48abbd616d4519b47, type: 3}
-  MaxBarrierEnemyNum: 3
-  MaxFollowEnemyNum: 3
-  MaxRollEnemyNum: 1
+  MaxBarrierEnemyNum: 5
+  MaxFollowEnemyNum: 0
+  MaxRollEnemyNum: 0
   Spawn_Range: 35
   Cant_Spawn_Distance: 10
   nextSceneGameClear: {fileID: 1181262424}
@@ -12266,7 +12266,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1439989470772683766, guid: 90b409cbf370a8641a6aa58ce6fdac3c, type: 3}
       propertyPath: maxHp
-      value: 70
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 1439989470772683766, guid: 90b409cbf370a8641a6aa58ce6fdac3c, type: 3}
       propertyPath: movePower
@@ -12315,6 +12315,10 @@ PrefabInstance:
     - target: {fileID: 1439989470772683766, guid: 90b409cbf370a8641a6aa58ce6fdac3c, type: 3}
       propertyPath: testFlashingMaterial.flashingSpanFlagController.maxActiveTime
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1439989470772683767, guid: 90b409cbf370a8641a6aa58ce6fdac3c, type: 3}
+      propertyPath: radius
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1473072585009618446, guid: 90b409cbf370a8641a6aa58ce6fdac3c, type: 3}
       propertyPath: m_RootOrder
@@ -12601,7 +12605,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2683838146694799363, guid: 41336c39d89ec8d4895a261b0d0b0d7c, type: 3}
       propertyPath: maxSpeed
-      value: 3
+      value: 2.7
       objectReference: {fileID: 0}
     - target: {fileID: 2683838146694799363, guid: 41336c39d89ec8d4895a261b0d0b0d7c, type: 3}
       propertyPath: throwPower
@@ -12625,11 +12629,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2683838146694799363, guid: 41336c39d89ec8d4895a261b0d0b0d7c, type: 3}
       propertyPath: enemyAccelerateValue
-      value: 2
+      value: 1.35
       objectReference: {fileID: 0}
     - target: {fileID: 2683838146694799363, guid: 41336c39d89ec8d4895a261b0d0b0d7c, type: 3}
       propertyPath: domeHitAccelerateValue
-      value: 3
+      value: 2.7
       objectReference: {fileID: 0}
     - target: {fileID: 2683838146694799363, guid: 41336c39d89ec8d4895a261b0d0b0d7c, type: 3}
       propertyPath: BarrierHitEffectManager
@@ -12641,7 +12645,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2683838146694799363, guid: 41336c39d89ec8d4895a261b0d0b0d7c, type: 3}
       propertyPath: domeTriggerAccelerationValue
-      value: 1.25
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 2683838146694799366, guid: 41336c39d89ec8d4895a261b0d0b0d7c, type: 3}
       propertyPath: m_Name
