@@ -271,12 +271,14 @@ public class PauseManager : SingletonComponent<PauseManager>
     // タイトルへのUIを押した際に実行する内容
     private void OnClickTitle()
     {
+        isPause = false;
         UnityEngine.SceneManagement.SceneManager.LoadScene("TitleScene");
     }
 
     // リスタートのUIを押した際に実行する内容
     private void OnClickRestart()
     {
+        isPause = false;
         UnityEngine.SceneManagement.Scene currentScene = UnityEngine.SceneManagement.SceneManager.GetActiveScene();
         UnityEngine.SceneManagement.SceneManager.LoadScene(currentScene.name);
     }
@@ -284,6 +286,7 @@ public class PauseManager : SingletonComponent<PauseManager>
     // ステージセレクトのUIを押した際に実行する内容
     private void OnClickStageSelect()
     {
+        isPause = false;
         UnityEngine.SceneManagement.SceneManager.LoadScene("StageSelectScene");
     }
 

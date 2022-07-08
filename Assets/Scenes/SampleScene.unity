@@ -12486,6 +12486,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1348855508}
     m_Modifications:
+    - target: {fileID: 1607203819150482352, guid: 917ea8fe1afe14749aa184408e672e95, type: 3}
+      propertyPath: AddSpeed
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 1607203819150482352, guid: 917ea8fe1afe14749aa184408e672e95, type: 3}
+      propertyPath: MaxScale
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 1607203819150482353, guid: 917ea8fe1afe14749aa184408e672e95, type: 3}
       propertyPath: m_Name
       value: BarrierHitEffectManager
