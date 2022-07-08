@@ -3402,8 +3402,8 @@ MonoBehaviour:
   BarrierEnemy: {fileID: 1452703305129656446, guid: 079ff1ae46b11004ca559a0d0d7832e4, type: 3}
   FollowEnemy: {fileID: 1571662748511080394, guid: 2b0bb61fcae0cd64bb6709891593668f, type: 3}
   RollEnemy: {fileID: 7502561408969008520, guid: 8d306a475e3091c48abbd616d4519b47, type: 3}
-  MaxBarrierEnemyNum: 5
-  MaxFollowEnemyNum: 0
+  MaxBarrierEnemyNum: 4
+  MaxFollowEnemyNum: 1
   MaxRollEnemyNum: 0
   Spawn_Range: 35
   Cant_Spawn_Distance: 10
