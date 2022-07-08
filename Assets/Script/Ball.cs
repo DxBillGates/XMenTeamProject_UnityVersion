@@ -56,6 +56,7 @@ public class Ball : MonoBehaviour
     private GameObject trail;
     private TrailRenderer trailRenderer;
     private bool trailFlg;
+    private Collider collider;
 
     // Start is called before the first frame update
     void Start()
@@ -74,6 +75,8 @@ public class Ball : MonoBehaviour
         trailRenderer = trail.GetComponent<TrailRenderer>();
         trailFlg = false;
         trail.SetActive(trailFlg);
+
+        collider = GetComponent<Collider>();
     }
     
     private void FixedUpdate()
@@ -96,6 +99,9 @@ public class Ball : MonoBehaviour
         Vector3 hitNormal = other.gameObject.transform.forward;
 
         const float audioVolume = 0.5f;
+
+        float pushValue = CollisionManager.CollisionBoxAndPlane(transform, collider.bounds, other.transform, hitNormal);
+        float dotNormalAndVelocity = Vector3.Dot(velocity, hitNormal);
 
         switch (other.gameObject.tag)
         {
@@ -131,6 +137,8 @@ public class Ball : MonoBehaviour
                 // 投げられた状態でそのボールが動いていれば
                 if (isThrow == false && velocity.magnitude <= 0) break;
                 HitStopManager.GetInstance().HitStop();
+
+                transform.position += pushValue * dotNormalAndVelocity * velocity.normalized;
 
                 Reflection(hitNormal, true);
                 // 速度ベクトルの大きさを取得
