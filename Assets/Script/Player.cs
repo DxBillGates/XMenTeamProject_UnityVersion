@@ -149,7 +149,6 @@ public class Player : MonoBehaviour
                 // âüÇµèoÇµ
                 float pushValue = CollisionManager.CollisionBoxAndPlane(transform, collider.bounds, other.transform, hitNormal);
                 float dotNormalAndVelocity = Vector3.Dot(velocity, hitNormal);
-                Debug.Log(dotNormalAndVelocity);
 
                 //if (dotNormalAndVelocity < 0)
                 transform.position += pushValue * dotNormalAndVelocity * velocity.normalized;
