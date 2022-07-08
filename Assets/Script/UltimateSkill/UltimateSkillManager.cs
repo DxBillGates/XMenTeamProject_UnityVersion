@@ -90,6 +90,7 @@ public class UltimateSkillManager : SingletonComponent<UltimateSkillManager>
     public bool Use(Vector3 position,Vector3 direction,Transform triggerTransform)
     {
         // �K�E�Z���x����0�ȉ��̏ꍇ�͔��������Ȃ�
+        if (StartGameScene.IsSceneStarted() == false) return false;
         if (ultimateSkill.GetCurrentLevel() <= 0) return false;
         if (isUse == true) return false;
 
