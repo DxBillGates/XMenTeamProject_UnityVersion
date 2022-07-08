@@ -15,7 +15,8 @@ public class StartGameScene : MonoBehaviour
     Vector3 blackSquareInitScale = new Vector3((float)Screen.width / 100 + 1, (float)Screen.height / 25, 1);
     Vector3 blackSquareScale = new Vector3(1, 1, 1);
     static bool isGameStart = false;//演出終わったか
-    bool isEnd;
+    static bool isEnd;
+    bool beforeIsEnd;
 
     // Start is called before the first frame update
     void Start()
@@ -25,7 +26,7 @@ public class StartGameScene : MonoBehaviour
         square.transform.localScale = blackSquareInitScale;
         blackSquareScale = blackSquareInitScale;
         isGameStart = false;
-        isEnd = false;
+        beforeIsEnd = isEnd = false;
         //ゲーム時間戻す
         GameTimeManager.GetInstance().SetTime(0);
     }
@@ -34,9 +35,6 @@ public class StartGameScene : MonoBehaviour
     void Update()
     {
         if (PauseManager.IsPause() == true) return;
-        if (isEnd == true) return;
-
-        GameTimeManager.GetInstance().SetTime(0);
 
         //タイマー更新
         if (PauseManager.IsPause() == false) 
@@ -174,5 +172,10 @@ public class StartGameScene : MonoBehaviour
     public static bool IsGameStart()
     {
         return isGameStart;
+    }
+
+    public static bool IsSceneStarted()
+    {
+        return isEnd;
     }
 }
