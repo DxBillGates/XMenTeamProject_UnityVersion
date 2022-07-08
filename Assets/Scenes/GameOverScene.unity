@@ -1233,7 +1233,7 @@ GameObject:
   - component: {fileID: 1938688666}
   - component: {fileID: 1938688665}
   m_Layer: 5
-  m_Name: ClearBG
+  m_Name: OverBG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
