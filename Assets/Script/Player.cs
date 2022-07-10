@@ -301,7 +301,7 @@ public class Player : MonoBehaviour
         if (isThrowBall == true) return;
         if (ballComponent.state != BallState.HOLD_PLAYER) return;
 
-        ballComponent.transform.position = transform.position + transform.right;
+        ballComponent.transform.position = transform.position + transform.up * 9;
     }
 
     private void Knockback(Vector3 vector)

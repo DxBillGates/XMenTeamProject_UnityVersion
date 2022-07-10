@@ -170,6 +170,9 @@ public class Ball : MonoBehaviour
     public void Throw(Vector3 direction, BallState setState)
     {
         velocity = direction * throwPower;
+        Vector3 backupPosition = transform.position;
+        backupPosition.y = 0;
+        transform.position = backupPosition;
 
         isThrow = true;
         state = setState;
