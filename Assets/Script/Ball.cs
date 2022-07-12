@@ -218,7 +218,6 @@ public class Ball : MonoBehaviour
     // 反射ベクトルを生成
     public void Reflection(Vector3 normal, bool enemy = false, bool addSpeed = false)
     {
-        Vector3 backupVelocity = velocity;
         Vector3 reflectVector = velocity - 2.0f * Vector3.Dot(velocity, normal) * normal;
 
         // 法線ベクトルとの内積を計算して鈍角なら反射をせずに終了させる
@@ -228,8 +227,7 @@ public class Ball : MonoBehaviour
 
         velocity = reflectVector;
 
-        float acc = 0.0f;
-
+        float acc;
         if (UltimateSkillManager.GetInstance().IsActiveFlagControllerFlag())
         {
             acc = ballInfo.domeHitAccelerateValue;
@@ -335,6 +333,10 @@ public class Ball : MonoBehaviour
             if (distace + transform.localScale.x / 2 > ultimateSkillManager.usedSize)
             {
                 transform.position -= velocity.normalized * Mathf.Abs(distanceSubject);
+
+                // 法線と速度ベクトルで内積を取り鈍角（速度ベクトルの方向が法線側）なら反射させない
+                if (Vector3.Dot(hitNormal, velocity) > 0) return;
+
                 Reflection(hitNormal.normalized, false, true);
                 isHitDome = true;
             }
