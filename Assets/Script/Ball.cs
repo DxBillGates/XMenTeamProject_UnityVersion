@@ -48,10 +48,10 @@ public class Ball : MonoBehaviour
     public BallState state { get; private set; }
     private Vector3 velocity;
 
-    private bool isThrow;
-    private bool isHitWall;
-    private bool isHitDome;
-    private bool isInDome;
+    [SerializeField]private bool isThrow;
+    [SerializeField]private bool isHitWall;
+    [SerializeField]private bool isHitDome;
+    [SerializeField]private bool isInDome;
 
     //軌跡
     private GameObject trail;
@@ -122,17 +122,22 @@ public class Ball : MonoBehaviour
                 isHitWall = true;
                 Reflection(hitNormal);
                 AudioManager.GetInstance().PlayAudio(SE[0], MyAudioType.SE, audioVolume, false);
+
+                // 押し出し
+                pushValue = CollisionManager.CollisionBoxAndPlane(transform, collider.bounds, other.transform, hitNormal);
+                dotNormalAndVelocity = Vector3.Dot(velocity, hitNormal);
+
+                transform.position += pushValue * dotNormalAndVelocity * velocity.normalized;
                 break;
 
             // プレイヤーのバリアにあたったときの処理
             case "Barrier":
                 // 投げられた状態でそのボールが動いていれば
                 if (isThrow == false && velocity.magnitude <= 0) break;
-                HitStopManager.GetInstance().HitStop();
 
                 transform.position += pushValue * dotNormalAndVelocity * velocity.normalized;
 
-                Reflection(hitNormal, true);
+                Reflection(hitNormal, true,true);
                 // 速度ベクトルの大きさを取得
                 float speed = velocity.magnitude;
 
@@ -144,6 +149,7 @@ public class Ball : MonoBehaviour
 
                 //ヒット時エフェクト
                 BarrierHitEffectManager.GetComponent<BarrierHitEffect>().Use(gameObject.transform.position);
+                HitStopManager.GetInstance().HitStop();
 
                 break;
             case "EnemyBarrier":
@@ -190,6 +196,7 @@ public class Ball : MonoBehaviour
         // 減衰したあとに既定値より速度ベクトルの大きさが小さいなら止まっているみなす
         const float MIN_VELOCITY = 0.01f;
         if (velocity.magnitude < MIN_VELOCITY) InitializeState(BallState.FREE);
+        if (velocity.magnitude > ballInfo.maxSpeed) velocity = velocity.normalized * ballInfo.maxSpeed;
 
         // 速度ベクトルにゲーム内時間を掛ける
         Vector3 resultVelocity = velocity * GameTimeManager.GetInstance().GetTime();
@@ -218,14 +225,15 @@ public class Ball : MonoBehaviour
     // 反射ベクトルを生成
     public void Reflection(Vector3 normal, bool enemy = false, bool addSpeed = false)
     {
-        Vector3 reflectVector = velocity - 2.0f * Vector3.Dot(velocity, normal) * normal;
+        Vector3 backupVelocity = velocity * GameTimeManager.GetInstance().GetTime();
+        Vector3 reflectVector = backupVelocity - 2.0f * Vector3.Dot(backupVelocity, normal) * normal;
 
         // 法線ベクトルとの内積を計算して鈍角なら反射をせずに終了させる
         float dotReflectAndNormal = Vector3.Dot(reflectVector, normal);
         float dotReflectAndNormalAngle = 180.0f * dotReflectAndNormal / Mathf.PI;
         if (Mathf.Abs(dotReflectAndNormalAngle) > 180) return;
 
-        velocity = reflectVector;
+        velocity = reflectVector.normalized * velocity.magnitude;
 
         float acc;
         if (UltimateSkillManager.GetInstance().IsActiveFlagControllerFlag())
@@ -242,7 +250,7 @@ public class Ball : MonoBehaviour
         }
 
         // 引数のaddSpeedFlagの内容で反射ベクトルに加速度をかけるか
-        velocity = addSpeed ? reflectVector * acc : reflectVector;
+        velocity *= addSpeed ? acc : 1;
 
         // 加速後の速度が上限を超え内容制限
         if (velocity.magnitude > ballInfo.maxSpeed) velocity = velocity.normalized * ballInfo.maxSpeed;
@@ -312,13 +320,16 @@ public class Ball : MonoBehaviour
             if (Vector3.Distance(setPos, ultimateSkillManager.usedPosition) > ultimateSkillManager.usedSize - transform.localScale.x * 2)
             {
                 transform.position = setPos;
+                Vector3 vector = ultimateSkillManager.usedPosition - transform.position;
+                vector = vector.normalized * velocity.magnitude;
+                velocity = Vector3.Lerp(velocity, vector, 0.7f);
             }
             else
             {
                 isInDome = true;
             }
         }
-        else if (flagActiveType == FlagActiveType.ACTIVE || flagActiveType == FlagActiveType.END)
+        if (flagActiveType == FlagActiveType.ACTIVE || flagActiveType == FlagActiveType.END || isInDome)
         {
             if (isHitWall == true)
             {
@@ -332,10 +343,13 @@ public class Ball : MonoBehaviour
             // ドームとの距離がドームの半径を超えているなら反射
             if (distace + transform.localScale.x / 2 > ultimateSkillManager.usedSize)
             {
-                transform.position -= velocity.normalized * Mathf.Abs(distanceSubject);
+                //transform.position -= velocity.normalized * Mathf.Abs(distanceSubject);
 
                 // 法線と速度ベクトルで内積を取り鈍角（速度ベクトルの方向が法線側）なら反射させない
-                if (Vector3.Dot(hitNormal, velocity) > 0) return;
+                if (Vector3.Dot(hitNormal, velocity) > 0)
+                {
+                    return;
+                }
 
                 Reflection(hitNormal.normalized, false, true);
                 isHitDome = true;
