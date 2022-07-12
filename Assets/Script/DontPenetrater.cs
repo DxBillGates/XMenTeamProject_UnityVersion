@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class DontPenetrater
 {
-    // Update is called once per frame
     static public Vector3 CalcVelocity(Vector3 position,Vector3 velocity)
     {
         if (velocity == null) return Vector3.zero;
@@ -17,6 +16,7 @@ public class DontPenetrater
 
         if (Physics.Raycast(position, velocity.normalized, out RaycastHit raycastHit))
         {
+            if (raycastHit.collider.CompareTag("Wall") == false) return velocity;
             // 壁との距離が壁のサイズより小さいなら抜ける可能性がある
             if (raycastHit.distance >= wallSize) return velocity;
 
