@@ -140,21 +140,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f7b30dd3b8bf344586e702d07dfa9bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SEPlayManager: {fileID: 5001082493362104408, guid: 7587479cdba26374c8d3aa484afe3cd0, type: 3}
+  ballInfo:
+    throwPower: 1.5
+    attenuationPower: 0.004
+    maxSpeed: 2.7
+    accelerateValue: 2
+    enemyAccelerateValue: 2
+    domeHitAccelerateValue: 2.7
+    domeTriggerAccelerationValue: 2.7
+    barrierReflectance: 0.5
   BarrierHitEffectManager: {fileID: 0}
   SE:
   - {fileID: 8300000, guid: 45bdfac5f1e4ae14fba0862eaea30f42, type: 3}
-  throwPower: 0.5
-  attenuationPower: 0.001
-  maxSpeed: 1
-  accelerateValue: 1.05
-  enemyAccelerateValue: 0
-  domeHitAccelerateValue: 0
-  domeTriggerAccelerationValue: 0
   stateMaterials:
   - {fileID: 2100000, guid: 1881196c8550f2b45af99d03c6da1960, type: 2}
   - {fileID: 2100000, guid: 58b4dbf2dc1cb46408131df6ea47882d, type: 2}
   - {fileID: 2100000, guid: 22d23ed37c2d4ca4d98f5428c3a5977a, type: 2}
   - {fileID: 2100000, guid: fc52e54c31dfdb4459e01f0907be1f0c, type: 2}
   - {fileID: 2100000, guid: 8636c228dfa63414c9f6e81e9742151d, type: 2}
-  barrierReflectance: 0
