@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AudioManager : SingletonComponent<AudioManager>
 {
-    private const int MAX_VOLUME_LEVEL = 9;
+    private const int MAX_VOLUME_LEVEL = 10;
 
     [SerializeField,Range(0,1)] private float defaultVolume; 
 
