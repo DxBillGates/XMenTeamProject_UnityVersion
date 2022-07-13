@@ -360,6 +360,7 @@ public class Ball : MonoBehaviour
     // ƒh[ƒ€”­“®‚É‰Á‘¬‚³‚¹‚é‚½‚ß‚ÌŠÖ”
     public void AddTriggerSkillAcc()
     {
-        velocity *= ballInfo.domeTriggerAccelerationValue;
+        velocity += velocity.normalized * ballInfo.domeTriggerAccelerationValue;
+        //velocity *= ballInfo.domeTriggerAccelerationValue;
     }
 }
