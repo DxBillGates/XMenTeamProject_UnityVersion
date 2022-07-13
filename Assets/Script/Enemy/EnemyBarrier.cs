@@ -19,7 +19,7 @@ public class EnemyBarrier : MonoBehaviour
 
     }
 
-    private void OnTriggerStay(Collider collision)
+    private void OnTriggerEnter(Collider collision)
     {
         // ƒ{[ƒ‹‚É“–‚½‚Á‚½‚Æ‚«‚Ìˆ—
         Ball ballComponent;
