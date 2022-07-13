@@ -122,13 +122,15 @@ public class RollEnemy : Enemy
                     ballComponent.Throw(throwVector * ballSpeed, BallState.THROWED_ENEMY);
                 }
                 KnockBack(collision);
-
             }
         }
-        else if (collision.gameObject.tag == "Wall")
+    }
+
+    private void OnTriggerStay(Collider collision)
+    {
+        if (collision.gameObject.CompareTag("Wall"))
         {
             WallCollsion(collision.transform);
         }
-
     }
 }

@@ -22,6 +22,19 @@ public class BarrierEnemyCollision : MonoBehaviour
         GameObject enemyParent = transform.root.gameObject;
         BarrierEnemy barrierEnemy = enemyParent.GetComponent<BarrierEnemy>();
 
+        if (collision.gameObject.tag == "Wall")
+        {
+            //親で親のトランスフォーム修正
+            barrierEnemy.WallCollsion(collision.transform);
+        }
+    }
+
+    private void OnTriggerEnter(Collider collision)
+    {
+        //親オブジェクト取得
+        GameObject enemyParent = transform.root.gameObject;
+        BarrierEnemy barrierEnemy = enemyParent.GetComponent<BarrierEnemy>();
+
         // ボールに当たったときの処理
         Ball ballComponent;
         if (collision.gameObject.CompareTag("Ball"))
@@ -34,12 +47,6 @@ public class BarrierEnemyCollision : MonoBehaviour
                 //親で判定
                 barrierEnemy.KnockBack(collision);
             }
-        }
-
-        if (collision.gameObject.tag == "Wall")
-        {
-            //親で親のトランスフォーム修正
-            barrierEnemy.WallCollsion(collision.transform);
         }
     }
 }

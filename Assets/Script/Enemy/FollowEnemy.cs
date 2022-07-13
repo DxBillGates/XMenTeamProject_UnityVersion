@@ -36,6 +36,15 @@ public class FollowEnemy : Enemy
 
     private void OnTriggerStay(Collider collision)
     {
+        if (collision.gameObject.CompareTag("Wall"))
+        {
+            WallCollsion(collision.transform);
+        }
+
+    }
+
+    private void OnTriggerEnter(Collider collision)
+    {
         Ball ballComponent;
         if (collision.gameObject.CompareTag("Ball"))
         {
@@ -49,10 +58,5 @@ public class FollowEnemy : Enemy
                 KnockBack(collision);
             }
         }
-        else if (collision.gameObject.tag == "Wall")
-        {
-            WallCollsion(collision.transform);
-        }
-
     }
 }
