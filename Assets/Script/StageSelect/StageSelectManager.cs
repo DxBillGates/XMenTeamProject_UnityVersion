@@ -12,14 +12,15 @@ public class StageSelectManager : SingletonComponent<StageSelectManager>
     [SerializeField] List<Image> UIStageNums;                   //選択中のステージナンバーUI
     [SerializeField] List<Sprite> sprNums;                      //0～9の数字
     [SerializeField] NextScene sceneChange;                     //シーンチェンジオブジェクト
+    [SerializeField] int rotationCount = 2;                     //ステージ決定時のオブジェクト回転数
 
     static int staticStageCount;                                //ステージ数　いずれ自動カウントできるようにしたい
     static int nowSelectStageNum = 0;                           //現在選択中のステージインデックス
     bool isMoveLeft = false;                                    //バリアが左に動いているか
-    float moveTimer = 0.75f;                                     //移動タイマー
+    float moveTimer = 0.75f;                                    //移動タイマー
     bool isStartMoveTimer = false;                              //移動タイマーが開始しているか
-    float decideTimer = 0;                                     //移動タイマー
-    bool isStartDecideTimer = false;                              //移動タイマーが開始しているか
+    float decideTimer = 0;                                      //移動タイマー
+    bool isStartDecideTimer = false;                            //移動タイマーが開始しているか
 
 
     protected override void Awake()
@@ -141,6 +142,11 @@ public class StageSelectManager : SingletonComponent<StageSelectManager>
     public float GetMoveTimer()
     {
         return moveTimer;
+    }
+
+    public int GetRotationCount()
+    {
+        return rotationCount;
     }
 
     public bool IsStartMoveTimer()
