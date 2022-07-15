@@ -339,4 +339,11 @@ public class Ball : MonoBehaviour
     {
         velocity *= domeTriggerAccelerationValue;
     }
+
+
+    // ボールのパーティクル用に最大速度を取ってくる
+    public float GetMaxSpeed()
+    {
+        return maxSpeed;
+    }
 }
