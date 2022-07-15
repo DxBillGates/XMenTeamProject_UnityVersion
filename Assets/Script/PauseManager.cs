@@ -30,7 +30,9 @@ public class PauseManager : SingletonComponent<PauseManager>
     [SerializeField] private RectTransform circle;
     [SerializeField] private RectTransform underLine;
     [SerializeField] private Image bgmVolume;
+    [SerializeField] private Image bgmVolume_10;
     [SerializeField] private Image seVolume;
+    [SerializeField] private Image seVolume_10;
     [SerializeField] private Image bgmArrowLeft;
     [SerializeField] private Image bgmArrowRight;
     [SerializeField] private Image seArrowLeft;
@@ -170,19 +172,23 @@ public class PauseManager : SingletonComponent<PauseManager>
         if (currentButtonIndex == (int)PauseButtonType.BGM_VOLUME)
         {
             bgmVolume.color = new Color32(242, 145, 25, 255);
+            bgmVolume_10.color = new Color32(242, 145, 25, 255);
         }
         else
         {
             bgmVolume.color = new Color32(30, 173, 226, 255);
+            bgmVolume_10.color = new Color32(30, 173, 226, 255);
         }
         //SE数字
         if (currentButtonIndex == (int)PauseButtonType.SE_VOLUME)
         {
             seVolume.color = new Color32(242, 145, 25, 255);
+            seVolume_10.color = new Color32(242, 145, 25, 255);
         }
         else
         {
             seVolume.color = new Color32(30, 173, 226, 255);
+            seVolume_10.color = new Color32(30, 173, 226, 255);
         }
         //BGの色
         if (isPause == false)
@@ -218,8 +224,28 @@ public class PauseManager : SingletonComponent<PauseManager>
 
         //スプライト更新
         //数字
-        bgmVolume.sprite = sprNum[AudioManager.GetInstance().GetBGMMasterVolumeLevel()];
-        seVolume.sprite = sprNum[AudioManager.GetInstance().GetSEMasterVolumeLevel()];
+        int bgm = AudioManager.GetInstance().GetBGMMasterVolumeLevel();
+        int se = AudioManager.GetInstance().GetSEMasterVolumeLevel();
+        if (bgm < 10)
+        {
+            bgmVolume.sprite = sprNum[AudioManager.GetInstance().GetBGMMasterVolumeLevel()];
+            bgmVolume_10.sprite = sprNum[0];
+        }
+        else
+        {
+            bgmVolume.sprite = sprNum[0];
+            bgmVolume_10.sprite = sprNum[1];
+        }
+        if (se < 10)
+        {
+            seVolume.sprite = sprNum[AudioManager.GetInstance().GetSEMasterVolumeLevel()];
+            seVolume_10.sprite = sprNum[0];
+        }
+        else
+        {
+            seVolume.sprite = sprNum[0];
+            seVolume_10.sprite = sprNum[1];
+        }
         //矢印
         //BGM
         if (currentButtonIndex == (int)PauseButtonType.BGM_VOLUME)
@@ -246,8 +272,6 @@ public class PauseManager : SingletonComponent<PauseManager>
 
         if (inputHorizontal == 0) isInputHorizontalButton = false;
 
-        //texts[(int)PauseButtonType.BGM_VOLUME - 1].text = "BGMVolume" + " < " + AudioManager.GetInstance().GetBGMMasterVolumeLevel() + " > ";
-        //texts[(int)PauseButtonType.SE_VOLUME - 1].text = "SEVolume" + "      < " + AudioManager.GetInstance().GetSEMasterVolumeLevel() + " > ";
     }
     private void UpdateEffect()
     {
@@ -264,8 +288,8 @@ public class PauseManager : SingletonComponent<PauseManager>
         float adjustY = -20;
 
         circle.position = new Vector3(circle.position.x, circlePositionY);
-        underLine.position = new Vector3(EaseOutExpo(405, 405 + 132 * 1.4f * 2.7f / 2, timerEffect / 0.5f), underlinePositionY + adjustY);
-        underLine.localScale = new Vector3(EaseOutExpo(0, 1.4f, timerEffect / 0.5f), 0.35f);
+        underLine.position = new Vector3(EaseOutExpo(435, 435 + 132 * 1.2f * 2.7f / 2, timerEffect / 0.5f), underlinePositionY + adjustY);
+        underLine.localScale = new Vector3(EaseOutExpo(0, 1.2f, timerEffect / 0.5f), 0.35f);
     }
 
     // タイトルへのUIを押した際に実行する内容
