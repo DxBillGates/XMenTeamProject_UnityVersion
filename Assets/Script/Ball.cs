@@ -191,7 +191,7 @@ public class Ball : MonoBehaviour
     private void Move()
     {
         // 速度ベクトルを減衰させる
-        velocity -= velocity.normalized * ballInfo.attenuationPower;
+        velocity -= velocity.normalized * ballInfo.attenuationPower * GameTimeManager.GetInstance().GetTime();
 
         // 減衰したあとに既定値より速度ベクトルの大きさが小さいなら止まっているみなす
         const float MIN_VELOCITY = 0.01f;
