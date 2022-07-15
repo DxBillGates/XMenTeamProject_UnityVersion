@@ -4047,15 +4047,15 @@ Transform:
   - {fileID: 1101641924}
   - {fileID: 1577817573}
   - {fileID: 741282583}
+  - {fileID: 1545067176}
   - {fileID: 508300957}
   - {fileID: 1947879781}
   - {fileID: 1290566431}
   - {fileID: 963780383}
-  - {fileID: 74812381}
-  - {fileID: 1545067176}
   - {fileID: 1721036302}
   - {fileID: 1204315940}
   - {fileID: 6584887}
+  - {fileID: 74812381}
   - {fileID: 136497844}
   - {fileID: 1554730395}
   - {fileID: 1523826849}
@@ -5119,6 +5119,7 @@ MonoBehaviour:
   - {fileID: -1641383276, guid: 6be1482a20690834e91960cb6153b73f, type: 3}
   - {fileID: 1445356088, guid: 6be1482a20690834e91960cb6153b73f, type: 3}
   sceneChange: {fileID: 1459785081}
+  rotationCount: 3
 --- !u!4 &1970035457
 Transform:
   m_ObjectHideFlags: 0

@@ -55,6 +55,7 @@ public class StageSelectBarrier : MonoBehaviour
             int afterNum = StageSelectManager.GetNowSelectStageNum(false) + stageNum;
             float afterRad = (360.0f / generatedCount * afterNum - 90) * Mathf.Deg2Rad; //ƒJƒƒ‰‚Ì‘O‚É‚Á‚Ä‚­‚é‚½‚ß270‹‚ÌˆÊ’u‚ğ0‹ˆµ‚¢‚É‚·‚é
 
+            //ˆÊ’u
             transform.position = new Vector3(
                 Mathf.Cos(EaseOutExpo(beforeRad, afterRad, timer / 0.75f)) * radius,
                 Mathf.Sin(timerPosY * Mathf.PI) * swingWidth / 2,
@@ -63,18 +64,25 @@ public class StageSelectBarrier : MonoBehaviour
 
             transform.position += StageSelectManager.GetInstance().GetCenterPos();
 
+            //‰ñ“]
+            transform.rotation = Quaternion.Euler(
+                0,
+                EaseOutExpo(90 - (beforeRad * Mathf.Rad2Deg), 90 - (afterRad * Mathf.Rad2Deg), timer / 0.75f),
+                0);
+
         }
         //Ã~
         else
         {
             transform.position = GetPosFromStageNum(stageNum);
+            transform.rotation = GetRotationFromStageNum(stageNum);
         }
 
         //ƒoƒŠƒA©‘Ì‚ğ‰ñ“]‚³‚¹‚éˆ—
         if (StageSelectManager.GetInstance().IsStartDecideTimer() && StageSelectManager.GetNowSelectStageNum(true) == stageNum)
         {
             float timer = StageSelectManager.GetInstance().GetDecideTimer();
-            transform.Rotate(0, EaseOutCubic(10,0, timer / 2.5f), 0);
+            transform.rotation = Quaternion.Euler(0, EaseOutCubic(180 + 360 * StageSelectManager.GetInstance().GetRotationCount(), 180, timer), 0);
         }
     }
 
@@ -92,6 +100,14 @@ public class StageSelectBarrier : MonoBehaviour
         result += StageSelectManager.GetInstance().GetCenterPos();
 
         return result;
+    }
+
+    Quaternion GetRotationFromStageNum(int stageNum)
+    {
+        //‰~ó‚É•À‚×‚é
+        float dig = 360.0f / StageSelectManager.GetInstance().GetStageCount() * (stageNum - StageSelectManager.GetNowSelectStageNum(false));
+
+        return Quaternion.Euler(0, 180 - dig, 0);
     }
 
     float EaseOutExpo(float s, float e, float t)
