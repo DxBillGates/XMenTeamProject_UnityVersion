@@ -363,4 +363,11 @@ public class Ball : MonoBehaviour
         velocity += velocity.normalized * ballInfo.domeTriggerAccelerationValue;
         //velocity *= ballInfo.domeTriggerAccelerationValue;
     }
+
+
+    // ボールのパーティクル用に最大速度を取ってくる
+    public float GetMaxSpeed()
+    {
+        return maxSpeed;
+    }
 }
