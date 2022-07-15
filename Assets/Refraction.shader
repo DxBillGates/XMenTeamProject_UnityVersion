@@ -4,6 +4,8 @@ Shader "Unlit/test"
 	{
 		_RelativeRefractionIndex("Relative Refraction Index", Range(0.0, 1.0)) = 0.67
 		[PowerSlider(5)]_Distance("Distance", Range(0.0, 100.0)) = 10.0
+		_Radius("Radius",Range(0.0,10.0)) = 0
+
 	}
 
 		SubShader
@@ -39,6 +41,7 @@ Shader "Unlit/test"
 			sampler2D _GrabPassTexture;
 			float _RelativeRefractionIndex;
 			float _Distance;
+			float _Radius;
 
 			v2f vert(appdata v)
 			{
@@ -50,10 +53,14 @@ Shader "Unlit/test"
 				half3 worldNormal = UnityObjectToWorldNormal(v.normal);
 				//カメラディレクション
 				half3 viewDir = normalize(worldPos - _WorldSpaceCameraPos.xyz);
+
+				//カメラからの内積
+				float val = 1 - abs(dot(-viewDir, v.normal));
+
 				// 屈折ディレクション
 				half3 refractDir = refract(viewDir, worldNormal, _RelativeRefractionIndex);
 				// 屈折方向の先にある位置をサンプリング位置とする
-				half3 samplingPos = worldPos + refractDir * _Distance;
+				half3 samplingPos = worldPos + refractDir * _Distance * pow(val, _Radius);
 				// サンプリング位置をプロジェクション変換
 				half4 samplingScreenPos = mul(UNITY_MATRIX_VP, half4(samplingPos, 1.0));
 				// ビューポート座標系に変換
