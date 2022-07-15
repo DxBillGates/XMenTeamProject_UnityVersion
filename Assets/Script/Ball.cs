@@ -368,6 +368,6 @@ public class Ball : MonoBehaviour
     // ボールのパーティクル用に最大速度を取ってくる
     public float GetMaxSpeed()
     {
-        return maxSpeed;
+        return ballInfo.maxSpeed;
     }
 }
