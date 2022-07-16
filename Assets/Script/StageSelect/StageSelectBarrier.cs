@@ -4,16 +4,14 @@ using UnityEngine;
 
 public class StageSelectBarrier : MonoBehaviour
 {
-    static int generatedCount = 0;
-    private int stageNum{get; set;}  //自身のステージナンバー(0～) これを基に位置決定する
+    private int stageNum = -1;  //自身のステージナンバー(0～) これを基に位置決定する
     private float timerPosY = 0;
     private float swingWidth = 1.0f;
 
     // Start is called before the first frame update
     void Start()
     {
-        stageNum = generatedCount;
-        generatedCount++;
+        timerPosY = 0;
     }
 
     // Update is called once per frame
@@ -42,24 +40,32 @@ public class StageSelectBarrier : MonoBehaviour
         //回転時
         if (StageSelectManager.GetInstance().IsStartMoveTimer())
         {
+            //半径
             float radius = StageSelectManager.GetInstance().GetRadius();
 
+            //移動タイマー
             float timer = StageSelectManager.GetInstance().GetMoveTimer();
+
+            //移動タイマーの上限値
+            float limitTimer = StageSelectManager.GetInstance().GetLimitMoveTimer();
+
+            //ステージ数
+            int stageCount = StageSelectManager.GetInstance().GetStageCount();
 
             //回転前
             int beforeNum = StageSelectManager.GetInstance().IsMoveLeft() ?
                 StageSelectManager.GetNowSelectStageNum(false) - 1 + stageNum : StageSelectManager.GetNowSelectStageNum(false) + 1 + stageNum;
-            float beforeRad = (360.0f / generatedCount * beforeNum - 90) * Mathf.Deg2Rad; //カメラの前に持ってくるため270°の位置を0°扱いにする
+            float beforeRad = (360.0f / stageCount * beforeNum - 90) * Mathf.Deg2Rad; //カメラの前に持ってくるため270°の位置を0°扱いにする
 
             //回転後
             int afterNum = StageSelectManager.GetNowSelectStageNum(false) + stageNum;
-            float afterRad = (360.0f / generatedCount * afterNum - 90) * Mathf.Deg2Rad; //カメラの前に持ってくるため270°の位置を0°扱いにする
+            float afterRad = (360.0f / stageCount * afterNum - 90) * Mathf.Deg2Rad; //カメラの前に持ってくるため270°の位置を0°扱いにする
 
             //位置
             transform.position = new Vector3(
-                Mathf.Cos(EaseOutExpo(beforeRad, afterRad, timer / 0.75f)) * radius,
+                Mathf.Cos(EaseOutExpo(beforeRad, afterRad, timer / limitTimer)) * radius,
                 Mathf.Sin(timerPosY * Mathf.PI) * swingWidth / 2,
-                Mathf.Sin(EaseOutExpo(beforeRad, afterRad, timer / 0.75f)) * radius
+                Mathf.Sin(EaseOutExpo(beforeRad, afterRad, timer / limitTimer)) * radius
                 );
 
             transform.position += StageSelectManager.GetInstance().GetCenterPos();
@@ -67,7 +73,7 @@ public class StageSelectBarrier : MonoBehaviour
             //回転
             transform.rotation = Quaternion.Euler(
                 0,
-                EaseOutExpo(90 - (beforeRad * Mathf.Rad2Deg), 90 - (afterRad * Mathf.Rad2Deg), timer / 0.75f),
+                EaseOutExpo(90 - (beforeRad * Mathf.Rad2Deg), 90 - (afterRad * Mathf.Rad2Deg), timer / limitTimer),
                 0);
 
         }
@@ -82,7 +88,8 @@ public class StageSelectBarrier : MonoBehaviour
         if (StageSelectManager.GetInstance().IsStartDecideTimer() && StageSelectManager.GetNowSelectStageNum(true) == stageNum)
         {
             float timer = StageSelectManager.GetInstance().GetDecideTimer();
-            transform.rotation = Quaternion.Euler(0, EaseOutCubic(180 + 360 * StageSelectManager.GetInstance().GetRotationCount(), 180, timer), 0);
+            float limitTimer = StageSelectManager.GetInstance().GetLimitDecideTimer();
+            transform.rotation = Quaternion.Euler(0, EaseOutCubic(180 + 360 * StageSelectManager.GetInstance().GetRotationCount(), 180, timer / (limitTimer - 1.0f)), 0);
         }
     }
 
@@ -108,6 +115,11 @@ public class StageSelectBarrier : MonoBehaviour
         float dig = 360.0f / StageSelectManager.GetInstance().GetStageCount() * (stageNum - StageSelectManager.GetNowSelectStageNum(false));
 
         return Quaternion.Euler(0, 180 - dig, 0);
+    }
+
+    public void SetStageNum(int num)
+    {
+        stageNum = num;
     }
 
     float EaseOutExpo(float s, float e, float t)

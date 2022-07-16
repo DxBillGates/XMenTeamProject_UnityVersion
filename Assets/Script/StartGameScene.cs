@@ -16,7 +16,6 @@ public class StartGameScene : MonoBehaviour
     Vector3 blackSquareScale = new Vector3(1, 1, 1);
     static bool isGameStart = false;//ââèoèIÇÌÇ¡ÇΩÇ©
     static bool isEnd;
-    bool beforeIsEnd;
 
     // Start is called before the first frame update
     void Start()
@@ -26,7 +25,7 @@ public class StartGameScene : MonoBehaviour
         square.transform.localScale = blackSquareInitScale;
         blackSquareScale = blackSquareInitScale;
         isGameStart = false;
-        beforeIsEnd = isEnd = false;
+        isEnd = false;
         //ÉQÅ[ÉÄéûä‘ñﬂÇ∑
         GameTimeManager.GetInstance().SetTime(0);
     }
