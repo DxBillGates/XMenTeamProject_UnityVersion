@@ -20,7 +20,7 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] private float Cant_Spawn_Distance = 10;
 
     //クリアシーン遷移用
-    [SerializeField] GameObject nextSceneGameClear;
+    [SerializeField] NextScene sceneChange;
 
     private static int aliveCount = 0;
 
@@ -48,7 +48,8 @@ public class EnemyManager : MonoBehaviour
         //敵が全滅したらクリアシーンへ
         if (Enemys.Length <= 0)
         {
-            nextSceneGameClear.SetActive(true);
+            sceneChange.nextSceneName = "GameClearScene";
+            sceneChange.gameObject.SetActive(true);
         }
     }
 

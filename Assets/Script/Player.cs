@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject lineObjectManager;
     [SerializeField] private float maxHp;
     [SerializeField] private GameObject hpGaugeUIObject;
-    [SerializeField] private GameObject nextSceneGameOver;
+    [SerializeField] private NextScene sceneChange;
     [SerializeField] private GameObject SEPlayManager;
     [SerializeField] private List<AudioClip> SE;
 
@@ -338,7 +338,8 @@ public class Player : MonoBehaviour
         {
             hp = 0;
             //ゲームオーバーシーンへ
-            nextSceneGameOver.SetActive(true);
+            sceneChange.nextSceneName = "GameOverScene";
+            sceneChange.gameObject.SetActive(true);
         }
     }
 
