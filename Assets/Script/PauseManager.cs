@@ -62,6 +62,11 @@ public class PauseManager : SingletonComponent<PauseManager>
         Initialize();
     }
 
+    private void OnDisable()
+    {
+        isPause = false;
+    }
+
     // Update is called once per frame
     void Update()
     {
