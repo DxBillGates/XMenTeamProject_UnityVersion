@@ -84,6 +84,13 @@ public class StageSelectManager : SingletonComponent<StageSelectManager>
             sceneChange.nextSceneName = "Stage" + (GetNowSelectStageNum(true) + 1).ToString();
             sceneChange.gameObject.SetActive(true);
         }
+
+        //ポーズボタンでタイトルへ
+        if (Input.GetButtonDown("Pause"))
+        {
+            sceneChange.nextSceneName = "TitleScene";
+            sceneChange.gameObject.SetActive(true);
+        }
     }
 
     void UpdateTimer()
