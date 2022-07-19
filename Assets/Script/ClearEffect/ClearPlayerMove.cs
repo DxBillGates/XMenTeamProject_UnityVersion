@@ -8,6 +8,8 @@ public class ClearPlayerMove : MonoBehaviour
     [SerializeField] private float velocity = 0.1f;
 
     // Start is called before the first frame update
+    bool isEffectEnd = false;
+
     void Start()
     {
 
@@ -21,5 +23,15 @@ public class ClearPlayerMove : MonoBehaviour
             transform.position += new Vector3(velocity, 0, 0);
         }
 
+        if (transform.position.x >= 5)
+        {
+            isEffectEnd = true;
+        }
+
+    }
+
+    public bool IsEffectEnd
+    {
+        get { return isEffectEnd; }
     }
 }
