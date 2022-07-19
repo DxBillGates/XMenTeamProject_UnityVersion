@@ -999,6 +999,7 @@ GameObject:
   - component: {fileID: 300305073}
   - component: {fileID: 300305072}
   - component: {fileID: 300305071}
+  - component: {fileID: 300305075}
   m_Layer: 0
   m_Name: Plane
   m_TagString: Untagged
@@ -1085,6 +1086,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &300305075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 300305070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83b3fb01c63623b4996d59fa904239e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  castSadowObjects: []
+  shadowPrefab: {fileID: 2132234326730853725, guid: b9417f3f2799d5d42893be0c2c0778d0, type: 3}
+  Scale: 0.35
 --- !u!1001 &305257623
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5120,6 +5136,7 @@ MonoBehaviour:
   - {fileID: 1445356088, guid: 6be1482a20690834e91960cb6153b73f, type: 3}
   sceneChange: {fileID: 1459785081}
   rotationCount: 3
+  circleShadowScriptObject: {fileID: 300305070}
 --- !u!4 &1970035457
 Transform:
   m_ObjectHideFlags: 0

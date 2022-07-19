@@ -22,6 +22,10 @@ public class EnemyManager : MonoBehaviour
     //クリアシーン遷移用
     [SerializeField] GameObject nextSceneGameClear;
 
+    //丸影のスクリプト取得用
+    [SerializeField] GameObject circleShadowScriptObject;
+
+
     private static int aliveCount = 0;
 
     private GameObject[] Enemys;
@@ -81,7 +85,7 @@ public class EnemyManager : MonoBehaviour
             }
 
             //引数の真ん中変更で生成するポジション変更
-            Instantiate(prefab, spawnPos, Quaternion.identity);
+            circleShadowScriptObject.GetComponent<CircleShadow>().AddObject(Instantiate(prefab, spawnPos, Quaternion.identity));
             //生成数増やす
             aliveCount++;
         }

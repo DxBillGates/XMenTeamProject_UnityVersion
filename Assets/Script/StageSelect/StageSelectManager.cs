@@ -22,6 +22,7 @@ public class StageSelectManager : SingletonComponent<StageSelectManager>
     float decideTimer = 0;                                      //移動タイマー
     bool isStartDecideTimer = false;                            //移動タイマーが開始しているか
 
+    [SerializeField] GameObject circleShadowScriptObject;       //丸影のスクリプト取得用
 
     protected override void Awake()
     {
@@ -33,7 +34,7 @@ public class StageSelectManager : SingletonComponent<StageSelectManager>
     {
         for (int i = 0; i < stageCount; i++)
         {
-            Instantiate(barrierPrefab);
+            circleShadowScriptObject.GetComponent<CircleShadow>().AddObject(Instantiate(barrierPrefab));
         }
         moveTimer = 0.5f;
         decideTimer = 0;

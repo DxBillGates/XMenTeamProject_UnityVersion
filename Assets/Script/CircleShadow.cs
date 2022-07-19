@@ -8,8 +8,11 @@ public class CircleShadow : MonoBehaviour
     [SerializeField] List<GameObject> castSadowObjects;
     //影のプレハブ
     [SerializeField] GameObject shadowPrefab;
+    //影の大きさ
+    [SerializeField] float Scale;
     //影のクローン
     List<GameObject> shadowClone;
+
     
     // Start is called before the first frame update
     void Start()
@@ -18,7 +21,7 @@ public class CircleShadow : MonoBehaviour
 
         for (int i = 0; i < castSadowObjects.Count; i++)
         {
-            shadowClone.Add(Instantiate(shadowPrefab, Vector3.zero, new Quaternion(0, 1, 0, 0)));
+            shadowClone.Add(Instantiate(shadowPrefab));
         }
     }
 
@@ -27,7 +30,8 @@ public class CircleShadow : MonoBehaviour
     {
         for (int i = 0; i < castSadowObjects.Count; i++)
         {
-            shadowClone[i].transform.position = new Vector3(castSadowObjects[i].transform.position.x, 0, castSadowObjects[i].transform.position.z);
+            shadowClone[i].transform.position = new Vector3(castSadowObjects[i].transform.position.x, gameObject.transform.position.y+0.01f, castSadowObjects[i].transform.position.z);
+            shadowClone[i].transform.localScale = new Vector3(Scale, Scale, Scale);
         }
     }
 

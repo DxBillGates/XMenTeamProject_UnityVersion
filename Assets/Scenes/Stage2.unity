@@ -3460,6 +3460,7 @@ MonoBehaviour:
   Spawn_Range: 35
   Cant_Spawn_Distance: 10
   nextSceneGameClear: {fileID: 1181262424}
+  circleShadowScriptObject: {fileID: 1840167696}
 --- !u!1 &649900686
 GameObject:
   m_ObjectHideFlags: 0
@@ -10537,6 +10538,7 @@ GameObject:
   - component: {fileID: 1840167699}
   - component: {fileID: 1840167698}
   - component: {fileID: 1840167697}
+  - component: {fileID: 1840167701}
   m_Layer: 0
   m_Name: Ground
   m_TagString: Untagged
@@ -10623,6 +10625,22 @@ Transform:
   m_Father: {fileID: 1643054968}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1840167701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1840167696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83b3fb01c63623b4996d59fa904239e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  castSadowObjects:
+  - {fileID: 676976071}
+  shadowPrefab: {fileID: 2132234326730853725, guid: b9417f3f2799d5d42893be0c2c0778d0, type: 3}
+  Scale: 1
 --- !u!1 &1843805693
 GameObject:
   m_ObjectHideFlags: 0
