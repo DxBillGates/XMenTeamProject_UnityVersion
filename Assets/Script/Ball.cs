@@ -160,6 +160,11 @@ public class Ball : MonoBehaviour
                 state = BallState.THROWED_ENEMY;
                 AudioManager.GetInstance().PlayAudio(SE[0], MyAudioType.SE, audioVolume, false);
                 break;
+            case "Pin":
+                hitNormal = (transform.position - other.transform.position).normalized;
+                hitNormal.y = 0;
+                Reflection(hitNormal);
+                break;
         }
     }
 
