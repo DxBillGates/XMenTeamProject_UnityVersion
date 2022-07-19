@@ -132,5 +132,10 @@ public class RollEnemy : Enemy
         {
             WallCollsion(collision.transform);
         }
+
+        if (collision.gameObject.CompareTag("Pin"))
+        {
+            PinCollision(collision.transform);
+        }
     }
 }

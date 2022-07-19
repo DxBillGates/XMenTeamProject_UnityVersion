@@ -168,6 +168,13 @@ public class Enemy : MonoBehaviour
         transform.position += moveVector;
     }
 
+    public void PinCollision(Transform pinTransform)
+    {
+        Vector3 hitNormal = (transform.position - pinTransform.position).normalized;
+        hitNormal.y = 0;
+        transform.position += movedVector.magnitude * hitNormal;
+    }
+
     public ParticleSystem GetDamageParticle
     {
         get { return damageParticle; }

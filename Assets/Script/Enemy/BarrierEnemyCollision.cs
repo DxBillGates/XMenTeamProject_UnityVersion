@@ -27,6 +27,11 @@ public class BarrierEnemyCollision : MonoBehaviour
             //親で親のトランスフォーム修正
             barrierEnemy.WallCollsion(collision.transform);
         }
+
+        if (collision.gameObject.CompareTag("Pin"))
+        {
+            barrierEnemy.PinCollision(collision.transform);
+        }
     }
 
     private void OnTriggerEnter(Collider collision)
