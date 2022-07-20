@@ -24,6 +24,7 @@ public class Enemy : MonoBehaviour
     // 敵の撃破時のパーティクル
     [SerializeField] protected ParticleSystem deadParticle;
 
+    [SerializeField] GameObject circleShadowScript;
 
     //player入れる
     protected GameObject targetObject;

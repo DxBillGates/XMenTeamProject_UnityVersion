@@ -86,7 +86,8 @@ public class EnemyManager : MonoBehaviour
             }
 
             //引数の真ん中変更で生成するポジション変更
-            /*circleShadowScriptObject.GetComponent<CircleShadow>().AddObject(*/Instantiate(prefab, spawnPos, Quaternion.identity)/*)*/;
+            //circleShadowScriptObject.GetComponent<CircleShadow>().AddObject(Instantiate(prefab, spawnPos, Quaternion.identity));
+            Instantiate(prefab, spawnPos, Quaternion.identity);
             //生成数増やす
             aliveCount++;
         }

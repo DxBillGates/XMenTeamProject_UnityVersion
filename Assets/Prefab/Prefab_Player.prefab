@@ -285,9 +285,10 @@ MonoBehaviour:
   lineObjectManager: {fileID: 0}
   maxHp: 100
   hpGaugeUIObject: {fileID: 0}
-  nextSceneGameOver: {fileID: 0}
+  sceneChange: {fileID: 0}
   SEPlayManager: {fileID: 0}
   SE: []
+  circleShadowScript: {fileID: 0}
   hitEnemyDamage: 5
 --- !u!114 &1439989470772683769
 MonoBehaviour:

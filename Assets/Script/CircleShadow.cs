@@ -13,16 +13,15 @@ public class CircleShadow : MonoBehaviour
     //âeÇÃÉNÉçÅ[Éì
     List<GameObject> shadowClone;
 
-    
+    private void Awake()
+    {
+        castSadowObjects = new List<GameObject>();
+        shadowClone = new List<GameObject>();
+        
+    }
     // Start is called before the first frame update
     void Start()
     {
-        shadowClone = new List<GameObject>();
-
-        for (int i = 0; i < castSadowObjects.Count; i++)
-        {
-            shadowClone.Add(Instantiate(shadowPrefab));
-        }
     }
 
     // Update is called once per frame
@@ -30,8 +29,17 @@ public class CircleShadow : MonoBehaviour
     {
         for (int i = 0; i < castSadowObjects.Count; i++)
         {
+            if(castSadowObjects[i]!=null)
+            {
             shadowClone[i].transform.position = new Vector3(castSadowObjects[i].transform.position.x, gameObject.transform.position.y+0.01f, castSadowObjects[i].transform.position.z);
             shadowClone[i].transform.localScale = new Vector3(Scale, Scale, Scale);
+
+            }
+            else
+            {
+                castSadowObjects.RemoveAt(i);
+                shadowClone.RemoveAt(i);
+            }
         }
     }
 
@@ -39,8 +47,13 @@ public class CircleShadow : MonoBehaviour
     {
 
         castSadowObjects.Add(obj);
-        shadowClone.Add(Instantiate(shadowPrefab, Vector3.zero, new Quaternion(0, 1, 0, 0)));
+        shadowClone.Add(Instantiate(shadowPrefab));
 
+    }
+
+    public void DestroyObject(GameObject obj)
+    {
+        castSadowObjects.Remove(obj);
     }
 
 }

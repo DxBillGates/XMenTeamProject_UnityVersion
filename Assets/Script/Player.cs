@@ -14,6 +14,8 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject SEPlayManager;
     [SerializeField] private List<AudioClip> SE;
 
+    [SerializeField] private GameObject circleShadowScript;
+
     private float hp;
 
     private Vector3 velocity;
@@ -74,6 +76,8 @@ public class Player : MonoBehaviour
         collider = GetComponent<Collider>();
         isHitWall = false;
         backupPushVector = Vector3.zero;
+
+        circleShadowScript.GetComponent<CircleShadow>().AddObject(gameObject);
     }
 
     // Update is called once per frame
