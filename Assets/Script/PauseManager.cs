@@ -11,6 +11,7 @@ public enum PauseButtonType
     TITLE,
     RESTART,
     STAGE_SELECT,
+    EXIT,
     BACK,
 }
 
@@ -38,6 +39,7 @@ public class PauseManager : SingletonComponent<PauseManager>
     [SerializeField] private Image seArrowLeft;
     [SerializeField] private Image seArrowRight;
     [SerializeField] private List<Sprite> sprNum;
+    [SerializeField] private NextScene sceneChange;
 
     // ポーズ中の操作が何秒後から可能か
     [SerializeField] private float enabledTime;
@@ -48,10 +50,21 @@ public class PauseManager : SingletonComponent<PauseManager>
     // 球と下線の演出用タイマー
     private float timerEffect = 0;
 
+    //オレンジ
+    Color32 COLOR_ORANGE = new Color32(242, 145, 25, 255);
+
+    //青
+    Color32 COLOR_BLUE = new Color32(32, 174, 227, 255);
+
     // Start is called before the first frame update
     void Start()
     {
         Initialize();
+    }
+
+    private void OnDisable()
+    {
+        isPause = false;
     }
 
     // Update is called once per frame
@@ -83,6 +96,9 @@ public class PauseManager : SingletonComponent<PauseManager>
                 break;
             case PauseButtonType.STAGE_SELECT:
                 OnClickStageSelect();
+                break;
+            case PauseButtonType.EXIT:
+                OnClickExit();
                 break;
             case PauseButtonType.BACK:
                 OnClickBack();
@@ -161,34 +177,34 @@ public class PauseManager : SingletonComponent<PauseManager>
         {
             if (i == currentButtonIndex)
             {
-                texts[i].color = new Color32(242, 145, 25, 255);
+                texts[i].color = COLOR_ORANGE;
             }
             else
             {
-                texts[i].color = new Color32(32, 174, 227, 255);
+                texts[i].color = COLOR_BLUE;
             }
         }
         //BGM数字
         if (currentButtonIndex == (int)PauseButtonType.BGM_VOLUME)
         {
-            bgmVolume.color = new Color32(242, 145, 25, 255);
-            bgmVolume_10.color = new Color32(242, 145, 25, 255);
+            bgmVolume.color = COLOR_ORANGE;
+            bgmVolume_10.color = COLOR_ORANGE;
         }
         else
         {
-            bgmVolume.color = new Color32(30, 173, 226, 255);
-            bgmVolume_10.color = new Color32(30, 173, 226, 255);
+            bgmVolume.color = COLOR_BLUE;
+            bgmVolume_10.color = COLOR_BLUE;
         }
         //SE数字
         if (currentButtonIndex == (int)PauseButtonType.SE_VOLUME)
         {
-            seVolume.color = new Color32(242, 145, 25, 255);
-            seVolume_10.color = new Color32(242, 145, 25, 255);
+            seVolume.color = COLOR_ORANGE;
+            seVolume_10.color = COLOR_ORANGE;
         }
         else
         {
-            seVolume.color = new Color32(30, 173, 226, 255);
-            seVolume_10.color = new Color32(30, 173, 226, 255);
+            seVolume.color = COLOR_BLUE;
+            seVolume_10.color = COLOR_BLUE;
         }
         //BGの色
         if (isPause == false)
@@ -287,31 +303,46 @@ public class PauseManager : SingletonComponent<PauseManager>
         float underlinePositionY = texts[currentButtonIndex].gameObject.transform.position.y - texts[currentButtonIndex].fontSize / 2 * texts[currentButtonIndex].gameObject.transform.localScale.y;
         float adjustY = -20;
 
+        const float BEFORE_POS_X = 435;
+        const float AFTER_POS_X = BEFORE_POS_X + 132 * 1.2f * 2.7f / 2;
+        const float BEFORE_SCALE = 0;
+        const float AFTER_SCALE = 1.2f;
+
         circle.position = new Vector3(circle.position.x, circlePositionY);
-        underLine.position = new Vector3(EaseOutExpo(435, 435 + 132 * 1.2f * 2.7f / 2, timerEffect / 0.5f), underlinePositionY + adjustY);
-        underLine.localScale = new Vector3(EaseOutExpo(0, 1.2f, timerEffect / 0.5f), 0.35f);
+        underLine.position = new Vector3(EaseOutExpo(BEFORE_POS_X, AFTER_POS_X, timerEffect / 0.5f), underlinePositionY + adjustY);
+        underLine.localScale = new Vector3(EaseOutExpo(BEFORE_SCALE, AFTER_SCALE, timerEffect / 0.5f), 0.35f);
     }
 
     // タイトルへのUIを押した際に実行する内容
     private void OnClickTitle()
     {
-        isPause = false;
-        UnityEngine.SceneManagement.SceneManager.LoadScene("TitleScene");
+        sceneChange.nextSceneName = "TitleScene";
+        sceneChange.gameObject.SetActive(true);
     }
 
     // リスタートのUIを押した際に実行する内容
     private void OnClickRestart()
     {
-        isPause = false;
         UnityEngine.SceneManagement.Scene currentScene = UnityEngine.SceneManagement.SceneManager.GetActiveScene();
-        UnityEngine.SceneManagement.SceneManager.LoadScene(currentScene.name);
+        sceneChange.nextSceneName = currentScene.name;
+        sceneChange.gameObject.SetActive(true);
     }
 
     // ステージセレクトのUIを押した際に実行する内容
     private void OnClickStageSelect()
     {
-        isPause = false;
-        UnityEngine.SceneManagement.SceneManager.LoadScene("StageSelectScene");
+        sceneChange.nextSceneName = "StageSelectScene";
+        sceneChange.gameObject.SetActive(true);
+    }
+
+    // ExitのUIを押した際に実行する内容
+    private void OnClickExit()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;//ゲームプレイ終了
+#else
+    Application.Quit();//ゲームプレイ終了
+#endif
     }
 
     // 戻るのUIを押した際に実行する内容
