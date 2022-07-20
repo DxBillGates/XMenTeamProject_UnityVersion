@@ -3563,6 +3563,7 @@ MonoBehaviour:
   Spawn_Range: 35
   Cant_Spawn_Distance: 10
   sceneChange: {fileID: 0}
+  circleShadowScriptObject: {fileID: 1840167696}
 --- !u!1 &649900686
 GameObject:
   m_ObjectHideFlags: 0
