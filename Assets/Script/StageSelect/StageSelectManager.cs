@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class StageSelectManager : SingletonComponent<StageSelectManager>
 {
-    [SerializeField] int stageCount = 5;
+    [SerializeField] int stageCount = 3;
     [SerializeField] Vector3 center = new Vector3(0, 0, 20);    //回転の中止座標
     [SerializeField] float radius = 20;                         //回転する円の半径
     [SerializeField] GameObject barrierPrefab;                  //バリアプレハブ
@@ -13,6 +13,8 @@ public class StageSelectManager : SingletonComponent<StageSelectManager>
     [SerializeField] List<Sprite> sprNums;                      //0～9の数字
     [SerializeField] NextScene sceneChange;                     //シーンチェンジオブジェクト
     [SerializeField] int rotationCount = 2;                     //ステージ決定時のオブジェクト回転数
+    [SerializeField] float limitMoveTimer = 1.5f;               //移動タイマーの上限値
+    [SerializeField] float limitDecideTimer = 2.5f;             //決定タイマーの上限値
 
     static int staticStageCount;                                //ステージ数　いずれ自動カウントできるようにしたい
     static int nowSelectStageNum = 0;                           //現在選択中のステージインデックス
@@ -34,10 +36,14 @@ public class StageSelectManager : SingletonComponent<StageSelectManager>
     {
         for (int i = 0; i < stageCount; i++)
         {
-            circleShadowScriptObject.GetComponent<CircleShadow>().AddObject(Instantiate(barrierPrefab));
+            GameObject localScopeGameObject =  Instantiate(barrierPrefab);
+            StageSelectBarrier barrier = localScopeGameObject.GetComponent<StageSelectBarrier>();
+            barrier.SetStageNum(i);
+            circleShadowScriptObject.GetComponent<CircleShadow>().AddObject(localScopeGameObject);
         }
-        moveTimer = 0.5f;
+        moveTimer = 0;
         decideTimer = 0;
+        isStartDecideTimer = false;
     }
 
     // Update is called once per frame
@@ -55,7 +61,7 @@ public class StageSelectManager : SingletonComponent<StageSelectManager>
                 moveTimer = 0;
                 isStartMoveTimer = true;
                 isMoveLeft = false;
-            }
+            } 
             if (Input.GetAxis("Horizontal") < 0)
             {
                 nowSelectStageNum--;
@@ -81,7 +87,12 @@ public class StageSelectManager : SingletonComponent<StageSelectManager>
             sceneChange.gameObject.SetActive(true);
         }
 
-        Debug.Log(sceneChange.gameObject.activeSelf);
+        //ポーズボタンでタイトルへ
+        if (Input.GetButtonDown("Pause"))
+        {
+            sceneChange.nextSceneName = "TitleScene";
+            sceneChange.gameObject.SetActive(true);
+        }
     }
 
     void UpdateTimer()
@@ -89,18 +100,18 @@ public class StageSelectManager : SingletonComponent<StageSelectManager>
         if (isStartMoveTimer)
         {
             moveTimer += Time.deltaTime;
-            if (moveTimer > 0.75f)
+            if (moveTimer > limitMoveTimer)
             {
-                moveTimer = 0.75f;
+                moveTimer = limitMoveTimer;
                 isStartMoveTimer = false;
             }
         }
         if (isStartDecideTimer)
         {
             decideTimer += Time.deltaTime;
-            if (decideTimer > 2.5f)
+            if (decideTimer > limitDecideTimer)
             {
-                decideTimer = 2.5f;
+                decideTimer = limitDecideTimer;
                 isStartDecideTimer = false;
             }
         }
@@ -140,21 +151,27 @@ public class StageSelectManager : SingletonComponent<StageSelectManager>
         return center;
     }
 
-    public float GetMoveTimer()
-    {
-        return moveTimer;
-    }
-
     public int GetRotationCount()
     {
         return rotationCount;
+    }
+    public bool IsMoveLeft()
+    {
+        return isMoveLeft;
+    }
+    public float GetMoveTimer()
+    {
+        return moveTimer;
     }
 
     public bool IsStartMoveTimer()
     {
         return isStartMoveTimer;
     }
-
+    public float GetLimitMoveTimer()
+    {
+        return limitMoveTimer;
+    }
     public float GetDecideTimer()
     {
         return decideTimer;
@@ -163,9 +180,9 @@ public class StageSelectManager : SingletonComponent<StageSelectManager>
     {
         return isStartDecideTimer;
     }
-    public bool IsMoveLeft()
+    public float GetLimitDecideTimer()
     {
-        return isMoveLeft;
+        return limitDecideTimer;
     }
 
     void SetSpriteNum(int num)
