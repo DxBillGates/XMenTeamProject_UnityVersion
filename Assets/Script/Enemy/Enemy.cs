@@ -112,7 +112,7 @@ public class Enemy : MonoBehaviour
         // ノックバックする位置を決める
         Vector3 moveVector = -1 * (hitPos - transform.position);
         // 正規化させる
-        moveVector = knock_back_speed * moveVector.normalized;
+        moveVector = knock_back_speed * moveVector.normalized * GameTimeManager.GetInstance().GetTime();
 
         transform.position += moveVector;
 
