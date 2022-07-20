@@ -38,6 +38,7 @@ public class CircleShadow : MonoBehaviour
             else
             {
                 castSadowObjects.RemoveAt(i);
+                Destroy(shadowClone[i]);
                 shadowClone.RemoveAt(i);
             }
         }

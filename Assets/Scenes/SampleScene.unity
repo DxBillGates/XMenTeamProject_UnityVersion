@@ -3562,7 +3562,7 @@ MonoBehaviour:
   MaxRollEnemyNum: 0
   Spawn_Range: 35
   Cant_Spawn_Distance: 10
-  sceneChange: {fileID: 0}
+  sceneChange: {fileID: 1181262425}
   circleShadowScriptObject: {fileID: 1511126691}
 --- !u!1 &649900686
 GameObject:
