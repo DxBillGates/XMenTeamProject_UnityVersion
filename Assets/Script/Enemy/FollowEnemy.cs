@@ -41,6 +41,11 @@ public class FollowEnemy : Enemy
             WallCollsion(collision.transform);
         }
 
+        if(collision.gameObject.CompareTag("Pin"))
+        {
+            PinCollision(collision.transform);
+        }
+
     }
 
     private void OnTriggerEnter(Collider collision)

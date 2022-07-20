@@ -138,11 +138,12 @@ public class Player : MonoBehaviour
         // 必殺技使用中なら当たり判定を行わない
         if (UltimateSkillManager.GetInstance().GetActiveFlagController().flag == true) return;
 
+        // ヒットした障害物のヒットした法線方向に押し出したいからその法線を取得
+        Vector3 hitNormal = other.transform.forward;
+
         switch (other.gameObject.tag)
         {
             case "Wall":
-                // ヒットした障害物のヒットした法線方向に押し出したいからその法線を取得
-                Vector3 hitNormal = other.transform.forward;
 
                 //// 座標を位置フレーム前に戻す
                 //const float PUSH_VALUE = 1.5f;
@@ -180,6 +181,11 @@ public class Player : MonoBehaviour
                 }
                 break;
             case "Enemy":
+                break;
+            case "Pin":
+                hitNormal = (transform.position - other.transform.position).normalized;
+                hitNormal.y = 0;
+                transform.position += velocity.magnitude * hitNormal;
                 break;
         }
 
