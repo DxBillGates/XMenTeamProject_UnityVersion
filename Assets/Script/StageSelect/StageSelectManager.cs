@@ -10,6 +10,8 @@ public class StageSelectManager : SingletonComponent<StageSelectManager>
     [SerializeField] float radius = 20;                         //回転する円の半径
     [SerializeField] GameObject barrierPrefab;                  //バリアプレハブ
     [SerializeField] List<Image> UIStageNums;                   //選択中のステージナンバーUI
+    [SerializeField] Image UIEndless;                           //「Endless」文字
+    [SerializeField] Image UIStage;                             //「Stage」文字
     [SerializeField] List<Sprite> sprNums;                      //0～9の数字
     [SerializeField] NextScene sceneChange;                     //シーンチェンジオブジェクト
     [SerializeField] int rotationCount = 2;                     //ステージ決定時のオブジェクト回転数
@@ -78,6 +80,11 @@ public class StageSelectManager : SingletonComponent<StageSelectManager>
         if (Input.GetButtonDown("PlayerAbility"))
         {
             isStartDecideTimer = true;
+            //移動タイマー強制終了
+            moveTimer = limitMoveTimer;
+            isStartMoveTimer = false;
+            //方向キーの数値が残ったままになるので初期化
+            Input.ResetInputAxes();
         }
         //演出途中で次のシーンへ
         if (decideTimer >= 1.0f && sceneChange.gameObject.activeSelf == false)
@@ -205,5 +212,14 @@ public class StageSelectManager : SingletonComponent<StageSelectManager>
         index = cal % 10;
         //十の位
         UIStageNums[1].sprite = sprNums[index];
+
+        //最終ステージかどうかでUI表示/非表示を管理
+        bool isLastStage = num == stageCount;
+        UIEndless.gameObject.SetActive(isLastStage);
+        UIStage.gameObject.SetActive(!isLastStage);
+        foreach (var v in UIStageNums)
+        {
+            v.gameObject.SetActive(!isLastStage);
+        }
     }
 }

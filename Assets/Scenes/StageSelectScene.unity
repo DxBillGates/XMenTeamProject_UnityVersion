@@ -2616,6 +2616,7 @@ RectTransform:
   - {fileID: 1717273170}
   - {fileID: 153075578}
   - {fileID: 1059918354}
+  - {fileID: 943479502}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2629,6 +2630,82 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: dea808c82ef05e04cb721a842339c157, type: 3}
   m_PrefabInstance: {fileID: 53067923}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &943479501
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 943479502}
+  - component: {fileID: 943479504}
+  - component: {fileID: 943479503}
+  m_Layer: 5
+  m_Name: Endless
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &943479502
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 943479501}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.73, y: 0.73, z: 0.73}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 895310546}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 420, y: -270}
+  m_SizeDelta: {x: 524, y: 203}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &943479503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 943479501}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 528c2fc00360bc74481695f220e04aee, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &943479504
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 943479501}
+  m_CullTransparentMesh: 1
 --- !u!4 &962770291 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: dea808c82ef05e04cb721a842339c157, type: 3}
@@ -3928,6 +4005,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1493044040 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: dea808c82ef05e04cb721a842339c157, type: 3}
+  m_PrefabInstance: {fileID: 305257623}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1515952731 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: dea808c82ef05e04cb721a842339c157, type: 3}
@@ -4005,10 +4087,11 @@ Transform:
   - {fileID: 508300957}
   - {fileID: 1947879781}
   - {fileID: 963780383}
-  - {fileID: 1204315940}
+  - {fileID: 1493044040}
   - {fileID: 6584887}
   - {fileID: 74812381}
   - {fileID: 136497844}
+  - {fileID: 1204315940}
   - {fileID: 1554730395}
   - {fileID: 1523826849}
   - {fileID: 1721459744}
@@ -5054,6 +5137,8 @@ MonoBehaviour:
   UIStageNums:
   - {fileID: 176072781}
   - {fileID: 995376159}
+  UIEndless: {fileID: 943479503}
+  UIStage: {fileID: 1717273172}
   sprNums:
   - {fileID: -1146157607, guid: 6be1482a20690834e91960cb6153b73f, type: 3}
   - {fileID: -1037073725, guid: 6be1482a20690834e91960cb6153b73f, type: 3}
@@ -5067,9 +5152,9 @@ MonoBehaviour:
   - {fileID: 1445356088, guid: 6be1482a20690834e91960cb6153b73f, type: 3}
   sceneChange: {fileID: 1459785081}
   rotationCount: 3
-  circleShadowScriptObject: {fileID: 300305070}
   limitMoveTimer: 1.5
   limitDecideTimer: 2.5
+  circleShadowScriptObject: {fileID: 300305070}
 --- !u!4 &1970035457
 Transform:
   m_ObjectHideFlags: 0
