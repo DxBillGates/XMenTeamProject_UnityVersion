@@ -15,25 +15,24 @@ public class DomeEffectControl : MonoBehaviour
     [SerializeField] Color color;
     void Start()
     {
-        // BloomŒø‰Ê‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚Ìì¬
+        // BloomåŠ¹æžœã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã®ä½œæˆ
         bloom = ScriptableObject.CreateInstance<Bloom>();
-        //‘‚«Š·‚¦‚ð‰Â”\‚É‚µ‚Ä‚¢‚é
+        //æ›¸ãæ›ãˆã‚’å¯èƒ½ã«ã—ã¦ã„ã‚‹
         bloom.enabled.Override(true);
         bloom.intensity.Override(intensity);
         bloom.threshold.Override(threshold);
         bloom.color.Override(color);
-        //@ƒ|ƒXƒgƒvƒƒZƒXƒ{ƒŠƒ…[ƒ€‚É”½‰f
+        //ã€€ãƒã‚¹ãƒˆãƒ—ãƒ­ã‚»ã‚¹ãƒœãƒªãƒ¥ãƒ¼ãƒ ã«åæ˜ 
         postProcessVolume = PostProcessManager.instance.QuickVolume(gameObject.layer, 0f, bloom);
     }
     private void Update()
     {
         bloom.color.Override(color);
-        //@ƒ|ƒXƒgƒvƒƒZƒXƒ{ƒŠƒ…[ƒ€‚É”½‰f
-        postProcessVolume = PostProcessManager.instance.QuickVolume(gameObject.layer, 0f, bloom);
+
     }
     void OnDestroy()
     {
-        //@ì¬‚µ‚½ƒ{ƒŠƒ…[ƒ€‚Ìíœ
+        //ã€€ä½œæˆã—ãŸãƒœãƒªãƒ¥ãƒ¼ãƒ ã®å‰Šé™¤
         RuntimeUtilities.DestroyVolume(postProcessVolume, true, true);
     }
     public void SetBloom(float intencity)
