@@ -15,6 +15,7 @@ public class StageSelectManager : SingletonComponent<StageSelectManager>
     [SerializeField] int rotationCount = 2;                     //ステージ決定時のオブジェクト回転数
     [SerializeField] float limitMoveTimer = 1.5f;               //移動タイマーの上限値
     [SerializeField] float limitDecideTimer = 2.5f;             //決定タイマーの上限値
+    [SerializeField] List<Texture> textures;                  //盾にセットするマテリアル
 
     static int staticStageCount;                                //ステージ数　いずれ自動カウントできるようにしたい
     static int nowSelectStageNum = 0;                           //現在選択中のステージインデックス
@@ -39,6 +40,8 @@ public class StageSelectManager : SingletonComponent<StageSelectManager>
             GameObject localScopeGameObject =  Instantiate(barrierPrefab);
             StageSelectBarrier barrier = localScopeGameObject.GetComponent<StageSelectBarrier>();
             barrier.SetStageNum(i);
+            GameObject child = barrier.transform.Find("MeshSub").gameObject;
+            child.GetComponent<MeshRenderer>().material.SetTexture("_MainTex", textures[i]);
             circleShadowScriptObject.GetComponent<CircleShadow>().AddObject(localScopeGameObject);
         }
         moveTimer = 0;
