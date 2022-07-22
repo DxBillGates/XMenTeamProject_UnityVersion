@@ -1094,7 +1094,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: dea808c82ef05e04cb721a842339c157, type: 3}
       propertyPath: m_RootOrder
-      value: 40
+      value: 39
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: dea808c82ef05e04cb721a842339c157, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3272,7 +3272,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: dea808c82ef05e04cb721a842339c157, type: 3}
       propertyPath: m_RootOrder
-      value: 42
+      value: 41
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: dea808c82ef05e04cb721a842339c157, type: 3}
       propertyPath: m_LocalScale.x
@@ -3360,7 +3360,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: dea808c82ef05e04cb721a842339c157, type: 3}
       propertyPath: m_RootOrder
-      value: 40
+      value: 43
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: dea808c82ef05e04cb721a842339c157, type: 3}
       propertyPath: m_LocalScale.x
@@ -3750,6 +3750,11 @@ Transform:
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: dea808c82ef05e04cb721a842339c157, type: 3}
   m_PrefabInstance: {fileID: 1244328164}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1447621425 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: dea808c82ef05e04cb721a842339c157, type: 3}
+  m_PrefabInstance: {fileID: 305257623}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1459785080
 GameObject:
@@ -4474,7 +4479,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: dea808c82ef05e04cb721a842339c157, type: 3}
       propertyPath: m_RootOrder
-      value: 43
+      value: 42
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: dea808c82ef05e04cb721a842339c157, type: 3}
       propertyPath: m_LocalScale.x
@@ -4828,7 +4833,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: dea808c82ef05e04cb721a842339c157, type: 3}
       propertyPath: m_RootOrder
-      value: 41
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: dea808c82ef05e04cb721a842339c157, type: 3}
       propertyPath: m_LocalScale.x
@@ -5183,7 +5188,7 @@ MonoBehaviour:
   stageCount: 3
   center: {x: 0, y: 0, z: 20}
   radius: 10
-  barrierPrefab: {fileID: 6302714476797584802, guid: 6b011e121fc032a49916722abc12f4d7, type: 3}
+  barrierPrefab: {fileID: 4371208662922664409, guid: 6b011e121fc032a49916722abc12f4d7, type: 3}
   UIStageNums:
   - {fileID: 176072781}
   - {fileID: 995376159}
@@ -5204,7 +5209,11 @@ MonoBehaviour:
   rotationCount: 3
   limitMoveTimer: 1.5
   limitDecideTimer: 2.5
-  circleShadowScriptObject: {fileID: 363159439}
+  textures:
+  - {fileID: 2800000, guid: eefd42f09b46108439861ea68f5f4ac3, type: 3}
+  - {fileID: 2800000, guid: 99fa0d077c3a0df438802f7747a808c5, type: 3}
+  - {fileID: 2800000, guid: 2ce50166c1106cc4da9451d0567605fc, type: 3}
+  circleShadowScriptObject: {fileID: 300305070}
 --- !u!4 &1970035457
 Transform:
   m_ObjectHideFlags: 0

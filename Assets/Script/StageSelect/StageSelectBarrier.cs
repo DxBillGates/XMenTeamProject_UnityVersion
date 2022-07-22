@@ -54,11 +54,11 @@ public class StageSelectBarrier : MonoBehaviour
 
             //回転前
             int beforeNum = StageSelectManager.GetInstance().IsMoveLeft() ?
-                StageSelectManager.GetNowSelectStageNum(false) - 1 + stageNum : StageSelectManager.GetNowSelectStageNum(false) + 1 + stageNum;
+                stageNum - StageSelectManager.GetNowSelectStageNum(false) - 1 : stageNum - StageSelectManager.GetNowSelectStageNum(false) + 1;
             float beforeRad = (360.0f / stageCount * beforeNum - 90) * Mathf.Deg2Rad; //カメラの前に持ってくるため270°の位置を0°扱いにする
 
             //回転後
-            int afterNum = StageSelectManager.GetNowSelectStageNum(false) + stageNum;
+            int afterNum = stageNum - StageSelectManager.GetNowSelectStageNum(false);
             float afterRad = (360.0f / stageCount * afterNum - 90) * Mathf.Deg2Rad; //カメラの前に持ってくるため270°の位置を0°扱いにする
 
             //位置
