@@ -3999,11 +3999,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &1493044040 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: dea808c82ef05e04cb721a842339c157, type: 3}
-  m_PrefabInstance: {fileID: 305257623}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1515952731 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: dea808c82ef05e04cb721a842339c157, type: 3}
@@ -4081,7 +4076,7 @@ Transform:
   - {fileID: 508300957}
   - {fileID: 1947879781}
   - {fileID: 963780383}
-  - {fileID: 2046431623}
+  - {fileID: 1447621425}
   - {fileID: 6584887}
   - {fileID: 74812381}
   - {fileID: 136497844}
@@ -5213,7 +5208,7 @@ MonoBehaviour:
   - {fileID: 2800000, guid: eefd42f09b46108439861ea68f5f4ac3, type: 3}
   - {fileID: 2800000, guid: 99fa0d077c3a0df438802f7747a808c5, type: 3}
   - {fileID: 2800000, guid: 2ce50166c1106cc4da9451d0567605fc, type: 3}
-  circleShadowScriptObject: {fileID: 300305070}
+  circleShadowScriptObject: {fileID: 363159439}
 --- !u!4 &1970035457
 Transform:
   m_ObjectHideFlags: 0
@@ -5375,11 +5370,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dea808c82ef05e04cb721a842339c157, type: 3}
---- !u!4 &2046431623 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: dea808c82ef05e04cb721a842339c157, type: 3}
-  m_PrefabInstance: {fileID: 305257623}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2130347699 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: dea808c82ef05e04cb721a842339c157, type: 3}

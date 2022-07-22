@@ -153,6 +153,8 @@ public class PauseManager : SingletonComponent<PauseManager>
 
     private void UpdateCurrentButtonIndex()
     {
+        int beforeButtonIndex = currentButtonIndex;
+
         float inputVertical = Input.GetAxisRaw("Vertical");
         if (Input.GetAxisRaw("VerticalButton") != 0) inputVertical = Input.GetAxisRaw("VerticalButton");
 
@@ -168,6 +170,8 @@ public class PauseManager : SingletonComponent<PauseManager>
         }
 
         if (inputVertical == 0) isInputVerticalButton = false;
+
+        if (beforeButtonIndex != currentButtonIndex) AudioManager.GetInstance().PlaySelectSE();
     }
 
     // ‘I‘ğ‚³‚ê‚Ä‚¢‚éUI‚ÌF‚ğ•ÏX‚·‚é

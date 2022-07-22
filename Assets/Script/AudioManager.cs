@@ -86,17 +86,24 @@ public class AudioManager : SingletonComponent<AudioManager>
 
     public void IncreaseBGMMasterVolumeLevel(int value)
     {
+        int beforeVolume = bgmMasterVolumeLevel;
+
         bgmMasterVolumeLevel += value;
         if (bgmMasterVolumeLevel <= 0) bgmMasterVolumeLevel = 0;
         if (bgmMasterVolumeLevel >= MAX_VOLUME_LEVEL) bgmMasterVolumeLevel = MAX_VOLUME_LEVEL;
+
+        if (beforeVolume != bgmMasterVolumeLevel) PlaySelectSE();
     }
 
     public void IncreaseSEMasterVolumeLevel(int value)
     {
+        int beforeVolume = bgmMasterVolumeLevel;
         seMasterVolumeLevel += value;
 
         if (seMasterVolumeLevel <= 0) seMasterVolumeLevel = 0;
         if (seMasterVolumeLevel >= MAX_VOLUME_LEVEL) seMasterVolumeLevel = MAX_VOLUME_LEVEL;
+
+        if (beforeVolume != bgmMasterVolumeLevel) PlaySelectSE();
     }
 
     public void PlayAudio(AudioClip audio, MyAudioType audioType, float volume, bool isLoop = false)
@@ -104,4 +111,10 @@ public class AudioManager : SingletonComponent<AudioManager>
         GameObject sePlayer = Instantiate(prefabAudioPlayer);
         sePlayer.GetComponent<AudioPlayer>().Play(audio,audioType,volume,isLoop);
     }
+
+    public void PlaySelectSE()
+    {
+        PlayAudio(testSE, MyAudioType.SE, 1);
+    }
+
 }
