@@ -1,6 +1,6 @@
 # Blender v3.1.2 OBJ File: 'Wood.blend'
 # www.blender.org
-mtllib wood.mtl
+mtllib Wood.mtl
 o Wood_円柱
 v 0.000000 0.000000 -0.554899
 v 0.005524 1.475196 -0.328297
