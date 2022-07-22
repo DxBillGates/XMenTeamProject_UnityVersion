@@ -38,7 +38,7 @@ public class DomeEffectControl : MonoBehaviour
     public void SetBloom(float intencity)
     {
         bloom.intensity.Override(intencity);
-        postProcessVolume = PostProcessManager.instance.QuickVolume(gameObject.layer, 0f, bloom);
+        //postProcessVolume = PostProcessManager.instance.QuickVolume(gameObject.layer, 0f, bloom);
 
     }
 }
