@@ -10,6 +10,7 @@ TagManager:
   - Barrier
   - EnemyBarrier
   - SEPlayManager
+  - Pin
   layers:
   - Default
   - TransparentFX
