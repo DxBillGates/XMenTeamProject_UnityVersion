@@ -3145,7 +3145,7 @@ MonoBehaviour:
   MaxRollEnemyNum: 0
   Spawn_Range: 35
   Cant_Spawn_Distance: 10
-  nextSceneGameClear: {fileID: 1181262424}
+  sceneChange: {fileID: 0}
   circleShadowScriptObject: {fileID: 1840167696}
 --- !u!1 &649900686
 GameObject:
@@ -6602,6 +6602,7 @@ MonoBehaviour:
   - {fileID: 770069934, guid: 6be1482a20690834e91960cb6153b73f, type: 3}
   - {fileID: -1641383276, guid: 6be1482a20690834e91960cb6153b73f, type: 3}
   - {fileID: 1445356088, guid: 6be1482a20690834e91960cb6153b73f, type: 3}
+  sceneChange: {fileID: 0}
   enabledTime: 0.25
 --- !u!1001 &1210712076
 PrefabInstance:
