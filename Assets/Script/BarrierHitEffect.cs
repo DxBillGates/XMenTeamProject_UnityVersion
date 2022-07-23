@@ -6,18 +6,23 @@ public class BarrierHitEffect : MonoBehaviour
 {
     //エフェクト用マテリアル
     [SerializeField] Material material;
-    //マテリアルを保持しているオブジェクト
+    //歪みエフェクトオブジェクト
     [SerializeField] GameObject hitObj;
-    struct HitEffect
+   
+    struct RefractionHitEffect
     {
-        public GameObject cloneObject;
+        public GameObject refractionClone;
         public float count;
         public bool isEffect;
 
     }
-    int num = 3;
-    HitEffect[] hitEffect;
+    //歪みエフェクトを同時に何個まで出せるか
+    int hitNum = 3;
 
+
+    //歪みエフェクトのクローン
+    RefractionHitEffect[] refraction;
+    //歪みエフェクトの歪む広さ
     float distance;
     //拡大する速さ
     [SerializeField] float AddSpeed;
@@ -27,13 +32,13 @@ public class BarrierHitEffect : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        hitEffect = new HitEffect[5];
 
-
-        for (int i = 0; i < num; i++)
+        //歪みエフェクト初期化
+        refraction = new RefractionHitEffect[hitNum];
+        for (int i = 0; i < hitNum; i++)
         {
-            hitEffect[i].count = 0.0f;
-            hitEffect[i].isEffect = false;
+            refraction[i].count = 0.0f;
+            refraction[i].isEffect = false;
 
         }
         distance = 27.0f;
@@ -43,49 +48,50 @@ public class BarrierHitEffect : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        for (int i = 0; i < num; i++)
-        {
-
-            if (hitEffect[i].isEffect)
-            {
-                if (hitEffect[i].count < AddSpeed)
-                {
-                    hitEffect[i].count++;
-                    //値の制御
-                    float result = Mathf.Lerp(0.0f, MaxScale, hitEffect[i].count / AddSpeed);
-                    //拡大
-                    hitEffect[i].cloneObject.transform.localScale = new Vector3(result, result, result);
-                }
-                else
-                {
-                    hitEffect[i].isEffect = false;
-                    Destroy(hitEffect[i].cloneObject);
-                    hitEffect[i].count = 0.0f;
-                }
-            }
-        }
-
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            Use(Vector3.zero);
-        }
-
-        material.SetFloat("_Distance", distance);
+        RefractionControl();
     }
 
     public void SetDistance(float f)
     {
         distance = f < 0 ? 0 : f > 100.0f ? 100.0f : f;
     }
-    public void Use(Vector3 position)
+
+    //歪みエフェクト制御
+    void RefractionControl()
     {
-        for (int i = 0; i < num; i++)
+
+        for (int i = 0; i < hitNum; i++)
         {
 
-            if (!hitEffect[i].isEffect)
+            if (refraction[i].isEffect)
             {
-                hitEffect[i].isEffect = true;
-                hitEffect[i].cloneObject = Instantiate(hitObj, position, new Quaternion(0, 1, 0, 0));
+                if (refraction[i].count < AddSpeed)
+                {
+                    refraction[i].count++;
+                    //値の制御
+                    float result = Mathf.Lerp(0.0f, MaxScale, refraction[i].count / AddSpeed);
+                    //拡大
+                    refraction[i].refractionClone.transform.localScale = new Vector3(result, result, result);
+                }
+                else
+                {
+                    refraction[i].isEffect = false;
+                    Destroy(refraction[i].refractionClone);
+                    refraction[i].count = 0.0f;
+                }
+            }
+        }
+        material.SetFloat("_Distance", distance);
+    }
+    //歪みエフェクト展開
+    public void Use(Vector3 position)
+    {
+        for (int i = 0; i < hitNum; i++)
+        {
+            if (!refraction[i].isEffect)
+            {
+                refraction[i].isEffect = true;
+                refraction[i].refractionClone = Instantiate(hitObj, position, new Quaternion(0, 1, 0, 0));
                 break;
             }
         }

@@ -27,18 +27,14 @@ public class DomeEffectControl : MonoBehaviour
     }
     private void Update()
     {
+        bloom.intensity.Override(intensity);
+        bloom.threshold.Override(threshold);
         bloom.color.Override(color);
-
     }
     void OnDestroy()
     {
         //　作成したボリュームの削除
         RuntimeUtilities.DestroyVolume(postProcessVolume, true, true);
     }
-    public void SetBloom(float intencity)
-    {
-        bloom.intensity.Override(intencity);
-        //postProcessVolume = PostProcessManager.instance.QuickVolume(gameObject.layer, 0f, bloom);
-
-    }
+    
 }

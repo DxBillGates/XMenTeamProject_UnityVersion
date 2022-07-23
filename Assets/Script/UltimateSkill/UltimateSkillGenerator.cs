@@ -74,7 +74,7 @@ public class UltimateSkillGenerator : SingletonComponent<UltimateSkillGenerator>
         if (createdUltimateSkillObject)
         {
             //�u���[����Intencity��0�ɂ���
-            postEffectManager.GetComponent<DomeEffectControl>().SetBloom(0f);
+            //postEffectManager.GetComponent<DomeEffectControl>().SetBloom(0f);
 
             int wallCount = FieldObjectManager.GetInstance().GetFieldObjectsCount();
 

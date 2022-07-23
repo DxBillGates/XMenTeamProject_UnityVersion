@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 974740116381150287}
   - component: {fileID: 9048329974845740095}
   - component: {fileID: 469323702138751424}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: dome:pSphere1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -106,7 +106,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1523400296669382141}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: dome_Alpha
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -142,7 +142,7 @@ GameObject:
   - component: {fileID: 5404099826399552102}
   - component: {fileID: 6858231368510843726}
   - component: {fileID: 3532099682520985575}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: domeDepth:pSphere1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -225,7 +225,7 @@ GameObject:
   - component: {fileID: 6182622903598749468}
   - component: {fileID: 6765834927937248581}
   - component: {fileID: 2118667308298988150}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}

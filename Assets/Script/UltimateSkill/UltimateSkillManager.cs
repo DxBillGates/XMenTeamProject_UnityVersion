@@ -21,7 +21,6 @@ public class UltimateSkillManager : SingletonComponent<UltimateSkillManager>
     //ポストエフェクト調整用
     [SerializeField] GameObject postEffectManager;
 
-    DomeEffectControl domeEffectControl;
     // Start is called before the first frame update
     void Start()
     {
@@ -34,8 +33,6 @@ public class UltimateSkillManager : SingletonComponent<UltimateSkillManager>
 
         Initialize();
         ultimateSkill.Initialize();
-        //
-        domeEffectControl = postEffectManager.GetComponent<DomeEffectControl>();
     }
 
     // Update is called once per frame
@@ -94,9 +91,6 @@ public class UltimateSkillManager : SingletonComponent<UltimateSkillManager>
         if (ultimateSkill.GetCurrentLevel() <= 0) return false;
         if (isUse == true) return false;
 
-
-        //�u���[����Intencity��20�ɂ���
-        domeEffectControl.SetBloom(20f);
 
         int wallCount = FieldObjectManager.GetInstance().GetFieldObjectsCount();
 

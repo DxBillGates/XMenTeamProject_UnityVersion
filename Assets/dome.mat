@@ -35,7 +35,7 @@ Material:
     - _PixelLevel: 105
     - _Speed: 5.1
     - _TexCutoff: 0.7
-    - _Threshold: 0.999
+    - _Threshold: 0.87788737
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _GlowColor: {r: 1, g: 1, b: 1, a: 1}
