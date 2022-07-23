@@ -60,6 +60,8 @@ public class Ball : MonoBehaviour
 
     private Collider collider;
 
+    [SerializeField] private ComboSystem comboSystem;
+
     void Start()
     {
         // state velocity isThrowを初期化
@@ -79,6 +81,9 @@ public class Ball : MonoBehaviour
         trail.SetActive(trailFlg);
 
         collider = GetComponent<Collider>();
+
+        comboSystem.Initialize();
+        comboSystem.SetBallObject(gameObject);
     }
 
     private void FixedUpdate()
@@ -104,6 +109,8 @@ public class Ball : MonoBehaviour
                     hitNormal = (other.gameObject.transform.position - transform.position).normalized;
                     Reflection(hitNormal);
                 }
+
+                comboSystem.ResetCombo();
                 break;
             case "Enemy":
                 // 投げられた状態でそのボールが動いていれば
@@ -151,6 +158,7 @@ public class Ball : MonoBehaviour
                 BarrierHitEffectManager.GetComponent<BarrierHitEffect>().Use(gameObject.transform.position);
                 HitStopManager.GetInstance().HitStop();
 
+                comboSystem.IncreaseCombo();
                 break;
             case "EnemyBarrier":
                 // 投げられた状態でそのボールが動いていれば

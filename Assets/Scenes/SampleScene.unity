@@ -12874,6 +12874,10 @@ PrefabInstance:
       value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 2683838146694799363, guid: 41336c39d89ec8d4895a261b0d0b0d7c, type: 3}
+      propertyPath: comboSystem.maxSize
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2683838146694799363, guid: 41336c39d89ec8d4895a261b0d0b0d7c, type: 3}
       propertyPath: enemyAccelerateValue
       value: 2
       objectReference: {fileID: 0}
@@ -12886,6 +12890,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1358778564}
     - target: {fileID: 2683838146694799363, guid: 41336c39d89ec8d4895a261b0d0b0d7c, type: 3}
+      propertyPath: comboSystem.increaseSize
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2683838146694799363, guid: 41336c39d89ec8d4895a261b0d0b0d7c, type: 3}
       propertyPath: ultimateSkillManagerObject
       value: 
       objectReference: {fileID: 0}
@@ -12896,6 +12904,10 @@ PrefabInstance:
     - target: {fileID: 2683838146694799363, guid: 41336c39d89ec8d4895a261b0d0b0d7c, type: 3}
       propertyPath: domeTriggerAccelerationValue
       value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2683838146694799363, guid: 41336c39d89ec8d4895a261b0d0b0d7c, type: 3}
+      propertyPath: comboSystem.increaseSizeNCombo
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2683838146694799366, guid: 41336c39d89ec8d4895a261b0d0b0d7c, type: 3}
       propertyPath: m_Name
