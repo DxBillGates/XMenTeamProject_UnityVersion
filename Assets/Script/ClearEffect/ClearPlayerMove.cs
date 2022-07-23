@@ -18,10 +18,8 @@ public class ClearPlayerMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (transform.position.x <= 20)
-        {
-            transform.position += new Vector3(velocity, 0, 0);
-        }
+
+        transform.position += new Vector3(velocity, 0, 0);
 
         if (transform.position.x >= 5)
         {
