@@ -7953,6 +7953,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   obj: {fileID: 8552504346212257261, guid: a280cdeda1842f445a101411e431b71b, type: 3}
   ball: {fileID: 1024034000}
+  "Star\uFF54Object": {fileID: 676976071}
   AddSpeed: 60
   radius: 10
 --- !u!1 &1359252391

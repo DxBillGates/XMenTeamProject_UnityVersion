@@ -150,7 +150,7 @@ public class Ball : MonoBehaviour
                 //ヒット時エフェクト
                 BarrierHitEffectManager.GetComponent<BarrierHitEffect>().Use(gameObject.transform.position);
                 ////ボールにパーティクルが向かうエフェクト
-                //BarrierHitEffectManager.GetComponent<BallGrowEffect>().Use(gameObject.transform.position);
+                BarrierHitEffectManager.GetComponent<BallGrowEffect>().Use();
                 HitStopManager.GetInstance().HitStop();
 
                 break;

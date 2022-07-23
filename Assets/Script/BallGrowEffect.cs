@@ -8,6 +8,8 @@ public class BallGrowEffect : MonoBehaviour
     [SerializeField] GameObject obj;
     //ボール
     [SerializeField] GameObject ball;
+    //開始地点のオブジェクト
+    [SerializeField] GameObject StarｔObject;
     //移動する速さ
     [SerializeField] float AddSpeed;
     //開始地点のばらつき
@@ -73,16 +75,16 @@ public class BallGrowEffect : MonoBehaviour
             }
 
         }
-        if (Input.GetKeyDown(KeyCode.L))
+        else
         {
-            Use(Vector3.zero);
+            startPosition = StarｔObject.transform.position;
         }
+       
     }
-    public void Use(Vector3 pos)
+    public void Use()
     {
         if (!isEffect)
         {
-            startPosition = pos;
             for (int i = 0; i < ballGlowCloneObject.Length; i++)
             {
                 ballGlowCloneObject[i] = Instantiate(obj);
