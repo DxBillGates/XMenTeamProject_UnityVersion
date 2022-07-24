@@ -276,6 +276,7 @@ public class Ball : MonoBehaviour
         state = setState;
         velocity = Vector3.zero;
         isThrow = false;
+        comboSystem.ResetCombo();
     }
 
     public float GetSpeed()

@@ -183,3 +183,5 @@ MonoBehaviour:
     - {fileID: -1641383276, guid: 6be1482a20690834e91960cb6153b73f, type: 3}
     - {fileID: 1445356088, guid: 6be1482a20690834e91960cb6153b73f, type: 3}
     prefabImage: {fileID: 3604188475636220910, guid: 87e9b98f6d7fa6947879f1fc57e669ea, type: 3}
+    movePower: 1
+    g: 0.0981

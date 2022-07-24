@@ -25,6 +25,12 @@ public class ComboSystem
     [SerializeField] private List<Sprite> numTextures;
     [SerializeField] private UnityEngine.UI.Image prefabImage;
 
+    [SerializeField] private float movePower;
+    [SerializeField] private float g;
+    [SerializeField]private Vector3 velocity;
+    private float yOffset;
+    private bool upFlag;
+
     // Start is called before the first frame update
     public void Initialize()
     {
@@ -32,19 +38,8 @@ public class ComboSystem
         comboCount = 0;
         initSize = Vector3.zero;
 
-        //// Inspectorでセットされていない場合は自分でUIを作成する
-        //if (images.Count == 0)
-        //{
-        //    // 三桁分作成
-        //    images = new List<UnityEngine.UI.Image>();
-
-        //    for (int i = 0; i < 3; ++i)
-        //    {
-        //        var image = GameObject.Instantiate(prefabImage);
-        //        image.rectTransform.SetParent(GameObject.Find("Canvas").transform);
-        //        images.Add(image);
-        //    }
-        //}
+        if (images.Count == 0) return;
+        yOffset = images[0].transform.position.y;
     }
 
     // Update is called once per frame
@@ -62,6 +57,8 @@ public class ComboSystem
             startNumber /= 10;
             startNumber2 /= 10;
         }
+
+        UpdateUIPosition();
     }
 
     public void SetBallObject(GameObject argObject)
@@ -75,7 +72,7 @@ public class ComboSystem
         ++combo;
 
         // コンボがボールが大きくなるために必要なコンボ数ずつ判定させる
-        if (combo > increaseSizeNCombo + increaseSizeNCombo * comboCount)
+        if (combo >= increaseSizeNCombo + increaseSizeNCombo * comboCount)
         {
             ++comboCount;
             ballObject.transform.localScale += Vector3.one * increaseSize;
@@ -83,7 +80,11 @@ public class ComboSystem
             // ここにUIが大きくなり始めるような処理を記述
 
 
-            // オブジェクトのサイズを増加させる
+
+            velocity.y = movePower;
+            upFlag = true;
+
+            // オブジェクトのサイズを増加を制限
             if (ballObject.transform.localScale.x >= maxSize)
             {
                 ballObject.transform.localScale = Vector3.one * maxSize;
@@ -96,5 +97,27 @@ public class ComboSystem
         combo = 0;
         comboCount = 0;
         ballObject.transform.localScale = initSize;
+    }
+
+    private void UpdateUIPosition()
+    {
+        if (upFlag == false) return;
+        velocity.y -= g;
+        foreach(var image in images)
+        {
+            image.rectTransform.position += velocity;
+            if(image.rectTransform.position.y <= yOffset)
+            {
+                Vector3 pos = image.rectTransform.position;
+                pos.y = yOffset;
+                image.rectTransform.position = pos;
+                upFlag = false;
+            }
+        }
+
+        if(upFlag == false)
+        {
+            velocity = Vector3.zero;
+        }
     }
 }
