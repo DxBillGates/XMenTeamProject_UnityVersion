@@ -17,7 +17,7 @@ public class CircleShadow : MonoBehaviour
     {
         castSadowObjects = new List<GameObject>();
         shadowClone = new List<GameObject>();
-        
+
     }
     // Start is called before the first frame update
     void Start()
@@ -29,10 +29,10 @@ public class CircleShadow : MonoBehaviour
     {
         for (int i = 0; i < castSadowObjects.Count; i++)
         {
-            if(castSadowObjects[i]!=null)
+            if (castSadowObjects[i] != null)
             {
-            shadowClone[i].transform.position = new Vector3(castSadowObjects[i].transform.position.x, gameObject.transform.position.y+0.01f, castSadowObjects[i].transform.position.z);
-            shadowClone[i].transform.localScale = new Vector3(Scale, Scale, Scale);
+                shadowClone[i].transform.position = new Vector3(castSadowObjects[i].transform.position.x, gameObject.transform.position.y + 0.01f, castSadowObjects[i].transform.position.z);
+                shadowClone[i].transform.localScale = new Vector3(Scale, Scale, Scale);
 
             }
             else
@@ -40,6 +40,11 @@ public class CircleShadow : MonoBehaviour
                 castSadowObjects.RemoveAt(i);
                 Destroy(shadowClone[i]);
                 shadowClone.RemoveAt(i);
+            }
+            float Y = castSadowObjects[i].transform.position.y - shadowClone[i].transform.position.y;
+            if (Y > 5.0f)
+            {
+                shadowClone[i].transform.localScale = Vector3.zero;
             }
         }
     }
