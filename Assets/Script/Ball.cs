@@ -178,6 +178,7 @@ public class Ball : MonoBehaviour
 
     void Update()
     {
+        comboSystem.Update();
         UpdateDomeDetection();
         if (isThrow) Move();
         TrailController();
