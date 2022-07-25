@@ -34,6 +34,11 @@ public class CircleShadow : MonoBehaviour
                 shadowClone[i].transform.position = new Vector3(castSadowObjects[i].transform.position.x, gameObject.transform.position.y + 0.01f, castSadowObjects[i].transform.position.z);
                 shadowClone[i].transform.localScale = new Vector3(Scale, Scale, Scale);
 
+                float Y = castSadowObjects[i].transform.position.y - shadowClone[i].transform.position.y;
+                if (Y > 5.0f)
+                {
+                    shadowClone[i].transform.localScale = Vector3.zero;
+                }
             }
             else
             {
@@ -41,11 +46,7 @@ public class CircleShadow : MonoBehaviour
                 Destroy(shadowClone[i]);
                 shadowClone.RemoveAt(i);
             }
-            float Y = castSadowObjects[i].transform.position.y - shadowClone[i].transform.position.y;
-            if (Y > 5.0f)
-            {
-                shadowClone[i].transform.localScale = Vector3.zero;
-            }
+           
         }
     }
 
