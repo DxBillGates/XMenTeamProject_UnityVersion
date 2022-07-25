@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class CreateWoods : MonoBehaviour
 {
@@ -16,19 +17,32 @@ public class CreateWoods : MonoBehaviour
     // カメラからどれだけ離れた位置に出現させるか
     [SerializeField] private float DistanceCameraToWood = 10.0f;
 
+    private GameObject[] woods;
+    
+
     // Start is called before the first frame update
     void Start()
     {
+        // 配列の上限を変更
+        Array.Resize(ref woods, CreateWoodNum);
+        
+        
+
         for (int i = 0; i < CreateWoodNum; i++)
         {
             // とりあえず横幅はベタ打ち　かつｚ軸をカメラ離れさせる距離から特定値
             Vector3 position =
-                new Vector3(Random.Range(-100, 100), 0, Random.Range(DistanceCameraToWood, DistanceCameraToWood + 20));
+                new Vector3(UnityEngine.Random.Range(-100, 100), 0, 
+                UnityEngine.Random.Range(DistanceCameraToWood, DistanceCameraToWood + 20));
 
 
             var wood = Instantiate(woodObject, position, Quaternion.identity);
 
-            wood.transform.localScale *= Random.Range(CreateWoodMinSize, CreateWoodMaxSize);
+            wood.transform.localScale *= UnityEngine.Random.Range(CreateWoodMinSize, CreateWoodMaxSize);
+
+            // スクロール用にリストに追加
+            woods[i] = wood;
+
         }
     }
 
@@ -36,5 +50,10 @@ public class CreateWoods : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public GameObject[] Woods
+    {
+        get { return woods; }
     }
 }
