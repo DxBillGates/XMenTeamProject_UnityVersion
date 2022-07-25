@@ -159,7 +159,7 @@ public class Ball : MonoBehaviour
                 }
 
                 state = BallState.THROWED_PLAYER;
-                AudioManager.GetInstance().PlayAudio(SE[0], MyAudioType.SE, audioVolume, false);
+                AudioManager.GetInstance().PlayAudio(SE[1], MyAudioType.SE, audioVolume, false);
 
                 //ヒット時エフェクト
                 BarrierHitEffectManager.GetComponent<BarrierHitEffect>().Use(gameObject.transform.position);
