@@ -64,6 +64,9 @@ public class Ball : MonoBehaviour
 
     void Start()
     {
+        comboSystem.Initialize();
+        comboSystem.SetBallObject(gameObject);
+
         // state velocity isThrowÇèâä˙âª
         InitializeState(BallState.HOLD_PLAYER);
 
@@ -81,9 +84,6 @@ public class Ball : MonoBehaviour
         trail.SetActive(trailFlg);
 
         collider = GetComponent<Collider>();
-
-        comboSystem.Initialize();
-        comboSystem.SetBallObject(gameObject);
     }
 
     private void FixedUpdate()
