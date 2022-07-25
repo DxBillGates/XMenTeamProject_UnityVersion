@@ -149,7 +149,14 @@ public class Ball : MonoBehaviour
                 float speed = velocity.magnitude;
 
                 Vector3 newVelocity = Vector3.Lerp(velocity, other.gameObject.transform.forward * speed, ballInfo.barrierReflectance);
-                velocity = newVelocity;
+                velocity = newVelocity.normalized * speed;
+
+                if (velocity.magnitude == 0)
+                {
+                    Debug.Log("velocity : " + velocity);
+                    Debug.Log("forward : " + other.gameObject.transform.forward * speed);
+                    Debug.Log("newVelocity : " + newVelocity);
+                }
 
                 state = BallState.THROWED_PLAYER;
                 AudioManager.GetInstance().PlayAudio(SE[0], MyAudioType.SE, audioVolume, false);
@@ -239,7 +246,9 @@ public class Ball : MonoBehaviour
     // 反射ベクトルを生成
     public void Reflection(Vector3 normal, bool enemy = false, bool addSpeed = false)
     {
-        Vector3 backupVelocity = velocity * GameTimeManager.GetInstance().GetTime();
+
+        float gameTime = HitStopManager.GetInstance().IsHitStop() == true ? 1 : GameTimeManager.GetInstance().GetTime();
+        Vector3 backupVelocity = velocity * gameTime;
         Vector3 reflectVector = backupVelocity - 2.0f * Vector3.Dot(backupVelocity, normal) * normal;
 
         // 法線ベクトルとの内積を計算して鈍角なら反射をせずに終了させる
@@ -268,6 +277,14 @@ public class Ball : MonoBehaviour
 
         // 加速後の速度が上限を超え内容制限
         if (velocity.magnitude > ballInfo.maxSpeed) velocity = velocity.normalized * ballInfo.maxSpeed;
+
+        if (velocity.magnitude == 0)
+        {
+            Debug.Log("after reflect");
+            Debug.Log("normal : " + normal);
+            Debug.Log("reflect : " + reflectVector);
+            Debug.Log("velocity : " + backupVelocity);
+        }
     }
 
     // ボールの状態を初期化
