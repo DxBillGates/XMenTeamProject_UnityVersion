@@ -37,4 +37,9 @@ public class HitStopManager : SingletonComponent<HitStopManager>
         isHitStop = true;
         time = 0;
     }
+
+    public bool IsHitStop()
+    {
+        return isHitStop;
+    }
 }

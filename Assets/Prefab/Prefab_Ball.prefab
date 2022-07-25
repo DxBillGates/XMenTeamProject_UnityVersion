@@ -158,3 +158,30 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 22d23ed37c2d4ca4d98f5428c3a5977a, type: 2}
   - {fileID: 2100000, guid: fc52e54c31dfdb4459e01f0907be1f0c, type: 2}
   - {fileID: 2100000, guid: 8636c228dfa63414c9f6e81e9742151d, type: 2}
+  isThrow: 0
+  isHitWall: 0
+  isHitDome: 0
+  isInDome: 0
+  comboSystem:
+    combo: 0
+    increaseSizeNCombo: 2
+    increaseSize: 1
+    maxSize: 0
+    images:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    numTextures:
+    - {fileID: -1146157607, guid: 6be1482a20690834e91960cb6153b73f, type: 3}
+    - {fileID: -1037073725, guid: 6be1482a20690834e91960cb6153b73f, type: 3}
+    - {fileID: 472388783, guid: 6be1482a20690834e91960cb6153b73f, type: 3}
+    - {fileID: 2068593023, guid: 6be1482a20690834e91960cb6153b73f, type: 3}
+    - {fileID: -1393966406, guid: 6be1482a20690834e91960cb6153b73f, type: 3}
+    - {fileID: -290967890, guid: 6be1482a20690834e91960cb6153b73f, type: 3}
+    - {fileID: -1697325636, guid: 6be1482a20690834e91960cb6153b73f, type: 3}
+    - {fileID: 770069934, guid: 6be1482a20690834e91960cb6153b73f, type: 3}
+    - {fileID: -1641383276, guid: 6be1482a20690834e91960cb6153b73f, type: 3}
+    - {fileID: 1445356088, guid: 6be1482a20690834e91960cb6153b73f, type: 3}
+    prefabImage: {fileID: 3604188475636220910, guid: 87e9b98f6d7fa6947879f1fc57e669ea, type: 3}
+    movePower: 1
+    g: 0.0981
