@@ -139,6 +139,8 @@ public class PauseManager : SingletonComponent<PauseManager>
 
         if (Input.GetButtonDown("PlayerAbility"))
         {
+
+            AudioManager.GetInstance().PlaySelectSE();
             return buttonInfos[currentButtonIndex];
         }
 

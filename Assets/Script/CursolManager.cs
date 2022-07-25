@@ -31,6 +31,8 @@ public class CursolManager : MonoBehaviour
         ++count;
         if(count>150&&Input.GetButtonDown("PlayerAbility"))
         {
+            AudioManager.GetInstance().PlaySelectSE();
+
             if (cursolPos == 0)
             {
                 sceneChange.nextSceneName = "StageSelectScene";
@@ -49,15 +51,25 @@ public class CursolManager : MonoBehaviour
         }
 
         //ç∂âEÉLÅ[Ç™âüÇ≥ÇÍÇΩÇ∆Ç´
-        if (Input.GetAxis("Horizontal") < 0 && cursolPos > 0)
+        bool isInput = false;
+        float inputHorizontal = Input.GetAxisRaw("Horizontal");
+        if (Input.GetAxisRaw("HorizontalButton") != 0) inputHorizontal = Input.GetAxisRaw("HorizontalButton");
+        if (inputHorizontal < 0 && cursolPos > 0)
         {
             cursolPos--;
             timer = 0;
+            isInput = true;
         }
-        if (Input.GetAxis("Horizontal") > 0 && cursolPos < 1)
+        if (inputHorizontal > 0 && cursolPos < 1)
         {
             cursolPos++;
             timer = 0;
+            isInput = true;
+        }
+
+        if(isInput == true)
+        {
+            AudioManager.GetInstance().PlaySelectSE();
         }
 
         if (cursolPos == 0)

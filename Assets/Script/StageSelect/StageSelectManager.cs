@@ -60,19 +60,29 @@ public class StageSelectManager : SingletonComponent<StageSelectManager>
         //左右キーが押されたとき、回転させる
         if (isStartMoveTimer == false)
         {
-            if (Input.GetAxis("Horizontal") > 0)
+            bool isInput = false;
+            float inputHorizontal = Input.GetAxisRaw("Horizontal");
+            if (Input.GetAxisRaw("HorizontalButton") != 0) inputHorizontal = Input.GetAxisRaw("HorizontalButton");
+            if (inputHorizontal > 0)
             {
                 nowSelectStageNum++;
                 moveTimer = 0;
                 isStartMoveTimer = true;
                 isMoveLeft = false;
+                isInput = true;
             } 
-            if (Input.GetAxis("Horizontal") < 0)
+            if (inputHorizontal < 0)
             {
                 nowSelectStageNum--;
                 moveTimer = 0;
                 isStartMoveTimer = true;
                 isMoveLeft = true;
+                isInput = true;
+            }
+
+            if(isInput == true)
+            {
+                AudioManager.GetInstance().PlaySelectSE();
             }
         }
 
@@ -88,6 +98,8 @@ public class StageSelectManager : SingletonComponent<StageSelectManager>
             isStartMoveTimer = false;
             //方向キーの数値が残ったままになるので初期化
             Input.ResetInputAxes();
+
+            AudioManager.GetInstance().PlaySelectSE();
         }
         //演出途中で次のシーンへ
         if (decideTimer >= 1.0f && sceneChange.gameObject.activeSelf == false)
