@@ -27,7 +27,7 @@ public class AudioManager : SingletonComponent<AudioManager>
 
         var bgm = bgmPlayer.GetComponent<AudioSource>();
         bgm.volume = GetBGMMasterVolume();
-        bgm.loop = true;
+        //bgm.loop = true;
         bgm.Play();
         
     }
