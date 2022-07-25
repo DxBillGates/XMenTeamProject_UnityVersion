@@ -168,6 +168,7 @@ public class PredictionalLineDrawer : MonoBehaviour
             }
 
             lineObjects[i].transform.position = setPosition + (i - reflectStartIndex) * setObjectDistance * useDirection;
+            lineObjects[i].transform.rotation = Quaternion.LookRotation(-useDirection);
         }
     }
 
