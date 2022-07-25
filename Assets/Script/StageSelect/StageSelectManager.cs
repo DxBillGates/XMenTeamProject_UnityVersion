@@ -93,11 +93,6 @@ public class StageSelectManager : SingletonComponent<StageSelectManager>
         if (Input.GetButtonDown("PlayerAbility"))
         {
             isStartDecideTimer = true;
-            //移動タイマー強制終了
-            moveTimer = limitMoveTimer;
-            isStartMoveTimer = false;
-            //方向キーの数値が残ったままになるので初期化
-            Input.ResetInputAxes();
 
             AudioManager.GetInstance().PlaySelectSE();
         }
@@ -110,7 +105,7 @@ public class StageSelectManager : SingletonComponent<StageSelectManager>
         }
 
         //ポーズボタンでタイトルへ
-        if (Input.GetButtonDown("Pause"))
+        if (Input.GetButtonDown("Pause") && isStartDecideTimer == false)
         {
             sceneChange.nextSceneName = "TitleScene";
             sceneChange.gameObject.SetActive(true);
@@ -128,7 +123,7 @@ public class StageSelectManager : SingletonComponent<StageSelectManager>
                 isStartMoveTimer = false;
             }
         }
-        if (isStartDecideTimer)
+        if (isStartDecideTimer && isStartMoveTimer == false)
         {
             decideTimer += Time.deltaTime;
             if (decideTimer > limitDecideTimer)
