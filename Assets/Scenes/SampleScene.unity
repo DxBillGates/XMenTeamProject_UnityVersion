@@ -27700,6 +27700,10 @@ PrefabInstance:
       propertyPath: radius
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 1439989470772683767, guid: 90b409cbf370a8641a6aa58ce6fdac3c, type: 3}
+      propertyPath: openSpan
+      value: 40
+      objectReference: {fileID: 0}
     - target: {fileID: 1473072585009618446, guid: 90b409cbf370a8641a6aa58ce6fdac3c, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -28041,7 +28045,7 @@ PrefabInstance:
       objectReference: {fileID: 1358778564}
     - target: {fileID: 2683838146694799363, guid: 41336c39d89ec8d4895a261b0d0b0d7c, type: 3}
       propertyPath: comboSystem.increaseSize
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2683838146694799363, guid: 41336c39d89ec8d4895a261b0d0b0d7c, type: 3}
       propertyPath: ultimateSkillManagerObject
@@ -28061,7 +28065,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2683838146694799363, guid: 41336c39d89ec8d4895a261b0d0b0d7c, type: 3}
       propertyPath: comboSystem.increaseSizeNCombo
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2683838146694799363, guid: 41336c39d89ec8d4895a261b0d0b0d7c, type: 3}
       propertyPath: comboSystem.images.Array.data[0]

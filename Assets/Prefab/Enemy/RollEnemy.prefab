@@ -70,7 +70,7 @@ MonoBehaviour:
   deadParticle: {fileID: -6852552541218724442, guid: 253e467a5fde65b4499e365c3a706507, type: 3}
   circleShadowScript: {fileID: 6996367962761417341, guid: 2aef0a7be29677e4986d4669f7aaa2a2, type: 3}
   playerToDistance: 20
-  rollingSpeed: 3
+  rollingSpeed: 20
 --- !u!54 &2911599334720447470
 Rigidbody:
   m_ObjectHideFlags: 0
