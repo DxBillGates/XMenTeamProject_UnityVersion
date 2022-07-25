@@ -95,7 +95,7 @@ public class Ball : MonoBehaviour
     {
         Vector3 hitNormal = other.gameObject.transform.forward;
 
-        const float audioVolume = 0.5f;
+        const float audioVolume = 5.0f;
 
         float pushValue = CollisionManager.CollisionBoxAndPlane(transform, collider.bounds, other.transform, hitNormal);
         float dotNormalAndVelocity = Vector3.Dot(velocity, hitNormal);

@@ -290,7 +290,7 @@ public class Player : MonoBehaviour
         {
             ballComponent.AddTriggerSkillAcc();
             triggerSkillPosition = transform.position;
-            AudioManager.GetInstance().PlayAudio(SE[1], MyAudioType.SE, 1, false);
+            AudioManager.GetInstance().PlayAudio(SE[1], MyAudioType.SE, 7, false);
         }
     }
 
