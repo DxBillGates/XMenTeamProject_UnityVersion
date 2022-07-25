@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2189680256408245975}
   m_Layer: 0
-  m_Name: Rock
+  m_Name: Rock - Copy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
