@@ -126,7 +126,7 @@ public class Enemy : MonoBehaviour
     {
         hp -= damage;
 
-        AudioManager.GetInstance().PlayAudio(SE[0], MyAudioType.SE, 1, false);
+        //AudioManager.GetInstance().PlayAudio(SE[0], MyAudioType.SE, 1, false);
 
         if (hp <= 0)
         {

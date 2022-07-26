@@ -68,7 +68,7 @@ MonoBehaviour:
   hp: 15
   dontHitDistance: 20
   SE:
-  - {fileID: 8300000, guid: 45bdfac5f1e4ae14fba0862eaea30f42, type: 3}
+  - {fileID: 8300000, guid: 75fa6fbf1ac3a104a8ea6eae7f3bf4a0, type: 3}
   damageParticle: {fileID: -6852552541218724442, guid: 253e467a5fde65b4499e365c3a706507, type: 3}
   deadParticle: {fileID: -6852552541218724442, guid: 253e467a5fde65b4499e365c3a706507, type: 3}
   circleShadowScript: {fileID: 6996367962761417341, guid: 2aef0a7be29677e4986d4669f7aaa2a2, type: 3}

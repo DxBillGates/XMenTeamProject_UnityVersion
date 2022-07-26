@@ -33,7 +33,7 @@ public class ballParticleFast : MonoBehaviour
             var particlePosition = ball.transform.position;
 
             var createdParticle = Instantiate(particleObj,particlePosition,Quaternion.identity);
-            createdParticle.GetComponent<ParticleSystemRenderer>().material = ball.GetComponent<Renderer>().material;
+            createdParticle.GetComponent<ParticleSystem>().startColor = ball.GetComponent<Renderer>().material.color;
 
         }
 
