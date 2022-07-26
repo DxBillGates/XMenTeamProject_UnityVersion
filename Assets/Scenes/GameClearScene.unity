@@ -591,7 +591,7 @@ Transform:
   - {fileID: 2069535773}
   - {fileID: 1656911127}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &374568229
 GameObject:
@@ -1425,7 +1425,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fa9e057f5e96c94e9d936f8c63e22b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waitTimer: 10
+  waitTimer: 30
   nextScene: {fileID: 1255547156}
 --- !u!114 &1297991292
 MonoBehaviour:
@@ -1594,7 +1594,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1355952770
 GameObject:
