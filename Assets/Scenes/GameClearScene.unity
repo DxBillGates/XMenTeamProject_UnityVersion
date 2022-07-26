@@ -591,7 +591,7 @@ Transform:
   - {fileID: 2069535773}
   - {fileID: 1656911127}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &374568229
 GameObject:
@@ -1006,6 +1006,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -924285256543482601, guid: ff40624a145b7f14bb5112206b8af284, type: 3}
+      propertyPath: CreateWoodMaxSize
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: -924285256543482601, guid: ff40624a145b7f14bb5112206b8af284, type: 3}
+      propertyPath: CreateWoodMinSize
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 7948090367532069802, guid: ff40624a145b7f14bb5112206b8af284, type: 3}
       propertyPath: m_Name
       value: ClearEffectManager
