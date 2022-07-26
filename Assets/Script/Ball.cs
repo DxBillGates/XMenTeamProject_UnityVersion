@@ -48,10 +48,10 @@ public class Ball : MonoBehaviour
     public BallState state { get; private set; }
     private Vector3 velocity;
 
-    [SerializeField]private bool isThrow;
-    [SerializeField]private bool isHitWall;
-    [SerializeField]private bool isHitDome;
-    [SerializeField]private bool isInDome;
+    [SerializeField] private bool isThrow;
+    [SerializeField] private bool isHitWall;
+    [SerializeField] private bool isHitDome;
+    [SerializeField] private bool isInDome;
 
     //軌跡
     private GameObject trail;
@@ -144,7 +144,7 @@ public class Ball : MonoBehaviour
 
                 transform.position += pushValue * dotNormalAndVelocity * velocity.normalized;
 
-                Reflection(hitNormal, true,true);
+                Reflection(hitNormal, true, true);
                 // 速度ベクトルの大きさを取得
                 float speed = velocity.magnitude;
 
@@ -182,6 +182,11 @@ public class Ball : MonoBehaviour
                 hitNormal.y = 0;
                 Reflection(hitNormal);
                 break;
+        }
+
+        if (velocity.magnitude > ballInfo.maxSpeed)
+        {
+            velocity = velocity.normalized * ballInfo.maxSpeed;
         }
     }
 
