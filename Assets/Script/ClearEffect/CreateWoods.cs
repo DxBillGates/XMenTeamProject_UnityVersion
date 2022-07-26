@@ -17,6 +17,9 @@ public class CreateWoods : MonoBehaviour
     // カメラからどれだけ離れた位置に出現させるか
     [SerializeField] private float DistanceCameraToWood = 10.0f;
 
+    // x軸の出現範囲
+    [SerializeField] private float CreateWoodXrange = 100;
+
     private GameObject[] woods;
     
 
@@ -32,7 +35,7 @@ public class CreateWoods : MonoBehaviour
         {
             // とりあえず横幅はベタ打ち　かつｚ軸をカメラ離れさせる距離から特定値
             Vector3 position =
-                new Vector3(UnityEngine.Random.Range(-100, 100), 0, 
+                new Vector3(UnityEngine.Random.Range(-1 *CreateWoodXrange, CreateWoodXrange), 0, 
                 UnityEngine.Random.Range(DistanceCameraToWood, DistanceCameraToWood + 20));
 
 
