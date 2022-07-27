@@ -91,14 +91,6 @@ public class UltimateSkillManager : SingletonComponent<UltimateSkillManager>
         if (ultimateSkill.GetCurrentLevel() <= 0) return false;
         if (isUse == true) return false;
 
-
-        int wallCount = FieldObjectManager.GetInstance().GetFieldObjectsCount();
-
-        for(int i = 0;i < wallCount;++i)
-        {
-            FieldObjectManager.GetInstance().GetWallMaterial(i).SetBlackMaterial();
-        }
-
         usedPosition = position;
         usedSize = ultimateSkill.GetCurrentLevelSize();
         isUse = true;

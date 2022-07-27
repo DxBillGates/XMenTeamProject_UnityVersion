@@ -76,14 +76,6 @@ public class UltimateSkillGenerator : SingletonComponent<UltimateSkillGenerator>
             //�u���[����Intencity��0�ɂ���
             //postEffectManager.GetComponent<DomeEffectControl>().SetBloom(0f);
 
-            int wallCount = FieldObjectManager.GetInstance().GetFieldObjectsCount();
-
-            for (int i = 0; i < wallCount; ++i)
-            {
-                FieldObjectManager.GetInstance().GetWallMaterial(i).SetNormalMaterial();
-            }
-
-
             Destroy(createdUltimateSkillObject);
 
             isAddScale = false;
