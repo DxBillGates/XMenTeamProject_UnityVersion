@@ -12,6 +12,7 @@ public class FieldObjectManager : SingletonComponent<FieldObjectManager>
     [SerializeField] private bool reCreate;
 
     List<GameObject> wallObjects;
+
     // Start is called before the first frame update
     void Start()
     {
