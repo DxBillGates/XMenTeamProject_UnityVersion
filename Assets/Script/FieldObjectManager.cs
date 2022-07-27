@@ -12,13 +12,11 @@ public class FieldObjectManager : SingletonComponent<FieldObjectManager>
     [SerializeField] private bool reCreate;
 
     List<GameObject> wallObjects;
-    private List<ChangeMaterial> changeMaterials{get;set;}
 
     // Start is called before the first frame update
     void Start()
     {
         wallObjects = new List<GameObject>();
-        changeMaterials = new List<ChangeMaterial>();
         CreateWall();
     }
 
@@ -68,7 +66,6 @@ public class FieldObjectManager : SingletonComponent<FieldObjectManager>
             RePosition(newWallObject.transform);
 
             wallObjects.Add(newWallObject);
-            changeMaterials.Add(newWallObject.GetComponent<ChangeMaterial>());
 
             // �e�̐ݒ�
             newWallObject.transform.parent = transform;
@@ -132,11 +129,6 @@ public class FieldObjectManager : SingletonComponent<FieldObjectManager>
     public int GetFieldObjectsCount()
     {
         return wallObjects.Count;
-    }
-
-    public ChangeMaterial GetWallMaterial(int wallIndex)
-    {
-        return changeMaterials[wallIndex];
     }
 
     public float GetWallSize()
