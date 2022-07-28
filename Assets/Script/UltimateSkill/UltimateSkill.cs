@@ -37,11 +37,15 @@ public class UltimateSkill
         // 現在のゲージ量をレベルアップに必要な既定値で割った値
         // 例）74(現ゲージ量) / 25(既定値) = 2level
         level = (int)(gaugeValue / (maxGaugeValue / maxLevel));
+        if (level >= 4)
+        {
+            level = 4;
+        }
     }
 
     public void AddValue()
     {
-        gaugeValue += levelUpValues[GetCurrentLevel()];
+        gaugeValue += levelUpValues[GetCurrentLevel() - 1];
 
         // ゲージ値の制限
         if (gaugeValue >= maxGaugeValue) gaugeValue = maxGaugeValue;
