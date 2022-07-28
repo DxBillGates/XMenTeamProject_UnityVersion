@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7087433514508457317}
   - component: {fileID: 3570265353194182555}
   - component: {fileID: 7610633346716219750}
+  - component: {fileID: 6495126102542822353}
   m_Layer: 0
   m_Name: FollowEnemy
   m_TagString: Enemy
@@ -85,6 +86,19 @@ MonoBehaviour:
   damageParticle: {fileID: -6852552541218724442, guid: 3eefe83feb5262242a5a5856b45f7f2c, type: 3}
   deadParticle: {fileID: -6852552541218724442, guid: 253e467a5fde65b4499e365c3a706507, type: 3}
   circleShadowScript: {fileID: 6996367962761417341, guid: 2aef0a7be29677e4986d4669f7aaa2a2, type: 3}
+--- !u!114 &6495126102542822353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1571662748511080394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae43a709636a408478dc51252fc2bb94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 2135096231102035681, guid: 54e889900d5cb4141af8e06670ab1666, type: 3}
 --- !u!1001 &6377750239660038466
 PrefabInstance:
   m_ObjectHideFlags: 0

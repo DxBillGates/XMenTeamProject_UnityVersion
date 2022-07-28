@@ -6,6 +6,7 @@ public class FieldObjectManager : SingletonComponent<FieldObjectManager>
 {
     [SerializeField] private GameObject wallPrefab;
     [SerializeField] private uint wallValue;
+    [SerializeField] private GameObject invisibleWallPrefab;
     [SerializeField] private bool isRotate;
 
     // �X�V���ɐV�����ǂ�����Ă݂����Ƃ��p
@@ -54,21 +55,31 @@ public class FieldObjectManager : SingletonComponent<FieldObjectManager>
                                                  , Vector3.Lerp(currntCalcPosition, nextCalcPosition, HALF_LERP_POINT)
                                                  , new Quaternion());
 
+            GameObject newInvisibleObject = Instantiate(invisibleWallPrefab
+                                                 , Vector3.Lerp(currntCalcPosition, nextCalcPosition, HALF_LERP_POINT)
+                                                 , new Quaternion());
+
             // �|�W�V�����𒆐S�_��y����ANGLE�x��]
             if (isRotate)
             {
                 RotatePosition(newWallObject.transform);
+                RotatePosition(newInvisibleObject.transform);
             }
 
             // ���̂܂܂ł�Rotate�����������̂Œ��S�������悤�ɏC��
             CalclateRotation(newWallObject.transform);
-            ReSize(newWallObject.transform);
-            RePosition(newWallObject.transform);
+            ReSize(newWallObject.transform,wallPrefab);
+            RePosition(newWallObject.transform,wallPrefab);
 
             wallObjects.Add(newWallObject);
 
+            CalclateRotation(newInvisibleObject.transform);
+            ReSize(newInvisibleObject.transform,invisibleWallPrefab);
+            RePosition(newInvisibleObject.transform,invisibleWallPrefab);
+
             // �e�̐ݒ�
             newWallObject.transform.parent = transform;
+            newInvisibleObject.transform.parent = transform;
         }
     }
 
@@ -112,17 +123,19 @@ public class FieldObjectManager : SingletonComponent<FieldObjectManager>
     }
 
     // n�p�`���Ƃ̕ӂ̒����ɑΉ�������
-    private void ReSize(Transform argTransform)
+    private void ReSize(Transform argTransform,GameObject prefab)
     {
-        float trueWidthSize = 2 * Mathf.Sin(Mathf.PI / wallValue) * wallPrefab.transform.localScale.x;
+        if (prefab == null) return;
+        float trueWidthSize = 2 * Mathf.Sin(Mathf.PI / wallValue) * prefab.transform.localScale.x;
         Vector3 beforeScale = argTransform.transform.localScale;
         argTransform.transform.localScale = new Vector3(trueWidthSize, beforeScale.y, beforeScale.z);
     }
 
     // �ǂ̒����ɂ������ʒu�ɏC������
-    private void RePosition(Transform argTransform)
+    private void RePosition(Transform argTransform,GameObject prefab)
     {
-        float halfSize = wallPrefab.transform.localScale.x;
+        if (prefab == null) return;
+        float halfSize = prefab.transform.localScale.x;
         argTransform.position *= halfSize;
     }
 

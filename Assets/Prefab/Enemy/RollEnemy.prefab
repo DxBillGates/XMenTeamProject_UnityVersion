@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6862521133737120756}
   - component: {fileID: 440425081530943552}
   - component: {fileID: 2911599334720447470}
+  - component: {fileID: 7305721822848707896}
   m_Layer: 0
   m_Name: RollEnemy
   m_TagString: Enemy
@@ -87,6 +88,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 2
+--- !u!114 &7305721822848707896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7502561408969008520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae43a709636a408478dc51252fc2bb94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 2135096231102035681, guid: 54e889900d5cb4141af8e06670ab1666, type: 3}
 --- !u!1001 &5448679520157567283
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1452703305129656441}
   - component: {fileID: 1452703305129656440}
   - component: {fileID: 1452703305129656447}
+  - component: {fileID: 4817202459022698256}
   m_Layer: 0
   m_Name: BarrierEnemy
   m_TagString: Untagged
@@ -75,6 +76,19 @@ MonoBehaviour:
   playerToDistance: 20
   change_pose_frame: 120
   barrier: {fileID: 3447620141785347147}
+--- !u!114 &4817202459022698256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1452703305129656446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae43a709636a408478dc51252fc2bb94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 2135096231102035681, guid: 54e889900d5cb4141af8e06670ab1666, type: 3}
 --- !u!1001 &1452703305243780230
 PrefabInstance:
   m_ObjectHideFlags: 0
