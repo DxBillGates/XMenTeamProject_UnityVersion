@@ -6660,7 +6660,7 @@ MonoBehaviour:
   MaxBarrierEnemyNum: 2
   MaxFollowEnemyNum: 3
   MaxRollEnemyNum: 2
-  Spawn_Range: 35
+  Spawn_Range: 25
   Cant_Spawn_Distance: 10
   sceneChange: {fileID: 1181262425}
   circleShadowScriptObject: {fileID: 1511126691}
@@ -26195,7 +26195,7 @@ PrefabInstance:
       objectReference: {fileID: 1358778564}
     - target: {fileID: 2683838146694799363, guid: 41336c39d89ec8d4895a261b0d0b0d7c, type: 3}
       propertyPath: ballInfo.accelerateValue
-      value: 1.35
+      value: 1.7
       objectReference: {fileID: 0}
     - target: {fileID: 2683838146694799363, guid: 41336c39d89ec8d4895a261b0d0b0d7c, type: 3}
       propertyPath: comboSystem.increaseSize
@@ -26215,7 +26215,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2683838146694799363, guid: 41336c39d89ec8d4895a261b0d0b0d7c, type: 3}
       propertyPath: ballInfo.enemyAccelerateValue
-      value: 1.35
+      value: 1.7
       objectReference: {fileID: 0}
     - target: {fileID: 2683838146694799363, guid: 41336c39d89ec8d4895a261b0d0b0d7c, type: 3}
       propertyPath: comboSystem.images.Array.size
