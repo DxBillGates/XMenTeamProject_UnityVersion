@@ -57,8 +57,8 @@ public class UltimateSkill
     public void End()
     {
         UltimateSkillGenerator.GetInstance().DestroySkillObject();
-        gaugeValue = 50;
-        level = 2;
+        gaugeValue = 0;
+        level = 0;
     }
 
     public int GetCurrentLevel()

@@ -192,6 +192,8 @@ public class Ball : MonoBehaviour
 
     void Update()
     {
+        if (PauseManager.IsPause()) return;
+
         comboSystem.Update();
         UpdateDomeDetection();
         if (isThrow) Move();

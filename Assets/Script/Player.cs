@@ -83,6 +83,12 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (StartGameScene.IsGameStart() == false)
+        {
+            HoldBallUpdate();
+            return;
+        }
+
         //バリアの展開する向き指定
         barrierControl.direction = gameObject.transform.forward;
 
