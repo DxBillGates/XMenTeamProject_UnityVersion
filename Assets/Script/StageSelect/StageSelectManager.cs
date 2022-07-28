@@ -224,12 +224,12 @@ public class StageSelectManager : SingletonComponent<StageSelectManager>
         UIStageNums[1].sprite = sprNums[index];
 
         //最終ステージかどうかでUI表示/非表示を管理
-        bool isLastStage = num == stageCount;
-        UIEndless.gameObject.SetActive(isLastStage);
-        UIStage.gameObject.SetActive(!isLastStage);
-        foreach (var v in UIStageNums)
-        {
-            v.gameObject.SetActive(!isLastStage);
-        }
+        //bool isLastStage = num == stageCount;
+        //UIEndless.gameObject.SetActive(isLastStage);
+        //UIStage.gameObject.SetActive(!isLastStage);
+        //foreach (var v in UIStageNums)
+        //{
+        //    v.gameObject.SetActive(!isLastStage);
+        //}
     }
 }

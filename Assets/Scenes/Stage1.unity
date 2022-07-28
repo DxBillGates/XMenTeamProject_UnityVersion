@@ -28263,6 +28263,18 @@ PrefabInstance:
       propertyPath: ultimateSkill.levelsScales.Array.data[3]
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 1921551139525285177, guid: 531dc461ce14a074980fe02f9adaceb7, type: 3}
+      propertyPath: ultimateSkill.levelUpValues.Array.data[1]
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1921551139525285177, guid: 531dc461ce14a074980fe02f9adaceb7, type: 3}
+      propertyPath: ultimateSkill.levelUpValues.Array.data[2]
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1921551139525285177, guid: 531dc461ce14a074980fe02f9adaceb7, type: 3}
+      propertyPath: ultimateSkill.levelUpValues.Array.data[3]
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 2318661832119566641, guid: 531dc461ce14a074980fe02f9adaceb7, type: 3}
       propertyPath: m_Name
       value: UltimateSkillManager
@@ -28330,7 +28342,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1439989470772683766, guid: 90b409cbf370a8641a6aa58ce6fdac3c, type: 3}
       propertyPath: maxHp
-      value: 60
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 1439989470772683766, guid: 90b409cbf370a8641a6aa58ce6fdac3c, type: 3}
       propertyPath: movePower

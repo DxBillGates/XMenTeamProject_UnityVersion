@@ -596,7 +596,7 @@ PrefabInstance:
       objectReference: {fileID: 1437909147}
     - target: {fileID: -709054189343020559, guid: 2fc023fdeed5aee4abc219671ccb5ace, type: 3}
       propertyPath: defaultVolume
-      value: 0.1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: -709054189343020559, guid: 2fc023fdeed5aee4abc219671ccb5ace, type: 3}
       propertyPath: seMasterVolumeLevel
@@ -779,7 +779,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 63ff907a8ecef8a428feca63209107a6, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 01aa1895c9b89aa42831bd7506a2db9d, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.1
   m_Pitch: 1
