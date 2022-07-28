@@ -115,7 +115,7 @@ public class Ball : MonoBehaviour
             case "Enemy":
                 // “Š‚°‚ç‚ê‚½ó‘Ô‚Å‚»‚Ìƒ{[ƒ‹‚ª“®‚¢‚Ä‚¢‚ê‚Î
                 if (isThrow == false && velocity.magnitude <= 0) break;
-
+                AudioManager.GetInstance().PlayAudio(SE[0], MyAudioType.SE, audioVolume, false);
                 hitNormal = -(other.gameObject.transform.position - transform.position).normalized;
                 Reflection(hitNormal, true, true);
                 state = BallState.THROWED_ENEMY;

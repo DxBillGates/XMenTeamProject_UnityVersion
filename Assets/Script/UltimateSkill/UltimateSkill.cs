@@ -45,7 +45,14 @@ public class UltimateSkill
 
     public void AddValue()
     {
-        gaugeValue += levelUpValues[GetCurrentLevel() - 1];
+        int levelUp = GetCurrentLevel();
+
+        if (levelUp >= 3)
+        {
+            levelUp = 3;
+        }
+
+        gaugeValue += levelUpValues[levelUp];
 
         // ƒQ[ƒW’l‚Ì§ŒÀ
         if (gaugeValue >= maxGaugeValue) gaugeValue = maxGaugeValue;
