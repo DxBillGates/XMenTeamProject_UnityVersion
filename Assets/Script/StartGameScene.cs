@@ -92,6 +92,9 @@ public class StartGameScene : MonoBehaviour
         }
         else if (timer < 3)
         {
+            //終点で固定
+            cd3.transform.position = new Vector3(-cd3.sizeDelta.x * 2, Screen.height / 2);
+
             if (timer < 2.5f)
             {
                 cd2.transform.position = new Vector3(
@@ -109,6 +112,10 @@ public class StartGameScene : MonoBehaviour
         }
         else if (timer < 4)
         {
+            //終点で固定
+            cd3.transform.position = new Vector3(-cd3.sizeDelta.x * 2, Screen.height / 2);
+            cd2.transform.position = new Vector3(-cd2.sizeDelta.x * 2, Screen.height / 2);
+
             if (timer < 3.5f)
             {
                 cd1.transform.position = new Vector3(
@@ -126,6 +133,11 @@ public class StartGameScene : MonoBehaviour
         }
         else if (timer < 5)
         {
+            //終点で固定
+            cd3.transform.position = new Vector3(-cd3.sizeDelta.x * 2, Screen.height / 2);
+            cd2.transform.position = new Vector3(-cd2.sizeDelta.x * 2, Screen.height / 2);
+            cd1.transform.position = new Vector3(-cd1.sizeDelta.x * 2, Screen.height / 2);
+
             if (timer < 4.25f)
             {
                 cdGO.transform.position = new Vector3(
@@ -140,6 +152,14 @@ public class StartGameScene : MonoBehaviour
                     Screen.height / 2
                     );
             }
+        }
+        else
+        {
+            //終点で固定
+            cd3.transform.position = new Vector3(-cd3.sizeDelta.x * 2, Screen.height / 2);
+            cd2.transform.position = new Vector3(-cd2.sizeDelta.x * 2, Screen.height / 2);
+            cd1.transform.position = new Vector3(-cd1.sizeDelta.x * 2, Screen.height / 2);
+            cdGO.transform.position = new Vector3(-cdGO.sizeDelta.x * 2, Screen.height / 2);
         }
     }
 
